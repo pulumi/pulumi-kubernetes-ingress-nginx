@@ -656,13 +656,6 @@
                     "description": "DaemonSet or Deployment.",
                     "type": "string"
                 },
-                "labels": {
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.",
-                    "type": "object"
-                },
                 "lifecycle": {
                     "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Lifecycle",
                     "description": "Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s."
@@ -759,6 +752,10 @@
                     },
                     "description": "See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.",
                     "type": "object"
+                },
+                "tolerations": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Toleration",
+                    "description": "Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/."
                 },
                 "tcp": {
                     "$ref": "#/types/chart-ingress-nginx:index:ControllerTcp",
@@ -914,7 +911,7 @@
                     },
                     "type": "array"
                 },
-                "extraVolume": {
+                "extraVolumes": {
                     "description": "Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}",
                     "items": {
                         "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Volume"

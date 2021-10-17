@@ -203,10 +203,6 @@ export interface ControllerArgs {
      */
     kind?: pulumi.Input<string>;
     /**
-     * Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
-     */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    /**
      * Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
      */
     lifecycle?: pulumi.Input<pulumiKubernetes.types.input.core.v1.LifecycleArgs>;
@@ -285,6 +281,10 @@ export interface ControllerArgs {
      */
     terminateGracePeriodSeconds?: pulumi.Input<number>;
     /**
+     * Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
+     */
+    tolerations?: pulumi.Input<pulumiKubernetes.types.input.core.v1.TolerationArgs>;
+    /**
      * Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
      */
     topologySpreadConstraints?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.TopologySpreadConstraintArgs>[]>;
@@ -346,13 +346,13 @@ export interface ControllerDefaultBackendArgs {
     extraArgs?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
     extraEnvs?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.EnvVarArgs>[]>;
     /**
-     * Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
-     */
-    extraVolume?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeArgs>[]>;
-    /**
      * Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
      */
     extraVolumeMounts?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeMountArgs>[]>;
+    /**
+     * Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
+     */
+    extraVolumes?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeArgs>[]>;
     image?: pulumi.Input<inputs.ControllerImageArgs>;
     /**
      * Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.

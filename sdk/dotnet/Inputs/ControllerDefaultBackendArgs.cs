@@ -43,18 +43,6 @@ namespace Pulumi.ChartIngressNginx.Inputs
             set => _extraEnvs = value;
         }
 
-        [Input("extraVolume")]
-        private InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.VolumeArgs>? _extraVolume;
-
-        /// <summary>
-        /// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
-        /// </summary>
-        public InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.VolumeArgs> ExtraVolume
-        {
-            get => _extraVolume ?? (_extraVolume = new InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.VolumeArgs>());
-            set => _extraVolume = value;
-        }
-
         [Input("extraVolumeMounts")]
         private InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.VolumeMountArgs>? _extraVolumeMounts;
 
@@ -65,6 +53,18 @@ namespace Pulumi.ChartIngressNginx.Inputs
         {
             get => _extraVolumeMounts ?? (_extraVolumeMounts = new InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.VolumeMountArgs>());
             set => _extraVolumeMounts = value;
+        }
+
+        [Input("extraVolumes")]
+        private InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.VolumeArgs>? _extraVolumes;
+
+        /// <summary>
+        /// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
+        /// </summary>
+        public InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.VolumeArgs> ExtraVolumes
+        {
+            get => _extraVolumes ?? (_extraVolumes = new InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.VolumeArgs>());
+            set => _extraVolumes = value;
         }
 
         [Input("image")]

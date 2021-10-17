@@ -1568,8 +1568,6 @@ type Controller struct {
 	Keda *Keda `pulumi:"keda"`
 	// DaemonSet or Deployment.
 	Kind *string `pulumi:"kind"`
-	// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
-	Labels map[string]string `pulumi:"labels"`
 	// Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
 	Lifecycle *corev1.Lifecycle `pulumi:"lifecycle"`
 	// Liveness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
@@ -1612,6 +1610,8 @@ type Controller struct {
 	Tcp *ControllerTcp `pulumi:"tcp"`
 	// How long to wait for the drain of connections.
 	TerminateGracePeriodSeconds *int `pulumi:"terminateGracePeriodSeconds"`
+	// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
+	Tolerations *corev1.Toleration `pulumi:"tolerations"`
 	// Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
 	TopologySpreadConstraints []corev1.TopologySpreadConstraint `pulumi:"topologySpreadConstraints"`
 	Udp                       *ControllerUdp                    `pulumi:"udp"`
@@ -1699,8 +1699,6 @@ type ControllerArgs struct {
 	Keda KedaPtrInput `pulumi:"keda"`
 	// DaemonSet or Deployment.
 	Kind pulumi.StringPtrInput `pulumi:"kind"`
-	// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
-	Labels pulumi.StringMapInput `pulumi:"labels"`
 	// Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
 	Lifecycle corev1.LifecyclePtrInput `pulumi:"lifecycle"`
 	// Liveness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
@@ -1743,6 +1741,8 @@ type ControllerArgs struct {
 	Tcp ControllerTcpPtrInput `pulumi:"tcp"`
 	// How long to wait for the drain of connections.
 	TerminateGracePeriodSeconds pulumi.IntPtrInput `pulumi:"terminateGracePeriodSeconds"`
+	// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
+	Tolerations corev1.TolerationPtrInput `pulumi:"tolerations"`
 	// Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
 	TopologySpreadConstraints corev1.TopologySpreadConstraintArrayInput `pulumi:"topologySpreadConstraints"`
 	Udp                       ControllerUdpPtrInput                     `pulumi:"udp"`
@@ -1997,11 +1997,6 @@ func (o ControllerOutput) Kind() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v Controller) *string { return v.Kind }).(pulumi.StringPtrOutput)
 }
 
-// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
-func (o ControllerOutput) Labels() pulumi.StringMapOutput {
-	return o.ApplyT(func(v Controller) map[string]string { return v.Labels }).(pulumi.StringMapOutput)
-}
-
 // Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
 func (o ControllerOutput) Lifecycle() corev1.LifecyclePtrOutput {
 	return o.ApplyT(func(v Controller) *corev1.Lifecycle { return v.Lifecycle }).(corev1.LifecyclePtrOutput)
@@ -2114,6 +2109,11 @@ func (o ControllerOutput) Tcp() ControllerTcpPtrOutput {
 // How long to wait for the drain of connections.
 func (o ControllerOutput) TerminateGracePeriodSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v Controller) *int { return v.TerminateGracePeriodSeconds }).(pulumi.IntPtrOutput)
+}
+
+// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
+func (o ControllerOutput) Tolerations() corev1.TolerationPtrOutput {
+	return o.ApplyT(func(v Controller) *corev1.Toleration { return v.Tolerations }).(corev1.TolerationPtrOutput)
 }
 
 // Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
@@ -2497,16 +2497,6 @@ func (o ControllerPtrOutput) Kind() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
-func (o ControllerPtrOutput) Labels() pulumi.StringMapOutput {
-	return o.ApplyT(func(v *Controller) map[string]string {
-		if v == nil {
-			return nil
-		}
-		return v.Labels
-	}).(pulumi.StringMapOutput)
-}
-
 // Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
 func (o ControllerPtrOutput) Lifecycle() corev1.LifecyclePtrOutput {
 	return o.ApplyT(func(v *Controller) *corev1.Lifecycle {
@@ -2739,6 +2729,16 @@ func (o ControllerPtrOutput) TerminateGracePeriodSeconds() pulumi.IntPtrOutput {
 		}
 		return v.TerminateGracePeriodSeconds
 	}).(pulumi.IntPtrOutput)
+}
+
+// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
+func (o ControllerPtrOutput) Tolerations() corev1.TolerationPtrOutput {
+	return o.ApplyT(func(v *Controller) *corev1.Toleration {
+		if v == nil {
+			return nil
+		}
+		return v.Tolerations
+	}).(corev1.TolerationPtrOutput)
 }
 
 // Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
@@ -3652,11 +3652,11 @@ type ControllerDefaultBackend struct {
 	ExistingPsp *string                      `pulumi:"existingPsp"`
 	ExtraArgs   map[string]map[string]string `pulumi:"extraArgs"`
 	ExtraEnvs   []corev1.EnvVar              `pulumi:"extraEnvs"`
-	// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
-	ExtraVolume []corev1.Volume `pulumi:"extraVolume"`
 	// Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
 	ExtraVolumeMounts []corev1.VolumeMount `pulumi:"extraVolumeMounts"`
-	Image             *ControllerImage     `pulumi:"image"`
+	// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
+	ExtraVolumes []corev1.Volume  `pulumi:"extraVolumes"`
+	Image        *ControllerImage `pulumi:"image"`
 	// Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
 	LivenessProbe *corev1.Probe `pulumi:"livenessProbe"`
 	MinAvailable  *int          `pulumi:"minAvailable"`
@@ -3700,11 +3700,11 @@ type ControllerDefaultBackendArgs struct {
 	ExistingPsp pulumi.StringPtrInput    `pulumi:"existingPsp"`
 	ExtraArgs   pulumi.StringMapMapInput `pulumi:"extraArgs"`
 	ExtraEnvs   corev1.EnvVarArrayInput  `pulumi:"extraEnvs"`
-	// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
-	ExtraVolume corev1.VolumeArrayInput `pulumi:"extraVolume"`
 	// Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
 	ExtraVolumeMounts corev1.VolumeMountArrayInput `pulumi:"extraVolumeMounts"`
-	Image             ControllerImagePtrInput      `pulumi:"image"`
+	// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
+	ExtraVolumes corev1.VolumeArrayInput `pulumi:"extraVolumes"`
+	Image        ControllerImagePtrInput `pulumi:"image"`
 	// Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
 	LivenessProbe corev1.ProbePtrInput  `pulumi:"livenessProbe"`
 	MinAvailable  pulumi.IntPtrInput    `pulumi:"minAvailable"`
@@ -3831,14 +3831,14 @@ func (o ControllerDefaultBackendOutput) ExtraEnvs() corev1.EnvVarArrayOutput {
 	return o.ApplyT(func(v ControllerDefaultBackend) []corev1.EnvVar { return v.ExtraEnvs }).(corev1.EnvVarArrayOutput)
 }
 
-// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
-func (o ControllerDefaultBackendOutput) ExtraVolume() corev1.VolumeArrayOutput {
-	return o.ApplyT(func(v ControllerDefaultBackend) []corev1.Volume { return v.ExtraVolume }).(corev1.VolumeArrayOutput)
-}
-
 // Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
 func (o ControllerDefaultBackendOutput) ExtraVolumeMounts() corev1.VolumeMountArrayOutput {
 	return o.ApplyT(func(v ControllerDefaultBackend) []corev1.VolumeMount { return v.ExtraVolumeMounts }).(corev1.VolumeMountArrayOutput)
+}
+
+// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
+func (o ControllerDefaultBackendOutput) ExtraVolumes() corev1.VolumeArrayOutput {
+	return o.ApplyT(func(v ControllerDefaultBackend) []corev1.Volume { return v.ExtraVolumes }).(corev1.VolumeArrayOutput)
 }
 
 func (o ControllerDefaultBackendOutput) Image() ControllerImagePtrOutput {
@@ -3991,16 +3991,6 @@ func (o ControllerDefaultBackendPtrOutput) ExtraEnvs() corev1.EnvVarArrayOutput 
 	}).(corev1.EnvVarArrayOutput)
 }
 
-// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
-func (o ControllerDefaultBackendPtrOutput) ExtraVolume() corev1.VolumeArrayOutput {
-	return o.ApplyT(func(v *ControllerDefaultBackend) []corev1.Volume {
-		if v == nil {
-			return nil
-		}
-		return v.ExtraVolume
-	}).(corev1.VolumeArrayOutput)
-}
-
 // Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
 func (o ControllerDefaultBackendPtrOutput) ExtraVolumeMounts() corev1.VolumeMountArrayOutput {
 	return o.ApplyT(func(v *ControllerDefaultBackend) []corev1.VolumeMount {
@@ -4009,6 +3999,16 @@ func (o ControllerDefaultBackendPtrOutput) ExtraVolumeMounts() corev1.VolumeMoun
 		}
 		return v.ExtraVolumeMounts
 	}).(corev1.VolumeMountArrayOutput)
+}
+
+// Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
+func (o ControllerDefaultBackendPtrOutput) ExtraVolumes() corev1.VolumeArrayOutput {
+	return o.ApplyT(func(v *ControllerDefaultBackend) []corev1.Volume {
+		if v == nil {
+			return nil
+		}
+		return v.ExtraVolumes
+	}).(corev1.VolumeArrayOutput)
 }
 
 func (o ControllerDefaultBackendPtrOutput) Image() ControllerImagePtrOutput {

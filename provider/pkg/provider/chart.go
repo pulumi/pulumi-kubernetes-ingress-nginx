@@ -165,7 +165,7 @@ type Controller struct {
 	MinReadySeconds *int `pulumi:"minReadySeconds"`
 	// Node tolerations for server scheduling to nodes with taints
 	// Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
-	Tolerations *map[string]string `pulumi:"labels"`
+	Tolerations *[]corev1.Toleration `pulumi:"tolerations" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Toleration"`
 	// Affinity and anti-affinity
 	// Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity.
 	Affinity *corev1.Affinity `pulumi:"affinity" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Affinity"`
@@ -579,7 +579,7 @@ type ControllerDefaultBackend struct {
 	// Additional volumes to the default backend pod.
 	//  - name: copy-portal-skins
 	//    emptyDir: {}
-	ExtraVolumes      *[]corev1.Volume                 `pulumi:"extraVolume" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Volume"`
+	ExtraVolumes      *[]corev1.Volume                 `pulumi:"extraVolumes" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Volume"`
 	Autoscaling       *Autoscaling                     `pulumi:"autoscaling"`
 	Service           *ControllerDefaultBackendService `pulumi:"service"`
 	PriorityClassName *string                          `pulumi:"priorityClassName"`

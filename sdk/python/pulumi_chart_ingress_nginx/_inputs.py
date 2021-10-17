@@ -877,8 +877,8 @@ class ControllerDefaultBackendArgs:
                  existing_psp: Optional[pulumi.Input[str]] = None,
                  extra_args: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
                  extra_envs: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]]] = None,
-                 extra_volume: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]] = None,
                  extra_volume_mounts: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]] = None,
+                 extra_volumes: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]] = None,
                  image: Optional[pulumi.Input['ControllerImageArgs']] = None,
                  liveness_probe: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']] = None,
                  min_available: Optional[pulumi.Input[int]] = None,
@@ -897,8 +897,8 @@ class ControllerDefaultBackendArgs:
                  tolerations: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]]] = None):
         """
         :param pulumi.Input[str] existing_psp: Use an existing PSP instead of creating one.
-        :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]] extra_volume: Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
         :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]] extra_volume_mounts: Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
+        :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]] extra_volumes: Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
         :param pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs'] liveness_probe: Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] node_selector: Node labels for default backend pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] pod_annotations: Annotations to be added to default backend pods.
@@ -919,10 +919,10 @@ class ControllerDefaultBackendArgs:
             pulumi.set(__self__, "extra_args", extra_args)
         if extra_envs is not None:
             pulumi.set(__self__, "extra_envs", extra_envs)
-        if extra_volume is not None:
-            pulumi.set(__self__, "extra_volume", extra_volume)
         if extra_volume_mounts is not None:
             pulumi.set(__self__, "extra_volume_mounts", extra_volume_mounts)
+        if extra_volumes is not None:
+            pulumi.set(__self__, "extra_volumes", extra_volumes)
         if image is not None:
             pulumi.set(__self__, "image", image)
         if liveness_probe is not None:
@@ -1014,18 +1014,6 @@ class ControllerDefaultBackendArgs:
         pulumi.set(self, "extra_envs", value)
 
     @property
-    @pulumi.getter(name="extraVolume")
-    def extra_volume(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]]:
-        """
-        Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
-        """
-        return pulumi.get(self, "extra_volume")
-
-    @extra_volume.setter
-    def extra_volume(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]]):
-        pulumi.set(self, "extra_volume", value)
-
-    @property
     @pulumi.getter(name="extraVolumeMounts")
     def extra_volume_mounts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]]:
         """
@@ -1036,6 +1024,18 @@ class ControllerDefaultBackendArgs:
     @extra_volume_mounts.setter
     def extra_volume_mounts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]]):
         pulumi.set(self, "extra_volume_mounts", value)
+
+    @property
+    @pulumi.getter(name="extraVolumes")
+    def extra_volumes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]]:
+        """
+        Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
+        """
+        return pulumi.get(self, "extra_volumes")
+
+    @extra_volumes.setter
+    def extra_volumes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]]):
+        pulumi.set(self, "extra_volumes", value)
 
     @property
     @pulumi.getter
@@ -2523,7 +2523,6 @@ class ControllerArgs:
                  ingress_class_resource: Optional[pulumi.Input['ControllerIngressClassResourceArgs']] = None,
                  keda: Optional[pulumi.Input['KedaArgs']] = None,
                  kind: Optional[pulumi.Input[str]] = None,
-                 labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  lifecycle: Optional[pulumi.Input['pulumi_kubernetes.core.v1.LifecycleArgs']] = None,
                  liveness_probe: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']] = None,
                  maxmind_license_key: Optional[pulumi.Input[str]] = None,
@@ -2548,6 +2547,7 @@ class ControllerArgs:
                  sysctls: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
                  tcp: Optional[pulumi.Input['ControllerTcpArgs']] = None,
                  terminate_grace_period_seconds: Optional[pulumi.Input[int]] = None,
+                 tolerations: Optional[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']] = None,
                  topology_spread_constraints: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TopologySpreadConstraintArgs']]]] = None,
                  udp: Optional[pulumi.Input['ControllerUdpArgs']] = None,
                  update_strategy: Optional[pulumi.Input['ControllerUpdateStrategyArgs']] = None,
@@ -2585,7 +2585,6 @@ class ControllerArgs:
         :param pulumi.Input['ControllerIngressClassResourceArgs'] ingress_class_resource: This section refers to the creation of the IngressClass resource. IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
         :param pulumi.Input['KedaArgs'] keda: Mutually exclusive with hpa autoscaling.
         :param pulumi.Input[str] kind: DaemonSet or Deployment.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] labels: Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
         :param pulumi.Input['pulumi_kubernetes.core.v1.LifecycleArgs'] lifecycle: Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
         :param pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs'] liveness_probe: Liveness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
         :param pulumi.Input[str] maxmind_license_key: Maxmind license key to download GeoLite2 Databases https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases.
@@ -2604,6 +2603,7 @@ class ControllerArgs:
         :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] sysctls: See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.
         :param pulumi.Input['ControllerTcpArgs'] tcp: Allows customization of the tcp-services-configmap.
         :param pulumi.Input[int] terminate_grace_period_seconds: How long to wait for the drain of connections.
+        :param pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs'] tolerations: Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
         :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TopologySpreadConstraintArgs']]] topology_spread_constraints: Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
         :param pulumi.Input['ControllerUpdateStrategyArgs'] update_strategy: The update strategy to apply to the Deployment or DaemonSet.
         :param pulumi.Input[bool] watch_ingress_without_class: Process Ingress objects without ingressClass annotation/ingressClassName field. Overrides value for --watch-ingress-without-class flag of the controller binary. Defaults to false.
@@ -2676,8 +2676,6 @@ class ControllerArgs:
             pulumi.set(__self__, "keda", keda)
         if kind is not None:
             pulumi.set(__self__, "kind", kind)
-        if labels is not None:
-            pulumi.set(__self__, "labels", labels)
         if lifecycle is not None:
             pulumi.set(__self__, "lifecycle", lifecycle)
         if liveness_probe is not None:
@@ -2726,6 +2724,8 @@ class ControllerArgs:
             pulumi.set(__self__, "tcp", tcp)
         if terminate_grace_period_seconds is not None:
             pulumi.set(__self__, "terminate_grace_period_seconds", terminate_grace_period_seconds)
+        if tolerations is not None:
+            pulumi.set(__self__, "tolerations", tolerations)
         if topology_spread_constraints is not None:
             pulumi.set(__self__, "topology_spread_constraints", topology_spread_constraints)
         if udp is not None:
@@ -3139,18 +3139,6 @@ class ControllerArgs:
 
     @property
     @pulumi.getter
-    def labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
-        """
-        Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
-        """
-        return pulumi.get(self, "labels")
-
-    @labels.setter
-    def labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
-        pulumi.set(self, "labels", value)
-
-    @property
-    @pulumi.getter
     def lifecycle(self) -> Optional[pulumi.Input['pulumi_kubernetes.core.v1.LifecycleArgs']]:
         """
         Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
@@ -3418,6 +3406,18 @@ class ControllerArgs:
     @terminate_grace_period_seconds.setter
     def terminate_grace_period_seconds(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "terminate_grace_period_seconds", value)
+
+    @property
+    @pulumi.getter
+    def tolerations(self) -> Optional[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]:
+        """
+        Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
+        """
+        return pulumi.get(self, "tolerations")
+
+    @tolerations.setter
+    def tolerations(self, value: Optional[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]):
+        pulumi.set(self, "tolerations", value)
 
     @property
     @pulumi.getter(name="topologySpreadConstraints")

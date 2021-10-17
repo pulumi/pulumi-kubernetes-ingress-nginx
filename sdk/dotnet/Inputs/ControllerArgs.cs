@@ -288,18 +288,6 @@ namespace Pulumi.ChartIngressNginx.Inputs
         [Input("kind")]
         public Input<string>? Kind { get; set; }
 
-        [Input("labels")]
-        private InputMap<string>? _labels;
-
-        /// <summary>
-        /// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
-        /// </summary>
-        public InputMap<string> Labels
-        {
-            get => _labels ?? (_labels = new InputMap<string>());
-            set => _labels = value;
-        }
-
         /// <summary>
         /// Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
         /// </summary>
@@ -455,6 +443,12 @@ namespace Pulumi.ChartIngressNginx.Inputs
         /// </summary>
         [Input("terminateGracePeriodSeconds")]
         public Input<int>? TerminateGracePeriodSeconds { get; set; }
+
+        /// <summary>
+        /// Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
+        /// </summary>
+        [Input("tolerations")]
+        public Input<Pulumi.Kubernetes.Types.Inputs.Core.V1.TolerationArgs>? Tolerations { get; set; }
 
         [Input("topologySpreadConstraints")]
         private InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.TopologySpreadConstraintArgs>? _topologySpreadConstraints;
