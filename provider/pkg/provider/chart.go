@@ -23,7 +23,7 @@ import (
 // IngressController provisions a NGINX reverse proxy and load balancer for Kubernetes.
 type IngressController struct {
 	pulumi.ResourceState
-	HelmRelease *helmv3.Release `pulumi:"helmRelease,out,ref=pulumi-kubernetes:helm/v3:Release"`
+	HelmRelease *helmv3.Release `pulumi:"helmRelease,out" pschema:"ref=pulumi-kubernetes:helm/v3:Release"`
 }
 
 func (c *IngressController) SetOutputs(rel *helmv3.Release) { c.HelmRelease = rel }
@@ -36,575 +36,572 @@ func (c *IngressController) DefaultRepoURL() string {
 // IngressControllerArgs contains the set of arguments for creating a IngressController component resource.
 type IngressControllerArgs struct {
 	// Overrides for generated resource names.
-	NameOverride *string `pulumi:"nameOverride,omitempty"`
+	NameOverride *string `pulumi:"nameOverride"`
 	// Overrides for generated resource names.
-	FullnameOverride *string     `pulumi:"fullnameOverride,omitempty"`
-	Controller       *Controller `pulumi:"controller" json:"controller,omitempty"`
+	FullnameOverride *string     `pulumi:"fullnameOverride"`
+	Controller       *Controller `pulumi:"controller" json:"controller"`
 	// Rollback limit.
-	RevisionHistoryLimit *int `pulumi:"revisionHistoryLimit,omitempty"`
+	RevisionHistoryLimit *int `pulumi:"revisionHistoryLimit"`
 	// Default 404 backend.
-	DefaultBackend *ControllerDefaultBackend `pulumi:"defaultBackend,omitempty"`
+	DefaultBackend *ControllerDefaultBackend `pulumi:"defaultBackend"`
 	// Enable RBAC as per
 	// https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and
 	// https://github.com/kubernetes/ingress-nginx/issues/266
-	RBAC *ControllerRBAC `pulumi:"rbac,omitempty"`
+	RBAC *ControllerRBAC `pulumi:"rbac"`
 	// If true, create & use Pod Security Policy resources
 	// https://kubernetes.io/docs/concepts/policy/pod-security-policy/
-	PodSecurityPolicy *ControllerPodSecurityPolicy `pulumi:"podSecurityPolicy,omitempty"`
-	ServiceAccount    *ControllerServiceAccount    `pulumi:"serviceAccount,omitempty"`
+	PodSecurityPolicy *ControllerPodSecurityPolicy `pulumi:"podSecurityPolicy"`
+	ServiceAccount    *ControllerServiceAccount    `pulumi:"serviceAccount"`
 	// Optional array of imagePullSecrets containing private registry credentials
 	// Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.
-	ImagePullSecrets *[]corev1.LocalObjectReference `pulumi:"imagePullSecrets,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:LocalObjectReference,omitempty"`
+	ImagePullSecrets *[]corev1.LocalObjectReference `pulumi:"imagePullSecrets" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:LocalObjectReference"`
 	// TCP service key:value pairs
 	// Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
-	TCP map[string]interface{} `pulumi:"tcp,omitempty"`
+	TCP *map[string]interface{} `pulumi:"tcp"`
 	// UDP service key:value pairs
 	// Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
-	UDP map[string]interface{} `pulumi:"udp,omitempty"`
+	UDP *map[string]interface{} `pulumi:"udp"`
 	// A base64ed Diffie-Hellman parameter.
 	// This can be generated with: openssl dhparam 4096 2> /dev/null | base64
 	// Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.
-	DHParam *string `pulumi:"dhParam,omitempty"`
+	DHParam *string `pulumi:"dhParam"`
 
 	// HelmOptions is an escape hatch that lets the end user control any aspect of the
 	// Helm deployment. This exposes the entirety of the underlying Helm Release component args.
-	HelmOptions *HelmOptions `pulumi:"helmOptions" json:"-"`
+	HelmOptions *helmv3.ReleaseType `pulumi:"helmOptions" pschema:"ref=#/types/chart-ingress-nginx:index:Release" json:"-"`
 }
-
-// HelmOptions defines the underlying Helm deployment options that can be specified to override defaults.
-type HelmOptions = helmv3.ReleaseType
 
 func (args *IngressControllerArgs) R() **helmv3.ReleaseType { return &args.HelmOptions }
 
 type Controller struct {
-	Name  *string          `pulumi:"name,omitempty"`
-	Image *ControllerImage `pulumi:"image,omitempty"`
+	Name  *string          `pulumi:"name"`
+	Image *ControllerImage `pulumi:"image"`
 	// Use an existing PSP instead of creating one.
-	ExistingPsp *string `pulumi:"existingPsp,omitempty"`
+	ExistingPsp *string `pulumi:"existingPsp"`
 	// Configures the controller container name.
-	ContainerName *string `pulumi:"containerName,omitempty"`
+	ContainerName *string `pulumi:"containerName"`
 	// Configures the ports the nginx-controller listens on.
-	ContainerPort *ControllerPort `pulumi:"containerPort,omitempty"`
+	ContainerPort *ControllerPort `pulumi:"containerPort"`
 	// Will add custom configuration options to Nginx
 	// https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
-	Config *map[string]interface{} `pulumi:"config,omitempty"`
+	Config *map[string]interface{} `pulumi:"config"`
 	// Annotations to be added to the controller config configuration configmap.
-	ConfigAnnotations *map[string]interface{} `pulumi:"configAnnotations,omitempty"`
+	ConfigAnnotations *map[string]interface{} `pulumi:"configAnnotations"`
 	// Will add custom headers before sending traffic to backends according to
 	// https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers.
-	ProxySetHeaders *map[string]interface{} `pulumi:"proxySetHeaders,omitempty"`
+	ProxySetHeaders *map[string]interface{} `pulumi:"proxySetHeaders"`
 	// Will add custom headers before sending response traffic to the client according to:
 	// https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers.
-	AddHeaders *map[string]interface{} `pulumi:"addHeaders,omitempty"`
+	AddHeaders *map[string]interface{} `pulumi:"addHeaders"`
 	// Optionally customize the pod dnsConfig.
-	DnsConfig *map[string]interface{} `pulumi:"dnsConfig,omitempty"`
+	DnsConfig *map[string]interface{} `pulumi:"dnsConfig"`
 	// Optionally customize the pod hostname.
-	Hostname *map[string]interface{} `pulumi:"hostname,omitempty"`
+	Hostname *map[string]interface{} `pulumi:"hostname"`
 	// Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
 	// By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
 	// to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
-	DnsPolicy *string `pulumi:"dnsPolicy,omitempty"`
+	DnsPolicy *string `pulumi:"dnsPolicy"`
 	// Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
 	// Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a
 	// configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply.
-	ReportNodeInternalIp *bool `pulumi:"reportNodeInternalIp,omitempty"`
+	ReportNodeInternalIp *bool `pulumi:"reportNodeInternalIp"`
 	// Process Ingress objects without ingressClass annotation/ingressClassName field.
 	// Overrides value for --watch-ingress-without-class flag of the controller binary.
 	// Defaults to false.
-	WatchIngressWithoutClass *bool `pulumi:"watchIngressWithoutClass,omitempty"`
+	WatchIngressWithoutClass *bool `pulumi:"watchIngressWithoutClass"`
 	// Process IngressClass per name (additionally as per spec.controller).
-	IngressClassByName *bool `pulumi:"ingressClassByName,omitempty"`
+	IngressClassByName *bool `pulumi:"ingressClassByName"`
 	// This configuration defines if Ingress Controller should allow users to set
 	// their own *-snippet annotations, otherwise this is forbidden / dropped when users add those annotations.
 	// Global snippets in ConfigMap are still respected.
-	AllowSnippetAnnotations *bool `pulumi:"allowSnippetAnnotations,omitempty"`
+	AllowSnippetAnnotations *bool `pulumi:"allowSnippetAnnotations"`
 	// Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
 	// since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
 	// is merged.
-	HostNetwork *bool `pulumi:"hostNetwork,omitempty"`
+	HostNetwork *bool `pulumi:"hostNetwork"`
 	// Use host ports 80 and 443. Disabled by default.
-	HostPort *ControllerHostPort `pulumi:"hostPort,omitempty"`
+	HostPort *ControllerHostPort `pulumi:"hostPort"`
 	// Election ID to use for status update.
-	ElectionID *string `pulumi:"electionID,omitempty"`
+	ElectionID *string `pulumi:"electionID"`
 	// This section refers to the creation of the IngressClass resource.
 	// IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
-	IngressClassResource *ControllerIngressClassResource `pulumi:"ingressClassResource,omitempty"`
+	IngressClassResource *ControllerIngressClassResource `pulumi:"ingressClassResource"`
 	// labels to add to the pod container metadata.
-	PodLabels *map[string]interface{} `pulumi:"podLabels,omitempty"`
+	PodLabels *map[string]interface{} `pulumi:"podLabels"`
 	// Security Context policies for controller pods.
-	PodSecurityContext *corev1.PodSecurityContext `pulumi:"podSecurityContext,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:PodSecurityContext,omitempty"`
+	PodSecurityContext *corev1.PodSecurityContext `pulumi:"podSecurityContext" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:PodSecurityContext"`
 	// See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
 	// notes on enabling and using sysctls.
-	Sysctls *map[string]interface{} `pulumi:"sysctls,omitempty"`
+	Sysctls *map[string]interface{} `pulumi:"sysctls"`
 	// Allows customization of the source of the IP address or FQDN to report
 	// in the ingress status field. By default, it reads the information provided
 	// by the service. If disable, the status field reports the IP address of the
 	// node or nodes where an ingress controller pod is running.
-	PublishService *ControllerPublishService `pulumi:"publishService,omitempty"`
+	PublishService *ControllerPublishService `pulumi:"publishService"`
 	// Limit the scope of the controller.
-	Scope *ControllerScope `pulumi:"scope,omitempty"`
+	Scope *ControllerScope `pulumi:"scope"`
 	// Allows customization of the configmap / nginx-configmap namespace.
-	ConfigMapNamespace *string `pulumi:"configMapNamespace,omitempty"`
+	ConfigMapNamespace *string `pulumi:"configMapNamespace"`
 	// Allows customization of the tcp-services-configmap.
-	Tcp *ControllerTcp `pulumi:"tcp,omitempty"`
-	Udp *ControllerUdp `pulumi:"udp,omitempty"`
+	Tcp *ControllerTcp `pulumi:"tcp"`
+	Udp *ControllerUdp `pulumi:"udp"`
 	// Maxmind license key to download GeoLite2 Databases
 	// https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases.
-	MaxmindLicenseKey *string `pulumi:"maxmindLicenseKey,omitempty"`
+	MaxmindLicenseKey *string `pulumi:"maxmindLicenseKey"`
 	// Additional command line arguments to pass to nginx-ingress-controller
 	// E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
-	ExtraArgs *map[string]interface{} `pulumi:"extraArgs,omitempty"`
+	ExtraArgs *map[string]interface{} `pulumi:"extraArgs"`
 	// Additional environment variables to set.
-	ExtraEnvs []*corev1.EnvVar `pulumi:"extraEnvs,omitempty"`
+	ExtraEnvs *[]corev1.EnvVar `pulumi:"extraEnvs" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:EnvVar"`
 	// DaemonSet or Deployment.
-	Kind *string `pulumi:"kind,omitempty"`
+	Kind *string `pulumi:"kind"`
 	// Annotations to be added to the controller Deployment or DaemonSet.
-	Annotations *map[string]string `pulumi:"annotations,omitempty"`
+	Annotations *map[string]string `pulumi:"annotations"`
 	// Labels to be added to the controller Deployment or DaemonSet.
-	Labels *map[string]string `pulumi:"labels,omitempty"`
+	Labels *map[string]string `pulumi:"labels"`
 	// The update strategy to apply to the Deployment or DaemonSet.
-	UpdateStrategy *ControllerUpdateStrategy `pulumi:"updateStrategy,omitempty"`
+	UpdateStrategy *ControllerUpdateStrategy `pulumi:"updateStrategy"`
 	// minReadySeconds to avoid killing pods before we are ready.
-	MinReadySeconds *int `pulumi:"minReadySeconds,omitempty"`
+	MinReadySeconds *int `pulumi:"minReadySeconds"`
 	// Node tolerations for server scheduling to nodes with taints
 	// Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
-	Tolerations *map[string]string `pulumi:"labels,omitempty"`
+	Tolerations *map[string]string `pulumi:"labels"`
 	// Affinity and anti-affinity
 	// Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity.
-	Affinity *corev1.Affinity `pulumi:"affinity,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Affinity,omitempty"`
+	Affinity *corev1.Affinity `pulumi:"affinity" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Affinity"`
 	// Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in.
 	// Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
-	TopologySpreadConstraints *[]corev1.TopologySpreadConstraint `pulumi:"topologySpreadConstraints,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:TopologySpreadConstraint,omitempty"`
+	TopologySpreadConstraints *[]corev1.TopologySpreadConstraint `pulumi:"topologySpreadConstraints" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:TopologySpreadConstraint"`
 	// How long to wait for the drain of connections.
-	TerminateGracePeriodSeconds *int `pulumi:"terminateGracePeriodSeconds,omitempty"`
+	TerminateGracePeriodSeconds *int `pulumi:"terminateGracePeriodSeconds"`
 	// Node labels for controller pod assignment
 	// Ref: https://kubernetes.io/docs/user-guide/node-selection/.
-	NodeSelector *map[string]string `pulumi:"nodeSelector,omitempty"`
+	NodeSelector *map[string]string `pulumi:"nodeSelector"`
 	// Startup probe values
 	// Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
-	StartupProbe *corev1.Probe `pulumi:"startupProbe,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe,omitempty"`
+	StartupProbe *corev1.Probe `pulumi:"startupProbe" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe"`
 	// Liveness probe values
 	// Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
-	LivenessProbe *corev1.Probe `pulumi:"livenessProbe,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe,omitempty"`
+	LivenessProbe *corev1.Probe `pulumi:"livenessProbe" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe"`
 	// Readiness probe values
 	// Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
-	ReadinessProbe *corev1.Probe `pulumi:"readinessProbe,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe,omitempty"`
+	ReadinessProbe *corev1.Probe `pulumi:"readinessProbe" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe"`
 	// Path of the health check endpoint. All requests received on the port defined by
 	// the healthz-port parameter are forwarded internally to this path.
-	HealthCheckPath *string `pulumi:"healthCheckPath,omitempty"`
+	HealthCheckPath *string `pulumi:"healthCheckPath"`
 	// Address to bind the health check endpoint.
 	// It is better to set this option to the internal node address
 	// if the ingress nginx controller is running in the hostNetwork: true mode.
-	HealthCheckHost *string `pulumi:"heathCheckHost,omitempty"`
+	HealthCheckHost *string `pulumi:"heathCheckHost"`
 	// Annotations to be added to controller pods.
-	PodAnnotations *map[string]string `pulumi:"podAnnotations,omitempty"`
-	ReplicaCount   *int               `pulumi:"replicaCount,omitempty"`
-	MinAvailable   *int               `pulumi:"minAvailable,omitempty"`
+	PodAnnotations *map[string]string `pulumi:"podAnnotations"`
+	ReplicaCount   *int               `pulumi:"replicaCount"`
+	MinAvailable   *int               `pulumi:"minAvailable"`
 	// Define requests resources to avoid probe issues due to CPU utilization in busy nodes
 	// ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903
 	// Ideally, there should be no limits.
 	// https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/
-	Resources *corev1.ResourceRequirements `pulumi:"resources,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements,omitempty"`
+	Resources *corev1.ResourceRequirements `pulumi:"resources" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"`
 	// Mutually exclusive with keda autoscaling.
-	Autoscaling *Autoscaling `pulumi:"autoscaling,omitempty"`
+	Autoscaling *Autoscaling `pulumi:"autoscaling"`
 	// Custom or additional autoscaling metrics
 	// ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
-	AutoscalingTemplate *[]AutoscalingTemplate `pulumi:"autoscalingTemplate,omitempty"`
+	AutoscalingTemplate *[]AutoscalingTemplate `pulumi:"autoscalingTemplate"`
 	// Mutually exclusive with hpa autoscaling.
-	Keds *Keda `pulumi:"keda,omitempty"`
+	Keds *Keda `pulumi:"keda"`
 	// Enable mimalloc as a drop-in replacement for malloc.
 	// ref: https://github.com/microsoft/mimalloc.
-	EnableMimalloc *bool `pulumi:"enableMimalloc,omitempty"`
+	EnableMimalloc *bool `pulumi:"enableMimalloc"`
 	// Override NGINX template.
-	CustomTemplate *ControllerCustomTemplate `pulumi:"customTemplate,omitempty"`
-	Service        *ControllerService        `pulumi:"service,omitempty"`
+	CustomTemplate *ControllerCustomTemplate `pulumi:"customTemplate"`
+	Service        *ControllerService        `pulumi:"service"`
 	// Additional containers to be added to the controller pod.
 	// See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
-	ExtraContainers []*corev1.Container `pulumi:"extraContainers,omitempty"`
+	ExtraContainers *[]corev1.Container `pulumi:"extraContainers" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Container"`
 	// Additional volumeMounts to the controller main container.
 	//  - name: copy-portal-skins
 	//    mountPath: /var/lib/lemonldap-ng/portal/skins
-	ExtraVolumeMounts []*corev1.VolumeMount `pulumi:"extraVolumeMounts,omitempty"`
+	ExtraVolumeMounts *[]corev1.VolumeMount `pulumi:"extraVolumeMounts" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:VolumeMount"`
 	// Additional volumes to the controller pod.
 	//  - name: copy-portal-skins
 	//    emptyDir: {}
-	ExtraVolumes []*corev1.Volume `pulumi:"extraVolume,omitempty"`
+	ExtraVolumes *[]corev1.Volume `pulumi:"extraVolumes" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Volume"`
 	// Containers, which are run before the app containers are started.
 	// - name: init-myservice
 	//   image: busybox
 	//   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
-	ExtraInitContainers []*corev1.Container         `pulumi:"extraInitContainers,omitempty"`
-	AdmissionWebhooks   *ContollerAdmissionWebhooks `pulumi:"admissionWebhooks,omitempty"`
-	Metrics             *ControllerMetrics          `pulumi:"metrics,omitempty"`
+	ExtraInitContainers *[]corev1.Container         `pulumi:"extraInitContainers" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Container"`
+	AdmissionWebhooks   *ContollerAdmissionWebhooks `pulumi:"admissionWebhooks"`
+	Metrics             *ControllerMetrics          `pulumi:"metrics"`
 	// Improve connection draining when ingress controller pod is deleted using a lifecycle hook:
 	// With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds
 	// to 300, allowing the draining of connections up to five minutes.
 	// If the active connections end before that, the pod will terminate gracefully at that time.
 	// To effectively take advantage of this feature, the Configmap feature
 	// worker-shutdown-timeout new value is 240s instead of 10s.
-	Lifecycle         *corev1.Lifecycle `pulumi:"lifecycle,omitempty"`
-	PriorityClassName *string           `pulumi:"priorityClassName,omitempty"`
+	Lifecycle         *corev1.Lifecycle `pulumi:"lifecycle" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Lifecycle"`
+	PriorityClassName *string           `pulumi:"priorityClassName"`
 }
 
 type ControllerImage struct {
-	Registry *string `pulumi:"registry,omitempty"`
-	Image    *string `pulumi:"image,omitempty"`
+	Registry *string `pulumi:"registry"`
+	Image    *string `pulumi:"image"`
 	// for backwards compatibility consider setting the full image url via the repository value below
 	// use *either* current default registry/image or repository format or installing will fail.
-	Repository               *string `pulumi:"repository,omitempty"`
-	Tag                      *string `pulumi:"tag,omitempty"`
-	Digest                   *string `pulumi:"digest,omitempty"`
-	PullPolicy               *string `pulumi:"pullPolicy,omitempty"`
-	RunAsUser                *string `pulumi:"runAsUser,omitempty"`
-	RunAsNonRoot             *bool   `pulumi:"runAsNonRoot,omitempty"`
-	ReadOnlyRootFilesystem   *bool   `pulumi:"readOnlyRootFilesystem,omitempty"`
-	AllowPrivilegeEscalation *bool   `pulumi:"allowPrivilegeEscalation,omitempty"`
+	Repository               *string `pulumi:"repository"`
+	Tag                      *string `pulumi:"tag"`
+	Digest                   *string `pulumi:"digest"`
+	PullPolicy               *string `pulumi:"pullPolicy"`
+	RunAsUser                *string `pulumi:"runAsUser"`
+	RunAsNonRoot             *bool   `pulumi:"runAsNonRoot"`
+	ReadOnlyRootFilesystem   *bool   `pulumi:"readOnlyRootFilesystem"`
+	AllowPrivilegeEscalation *bool   `pulumi:"allowPrivilegeEscalation"`
 }
 
 type ControllerPort struct {
-	Http  *int `pulumi:"http,omitempty"`
-	Https *int `pulumi:"https,omitempty"`
+	Http  *int `pulumi:"http"`
+	Https *int `pulumi:"https"`
 }
 
 type ControllerHostPort struct {
-	Enabled *bool                    `pulumi:"enabled,omitempty"`
-	Ports   *ControllerHostPortPorts `pulumi:"ports,omitempty"`
+	Enabled *bool                    `pulumi:"enabled"`
+	Ports   *ControllerHostPortPorts `pulumi:"ports"`
 }
 
 type ControllerHostPortPorts struct {
-	Http  *int `pulumi:"http,omitempty"`
-	Https *int `pulumi:"https,omitempty"`
+	Http  *int `pulumi:"http"`
+	Https *int `pulumi:"https"`
 }
 
 type ControllerServiceAccount struct {
-	Create                       *bool   `pulumi:"create,omitempty"`
-	Name                         *string `pulumi:"name,omitempty"`
-	AutomountServiceAccountToken *bool   `pulumi:"automountServiceAccountToken,omitempty"`
+	Create                       *bool   `pulumi:"create"`
+	Name                         *string `pulumi:"name"`
+	AutomountServiceAccountToken *bool   `pulumi:"automountServiceAccountToken"`
 }
 
 type ControllerIngressClassResource struct {
-	Name            *string `pulumi:"name,omitempty"`
-	Enabled         *bool   `pulumi:"enabled,omitempty"`
-	Default         *bool   `pulumi:"default,omitempty"`
-	ControllerValue *string `pulumi:"controllerValue,omitempty"`
+	Name            *string `pulumi:"name"`
+	Enabled         *bool   `pulumi:"enabled"`
+	Default         *bool   `pulumi:"default"`
+	ControllerValue *string `pulumi:"controllerValue"`
 	// Parameters is a link to a custom resource containing additional
 	// configuration for the controller. This is optional if the controller
 	// does not require extra parameters.
-	Parameters *map[string]interface{} `pulumi:"parameters,omitempty"`
+	Parameters *map[string]interface{} `pulumi:"parameters"`
 }
 
 type ControllerPublishService struct {
-	Enabled *bool `pulumi:"enabled,omitempty"`
+	Enabled *bool `pulumi:"enabled"`
 	// Allows overriding of the publish service to bind to. Must be <namespace>/<service_name>.
-	PathOverride *string `pulumi:"pathOverride,omitempty"`
+	PathOverride *string `pulumi:"pathOverride"`
 }
 
 type ControllerScope struct {
-	Enabled   *bool   `pulumi:"enabled,omitempty"`
-	Namespace *string `pulumi:"namespace,omitempty"`
+	Enabled   *bool   `pulumi:"enabled"`
+	Namespace *string `pulumi:"namespace"`
 }
 
 type ControllerTcp struct {
-	ConfigMapNamespace *string `pulumi:"configMapNamespace,omitempty"`
+	ConfigMapNamespace *string `pulumi:"configMapNamespace"`
 	// Annotations to be added to the tcp config configmap.
-	Annotations *map[string]string `pulumi:"annotations,omitempty"`
+	Annotations *map[string]string `pulumi:"annotations"`
 }
 
 type ControllerUdp struct {
-	ConfigMapNamespace *string `pulumi:"configMapNamespace,omitempty"`
+	ConfigMapNamespace *string `pulumi:"configMapNamespace"`
 	// Annotations to be added to the udp config configmap.
-	Annotations *map[string]string `pulumi:"annotations,omitempty"`
+	Annotations *map[string]string `pulumi:"annotations"`
 }
 
 type ControllerUpdateStrategy struct {
-	RollingUpdate *ControllerRollingUpdate `pulumi:"rollingUpdate,omitempty"`
-	Type          *string                  `pulumi:"type,omitempty"`
+	RollingUpdate *ControllerRollingUpdate `pulumi:"rollingUpdate"`
+	Type          *string                  `pulumi:"type"`
 }
 
 type ControllerRollingUpdate struct {
-	MaxUnavailable *int `pulumi:"maxUnavailable,omitempty"`
+	MaxUnavailable *int `pulumi:"maxUnavailable"`
 }
 
 type Autoscaling struct {
-	Annotations                        *map[string]string   `pulumi:"annotations,omitempty"`
-	Enabled                            *bool                `pulumi:"enabled,omitempty"`
-	MinReplicas                        *int                 `pulumi:"minReplicas,omitempty"`
-	MaxReplicas                        *int                 `pulumi:"maxReplicas,omitempty"`
-	TargetCPUUtilizationPercentation   *int                 `pulumi:"targetCPUUtilizationPercentage,omitempty"`
-	TargetMemoryUtilizationPercentatge *int                 `pulumi:"targetMemoryUtilizationPercentage,omitempty"`
-	Behavior                           *AutoscalingBehavior `pulumi:"controllerAutoscalingBehavior,omitempty"`
+	Annotations                        *map[string]string   `pulumi:"annotations"`
+	Enabled                            *bool                `pulumi:"enabled"`
+	MinReplicas                        *int                 `pulumi:"minReplicas"`
+	MaxReplicas                        *int                 `pulumi:"maxReplicas"`
+	TargetCPUUtilizationPercentation   *int                 `pulumi:"targetCPUUtilizationPercentage"`
+	TargetMemoryUtilizationPercentatge *int                 `pulumi:"targetMemoryUtilizationPercentage"`
+	Behavior                           *AutoscalingBehavior `pulumi:"controllerAutoscalingBehavior"`
 }
 
 type AutoscalingBehavior struct {
-	ScaleDown *AutoscalingBehaviorScaling `pulumi:"scaleDown,omitempty"`
-	ScaleUp   *AutoscalingBehaviorScaling `pulumi:"scaleUp,omitempty"`
+	ScaleDown *AutoscalingBehaviorScaling `pulumi:"scaleDown"`
+	ScaleUp   *AutoscalingBehaviorScaling `pulumi:"scaleUp"`
 }
 
 type AutoscalingBehaviorScaling struct {
-	StabilizationWindowSeconds *int                                `pulumi:"stabilizationWindowSeconds,omitempty"`
-	Policies                   *[]AutoscalingBehaviorScalingPolicy `pulumi:"policies,omitempty"`
+	StabilizationWindowSeconds *int                                `pulumi:"stabilizationWindowSeconds"`
+	Policies                   *[]AutoscalingBehaviorScalingPolicy `pulumi:"policies"`
 }
 
 type AutoscalingBehaviorScalingPolicy struct {
-	Type          *string `pulumi:"type,omitempty"`
-	Value         *int    `pulumi:"value,omitempty"`
-	PeriodSeconds *int    `pulumi:"periodSeconds,omitempty"`
+	Type          *string `pulumi:"type"`
+	Value         *int    `pulumi:"value"`
+	PeriodSeconds *int    `pulumi:"periodSeconds"`
 }
 
 type AutoscalingTemplate struct {
-	Type *string                  `pulumi:"type,omitempty"`
-	Pods *AutoscalingTemplatePods `pulumi:"pods,omitempty"`
+	Type *string                  `pulumi:"type"`
+	Pods *AutoscalingTemplatePods `pulumi:"pods"`
 }
 
 type AutoscalingTemplatePods struct {
-	Metric *AutoscalingTemplatePodsMetric `pulumi:"metric,omitempty"`
-	Target *AutoscalingTemplatePodsTarget `pulumi:"target,omitempty"`
+	Metric *AutoscalingTemplatePodsMetric `pulumi:"metric"`
+	Target *AutoscalingTemplatePodsTarget `pulumi:"target"`
 }
 
 type AutoscalingTemplatePodsMetric struct {
-	Name *string `pulumi:"name,omitempty"`
+	Name *string `pulumi:"name"`
 }
 
 type AutoscalingTemplatePodsTarget struct {
-	Type         *string `pulumi:"type,omitempty"`
-	AverageValue *string `pulumi:"averageValue,omitempty"`
+	Type         *string `pulumi:"type"`
+	AverageValue *string `pulumi:"averageValue"`
 }
 
 type Keda struct {
 	// apiVersion changes with keda 1.x vs 2.x:
 	// 2.x = keda.sh/v1alpha1,
 	// 1.x = keda.k8s.io/v1alpha1.
-	APIVersion                    *string              `pulumi:"apiVersion,omitempty"`
-	Enabled                       *bool                `pulumi:"enabled,omitempty"`
-	MinReplicas                   *int                 `pulumi:"minReplicas,omitempty"`
-	MaxReplicas                   *int                 `pulumi:"maxReplicas,omitempty"`
-	PollingInterval               *int                 `pulumi:"pollingInterval,omitempty"`
-	CooldownPeriod                *int                 `pulumi:"cooldownPeriod,omitempty"`
-	RestoreToOriginalReplicaCount *bool                `pulumi:"restoreToOriginalReplicaCount,omitempty"`
-	ScaledObject                  *KedaScaledObject    `pulumi:"scaledObject,omitempty"`
-	Triggers                      *[]KedaTrigger       `pulumi:"triggers,omitempty"`
-	Behavior                      *AutoscalingBehavior `pulumi:"behavior,omitempty"`
+	APIVersion                    *string              `pulumi:"apiVersion"`
+	Enabled                       *bool                `pulumi:"enabled"`
+	MinReplicas                   *int                 `pulumi:"minReplicas"`
+	MaxReplicas                   *int                 `pulumi:"maxReplicas"`
+	PollingInterval               *int                 `pulumi:"pollingInterval"`
+	CooldownPeriod                *int                 `pulumi:"cooldownPeriod"`
+	RestoreToOriginalReplicaCount *bool                `pulumi:"restoreToOriginalReplicaCount"`
+	ScaledObject                  *KedaScaledObject    `pulumi:"scaledObject"`
+	Triggers                      *[]KedaTrigger       `pulumi:"triggers"`
+	Behavior                      *AutoscalingBehavior `pulumi:"behavior"`
 }
 
 type KedaScaledObject struct {
 	// Custom annotations for ScaledObject resource.
-	Annotations *map[string]string `pulumi:"annotations,omitempty"`
+	Annotations *map[string]string `pulumi:"annotations"`
 }
 
 type KedaTrigger struct {
-	Type     *string                 `pulumi:"type,omitempty"`
-	Metadata *map[string]interface{} `pulumi:"metadata,omitempty"`
+	Type     *string                 `pulumi:"type"`
+	Metadata *map[string]interface{} `pulumi:"metadata"`
 }
 
 type ControllerCustomTemplate struct {
-	ConfigMapName *string `pulumi:"configMapName,omitempty"`
-	ConfigMapKey  *string `pulumi:"configMapKey,omitempty"`
+	ConfigMapName *string `pulumi:"configMapName"`
+	ConfigMapKey  *string `pulumi:"configMapKey"`
 }
 
 type ControllerService struct {
-	Enabled     *bool                   `pulumi:"enabled,omitempty"`
-	Annotations *map[string]interface{} `pulumi:"annotations,omitempty"`
-	Labels      *map[string]interface{} `pulumi:"labels,omitempty"`
-	ClusterIP   *string                 `pulumi:"clusterIP,omitempty"`
+	Enabled     *bool                   `pulumi:"enabled"`
+	Annotations *map[string]interface{} `pulumi:"annotations"`
+	Labels      *map[string]interface{} `pulumi:"labels"`
+	ClusterIP   *string                 `pulumi:"clusterIP"`
 	// List of IP addresses at which the controller services are available
 	// Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
-	ExternalIPs              *[]string `pulumi:"externalIPs,omitempty"`
-	LoadBalancerIP           *string   `pulumi:"loadBalancerIPs,omitempty"`
-	LoadBalancerSourceRanges *[]string `pulumi:"loadBalancerSourceRanges,omitempty"`
-	EnableHttp               *bool     `pulumi:"enableHttp,omitempty"`
-	EnableHttps              *bool     `pulumi:"enableHttps,omitempty"`
+	ExternalIPs              *[]string `pulumi:"externalIPs"`
+	LoadBalancerIP           *string   `pulumi:"loadBalancerIPs"`
+	LoadBalancerSourceRanges *[]string `pulumi:"loadBalancerSourceRanges"`
+	EnableHttp               *bool     `pulumi:"enableHttp"`
+	EnableHttps              *bool     `pulumi:"enableHttps"`
 	// Set external traffic policy to: "Local" to preserve source IP on
 	// providers supporting it.
 	// Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
-	ExternalTrafficPolicy *string `pulumi:"externalTrafficPolicy,omitempty"`
+	ExternalTrafficPolicy *string `pulumi:"externalTrafficPolicy"`
 	// Must be either "None" or "ClientIP" if set. Kubernetes will default to "None".
 	// Ref: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-	SessionAffinity *string `pulumi:"sessionAffinity,omitempty"`
+	SessionAffinity *string `pulumi:"sessionAffinity"`
 	// specifies the health check node port (numeric port number) for the service. If healthCheckNodePort isn’t specified,
 	// the service controller allocates a port from your cluster’s NodePort range.
 	// Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
-	HealthCheckNodePort *int                        `pulumi:"healthCheckNodePort,omitempty"`
-	Ports               *ControllerPort             `pulumi:"ports,omitempty"`
-	TargetPorts         *ControllerPort             `pulumi:"targetPorts,omitempty"`
-	Type                *string                     `pulumi:"type,omitempty"`
-	NodePorts           *ControllerServiceNodePorts `pulumi:"nodePorts,omitempty"`
+	HealthCheckNodePort *int                        `pulumi:"healthCheckNodePort"`
+	Ports               *ControllerPort             `pulumi:"ports"`
+	TargetPorts         *ControllerPort             `pulumi:"targetPorts"`
+	Type                *string                     `pulumi:"type"`
+	NodePorts           *ControllerServiceNodePorts `pulumi:"nodePorts"`
 	// Enables an additional internal load balancer (besides the external one).
 	// Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
-	Internal *ControllerServiceInternal `pulumi:"internal,omitempty"`
+	Internal *ControllerServiceInternal `pulumi:"internal"`
 }
 
 type ControllerServiceNodePorts struct {
-	Http  *string                 `pulumi:"http,omitempty"`
-	Https *string                 `pulumi:"https,omitempty"`
-	Tcp   *map[string]interface{} `pulumi:"tcp,omitempty"`
-	Udp   *map[string]interface{} `pulumi:"udp,omitempty"`
+	Http  *string                 `pulumi:"http"`
+	Https *string                 `pulumi:"https"`
+	Tcp   *map[string]interface{} `pulumi:"tcp"`
+	Udp   *map[string]interface{} `pulumi:"udp"`
 }
 
 type ControllerServiceInternal struct {
-	Enabled        *bool                   `pulumi:"enabled,omitempty"`
-	Annotations    *map[string]interface{} `pulumi:"annotations,omitempty"`
-	Labels         *map[string]interface{} `pulumi:"labels,omitempty"`
-	LoadBalancerIP *string                 `pulumi:"loadBalancerIPs,omitempty"`
+	Enabled        *bool                   `pulumi:"enabled"`
+	Annotations    *map[string]interface{} `pulumi:"annotations"`
+	Labels         *map[string]interface{} `pulumi:"labels"`
+	LoadBalancerIP *string                 `pulumi:"loadBalancerIPs"`
 	// Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.
-	LoadBalancerSourceRanges *[]string `pulumi:"loadBalancerSourceRanges,omitempty"`
+	LoadBalancerSourceRanges *[]string `pulumi:"loadBalancerSourceRanges"`
 	// Set external traffic policy to: "Local" to preserve source IP on
 	// providers supporting it.
 	// Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
-	ExternalTrafficPolicy *string `pulumi:"externalTrafficPolicy,omitempty"`
+	ExternalTrafficPolicy *string `pulumi:"externalTrafficPolicy"`
 }
 
 type ContollerAdmissionWebhooks struct {
-	Enabled           *bool                   `pulumi:"enabled,omitempty"`
-	Annotations       *map[string]interface{} `pulumi:"annotations,omitempty"`
-	FailurePolicy     *string                 `pulumi:"failurePolicy,omitempty"`
-	TimeoutSeconds    *int                    `pulumi:"timeoutSeconds,omitempty"`
-	Port              *int                    `pulumi:"port,omitempty"`
-	Certificate       *string                 `pulumi:"certificate,omitempty"`
-	Key               *string                 `pulumi:"key,omitempty"`
-	NamespaceSelector *map[string]interface{} `pulumi:"namespaceSelector,omitempty"`
-	ObjectSelector    *map[string]interface{} `pulumi:"objectSelector,omitempty"`
+	Enabled           *bool                   `pulumi:"enabled"`
+	Annotations       *map[string]interface{} `pulumi:"annotations"`
+	FailurePolicy     *string                 `pulumi:"failurePolicy"`
+	TimeoutSeconds    *int                    `pulumi:"timeoutSeconds"`
+	Port              *int                    `pulumi:"port"`
+	Certificate       *string                 `pulumi:"certificate"`
+	Key               *string                 `pulumi:"key"`
+	NamespaceSelector *map[string]interface{} `pulumi:"namespaceSelector"`
+	ObjectSelector    *map[string]interface{} `pulumi:"objectSelector"`
 	// Use an existing PSP instead of creating one.
-	ExistingPsp     *string                                      `pulumi:"existingPsp,omitempty"`
-	Service         *ControllerAdmissionWebhooksService          `pulumi:"service,omitempty"`
-	CreateSecretJob *ControllerAdmissionWebhooksCreateSecretJob  `pulumi:"createSecretJob,omitempty"`
-	PatchWebhookJob *ControllerAdmissionWebhooksPatchWebhbookJob `pulumi:"patchWebhookJob,omitempty"`
-	Patch           *ControllerAdmissionWebhooksPatch            `pulumi:"patch,omitempty"`
+	ExistingPsp     *string                                      `pulumi:"existingPsp"`
+	Service         *ControllerAdmissionWebhooksService          `pulumi:"service"`
+	CreateSecretJob *ControllerAdmissionWebhooksCreateSecretJob  `pulumi:"createSecretJob"`
+	PatchWebhookJob *ControllerAdmissionWebhooksPatchWebhbookJob `pulumi:"patchWebhookJob"`
+	Patch           *ControllerAdmissionWebhooksPatch            `pulumi:"patch"`
 }
 
 type ControllerAdmissionWebhooksService struct {
-	Annotations              *map[string]interface{} `pulumi:"annotations,omitempty"`
-	ClusterIP                *string                 `pulumi:"clusterIP,omitempty"`
-	ExternalIPs              *[]string               `pulumi:"externalIPs,omitempty"`
-	LoadBalancerIP           *string                 `pulumi:"loadBalancerIPs,omitempty"`
-	LoadBalancerSourceRanges *[]string               `pulumi:"loadBalancerSourceRanges,omitempty"`
-	ServicePort              *int                    `pulumi:"servicePort,omitempty"`
-	Type                     *string                 `pulumi:"type,omitempty"`
+	Annotations              *map[string]interface{} `pulumi:"annotations"`
+	ClusterIP                *string                 `pulumi:"clusterIP"`
+	ExternalIPs              *[]string               `pulumi:"externalIPs"`
+	LoadBalancerIP           *string                 `pulumi:"loadBalancerIPs"`
+	LoadBalancerSourceRanges *[]string               `pulumi:"loadBalancerSourceRanges"`
+	ServicePort              *int                    `pulumi:"servicePort"`
+	Type                     *string                 `pulumi:"type"`
 }
 
 type ControllerAdmissionWebhooksCreateSecretJob struct {
-	Resources *corev1.ResourceRequirements `pulumi:"resources,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements,omitempty"`
+	Resources *corev1.ResourceRequirements `pulumi:"resources" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"`
 }
 
 type ControllerAdmissionWebhooksPatchWebhbookJob struct {
-	Resources *corev1.ResourceRequirements `pulumi:"resources,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements,omitempty"`
+	Resources *corev1.ResourceRequirements `pulumi:"resources" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"`
 }
 
 type ControllerAdmissionWebhooksPatch struct {
-	Enabled *bool            `pulumi:"enabled,omitempty"`
-	Image   *ControllerImage `pulumi:"image,omitempty"`
+	Enabled *bool            `pulumi:"enabled"`
+	Image   *ControllerImage `pulumi:"image"`
 	// Provide a priority class name to the webhook patching job.
-	PriorityClassName *string                 `pulumi:"priorityClassName,omitempty"`
-	PodAnnotations    *map[string]interface{} `pulumi:"podAnnotations,omitempty"`
-	NodeSelector      *map[string]string      `pulumi:"nodeSelector,omitempty"`
-	Tolerations       *[]corev1.Toleration    `pulumi:"tolerations,omitempty"`
-	RunAsUser         *int                    `pulumi:"runAsUser,omitempty"`
+	PriorityClassName *string                 `pulumi:"priorityClassName"`
+	PodAnnotations    *map[string]interface{} `pulumi:"podAnnotations"`
+	NodeSelector      *map[string]string      `pulumi:"nodeSelector"`
+	Tolerations       *[]corev1.Toleration    `pulumi:"tolerations" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Toleration"`
+	RunAsUser         *int                    `pulumi:"runAsUser"`
 }
 
 type ControllerMetrics struct {
 	// if this port is changed, change healthz-port: in extraArgs: accordingly.
-	Port           *int                              `pulumi:"port,omitempty"`
-	Enabled        *bool                             `pulumi:"enabled,omitempty"`
-	Service        *ControllerMetricsService         `pulumi:"service,omitempty"`
-	ServiceMonitor *ControllerMetricsServiceMonitor  `pulumi:"serviceMonitor,omitempty"`
-	PrometheusRule *ControllerMetricsPrometheusRules `pulumi:"prometheusRule,omitempty"`
+	Port           *int                              `pulumi:"port"`
+	Enabled        *bool                             `pulumi:"enabled"`
+	Service        *ControllerMetricsService         `pulumi:"service"`
+	ServiceMonitor *ControllerMetricsServiceMonitor  `pulumi:"serviceMonitor"`
+	PrometheusRule *ControllerMetricsPrometheusRules `pulumi:"prometheusRule"`
 }
 
 type ControllerMetricsService struct {
-	Annotations              *map[string]string `pulumi:"annotations,omitempty"`
-	ClusterIP                *string            `pulumi:"clusterIP,omitempty"`
-	ExternalIPs              *[]string          `pulumi:"externalIPs,omitempty"`
-	LoadBalancerIP           *string            `pulumi:"loadBalancerIPs,omitempty"`
-	LoadBalancerSourceRanges *[]string          `pulumi:"loadBalancerSourceRanges,omitempty"`
-	ServicePort              *int               `pulumi:"servicePort,omitempty"`
-	Type                     *string            `pulumi:"type,omitempty"`
-	ExternalTrafficPolicy    *string            `pulumi:"externalTrafficPolicy,omitempty"`
-	NodePort                 *string            `pulumi:"nodePort,omitempty"`
+	Annotations              *map[string]string `pulumi:"annotations"`
+	ClusterIP                *string            `pulumi:"clusterIP"`
+	ExternalIPs              *[]string          `pulumi:"externalIPs"`
+	LoadBalancerIP           *string            `pulumi:"loadBalancerIPs"`
+	LoadBalancerSourceRanges *[]string          `pulumi:"loadBalancerSourceRanges"`
+	ServicePort              *int               `pulumi:"servicePort"`
+	Type                     *string            `pulumi:"type"`
+	ExternalTrafficPolicy    *string            `pulumi:"externalTrafficPolicy"`
+	NodePort                 *string            `pulumi:"nodePort"`
 }
 
 type ControllerMetricsServiceMonitor struct {
-	Enabled          *bool                   `pulumi:"enabled,omitempty"`
-	AdditionalLabels *map[string]interface{} `pulumi:"additionalLabels,omitempty"`
+	Enabled          *bool                   `pulumi:"enabled"`
+	AdditionalLabels *map[string]interface{} `pulumi:"additionalLabels"`
 	// The label to use to retrieve the job name from.
-	JobLabel          *string                 `pulumi:"jobLabel,omitempty"`
-	Namespace         *string                 `pulumi:"namespace,omitempty"`
-	NamespaceSelector *map[string]interface{} `pulumi:"namespaceSelector,omitempty"`
-	ScrapeInterval    *string                 `pulumi:"scrapeInterval,omitempty"`
-	HonorLabels       *bool                   `pulumi:"honorLabels,omitempty"`
-	TargetLabels      *[]string               `pulumi:"targetLabels,omitempty"`
-	MetricRelabelings *[]string               `pulumi:"metricRelabelings,omitempty"`
+	JobLabel          *string                 `pulumi:"jobLabel"`
+	Namespace         *string                 `pulumi:"namespace"`
+	NamespaceSelector *map[string]interface{} `pulumi:"namespaceSelector"`
+	ScrapeInterval    *string                 `pulumi:"scrapeInterval"`
+	HonorLabels       *bool                   `pulumi:"honorLabels"`
+	TargetLabels      *[]string               `pulumi:"targetLabels"`
+	MetricRelabelings *[]string               `pulumi:"metricRelabelings"`
 }
 
 type ControllerMetricsPrometheusRules struct {
-	Enabled          *bool                   `pulumi:"enabled,omitempty"`
-	AdditionalLabels *map[string]interface{} `pulumi:"additionalLabels,omitempty"`
-	Namespace        *string                 `pulumi:"namespace,omitempty"`
-	Rules            *[]interface{}          `pulumi:"rules,omitempty"`
+	Enabled          *bool                   `pulumi:"enabled"`
+	AdditionalLabels *map[string]interface{} `pulumi:"additionalLabels"`
+	Namespace        *string                 `pulumi:"namespace"`
+	Rules            *[]interface{}          `pulumi:"rules"`
 }
 
 type ControllerDefaultBackend struct {
-	Enabled *bool            `pulumi:"enabled,omitempty"`
-	Name    *string          `pulumi:"name,omitempty"`
-	Image   *ControllerImage `pulumi:"image,omitempty"`
+	Enabled *bool            `pulumi:"enabled"`
+	Name    *string          `pulumi:"name"`
+	Image   *ControllerImage `pulumi:"image"`
 	// Use an existing PSP instead of creating one.
-	ExistingPsp    *string                   `pulumi:"existingPsp,omitempty"`
-	ExtraArgs      *map[string]interface{}   `pulumi:"extraArgs,omitempty"`
-	ServiceAccount *ControllerServiceAccount `pulumi:"serviceAccount,omitempty"`
-	ExtraEnvs      *[]corev1.EnvVar          `pulumi:"extraEnvs,omitempty"`
-	Port           *int                      `pulumi:"port,omitempty"`
+	ExistingPsp    *string                   `pulumi:"existingPsp"`
+	ExtraArgs      *map[string]interface{}   `pulumi:"extraArgs"`
+	ServiceAccount *ControllerServiceAccount `pulumi:"serviceAccount"`
+	ExtraEnvs      *[]corev1.EnvVar          `pulumi:"extraEnvs" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:EnvVar"`
+	Port           *int                      `pulumi:"port"`
 	// Liveness probe values for default backend.
 	// Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
-	LivenessProbe *corev1.Probe `pulumi:"livenessProbe,omitempty"`
+	LivenessProbe *corev1.Probe `pulumi:"livenessProbe" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe"`
 	// Readiness probe values for default backend.
 	// Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
-	ReadinessProbe *corev1.Probe `pulumi:"readinessProbe,omitempty"`
+	ReadinessProbe *corev1.Probe `pulumi:"readinessProbe" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe"`
 	// Node tolerations for server scheduling to nodes with taints.
 	// Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-	Tolerations *[]corev1.Toleration `pulumi:"tolerations,omitempty"`
-	Affinity    *corev1.Affinity     `pulumi:"affinity,omitempty"`
+	Tolerations *[]corev1.Toleration `pulumi:"tolerations" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Toleration"`
+	Affinity    *corev1.Affinity     `pulumi:"affinity" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Affinity"`
 	// Security Context policies for controller pods.
 	// See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
 	// notes on enabling and using sysctls.
-	PodSecurityContext *corev1.PodSecurityContext `pulumi:"podSecurityContext,omitempty"`
+	PodSecurityContext *corev1.PodSecurityContext `pulumi:"podSecurityContext" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:PodSecurityContext"`
 	// labels to add to the pod container metadata
-	PodLabels *map[string]string `pulumi:"podLabels,omitempty"`
+	PodLabels *map[string]string `pulumi:"podLabels"`
 	// Node labels for default backend pod assignment
 	// Ref: https://kubernetes.io/docs/user-guide/node-selection/.
-	NodeSelector *map[string]string `pulumi:"nodeSelector,omitempty"`
+	NodeSelector *map[string]string `pulumi:"nodeSelector"`
 	// Annotations to be added to default backend pods.
-	PodAnnotations *map[string]string           `pulumi:"podAnnotations,omitempty"`
-	ReplicaCount   *int                         `pulumi:"replicaCount,omitempty"`
-	MinAvailable   *int                         `pulumi:"minAvailable,omitempty"`
-	Resources      *corev1.ResourceRequirements `pulumi:"resources,ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements,omitempty"`
+	PodAnnotations *map[string]string           `pulumi:"podAnnotations"`
+	ReplicaCount   *int                         `pulumi:"replicaCount"`
+	MinAvailable   *int                         `pulumi:"minAvailable"`
+	Resources      *corev1.ResourceRequirements `pulumi:"resources" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"`
 	// Additional volumeMounts to the default backend container.
 	//  - name: copy-portal-skins
 	//    mountPath: /var/lib/lemonldap-ng/portal/skins
-	ExtraVolumeMounts []*corev1.VolumeMount `pulumi:"extraVolumeMounts,omitempty"`
+	ExtraVolumeMounts *[]corev1.VolumeMount `pulumi:"extraVolumeMounts" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:VolumeMount"`
 	// Additional volumes to the default backend pod.
 	//  - name: copy-portal-skins
 	//    emptyDir: {}
-	ExtraVolumes      []*corev1.Volume                 `pulumi:"extraVolume,omitempty"`
-	Autoscaling       *Autoscaling                     `pulumi:"autoscaling,omitempty"`
-	Service           *ControllerDefaultBackendService `pulumi:"service,omitempty"`
-	PriorityClassName *string                          `pulumi:"priorityClassName,omitempty"`
+	ExtraVolumes      *[]corev1.Volume                 `pulumi:"extraVolume" pschema:"ref=/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Volume"`
+	Autoscaling       *Autoscaling                     `pulumi:"autoscaling"`
+	Service           *ControllerDefaultBackendService `pulumi:"service"`
+	PriorityClassName *string                          `pulumi:"priorityClassName"`
 }
 
 type ControllerDefaultBackendService struct {
-	Annoations *map[string]string `pulumi:"annotations,omitempty"`
-	ClusterIP  *string            `pulumi:"clusterIP,omitempty"`
+	Annoations *map[string]string `pulumi:"annotations"`
+	ClusterIP  *string            `pulumi:"clusterIP"`
 	// List of IP addresses at which the default backend service is available.
 	// Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
-	ExternalIPs              *[]string `pulumi:"externalIPs,omitempty"`
-	LoadBalancerIP           *string   `pulumi:"loadBalancerIP,omitempty"`
-	LoadBalancerSourceRanges *[]string `pulumi:"loadBalancerSourceRanges,omitempty"`
-	ServicePort              *int      `pulumi:"servicePort,omitempty"`
-	Type                     *string   `pulumi:"type,omitempty"`
+	ExternalIPs              *[]string `pulumi:"externalIPs"`
+	LoadBalancerIP           *string   `pulumi:"loadBalancerIP"`
+	LoadBalancerSourceRanges *[]string `pulumi:"loadBalancerSourceRanges"`
+	ServicePort              *int      `pulumi:"servicePort"`
+	Type                     *string   `pulumi:"type"`
 }
 
 type ControllerPodSecurityPolicy struct {
-	Enabled *bool `pulumi:"enabled,omitempty"`
+	Enabled *bool `pulumi:"enabled"`
 }
 
 type ControllerRBAC struct {
-	Create *bool `pulumi:"create,omitempty"`
-	Scope  *bool `pulumi:"scope,omitempty"`
+	Create *bool `pulumi:"create"`
+	Scope  *bool `pulumi:"scope"`
 }
