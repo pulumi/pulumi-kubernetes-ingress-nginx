@@ -12,14 +12,11 @@ SCHEMA_PATH     := ${WORKING_DIR}/schema.json
 
 default:: generate build install
 
-generate:: gen_go_sdk gen_nodejs_sdk
-#generate:: gen_go_sdk gen_dotnet_sdk gen_nodejs_sdk gen_python_sdk
+generate:: gen_go_sdk gen_dotnet_sdk gen_nodejs_sdk gen_python_sdk
 
-build:: build_provider build_nodejs_sdk
-#build:: build_provider build_dotnet_sdk build_nodejs_sdk build_python_sdk
+build:: build_provider build_dotnet_sdk build_nodejs_sdk build_python_sdk
 
-install:: install_provider install_nodejs_sdk
-#install:: install_provider install_dotnet_sdk install_nodejs_sdk
+install:: install_provider install_dotnet_sdk install_nodejs_sdk
 
 
 # Provider
@@ -63,6 +60,11 @@ install_dotnet_sdk:: build_dotnet_sdk
 gen_nodejs_sdk::
 	rm -rf sdk/nodejs
 	cd provider/cmd/${CODEGEN} && go run . nodejs ../../../sdk/nodejs ${SCHEMA_PATH}
+# HACKHACK: work around https://github.com/pulumi/pulumi/issues/7979:
+	sed -i.bak \
+		's/pulumiKubernetes\.types\.input\.core\.v1\.\([a-zA-Z]*\)Args/pulumiKubernetes.types.input.core.v1.\1/g' \
+			sdk/nodejs/types/input.ts && \
+				rm sdk/nodejs/types/input.ts.bak
 
 build_nodejs_sdk:: gen_nodejs_sdk
 	cd sdk/nodejs/ && \

@@ -1572,6 +1572,9 @@
     },
     "language": {
         "csharp": {
+            "namespaces": {
+                "chart-ingress-nginx": "ChartIngressNginx"
+            },
             "packageReferences": {
                 "Pulumi": "3.*",
                 "Pulumi.Kubernetes": "3.*"
