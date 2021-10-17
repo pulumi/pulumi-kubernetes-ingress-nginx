@@ -23,12 +23,12 @@ import (
 // IngressController provisions a NGINX reverse proxy and load balancer for Kubernetes.
 type IngressController struct {
 	pulumi.ResourceState
-	HelmRelease *helmv3.Release `pulumi:"helmRelease,out" pschema:"ref=pulumi-kubernetes:helm/v3:Release"`
+	Status helmv3.ReleaseStatusOutput `pulumi:"status" pschema:"out"`
 }
 
-func (c *IngressController) SetOutputs(rel *helmv3.Release) { c.HelmRelease = rel }
-func (c *IngressController) Type() string                   { return ComponentName }
-func (c *IngressController) DefaultChartName() string       { return "ingress-nginx" }
+func (c *IngressController) SetOutputs(out helmv3.ReleaseStatusOutput) { c.Status = out }
+func (c *IngressController) Type() string                              { return ComponentName }
+func (c *IngressController) DefaultChartName() string                  { return "ingress-nginx" }
 func (c *IngressController) DefaultRepoURL() string {
 	return "https://kubernetes.github.io/ingress-nginx"
 }
@@ -39,7 +39,7 @@ type IngressControllerArgs struct {
 	NameOverride *string `pulumi:"nameOverride"`
 	// Overrides for generated resource names.
 	FullnameOverride *string     `pulumi:"fullnameOverride"`
-	Controller       *Controller `pulumi:"controller" json:"controller"`
+	Controller       *Controller `pulumi:"controller"`
 	// Rollback limit.
 	RevisionHistoryLimit *int `pulumi:"revisionHistoryLimit"`
 	// Default 404 backend.

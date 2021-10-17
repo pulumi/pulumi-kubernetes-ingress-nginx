@@ -14,13 +14,13 @@
                 }
             },
             "properties": {
-                "helmRelease": {
-                    "$ref": "#/types/chart-ingress-nginx:index:Release",
-                    "description": "The Helm Chart release metadata (name, version, chart options, etc)."
+                "status": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ReleaseStatus",
+                    "description": "Detailed information about the status of the underlying Helm deployment."
                 }
             },
             "required": [
-                "helmRelease"
+                "status"
             ]
         }
     },
@@ -176,46 +176,7 @@
                     "description": "Will wait until all Jobs have been completed before marking the release as successful. This is ignored if `skipAwait` is enabled."
                 }
             },
-            "type": "object",
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "name",
-                        "repositoryOpts",
-                        "chart",
-                        "version",
-                        "devel",
-                        "values",
-                        "set",
-                        "manifest",
-                        "namespace",
-                        "verify",
-                        "keyring",
-                        "timeout",
-                        "disableWebhooks",
-                        "disableCRDHooks",
-                        "reuseValues",
-                        "resetValues",
-                        "forceUpdate",
-                        "recreatePods",
-                        "cleanupOnFail",
-                        "maxHistory",
-                        "atomic",
-                        "skipCrds",
-                        "renderSubchartNotes",
-                        "disableOpenapiValidation",
-                        "skipAwait",
-                        "waitForJobs",
-                        "dependencyUpdate",
-                        "replace",
-                        "description",
-                        "createNamespace",
-                        "postrender",
-                        "lint",
-                        "status"
-                    ]
-                }
-            }
+            "type": "object"
         },
         "chart-ingress-nginx:index:ReleaseStatus": {
             "properties": {
@@ -250,22 +211,14 @@
             },
             "type": "object",
             "required": [
+                "name",
+                "revision",
+                "namespace",
+                "chart",
+                "version",
+                "appVersion",
                 "status"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "name",
-                        "revision",
-                        "namespace",
-                        "chart",
-                        "version",
-                        "appVersion",
-                        "values",
-                        "status"
-                    ]
-                }
-            }
+            ]
         },
         "chart-ingress-nginx:index:RepositoryOpts": {
             "description": "Specification defining the Helm chart repository to use.",
@@ -310,1441 +263,1312 @@
                 }
             }
         },
-
-
-
-            "chart-ingress-nginx:index:Autoscaling": {
-              "properties": {
+        "chart-ingress-nginx:index:Autoscaling": {
+            "properties": {
                 "annotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "type": "object"
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
                 },
                 "controllerAutoscalingBehavior": {
-                  "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehavior"
+                    "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehavior"
                 },
                 "enabled": {
-                  "type": "boolean"
+                    "type": "boolean"
                 },
                 "maxReplicas": {
-                  "type": "integer"
+                    "type": "integer"
                 },
                 "minReplicas": {
-                  "type": "integer"
+                    "type": "integer"
                 },
                 "targetCPUUtilizationPercentage": {
-                  "type": "integer"
+                    "type": "integer"
                 },
                 "targetMemoryUtilizationPercentage": {
-                  "type": "integer"
+                    "type": "integer"
                 }
-              },
-              "type": "object"
             },
-            "chart-ingress-nginx:index:AutoscalingBehavior": {
-              "properties": {
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:AutoscalingBehavior": {
+            "properties": {
                 "scaleDown": {
-                  "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehaviorScaling"
+                    "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehaviorScaling"
                 },
                 "scaleUp": {
-                  "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehaviorScaling"
+                    "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehaviorScaling"
                 }
-              },
-              "type": "object"
             },
-            "chart-ingress-nginx:index:AutoscalingBehaviorScaling": {
-              "properties": {
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:AutoscalingBehaviorScaling": {
+            "properties": {
                 "policies": {
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehaviorScalingPolicy"
-                  },
-                  "type": "array"
-                },
-                "stabilizationWindowSeconds": {
-                  "type": "integer"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:AutoscalingBehaviorScalingPolicy": {
-              "properties": {
-                "periodSeconds": {
-                  "type": "integer"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "value": {
-                  "type": "integer"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:AutoscalingTemplate": {
-              "properties": {
-                "pods": {
-                  "$ref": "#/types/chart-ingress-nginx:index:AutoscalingTemplatePods"
-                },
-                "type": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:AutoscalingTemplatePods": {
-              "properties": {
-                "metric": {
-                  "$ref": "#/types/chart-ingress-nginx:index:AutoscalingTemplatePodsMetric"
-                },
-                "target": {
-                  "$ref": "#/types/chart-ingress-nginx:index:AutoscalingTemplatePodsTarget"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:AutoscalingTemplatePodsMetric": {
-              "properties": {
-                "name": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:AutoscalingTemplatePodsTarget": {
-              "properties": {
-                "averageValue": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ContollerAdmissionWebhooks": {
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "certificate": {
-                  "type": "string"
-                },
-                "createSecretJob": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerAdmissionWebhooksCreateSecretJob"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "existingPsp": {
-                  "description": "Use an existing PSP instead of creating one.",
-                  "type": "string"
-                },
-                "failurePolicy": {
-                  "type": "string"
-                },
-                "key": {
-                  "type": "string"
-                },
-                "namespaceSelector": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "objectSelector": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "patch": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerAdmissionWebhooksPatch"
-                },
-                "patchWebhookJob": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerAdmissionWebhooksPatchWebhbookJob"
-                },
-                "port": {
-                  "type": "integer"
-                },
-                "service": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerAdmissionWebhooksService"
-                },
-                "timeoutSeconds": {
-                  "type": "integer"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:Controller": {
-              "properties": {
-                "addHeaders": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers.",
-                  "type": "object"
-                },
-                "admissionWebhooks": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ContollerAdmissionWebhooks"
-                },
-                "affinity": {
-                  "$ref": "#/types//kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Affinity",
-                  "description": "Affinity and anti-affinity Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity."
-                },
-                "allowSnippetAnnotations": {
-                  "description": "This configuration defines if Ingress Controller should allow users to set their own *-snippet annotations, otherwise this is forbidden / dropped when users add those annotations. Global snippets in ConfigMap are still respected.",
-                  "type": "boolean"
-                },
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Annotations to be added to the controller Deployment or DaemonSet.",
-                  "type": "object"
-                },
-                "autoscaling": {
-                  "$ref": "#/types/chart-ingress-nginx:index:Autoscaling",
-                  "description": "Mutually exclusive with keda autoscaling."
-                },
-                "autoscalingTemplate": {
-                  "description": "Custom or additional autoscaling metrics ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:AutoscalingTemplate"
-                  },
-                  "type": "array"
-                },
-                "config": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.",
-                  "type": "object"
-                },
-                "configAnnotations": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "Annotations to be added to the controller config configuration configmap.",
-                  "type": "object"
-                },
-                "configMapNamespace": {
-                  "description": "Allows customization of the configmap / nginx-configmap namespace.",
-                  "type": "string"
-                },
-                "containerName": {
-                  "description": "Configures the controller container name.",
-                  "type": "string"
-                },
-                "containerPort": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerPort",
-                  "description": "Configures the ports the nginx-controller listens on."
-                },
-                "customTemplate": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerCustomTemplate",
-                  "description": "Override NGINX template."
-                },
-                "dnsConfig": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "Optionally customize the pod dnsConfig.",
-                  "type": "object"
-                },
-                "dnsPolicy": {
-                  "description": "Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.",
-                  "type": "string"
-                },
-                "electionID": {
-                  "description": "Election ID to use for status update.",
-                  "type": "string"
-                },
-                "enableMimalloc": {
-                  "description": "Enable mimalloc as a drop-in replacement for malloc. ref: https://github.com/microsoft/mimalloc.",
-                  "type": "boolean"
-                },
-                "existingPsp": {
-                  "description": "Use an existing PSP instead of creating one.",
-                  "type": "string"
-                },
-                "extraArgs": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: \"<namespace>/<secret_name>\"`.",
-                  "type": "object"
-                },
-                "extraContainers": {
-                  "description": "Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:Container"
-                  },
-                  "type": "array"
-                },
-                "extraEnvs": {
-                  "description": "Additional environment variables to set.",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:EnvVar"
-                  },
-                  "type": "array"
-                },
-                "extraInitContainers": {
-                  "description": "Containers, which are run before the app containers are started. - name: init-myservice   image: busybox   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:Container"
-                  },
-                  "type": "array"
-                },
-                "extraVolume": {
-                  "description": "Additional volumes to the controller pod.  - name: copy-portal-skins    emptyDir: {}",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:Volume"
-                  },
-                  "type": "array"
-                },
-                "extraVolumeMounts": {
-                  "description": "Additional volumeMounts to the controller main container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:VolumeMount"
-                  },
-                  "type": "array"
-                },
-                "healthCheckPath": {
-                  "description": "Path of the health check endpoint. All requests received on the port defined by the healthz-port parameter are forwarded internally to this path.",
-                  "type": "string"
-                },
-                "heathCheckHost": {
-                  "description": "Address to bind the health check endpoint. It is better to set this option to the internal node address if the ingress nginx controller is running in the hostNetwork: true mode.",
-                  "type": "string"
-                },
-                "hostNetwork": {
-                  "description": "Required for use with CNI based kubernetes installations (such as ones set up by kubeadm), since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920 is merged.",
-                  "type": "boolean"
-                },
-                "hostPort": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerHostPort",
-                  "description": "Use host ports 80 and 443. Disabled by default."
-                },
-                "hostname": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "Optionally customize the pod hostname.",
-                  "type": "object"
-                },
-                "image": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerImage"
-                },
-                "ingressClassByName": {
-                  "description": "Process IngressClass per name (additionally as per spec.controller).",
-                  "type": "boolean"
-                },
-                "ingressClassResource": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerIngressClassResource",
-                  "description": "This section refers to the creation of the IngressClass resource. IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19"
-                },
-                "keda": {
-                  "$ref": "#/types/chart-ingress-nginx:index:Keda",
-                  "description": "Mutually exclusive with hpa autoscaling."
-                },
-                "kind": {
-                  "description": "DaemonSet or Deployment.",
-                  "type": "string"
-                },
-                "labels": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.",
-                  "type": "object"
-                },
-                "lifecycle": {
-                  "$ref": "#/types/chart-ingress-nginx:index:Lifecycle",
-                  "description": "Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s."
-                },
-                "livenessProbe": {
-                  "$ref": "#/types//kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe",
-                  "description": "Liveness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
-                },
-                "maxmindLicenseKey": {
-                  "description": "Maxmind license key to download GeoLite2 Databases https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases.",
-                  "type": "string"
-                },
-                "metrics": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerMetrics"
-                },
-                "minAvailable": {
-                  "type": "integer"
-                },
-                "minReadySeconds": {
-                  "description": "minReadySeconds to avoid killing pods before we are ready.",
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "nodeSelector": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Node labels for controller pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.",
-                  "type": "object"
-                },
-                "podAnnotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Annotations to be added to controller pods.",
-                  "type": "object"
-                },
-                "podLabels": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "labels to add to the pod container metadata.",
-                  "type": "object"
-                },
-                "podSecurityContext": {
-                  "$ref": "#/types//kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:PodSecurityContext",
-                  "description": "Security Context policies for controller pods."
-                },
-                "priorityClassName": {
-                  "type": "string"
-                },
-                "proxySetHeaders": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers.",
-                  "type": "object"
-                },
-                "publishService": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerPublishService",
-                  "description": "Allows customization of the source of the IP address or FQDN to report in the ingress status field. By default, it reads the information provided by the service. If disable, the status field reports the IP address of the node or nodes where an ingress controller pod is running."
-                },
-                "readinessProbe": {
-                  "$ref": "#/types//kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe",
-                  "description": "Readiness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
-                },
-                "replicaCount": {
-                  "type": "integer"
-                },
-                "reportNodeInternalIp": {
-                  "description": "Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply.",
-                  "type": "boolean"
-                },
-                "resources": {
-                  "$ref": "#/types//kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements",
-                  "description": "Define requests resources to avoid probe issues due to CPU utilization in busy nodes ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903 Ideally, there should be no limits. https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/"
-                },
-                "scope": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerScope",
-                  "description": "Limit the scope of the controller."
-                },
-                "service": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerService"
-                },
-                "startupProbe": {
-                  "$ref": "#/types//kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe",
-                  "description": "Startup probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
-                },
-                "sysctls": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.",
-                  "type": "object"
-                },
-                "tcp": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerTcp",
-                  "description": "Allows customization of the tcp-services-configmap."
-                },
-                "terminateGracePeriodSeconds": {
-                  "description": "How long to wait for the drain of connections.",
-                  "type": "integer"
-                },
-                "topologySpreadConstraints": {
-                  "description": "Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:TopologySpreadConstraint"
-                  },
-                  "type": "array"
-                },
-                "udp": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerUdp"
-                },
-                "updateStrategy": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerUpdateStrategy",
-                  "description": "The update strategy to apply to the Deployment or DaemonSet."
-                },
-                "watchIngressWithoutClass": {
-                  "description": "Process Ingress objects without ingressClass annotation/ingressClassName field. Overrides value for --watch-ingress-without-class flag of the controller binary. Defaults to false.",
-                  "type": "boolean"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerAdmissionWebhooksCreateSecretJob": {
-              "properties": {
-                "resources": {
-                  "$ref": "#/types//kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerAdmissionWebhooksPatch": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "image": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerImage"
-                },
-                "nodeSelector": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "type": "object"
-                },
-                "podAnnotations": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "priorityClassName": {
-                  "description": "Provide a priority class name to the webhook patching job.",
-                  "type": "string"
-                },
-                "runAsUser": {
-                  "type": "integer"
-                },
-                "tolerations": {
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:Toleration"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerAdmissionWebhooksPatchWebhbookJob": {
-              "properties": {
-                "resources": {
-                  "$ref": "#/types//kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerAdmissionWebhooksService": {
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "clusterIP": {
-                  "type": "string"
-                },
-                "externalIPs": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "loadBalancerIPs": {
-                  "type": "string"
-                },
-                "loadBalancerSourceRanges": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "servicePort": {
-                  "type": "integer"
-                },
-                "type": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerCustomTemplate": {
-              "properties": {
-                "configMapKey": {
-                  "type": "string"
-                },
-                "configMapName": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerDefaultBackend": {
-              "properties": {
-                "affinity": {
-                  "$ref": "#/types/chart-ingress-nginx:index:Affinity"
-                },
-                "autoscaling": {
-                  "$ref": "#/types/chart-ingress-nginx:index:Autoscaling"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "existingPsp": {
-                  "description": "Use an existing PSP instead of creating one.",
-                  "type": "string"
-                },
-                "extraArgs": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "extraEnvs": {
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:EnvVar"
-                  },
-                  "type": "array"
-                },
-                "extraVolume": {
-                  "description": "Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:Volume"
-                  },
-                  "type": "array"
-                },
-                "extraVolumeMounts": {
-                  "description": "Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:VolumeMount"
-                  },
-                  "type": "array"
-                },
-                "image": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerImage"
-                },
-                "livenessProbe": {
-                  "$ref": "#/types/chart-ingress-nginx:index:Probe",
-                  "description": "Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
-                },
-                "minAvailable": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "nodeSelector": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Node labels for default backend pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.",
-                  "type": "object"
-                },
-                "podAnnotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Annotations to be added to default backend pods.",
-                  "type": "object"
-                },
-                "podLabels": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "labels to add to the pod container metadata",
-                  "type": "object"
-                },
-                "podSecurityContext": {
-                  "$ref": "#/types/chart-ingress-nginx:index:PodSecurityContext",
-                  "description": "Security Context policies for controller pods. See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls."
-                },
-                "port": {
-                  "type": "integer"
-                },
-                "priorityClassName": {
-                  "type": "string"
-                },
-                "readinessProbe": {
-                  "$ref": "#/types/chart-ingress-nginx:index:Probe",
-                  "description": "Readiness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
-                },
-                "replicaCount": {
-                  "type": "integer"
-                },
-                "resources": {
-                  "$ref": "#/types//kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
-                },
-                "service": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerDefaultBackendService"
-                },
-                "serviceAccount": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceAccount"
-                },
-                "tolerations": {
-                  "description": "Node tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:Toleration"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerDefaultBackendService": {
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "type": "object"
-                },
-                "clusterIP": {
-                  "type": "string"
-                },
-                "externalIPs": {
-                  "description": "List of IP addresses at which the default backend service is available. Ref: https://kubernetes.io/docs/user-guide/services/#external-ips",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "loadBalancerIP": {
-                  "type": "string"
-                },
-                "loadBalancerSourceRanges": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "servicePort": {
-                  "type": "integer"
-                },
-                "type": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerHostPort": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "ports": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerHostPortPorts"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerHostPortPorts": {
-              "properties": {
-                "http": {
-                  "type": "integer"
-                },
-                "https": {
-                  "type": "integer"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerImage": {
-              "properties": {
-                "allowPrivilegeEscalation": {
-                  "type": "boolean"
-                },
-                "digest": {
-                  "type": "string"
-                },
-                "image": {
-                  "type": "string"
-                },
-                "pullPolicy": {
-                  "type": "string"
-                },
-                "readOnlyRootFilesystem": {
-                  "type": "boolean"
-                },
-                "registry": {
-                  "type": "string"
-                },
-                "repository": {
-                  "description": "for backwards compatibility consider setting the full image url via the repository value below use *either* current default registry/image or repository format or installing will fail.",
-                  "type": "string"
-                },
-                "runAsNonRoot": {
-                  "type": "boolean"
-                },
-                "runAsUser": {
-                  "type": "string"
-                },
-                "tag": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerIngressClassResource": {
-              "properties": {
-                "controllerValue": {
-                  "type": "string"
-                },
-                "default": {
-                  "type": "boolean"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "parameters": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "Parameters is a link to a custom resource containing additional configuration for the controller. This is optional if the controller does not require extra parameters.",
-                  "type": "object"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerMetrics": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "port": {
-                  "description": "if this port is changed, change healthz-port: in extraArgs: accordingly.",
-                  "type": "integer"
-                },
-                "prometheusRule": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerMetricsPrometheusRules"
-                },
-                "service": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerMetricsService"
-                },
-                "serviceMonitor": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerMetricsServiceMonitor"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerMetricsPrometheusRules": {
-              "properties": {
-                "additionalLabels": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "namespace": {
-                  "type": "string"
-                },
-                "rules": {
-                  "items": {
-                    "type": "object"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerMetricsService": {
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "type": "object"
-                },
-                "clusterIP": {
-                  "type": "string"
-                },
-                "externalIPs": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "externalTrafficPolicy": {
-                  "type": "string"
-                },
-                "loadBalancerIPs": {
-                  "type": "string"
-                },
-                "loadBalancerSourceRanges": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "nodePort": {
-                  "type": "string"
-                },
-                "servicePort": {
-                  "type": "integer"
-                },
-                "type": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerMetricsServiceMonitor": {
-              "properties": {
-                "additionalLabels": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "honorLabels": {
-                  "type": "boolean"
-                },
-                "jobLabel": {
-                  "description": "The label to use to retrieve the job name from.",
-                  "type": "string"
-                },
-                "metricRelabelings": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "namespace": {
-                  "type": "string"
-                },
-                "namespaceSelector": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "scrapeInterval": {
-                  "type": "string"
-                },
-                "targetLabels": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerPodSecurityPolicy": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerPort": {
-              "properties": {
-                "http": {
-                  "type": "integer"
-                },
-                "https": {
-                  "type": "integer"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerPublishService": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "pathOverride": {
-                  "description": "Allows overriding of the publish service to bind to. Must be <namespace>/<service_name>.",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerRBAC": {
-              "properties": {
-                "create": {
-                  "type": "boolean"
-                },
-                "scope": {
-                  "type": "boolean"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerRollingUpdate": {
-              "properties": {
-                "maxUnavailable": {
-                  "type": "integer"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerScope": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "namespace": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerService": {
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "clusterIP": {
-                  "type": "string"
-                },
-                "enableHttp": {
-                  "type": "boolean"
-                },
-                "enableHttps": {
-                  "type": "boolean"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "externalIPs": {
-                  "description": "List of IP addresses at which the controller services are available Ref: https://kubernetes.io/docs/user-guide/services/#external-ips",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "externalTrafficPolicy": {
-                  "description": "Set external traffic policy to: \"Local\" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer",
-                  "type": "string"
-                },
-                "healthCheckNodePort": {
-                  "description": "specifies the health check node port (numeric port number) for the service. If healthCheckNodePort isn’t specified, the service controller allocates a port from your cluster’s NodePort range. Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip",
-                  "type": "integer"
-                },
-                "internal": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceInternal",
-                  "description": "Enables an additional internal load balancer (besides the external one). Annotations are mandatory for the load balancer to come up. Varies with the cloud service."
-                },
-                "labels": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "loadBalancerIPs": {
-                  "type": "string"
-                },
-                "loadBalancerSourceRanges": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "nodePorts": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceNodePorts"
-                },
-                "ports": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerPort"
-                },
-                "sessionAffinity": {
-                  "description": "Must be either \"None\" or \"ClientIP\" if set. Kubernetes will default to \"None\". Ref: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies",
-                  "type": "string"
-                },
-                "targetPorts": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerPort"
-                },
-                "type": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerServiceAccount": {
-              "properties": {
-                "automountServiceAccountToken": {
-                  "type": "boolean"
-                },
-                "create": {
-                  "type": "boolean"
-                },
-                "name": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerServiceInternal": {
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "externalTrafficPolicy": {
-                  "description": "Set external traffic policy to: \"Local\" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer",
-                  "type": "string"
-                },
-                "labels": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "loadBalancerIPs": {
-                  "type": "string"
-                },
-                "loadBalancerSourceRanges": {
-                  "description": "Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerServiceNodePorts": {
-              "properties": {
-                "http": {
-                  "type": "string"
-                },
-                "https": {
-                  "type": "string"
-                },
-                "tcp": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "udp": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerTcp": {
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Annotations to be added to the tcp config configmap.",
-                  "type": "object"
-                },
-                "configMapNamespace": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerUdp": {
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Annotations to be added to the udp config configmap.",
-                  "type": "object"
-                },
-                "configMapNamespace": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:ControllerUpdateStrategy": {
-              "properties": {
-                "rollingUpdate": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerRollingUpdate"
-                },
-                "type": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:HelmOptions": {
-              "properties": {
-                "atomic": {
-                  "type": "boolean"
-                },
-                "chart": {
-                  "type": "string"
-                },
-                "cleanupOnFail": {
-                  "type": "boolean"
-                },
-                "createNamespace": {
-                  "type": "boolean"
-                },
-                "dependencyUpdate": {
-                  "type": "boolean"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "devel": {
-                  "type": "boolean"
-                },
-                "disableCRDHooks": {
-                  "type": "boolean"
-                },
-                "disableOpenapiValidation": {
-                  "type": "boolean"
-                },
-                "disableWebhooks": {
-                  "type": "boolean"
-                },
-                "forceUpdate": {
-                  "type": "boolean"
-                },
-                "keyring": {
-                  "type": "string"
-                },
-                "lint": {
-                  "type": "boolean"
-                },
-                "manifest": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "maxHistory": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "namespace": {
-                  "type": "string"
-                },
-                "postrender": {
-                  "type": "string"
-                },
-                "recreatePods": {
-                  "type": "boolean"
-                },
-                "renderSubchartNotes": {
-                  "type": "boolean"
-                },
-                "replace": {
-                  "type": "boolean"
-                },
-                "repositoryOpts": {
-                  "$ref": "#/types/chart-ingress-nginx:index:RepositoryOpts"
-                },
-                "resetValues": {
-                  "type": "boolean"
-                },
-                "resourceNames": {
-                  "additionalProperties": {
                     "items": {
-                      "type": "string"
+                        "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehaviorScalingPolicy"
                     },
                     "type": "array"
-                  },
-                  "type": "object"
                 },
-                "reuseValues": {
-                  "type": "boolean"
-                },
-                "skipAwait": {
-                  "type": "boolean"
-                },
-                "skipCrds": {
-                  "type": "boolean"
-                },
-                "status": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ReleaseStatus"
-                },
-                "timeout": {
-                  "type": "integer"
-                },
-                "valueYamlFiles": {
-                  "items": {
-                    "type": "object"
-                  },
-                  "type": "array"
-                },
-                "values": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
-                },
-                "verify": {
-                  "type": "boolean"
-                },
-                "version": {
-                  "type": "string"
-                },
-                "waitForJobs": {
-                  "type": "boolean"
+                "stabilizationWindowSeconds": {
+                    "type": "integer"
                 }
-              },
-              "type": "object"
             },
-            "chart-ingress-nginx:index:IngressControllerArgs": {
-              "properties": {
-                "controller": {
-                  "$ref": "#/types/chart-ingress-nginx:index:Controller"
-                },
-                "defaultBackend": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerDefaultBackend",
-                  "description": "Default 404 backend."
-                },
-                "dhParam": {
-                  "description": "A base64ed Diffie-Hellman parameter. This can be generated with: openssl dhparam 4096 2> /dev/null | base64 Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.",
-                  "type": "string"
-                },
-                "fullnameOverride": {
-                  "description": "Overrides for generated resource names.",
-                  "type": "string"
-                },
-                "helmOptions": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ReleaseType",
-                  "description": "HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args."
-                },
-                "imagePullSecrets": {
-                  "description": "Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.",
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:LocalObjectReference"
-                  },
-                  "type": "array"
-                },
-                "nameOverride": {
-                  "description": "Overrides for generated resource names.",
-                  "type": "string"
-                },
-                "podSecurityPolicy": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerPodSecurityPolicy",
-                  "description": "If true, create & use Pod Security Policy resources https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
-                },
-                "rbac": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerRBAC",
-                  "description": "Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266"
-                },
-                "revisionHistoryLimit": {
-                  "description": "Rollback limit.",
-                  "type": "integer"
-                },
-                "serviceAccount": {
-                  "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceAccount"
-                },
-                "tcp": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "TCP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.",
-                  "type": "object"
-                },
-                "udp": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "description": "UDP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.",
-                  "type": "object"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:Keda": {
-              "properties": {
-                "apiVersion": {
-                  "description": "apiVersion changes with keda 1.x vs 2.x: 2.x = keda.sh/v1alpha1, 1.x = keda.k8s.io/v1alpha1.",
-                  "type": "string"
-                },
-                "behavior": {
-                  "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehavior"
-                },
-                "cooldownPeriod": {
-                  "type": "integer"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "maxReplicas": {
-                  "type": "integer"
-                },
-                "minReplicas": {
-                  "type": "integer"
-                },
-                "pollingInterval": {
-                  "type": "integer"
-                },
-                "restoreToOriginalReplicaCount": {
-                  "type": "boolean"
-                },
-                "scaledObject": {
-                  "$ref": "#/types/chart-ingress-nginx:index:KedaScaledObject"
-                },
-                "triggers": {
-                  "items": {
-                    "$ref": "#/types/chart-ingress-nginx:index:KedaTrigger"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:KedaScaledObject": {
-              "properties": {
-                "annotations": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "Custom annotations for ScaledObject resource.",
-                  "type": "object"
-                }
-              },
-              "type": "object"
-            },
-            "chart-ingress-nginx:index:KedaTrigger": {
-              "properties": {
-                "metadata": {
-                  "additionalProperties": {
-                    "type": "object"
-                  },
-                  "type": "object"
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:AutoscalingBehaviorScalingPolicy": {
+            "properties": {
+                "periodSeconds": {
+                    "type": "integer"
                 },
                 "type": {
-                  "type": "string"
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer"
                 }
-              },
-              "type": "object"
-            }
-                    
-                    
-                                        
-
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:AutoscalingTemplate": {
+            "properties": {
+                "pods": {
+                    "$ref": "#/types/chart-ingress-nginx:index:AutoscalingTemplatePods"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:AutoscalingTemplatePods": {
+            "properties": {
+                "metric": {
+                    "$ref": "#/types/chart-ingress-nginx:index:AutoscalingTemplatePodsMetric"
+                },
+                "target": {
+                    "$ref": "#/types/chart-ingress-nginx:index:AutoscalingTemplatePodsTarget"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:AutoscalingTemplatePodsMetric": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:AutoscalingTemplatePodsTarget": {
+            "properties": {
+                "averageValue": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ContollerAdmissionWebhooks": {
+            "properties": {
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "certificate": {
+                    "type": "string"
+                },
+                "createSecretJob": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerAdmissionWebhooksCreateSecretJob"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "existingPsp": {
+                    "description": "Use an existing PSP instead of creating one.",
+                    "type": "string"
+                },
+                "failurePolicy": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "namespaceSelector": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "objectSelector": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "patch": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerAdmissionWebhooksPatch"
+                },
+                "patchWebhookJob": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerAdmissionWebhooksPatchWebhbookJob"
+                },
+                "port": {
+                    "type": "integer"
+                },
+                "service": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerAdmissionWebhooksService"
+                },
+                "timeoutSeconds": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:Controller": {
+            "properties": {
+                "addHeaders": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers.",
+                    "type": "object"
+                },
+                "admissionWebhooks": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ContollerAdmissionWebhooks"
+                },
+                "affinity": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Affinity",
+                    "description": "Affinity and anti-affinity Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity."
+                },
+                "allowSnippetAnnotations": {
+                    "description": "This configuration defines if Ingress Controller should allow users to set their own *-snippet annotations, otherwise this is forbidden / dropped when users add those annotations. Global snippets in ConfigMap are still respected.",
+                    "type": "boolean"
+                },
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Annotations to be added to the controller Deployment or DaemonSet.",
+                    "type": "object"
+                },
+                "autoscaling": {
+                    "$ref": "#/types/chart-ingress-nginx:index:Autoscaling",
+                    "description": "Mutually exclusive with keda autoscaling."
+                },
+                "autoscalingTemplate": {
+                    "description": "Custom or additional autoscaling metrics ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics",
+                    "items": {
+                        "$ref": "#/types/chart-ingress-nginx:index:AutoscalingTemplate"
+                    },
+                    "type": "array"
+                },
+                "config": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.",
+                    "type": "object"
+                },
+                "configAnnotations": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "Annotations to be added to the controller config configuration configmap.",
+                    "type": "object"
+                },
+                "configMapNamespace": {
+                    "description": "Allows customization of the configmap / nginx-configmap namespace.",
+                    "type": "string"
+                },
+                "containerName": {
+                    "description": "Configures the controller container name.",
+                    "type": "string"
+                },
+                "containerPort": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerPort",
+                    "description": "Configures the ports the nginx-controller listens on."
+                },
+                "customTemplate": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerCustomTemplate",
+                    "description": "Override NGINX template."
+                },
+                "dnsConfig": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "Optionally customize the pod dnsConfig.",
+                    "type": "object"
+                },
+                "dnsPolicy": {
+                    "description": "Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.",
+                    "type": "string"
+                },
+                "electionID": {
+                    "description": "Election ID to use for status update.",
+                    "type": "string"
+                },
+                "enableMimalloc": {
+                    "description": "Enable mimalloc as a drop-in replacement for malloc. ref: https://github.com/microsoft/mimalloc.",
+                    "type": "boolean"
+                },
+                "existingPsp": {
+                    "description": "Use an existing PSP instead of creating one.",
+                    "type": "string"
+                },
+                "extraArgs": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: \"<namespace>/<secret_name>\"`.",
+                    "type": "object"
+                },
+                "extraContainers": {
+                    "description": "Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Container"
+                    },
+                    "type": "array"
+                },
+                "extraEnvs": {
+                    "description": "Additional environment variables to set.",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:EnvVar"
+                    },
+                    "type": "array"
+                },
+                "extraInitContainers": {
+                    "description": "Containers, which are run before the app containers are started. - name: init-myservice   image: busybox   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Container"
+                    },
+                    "type": "array"
+                },
+                "extraVolumeMounts": {
+                    "description": "Additional volumeMounts to the controller main container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:VolumeMount"
+                    },
+                    "type": "array"
+                },
+                "extraVolumes": {
+                    "description": "Additional volumes to the controller pod.  - name: copy-portal-skins    emptyDir: {}",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Volume"
+                    },
+                    "type": "array"
+                },
+                "healthCheckPath": {
+                    "description": "Path of the health check endpoint. All requests received on the port defined by the healthz-port parameter are forwarded internally to this path.",
+                    "type": "string"
+                },
+                "heathCheckHost": {
+                    "description": "Address to bind the health check endpoint. It is better to set this option to the internal node address if the ingress nginx controller is running in the hostNetwork: true mode.",
+                    "type": "string"
+                },
+                "hostNetwork": {
+                    "description": "Required for use with CNI based kubernetes installations (such as ones set up by kubeadm), since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920 is merged.",
+                    "type": "boolean"
+                },
+                "hostPort": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerHostPort",
+                    "description": "Use host ports 80 and 443. Disabled by default."
+                },
+                "hostname": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "Optionally customize the pod hostname.",
+                    "type": "object"
+                },
+                "image": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerImage"
+                },
+                "ingressClassByName": {
+                    "description": "Process IngressClass per name (additionally as per spec.controller).",
+                    "type": "boolean"
+                },
+                "ingressClassResource": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerIngressClassResource",
+                    "description": "This section refers to the creation of the IngressClass resource. IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19"
+                },
+                "keda": {
+                    "$ref": "#/types/chart-ingress-nginx:index:Keda",
+                    "description": "Mutually exclusive with hpa autoscaling."
+                },
+                "kind": {
+                    "description": "DaemonSet or Deployment.",
+                    "type": "string"
+                },
+                "labels": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.",
+                    "type": "object"
+                },
+                "lifecycle": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Lifecycle",
+                    "description": "Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s."
+                },
+                "livenessProbe": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe",
+                    "description": "Liveness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
+                },
+                "maxmindLicenseKey": {
+                    "description": "Maxmind license key to download GeoLite2 Databases https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases.",
+                    "type": "string"
+                },
+                "metrics": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerMetrics"
+                },
+                "minAvailable": {
+                    "type": "integer"
+                },
+                "minReadySeconds": {
+                    "description": "minReadySeconds to avoid killing pods before we are ready.",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Node labels for controller pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.",
+                    "type": "object"
+                },
+                "podAnnotations": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Annotations to be added to controller pods.",
+                    "type": "object"
+                },
+                "podLabels": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "labels to add to the pod container metadata.",
+                    "type": "object"
+                },
+                "podSecurityContext": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:PodSecurityContext",
+                    "description": "Security Context policies for controller pods."
+                },
+                "priorityClassName": {
+                    "type": "string"
+                },
+                "proxySetHeaders": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers.",
+                    "type": "object"
+                },
+                "publishService": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerPublishService",
+                    "description": "Allows customization of the source of the IP address or FQDN to report in the ingress status field. By default, it reads the information provided by the service. If disable, the status field reports the IP address of the node or nodes where an ingress controller pod is running."
+                },
+                "readinessProbe": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe",
+                    "description": "Readiness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
+                },
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "reportNodeInternalIp": {
+                    "description": "Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply.",
+                    "type": "boolean"
+                },
+                "resources": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements",
+                    "description": "Define requests resources to avoid probe issues due to CPU utilization in busy nodes ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903 Ideally, there should be no limits. https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/"
+                },
+                "scope": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerScope",
+                    "description": "Limit the scope of the controller."
+                },
+                "service": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerService"
+                },
+                "startupProbe": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe",
+                    "description": "Startup probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
+                },
+                "sysctls": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.",
+                    "type": "object"
+                },
+                "tcp": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerTcp",
+                    "description": "Allows customization of the tcp-services-configmap."
+                },
+                "terminateGracePeriodSeconds": {
+                    "description": "How long to wait for the drain of connections.",
+                    "type": "integer"
+                },
+                "topologySpreadConstraints": {
+                    "description": "Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:TopologySpreadConstraint"
+                    },
+                    "type": "array"
+                },
+                "udp": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerUdp"
+                },
+                "updateStrategy": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerUpdateStrategy",
+                    "description": "The update strategy to apply to the Deployment or DaemonSet."
+                },
+                "watchIngressWithoutClass": {
+                    "description": "Process Ingress objects without ingressClass annotation/ingressClassName field. Overrides value for --watch-ingress-without-class flag of the controller binary. Defaults to false.",
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerAdmissionWebhooksCreateSecretJob": {
+            "properties": {
+                "resources": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerAdmissionWebhooksPatch": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "image": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerImage"
+                },
+                "nodeSelector": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "podAnnotations": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "priorityClassName": {
+                    "description": "Provide a priority class name to the webhook patching job.",
+                    "type": "string"
+                },
+                "runAsUser": {
+                    "type": "integer"
+                },
+                "tolerations": {
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Toleration"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerAdmissionWebhooksPatchWebhbookJob": {
+            "properties": {
+                "resources": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerAdmissionWebhooksService": {
+            "properties": {
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "clusterIP": {
+                    "type": "string"
+                },
+                "externalIPs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "loadBalancerIPs": {
+                    "type": "string"
+                },
+                "loadBalancerSourceRanges": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "servicePort": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerCustomTemplate": {
+            "properties": {
+                "configMapKey": {
+                    "type": "string"
+                },
+                "configMapName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerDefaultBackend": {
+            "properties": {
+                "affinity": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Affinity"
+                },
+                "autoscaling": {
+                    "$ref": "#/types/chart-ingress-nginx:index:Autoscaling"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "existingPsp": {
+                    "description": "Use an existing PSP instead of creating one.",
+                    "type": "string"
+                },
+                "extraArgs": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "extraEnvs": {
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:EnvVar"
+                    },
+                    "type": "array"
+                },
+                "extraVolume": {
+                    "description": "Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Volume"
+                    },
+                    "type": "array"
+                },
+                "extraVolumeMounts": {
+                    "description": "Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:VolumeMount"
+                    },
+                    "type": "array"
+                },
+                "image": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerImage"
+                },
+                "livenessProbe": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe",
+                    "description": "Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
+                },
+                "minAvailable": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Node labels for default backend pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.",
+                    "type": "object"
+                },
+                "podAnnotations": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Annotations to be added to default backend pods.",
+                    "type": "object"
+                },
+                "podLabels": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "labels to add to the pod container metadata",
+                    "type": "object"
+                },
+                "podSecurityContext": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:PodSecurityContext",
+                    "description": "Security Context policies for controller pods. See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls."
+                },
+                "port": {
+                    "type": "integer"
+                },
+                "priorityClassName": {
+                    "type": "string"
+                },
+                "readinessProbe": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Probe",
+                    "description": "Readiness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
+                },
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "resources": {
+                    "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
+                },
+                "service": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerDefaultBackendService"
+                },
+                "serviceAccount": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceAccount"
+                },
+                "tolerations": {
+                    "description": "Node tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:Toleration"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerDefaultBackendService": {
+            "properties": {
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "clusterIP": {
+                    "type": "string"
+                },
+                "externalIPs": {
+                    "description": "List of IP addresses at which the default backend service is available. Ref: https://kubernetes.io/docs/user-guide/services/#external-ips",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "loadBalancerIP": {
+                    "type": "string"
+                },
+                "loadBalancerSourceRanges": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "servicePort": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerHostPort": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "ports": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerHostPortPorts"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerHostPortPorts": {
+            "properties": {
+                "http": {
+                    "type": "integer"
+                },
+                "https": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerImage": {
+            "properties": {
+                "allowPrivilegeEscalation": {
+                    "type": "boolean"
+                },
+                "digest": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "pullPolicy": {
+                    "type": "string"
+                },
+                "readOnlyRootFilesystem": {
+                    "type": "boolean"
+                },
+                "registry": {
+                    "type": "string"
+                },
+                "repository": {
+                    "description": "for backwards compatibility consider setting the full image url via the repository value below use *either* current default registry/image or repository format or installing will fail.",
+                    "type": "string"
+                },
+                "runAsNonRoot": {
+                    "type": "boolean"
+                },
+                "runAsUser": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerIngressClassResource": {
+            "properties": {
+                "controllerValue": {
+                    "type": "string"
+                },
+                "default": {
+                    "type": "boolean"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "Parameters is a link to a custom resource containing additional configuration for the controller. This is optional if the controller does not require extra parameters.",
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerMetrics": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "port": {
+                    "description": "if this port is changed, change healthz-port: in extraArgs: accordingly.",
+                    "type": "integer"
+                },
+                "prometheusRule": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerMetricsPrometheusRules"
+                },
+                "service": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerMetricsService"
+                },
+                "serviceMonitor": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerMetricsServiceMonitor"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerMetricsPrometheusRules": {
+            "properties": {
+                "additionalLabels": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "namespace": {
+                    "type": "string"
+                },
+                "rules": {
+                    "items": {
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerMetricsService": {
+            "properties": {
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
+                "clusterIP": {
+                    "type": "string"
+                },
+                "externalIPs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "externalTrafficPolicy": {
+                    "type": "string"
+                },
+                "loadBalancerIPs": {
+                    "type": "string"
+                },
+                "loadBalancerSourceRanges": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nodePort": {
+                    "type": "string"
+                },
+                "servicePort": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerMetricsServiceMonitor": {
+            "properties": {
+                "additionalLabels": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "honorLabels": {
+                    "type": "boolean"
+                },
+                "jobLabel": {
+                    "description": "The label to use to retrieve the job name from.",
+                    "type": "string"
+                },
+                "metricRelabelings": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "namespace": {
+                    "type": "string"
+                },
+                "namespaceSelector": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "scrapeInterval": {
+                    "type": "string"
+                },
+                "targetLabels": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerPodSecurityPolicy": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerPort": {
+            "properties": {
+                "http": {
+                    "type": "integer"
+                },
+                "https": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerPublishService": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "pathOverride": {
+                    "description": "Allows overriding of the publish service to bind to. Must be <namespace>/<service_name>.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerRBAC": {
+            "properties": {
+                "create": {
+                    "type": "boolean"
+                },
+                "scope": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerRollingUpdate": {
+            "properties": {
+                "maxUnavailable": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerScope": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "namespace": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerService": {
+            "properties": {
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "clusterIP": {
+                    "type": "string"
+                },
+                "enableHttp": {
+                    "type": "boolean"
+                },
+                "enableHttps": {
+                    "type": "boolean"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "externalIPs": {
+                    "description": "List of IP addresses at which the controller services are available Ref: https://kubernetes.io/docs/user-guide/services/#external-ips",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "externalTrafficPolicy": {
+                    "description": "Set external traffic policy to: \"Local\" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer",
+                    "type": "string"
+                },
+                "healthCheckNodePort": {
+                    "description": "specifies the health check node port (numeric port number) for the service. If healthCheckNodePort isn’t specified, the service controller allocates a port from your cluster’s NodePort range. Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip",
+                    "type": "integer"
+                },
+                "internal": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceInternal",
+                    "description": "Enables an additional internal load balancer (besides the external one). Annotations are mandatory for the load balancer to come up. Varies with the cloud service."
+                },
+                "labels": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "loadBalancerIPs": {
+                    "type": "string"
+                },
+                "loadBalancerSourceRanges": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "nodePorts": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceNodePorts"
+                },
+                "ports": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerPort"
+                },
+                "sessionAffinity": {
+                    "description": "Must be either \"None\" or \"ClientIP\" if set. Kubernetes will default to \"None\". Ref: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies",
+                    "type": "string"
+                },
+                "targetPorts": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerPort"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerServiceAccount": {
+            "properties": {
+                "automountServiceAccountToken": {
+                    "type": "boolean"
+                },
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerServiceInternal": {
+            "properties": {
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "externalTrafficPolicy": {
+                    "description": "Set external traffic policy to: \"Local\" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer",
+                    "type": "string"
+                },
+                "labels": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "loadBalancerIPs": {
+                    "type": "string"
+                },
+                "loadBalancerSourceRanges": {
+                    "description": "Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerServiceNodePorts": {
+            "properties": {
+                "http": {
+                    "type": "string"
+                },
+                "https": {
+                    "type": "string"
+                },
+                "tcp": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "udp": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerTcp": {
+            "properties": {
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Annotations to be added to the tcp config configmap.",
+                    "type": "object"
+                },
+                "configMapNamespace": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerUdp": {
+            "properties": {
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Annotations to be added to the udp config configmap.",
+                    "type": "object"
+                },
+                "configMapNamespace": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:ControllerUpdateStrategy": {
+            "properties": {
+                "rollingUpdate": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerRollingUpdate"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:IngressControllerArgs": {
+            "properties": {
+                "controller": {
+                    "$ref": "#/types/chart-ingress-nginx:index:Controller"
+                },
+                "defaultBackend": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerDefaultBackend",
+                    "description": "Default 404 backend."
+                },
+                "dhParam": {
+                    "description": "A base64ed Diffie-Hellman parameter. This can be generated with: openssl dhparam 4096 2> /dev/null | base64 Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.",
+                    "type": "string"
+                },
+                "fullnameOverride": {
+                    "description": "Overrides for generated resource names.",
+                    "type": "string"
+                },
+                "helmOptions": {
+                    "$ref": "#/types/chart-ingress-nginx:index:Release",
+                    "description": "HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args."
+                },
+                "imagePullSecrets": {
+                    "description": "Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:LocalObjectReference"
+                    },
+                    "type": "array"
+                },
+                "nameOverride": {
+                    "description": "Overrides for generated resource names.",
+                    "type": "string"
+                },
+                "podSecurityPolicy": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerPodSecurityPolicy",
+                    "description": "If true, create & use Pod Security Policy resources https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+                },
+                "rbac": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerRBAC",
+                    "description": "Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266"
+                },
+                "revisionHistoryLimit": {
+                    "description": "Rollback limit.",
+                    "type": "integer"
+                },
+                "serviceAccount": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceAccount"
+                },
+                "tcp": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "TCP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.",
+                    "type": "object"
+                },
+                "udp": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "UDP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.",
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:Keda": {
+            "properties": {
+                "apiVersion": {
+                    "description": "apiVersion changes with keda 1.x vs 2.x: 2.x = keda.sh/v1alpha1, 1.x = keda.k8s.io/v1alpha1.",
+                    "type": "string"
+                },
+                "behavior": {
+                    "$ref": "#/types/chart-ingress-nginx:index:AutoscalingBehavior"
+                },
+                "cooldownPeriod": {
+                    "type": "integer"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "maxReplicas": {
+                    "type": "integer"
+                },
+                "minReplicas": {
+                    "type": "integer"
+                },
+                "pollingInterval": {
+                    "type": "integer"
+                },
+                "restoreToOriginalReplicaCount": {
+                    "type": "boolean"
+                },
+                "scaledObject": {
+                    "$ref": "#/types/chart-ingress-nginx:index:KedaScaledObject"
+                },
+                "triggers": {
+                    "items": {
+                        "$ref": "#/types/chart-ingress-nginx:index:KedaTrigger"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:KedaScaledObject": {
+            "properties": {
+                "annotations": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Custom annotations for ScaledObject resource.",
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "chart-ingress-nginx:index:KedaTrigger": {
+            "properties": {
+                "metadata": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
     },
     "language": {
         "csharp": {
