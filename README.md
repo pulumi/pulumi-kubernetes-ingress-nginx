@@ -9,6 +9,10 @@ and offers a Pulumi-friendly and strongly-typed way to manage ingress controller
 After installing this component to your cluster, you can use it by adding the
 `kubernetes.io/ingress.class: nginx` annotation to your `Ingress` resources.
 
+For examples of usage, see [the official documentation](
+https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/), or refer to [the examples](/examples)
+in this repo.
+
 ## To Use
 
 To use this component, first install the Pulumi Package:
