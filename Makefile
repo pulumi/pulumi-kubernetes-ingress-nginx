@@ -61,10 +61,9 @@ gen_nodejs_sdk::
 	rm -rf sdk/nodejs
 	cd provider/cmd/${CODEGEN} && go run . nodejs ../../../sdk/nodejs ${SCHEMA_PATH}
 # HACKHACK: work around https://github.com/pulumi/pulumi/issues/7979:
-	sed -i.bak \
-		's/pulumiKubernetes\.types\.input\.core\.v1\.\([a-zA-Z]*\)Args/pulumiKubernetes.types.input.core.v1.\1/g' \
-			sdk/nodejs/types/input.ts && \
-				rm sdk/nodejs/types/input.ts.bak
+	find sdk/nodejs -name "*.ts" -exec sed -i.bak \
+		's/pulumiKubernetes\.types\.input\.\([a-zA-Z0-9]*\)\.\([a-zA-Z0-9]*\)\.\([a-zA-Z]*\)Args/pulumiKubernetes.types.input.\1.\2.\3/g' \
+			'{}' \;
 
 build_nodejs_sdk:: gen_nodejs_sdk
 	cd sdk/nodejs/ && \

@@ -8,9 +8,61 @@
                 "controller": {
                     "$ref": "#/types/chart-ingress-nginx:index:Controller"
                 },
+                "defaultBackend": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerDefaultBackend",
+                    "description": "Default 404 backend."
+                },
+                "dhParam": {
+                    "description": "A base64ed Diffie-Hellman parameter. This can be generated with: openssl dhparam 4096 2> /dev/null | base64 Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.",
+                    "type": "string"
+                },
+                "fullnameOverride": {
+                    "description": "Overrides for generated resource names.",
+                    "type": "string"
+                },
                 "helmOptions": {
                     "$ref": "#/types/chart-ingress-nginx:index:Release",
-                    "description": "Optional Helm Chart release metadata (name, version, chart options, etc)."
+                    "description": "HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args."
+                },
+                "imagePullSecrets": {
+                    "description": "Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.",
+                    "items": {
+                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:LocalObjectReference"
+                    },
+                    "type": "array"
+                },
+                "nameOverride": {
+                    "description": "Overrides for generated resource names.",
+                    "type": "string"
+                },
+                "podSecurityPolicy": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerPodSecurityPolicy",
+                    "description": "If true, create & use Pod Security Policy resources https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+                },
+                "rbac": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerRBAC",
+                    "description": "Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266"
+                },
+                "revisionHistoryLimit": {
+                    "description": "Rollback limit.",
+                    "type": "integer"
+                },
+                "serviceAccount": {
+                    "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceAccount"
+                },
+                "tcp": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "TCP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.",
+                    "type": "object"
+                },
+                "udp": {
+                    "additionalProperties": {
+                        "type": "object"
+                    },
+                    "description": "UDP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.",
+                    "type": "object"
                 }
             },
             "properties": {
@@ -1436,70 +1488,6 @@
                 },
                 "type": {
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "chart-ingress-nginx:index:IngressControllerArgs": {
-            "properties": {
-                "controller": {
-                    "$ref": "#/types/chart-ingress-nginx:index:Controller"
-                },
-                "defaultBackend": {
-                    "$ref": "#/types/chart-ingress-nginx:index:ControllerDefaultBackend",
-                    "description": "Default 404 backend."
-                },
-                "dhParam": {
-                    "description": "A base64ed Diffie-Hellman parameter. This can be generated with: openssl dhparam 4096 2> /dev/null | base64 Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.",
-                    "type": "string"
-                },
-                "fullnameOverride": {
-                    "description": "Overrides for generated resource names.",
-                    "type": "string"
-                },
-                "helmOptions": {
-                    "$ref": "#/types/chart-ingress-nginx:index:Release",
-                    "description": "HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args."
-                },
-                "imagePullSecrets": {
-                    "description": "Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.",
-                    "items": {
-                        "$ref": "/kubernetes/v3.8.1/schema.json#/types/kubernetes:core/v1:LocalObjectReference"
-                    },
-                    "type": "array"
-                },
-                "nameOverride": {
-                    "description": "Overrides for generated resource names.",
-                    "type": "string"
-                },
-                "podSecurityPolicy": {
-                    "$ref": "#/types/chart-ingress-nginx:index:ControllerPodSecurityPolicy",
-                    "description": "If true, create & use Pod Security Policy resources https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
-                },
-                "rbac": {
-                    "$ref": "#/types/chart-ingress-nginx:index:ControllerRBAC",
-                    "description": "Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266"
-                },
-                "revisionHistoryLimit": {
-                    "description": "Rollback limit.",
-                    "type": "integer"
-                },
-                "serviceAccount": {
-                    "$ref": "#/types/chart-ingress-nginx:index:ControllerServiceAccount"
-                },
-                "tcp": {
-                    "additionalProperties": {
-                        "type": "object"
-                    },
-                    "description": "TCP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.",
-                    "type": "object"
-                },
-                "udp": {
-                    "additionalProperties": {
-                        "type": "object"
-                    },
-                    "description": "UDP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.",
-                    "type": "object"
                 }
             },
             "type": "object"

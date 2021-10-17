@@ -89,7 +89,7 @@ export interface IngressControllerArgs {
     /**
      * Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.
      */
-    imagePullSecrets?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.LocalObjectReference>[]>;
+    imagePullSecrets?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.LocalObjectReferenceArgs>[]>;
     /**
      * Overrides for generated resource names.
      */

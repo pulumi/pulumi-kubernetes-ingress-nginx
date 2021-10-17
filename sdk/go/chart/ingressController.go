@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/core/v1"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -35,15 +36,57 @@ func NewIngressController(ctx *pulumi.Context,
 
 type ingressControllerArgs struct {
 	Controller *Controller `pulumi:"controller"`
-	// Optional Helm Chart release metadata (name, version, chart options, etc).
+	// Default 404 backend.
+	DefaultBackend *ControllerDefaultBackend `pulumi:"defaultBackend"`
+	// A base64ed Diffie-Hellman parameter. This can be generated with: openssl dhparam 4096 2> /dev/null | base64 Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.
+	DhParam *string `pulumi:"dhParam"`
+	// Overrides for generated resource names.
+	FullnameOverride *string `pulumi:"fullnameOverride"`
+	// HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
 	HelmOptions *Release `pulumi:"helmOptions"`
+	// Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.
+	ImagePullSecrets []corev1.LocalObjectReference `pulumi:"imagePullSecrets"`
+	// Overrides for generated resource names.
+	NameOverride *string `pulumi:"nameOverride"`
+	// If true, create & use Pod Security Policy resources https://kubernetes.io/docs/concepts/policy/pod-security-policy/
+	PodSecurityPolicy *ControllerPodSecurityPolicy `pulumi:"podSecurityPolicy"`
+	// Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266
+	Rbac *ControllerRBAC `pulumi:"rbac"`
+	// Rollback limit.
+	RevisionHistoryLimit *int                      `pulumi:"revisionHistoryLimit"`
+	ServiceAccount       *ControllerServiceAccount `pulumi:"serviceAccount"`
+	// TCP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
+	Tcp map[string]map[string]string `pulumi:"tcp"`
+	// UDP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
+	Udp map[string]map[string]string `pulumi:"udp"`
 }
 
 // The set of arguments for constructing a IngressController resource.
 type IngressControllerArgs struct {
 	Controller ControllerPtrInput
-	// Optional Helm Chart release metadata (name, version, chart options, etc).
+	// Default 404 backend.
+	DefaultBackend ControllerDefaultBackendPtrInput
+	// A base64ed Diffie-Hellman parameter. This can be generated with: openssl dhparam 4096 2> /dev/null | base64 Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.
+	DhParam pulumi.StringPtrInput
+	// Overrides for generated resource names.
+	FullnameOverride pulumi.StringPtrInput
+	// HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
 	HelmOptions ReleasePtrInput
+	// Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.
+	ImagePullSecrets corev1.LocalObjectReferenceArrayInput
+	// Overrides for generated resource names.
+	NameOverride pulumi.StringPtrInput
+	// If true, create & use Pod Security Policy resources https://kubernetes.io/docs/concepts/policy/pod-security-policy/
+	PodSecurityPolicy ControllerPodSecurityPolicyPtrInput
+	// Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266
+	Rbac ControllerRBACPtrInput
+	// Rollback limit.
+	RevisionHistoryLimit pulumi.IntPtrInput
+	ServiceAccount       ControllerServiceAccountPtrInput
+	// TCP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
+	Tcp pulumi.StringMapMapInput
+	// UDP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
+	Udp pulumi.StringMapMapInput
 }
 
 func (IngressControllerArgs) ElementType() reflect.Type {

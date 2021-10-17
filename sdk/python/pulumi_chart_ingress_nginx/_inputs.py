@@ -24,6 +24,8 @@ __all__ = [
     'ControllerAdmissionWebhooksPatchArgs',
     'ControllerAdmissionWebhooksServiceArgs',
     'ControllerCustomTemplateArgs',
+    'ControllerDefaultBackendServiceArgs',
+    'ControllerDefaultBackendArgs',
     'ControllerHostPortPortsArgs',
     'ControllerHostPortArgs',
     'ControllerImageArgs',
@@ -32,10 +34,13 @@ __all__ = [
     'ControllerMetricsServiceMonitorArgs',
     'ControllerMetricsServiceArgs',
     'ControllerMetricsArgs',
+    'ControllerPodSecurityPolicyArgs',
     'ControllerPortArgs',
     'ControllerPublishServiceArgs',
+    'ControllerRBACArgs',
     'ControllerRollingUpdateArgs',
     'ControllerScopeArgs',
+    'ControllerServiceAccountArgs',
     'ControllerServiceInternalArgs',
     'ControllerServiceNodePortsArgs',
     'ControllerServiceArgs',
@@ -769,6 +774,436 @@ class ControllerCustomTemplateArgs:
 
 
 @pulumi.input_type
+class ControllerDefaultBackendServiceArgs:
+    def __init__(__self__, *,
+                 annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 cluster_ip: Optional[pulumi.Input[str]] = None,
+                 external_ips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 load_balancer_ip: Optional[pulumi.Input[str]] = None,
+                 load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 service_port: Optional[pulumi.Input[int]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_ips: List of IP addresses at which the default backend service is available. Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
+        """
+        if annotations is not None:
+            pulumi.set(__self__, "annotations", annotations)
+        if cluster_ip is not None:
+            pulumi.set(__self__, "cluster_ip", cluster_ip)
+        if external_ips is not None:
+            pulumi.set(__self__, "external_ips", external_ips)
+        if load_balancer_ip is not None:
+            pulumi.set(__self__, "load_balancer_ip", load_balancer_ip)
+        if load_balancer_source_ranges is not None:
+            pulumi.set(__self__, "load_balancer_source_ranges", load_balancer_source_ranges)
+        if service_port is not None:
+            pulumi.set(__self__, "service_port", service_port)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        return pulumi.get(self, "annotations")
+
+    @annotations.setter
+    def annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "annotations", value)
+
+    @property
+    @pulumi.getter(name="clusterIP")
+    def cluster_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "cluster_ip")
+
+    @cluster_ip.setter
+    def cluster_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_ip", value)
+
+    @property
+    @pulumi.getter(name="externalIPs")
+    def external_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of IP addresses at which the default backend service is available. Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
+        """
+        return pulumi.get(self, "external_ips")
+
+    @external_ips.setter
+    def external_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "external_ips", value)
+
+    @property
+    @pulumi.getter(name="loadBalancerIP")
+    def load_balancer_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "load_balancer_ip")
+
+    @load_balancer_ip.setter
+    def load_balancer_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "load_balancer_ip", value)
+
+    @property
+    @pulumi.getter(name="loadBalancerSourceRanges")
+    def load_balancer_source_ranges(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "load_balancer_source_ranges")
+
+    @load_balancer_source_ranges.setter
+    def load_balancer_source_ranges(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "load_balancer_source_ranges", value)
+
+    @property
+    @pulumi.getter(name="servicePort")
+    def service_port(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "service_port")
+
+    @service_port.setter
+    def service_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "service_port", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class ControllerDefaultBackendArgs:
+    def __init__(__self__, *,
+                 affinity: Optional[pulumi.Input['pulumi_kubernetes.core.v1.AffinityArgs']] = None,
+                 autoscaling: Optional[pulumi.Input['AutoscalingArgs']] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 existing_psp: Optional[pulumi.Input[str]] = None,
+                 extra_args: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 extra_envs: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]]] = None,
+                 extra_volume: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]] = None,
+                 extra_volume_mounts: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]] = None,
+                 image: Optional[pulumi.Input['ControllerImageArgs']] = None,
+                 liveness_probe: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']] = None,
+                 min_available: Optional[pulumi.Input[int]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 node_selector: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 pod_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 pod_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 pod_security_context: Optional[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs']] = None,
+                 port: Optional[pulumi.Input[int]] = None,
+                 priority_class_name: Optional[pulumi.Input[str]] = None,
+                 readiness_probe: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']] = None,
+                 replica_count: Optional[pulumi.Input[int]] = None,
+                 resources: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']] = None,
+                 service: Optional[pulumi.Input['ControllerDefaultBackendServiceArgs']] = None,
+                 service_account: Optional[pulumi.Input['ControllerServiceAccountArgs']] = None,
+                 tolerations: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]]] = None):
+        """
+        :param pulumi.Input[str] existing_psp: Use an existing PSP instead of creating one.
+        :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]] extra_volume: Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
+        :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]] extra_volume_mounts: Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
+        :param pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs'] liveness_probe: Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] node_selector: Node labels for default backend pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] pod_annotations: Annotations to be added to default backend pods.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] pod_labels: labels to add to the pod container metadata
+        :param pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs'] pod_security_context: Security Context policies for controller pods. See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.
+        :param pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs'] readiness_probe: Readiness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
+        :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]] tolerations: Node tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+        """
+        if affinity is not None:
+            pulumi.set(__self__, "affinity", affinity)
+        if autoscaling is not None:
+            pulumi.set(__self__, "autoscaling", autoscaling)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if existing_psp is not None:
+            pulumi.set(__self__, "existing_psp", existing_psp)
+        if extra_args is not None:
+            pulumi.set(__self__, "extra_args", extra_args)
+        if extra_envs is not None:
+            pulumi.set(__self__, "extra_envs", extra_envs)
+        if extra_volume is not None:
+            pulumi.set(__self__, "extra_volume", extra_volume)
+        if extra_volume_mounts is not None:
+            pulumi.set(__self__, "extra_volume_mounts", extra_volume_mounts)
+        if image is not None:
+            pulumi.set(__self__, "image", image)
+        if liveness_probe is not None:
+            pulumi.set(__self__, "liveness_probe", liveness_probe)
+        if min_available is not None:
+            pulumi.set(__self__, "min_available", min_available)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if node_selector is not None:
+            pulumi.set(__self__, "node_selector", node_selector)
+        if pod_annotations is not None:
+            pulumi.set(__self__, "pod_annotations", pod_annotations)
+        if pod_labels is not None:
+            pulumi.set(__self__, "pod_labels", pod_labels)
+        if pod_security_context is not None:
+            pulumi.set(__self__, "pod_security_context", pod_security_context)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if priority_class_name is not None:
+            pulumi.set(__self__, "priority_class_name", priority_class_name)
+        if readiness_probe is not None:
+            pulumi.set(__self__, "readiness_probe", readiness_probe)
+        if replica_count is not None:
+            pulumi.set(__self__, "replica_count", replica_count)
+        if resources is not None:
+            pulumi.set(__self__, "resources", resources)
+        if service is not None:
+            pulumi.set(__self__, "service", service)
+        if service_account is not None:
+            pulumi.set(__self__, "service_account", service_account)
+        if tolerations is not None:
+            pulumi.set(__self__, "tolerations", tolerations)
+
+    @property
+    @pulumi.getter
+    def affinity(self) -> Optional[pulumi.Input['pulumi_kubernetes.core.v1.AffinityArgs']]:
+        return pulumi.get(self, "affinity")
+
+    @affinity.setter
+    def affinity(self, value: Optional[pulumi.Input['pulumi_kubernetes.core.v1.AffinityArgs']]):
+        pulumi.set(self, "affinity", value)
+
+    @property
+    @pulumi.getter
+    def autoscaling(self) -> Optional[pulumi.Input['AutoscalingArgs']]:
+        return pulumi.get(self, "autoscaling")
+
+    @autoscaling.setter
+    def autoscaling(self, value: Optional[pulumi.Input['AutoscalingArgs']]):
+        pulumi.set(self, "autoscaling", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="existingPsp")
+    def existing_psp(self) -> Optional[pulumi.Input[str]]:
+        """
+        Use an existing PSP instead of creating one.
+        """
+        return pulumi.get(self, "existing_psp")
+
+    @existing_psp.setter
+    def existing_psp(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "existing_psp", value)
+
+    @property
+    @pulumi.getter(name="extraArgs")
+    def extra_args(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+        return pulumi.get(self, "extra_args")
+
+    @extra_args.setter
+    def extra_args(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+        pulumi.set(self, "extra_args", value)
+
+    @property
+    @pulumi.getter(name="extraEnvs")
+    def extra_envs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]]]:
+        return pulumi.get(self, "extra_envs")
+
+    @extra_envs.setter
+    def extra_envs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]]]):
+        pulumi.set(self, "extra_envs", value)
+
+    @property
+    @pulumi.getter(name="extraVolume")
+    def extra_volume(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]]:
+        """
+        Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
+        """
+        return pulumi.get(self, "extra_volume")
+
+    @extra_volume.setter
+    def extra_volume(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]]):
+        pulumi.set(self, "extra_volume", value)
+
+    @property
+    @pulumi.getter(name="extraVolumeMounts")
+    def extra_volume_mounts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]]:
+        """
+        Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
+        """
+        return pulumi.get(self, "extra_volume_mounts")
+
+    @extra_volume_mounts.setter
+    def extra_volume_mounts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]]):
+        pulumi.set(self, "extra_volume_mounts", value)
+
+    @property
+    @pulumi.getter
+    def image(self) -> Optional[pulumi.Input['ControllerImageArgs']]:
+        return pulumi.get(self, "image")
+
+    @image.setter
+    def image(self, value: Optional[pulumi.Input['ControllerImageArgs']]):
+        pulumi.set(self, "image", value)
+
+    @property
+    @pulumi.getter(name="livenessProbe")
+    def liveness_probe(self) -> Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']]:
+        """
+        Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
+        """
+        return pulumi.get(self, "liveness_probe")
+
+    @liveness_probe.setter
+    def liveness_probe(self, value: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']]):
+        pulumi.set(self, "liveness_probe", value)
+
+    @property
+    @pulumi.getter(name="minAvailable")
+    def min_available(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "min_available")
+
+    @min_available.setter
+    def min_available(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_available", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="nodeSelector")
+    def node_selector(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        Node labels for default backend pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.
+        """
+        return pulumi.get(self, "node_selector")
+
+    @node_selector.setter
+    def node_selector(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "node_selector", value)
+
+    @property
+    @pulumi.getter(name="podAnnotations")
+    def pod_annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        Annotations to be added to default backend pods.
+        """
+        return pulumi.get(self, "pod_annotations")
+
+    @pod_annotations.setter
+    def pod_annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "pod_annotations", value)
+
+    @property
+    @pulumi.getter(name="podLabels")
+    def pod_labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        labels to add to the pod container metadata
+        """
+        return pulumi.get(self, "pod_labels")
+
+    @pod_labels.setter
+    def pod_labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "pod_labels", value)
+
+    @property
+    @pulumi.getter(name="podSecurityContext")
+    def pod_security_context(self) -> Optional[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs']]:
+        """
+        Security Context policies for controller pods. See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.
+        """
+        return pulumi.get(self, "pod_security_context")
+
+    @pod_security_context.setter
+    def pod_security_context(self, value: Optional[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs']]):
+        pulumi.set(self, "pod_security_context", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter(name="priorityClassName")
+    def priority_class_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "priority_class_name")
+
+    @priority_class_name.setter
+    def priority_class_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "priority_class_name", value)
+
+    @property
+    @pulumi.getter(name="readinessProbe")
+    def readiness_probe(self) -> Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']]:
+        """
+        Readiness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
+        """
+        return pulumi.get(self, "readiness_probe")
+
+    @readiness_probe.setter
+    def readiness_probe(self, value: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']]):
+        pulumi.set(self, "readiness_probe", value)
+
+    @property
+    @pulumi.getter(name="replicaCount")
+    def replica_count(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "replica_count")
+
+    @replica_count.setter
+    def replica_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "replica_count", value)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> Optional[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']]:
+        return pulumi.get(self, "resources")
+
+    @resources.setter
+    def resources(self, value: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']]):
+        pulumi.set(self, "resources", value)
+
+    @property
+    @pulumi.getter
+    def service(self) -> Optional[pulumi.Input['ControllerDefaultBackendServiceArgs']]:
+        return pulumi.get(self, "service")
+
+    @service.setter
+    def service(self, value: Optional[pulumi.Input['ControllerDefaultBackendServiceArgs']]):
+        pulumi.set(self, "service", value)
+
+    @property
+    @pulumi.getter(name="serviceAccount")
+    def service_account(self) -> Optional[pulumi.Input['ControllerServiceAccountArgs']]:
+        return pulumi.get(self, "service_account")
+
+    @service_account.setter
+    def service_account(self, value: Optional[pulumi.Input['ControllerServiceAccountArgs']]):
+        pulumi.set(self, "service_account", value)
+
+    @property
+    @pulumi.getter
+    def tolerations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]]]:
+        """
+        Node tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+        """
+        return pulumi.get(self, "tolerations")
+
+    @tolerations.setter
+    def tolerations(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]]]):
+        pulumi.set(self, "tolerations", value)
+
+
+@pulumi.input_type
 class ControllerHostPortPortsArgs:
     def __init__(__self__, *,
                  http: Optional[pulumi.Input[int]] = None,
@@ -1385,6 +1820,23 @@ class ControllerMetricsArgs:
 
 
 @pulumi.input_type
+class ControllerPodSecurityPolicyArgs:
+    def __init__(__self__, *,
+                 enabled: Optional[pulumi.Input[bool]] = None):
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+
+@pulumi.input_type
 class ControllerPortArgs:
     def __init__(__self__, *,
                  http: Optional[pulumi.Input[int]] = None,
@@ -1449,6 +1901,35 @@ class ControllerPublishServiceArgs:
 
 
 @pulumi.input_type
+class ControllerRBACArgs:
+    def __init__(__self__, *,
+                 create: Optional[pulumi.Input[bool]] = None,
+                 scope: Optional[pulumi.Input[bool]] = None):
+        if create is not None:
+            pulumi.set(__self__, "create", create)
+        if scope is not None:
+            pulumi.set(__self__, "scope", scope)
+
+    @property
+    @pulumi.getter
+    def create(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "create")
+
+    @create.setter
+    def create(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "create", value)
+
+    @property
+    @pulumi.getter
+    def scope(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "scope")
+
+    @scope.setter
+    def scope(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "scope", value)
+
+
+@pulumi.input_type
 class ControllerRollingUpdateArgs:
     def __init__(__self__, *,
                  max_unavailable: Optional[pulumi.Input[int]] = None):
@@ -1492,6 +1973,47 @@ class ControllerScopeArgs:
     @namespace.setter
     def namespace(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "namespace", value)
+
+
+@pulumi.input_type
+class ControllerServiceAccountArgs:
+    def __init__(__self__, *,
+                 automount_service_account_token: Optional[pulumi.Input[bool]] = None,
+                 create: Optional[pulumi.Input[bool]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        if automount_service_account_token is not None:
+            pulumi.set(__self__, "automount_service_account_token", automount_service_account_token)
+        if create is not None:
+            pulumi.set(__self__, "create", create)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="automountServiceAccountToken")
+    def automount_service_account_token(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "automount_service_account_token")
+
+    @automount_service_account_token.setter
+    def automount_service_account_token(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "automount_service_account_token", value)
+
+    @property
+    @pulumi.getter
+    def create(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "create")
+
+    @create.setter
+    def create(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "create", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
 
 
 @pulumi.input_type

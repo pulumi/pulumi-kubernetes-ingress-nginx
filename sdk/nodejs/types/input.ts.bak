@@ -80,7 +80,7 @@ export interface ControllerArgs {
     /**
      * Affinity and anti-affinity Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity.
      */
-    affinity?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Affinity>;
+    affinity?: pulumi.Input<pulumiKubernetes.types.input.core.v1.AffinityArgs>;
     /**
      * This configuration defines if Ingress Controller should allow users to set their own *-snippet annotations, otherwise this is forbidden / dropped when users add those annotations. Global snippets in ConfigMap are still respected.
      */
@@ -148,23 +148,23 @@ export interface ControllerArgs {
     /**
      * Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
      */
-    extraContainers?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Container>[]>;
+    extraContainers?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.ContainerArgs>[]>;
     /**
      * Additional environment variables to set.
      */
-    extraEnvs?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.EnvVar>[]>;
+    extraEnvs?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.EnvVarArgs>[]>;
     /**
      * Containers, which are run before the app containers are started. - name: init-myservice   image: busybox   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
      */
-    extraInitContainers?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Container>[]>;
+    extraInitContainers?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.ContainerArgs>[]>;
     /**
      * Additional volumeMounts to the controller main container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
      */
-    extraVolumeMounts?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeMount>[]>;
+    extraVolumeMounts?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeMountArgs>[]>;
     /**
      * Additional volumes to the controller pod.  - name: copy-portal-skins    emptyDir: {}
      */
-    extraVolumes?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Volume>[]>;
+    extraVolumes?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeArgs>[]>;
     /**
      * Path of the health check endpoint. All requests received on the port defined by the healthz-port parameter are forwarded internally to this path.
      */
@@ -209,11 +209,11 @@ export interface ControllerArgs {
     /**
      * Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
      */
-    lifecycle?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Lifecycle>;
+    lifecycle?: pulumi.Input<pulumiKubernetes.types.input.core.v1.LifecycleArgs>;
     /**
      * Liveness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    livenessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
+    livenessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ProbeArgs>;
     /**
      * Maxmind license key to download GeoLite2 Databases https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases.
      */
@@ -240,7 +240,7 @@ export interface ControllerArgs {
     /**
      * Security Context policies for controller pods.
      */
-    podSecurityContext?: pulumi.Input<pulumiKubernetes.types.input.core.v1.PodSecurityContext>;
+    podSecurityContext?: pulumi.Input<pulumiKubernetes.types.input.core.v1.PodSecurityContextArgs>;
     priorityClassName?: pulumi.Input<string>;
     /**
      * Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers.
@@ -253,7 +253,7 @@ export interface ControllerArgs {
     /**
      * Readiness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    readinessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
+    readinessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ProbeArgs>;
     replicaCount?: pulumi.Input<number>;
     /**
      * Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply.
@@ -262,7 +262,7 @@ export interface ControllerArgs {
     /**
      * Define requests resources to avoid probe issues due to CPU utilization in busy nodes ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903 Ideally, there should be no limits. https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/
      */
-    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements>;
+    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirementsArgs>;
     /**
      * Limit the scope of the controller.
      */
@@ -271,7 +271,7 @@ export interface ControllerArgs {
     /**
      * Startup probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    startupProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
+    startupProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ProbeArgs>;
     /**
      * See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.
      */
@@ -287,7 +287,7 @@ export interface ControllerArgs {
     /**
      * Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
      */
-    topologySpreadConstraints?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.TopologySpreadConstraint>[]>;
+    topologySpreadConstraints?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.TopologySpreadConstraintArgs>[]>;
     udp?: pulumi.Input<inputs.ControllerUdpArgs>;
     /**
      * The update strategy to apply to the Deployment or DaemonSet.
@@ -300,7 +300,7 @@ export interface ControllerArgs {
 }
 
 export interface ControllerAdmissionWebhooksCreateSecretJobArgs {
-    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements>;
+    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirementsArgs>;
 }
 
 export interface ControllerAdmissionWebhooksPatchArgs {
@@ -313,11 +313,11 @@ export interface ControllerAdmissionWebhooksPatchArgs {
      */
     priorityClassName?: pulumi.Input<string>;
     runAsUser?: pulumi.Input<number>;
-    tolerations?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Toleration>[]>;
+    tolerations?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.TolerationArgs>[]>;
 }
 
 export interface ControllerAdmissionWebhooksPatchWebhbookJobArgs {
-    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements>;
+    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirementsArgs>;
 }
 
 export interface ControllerAdmissionWebhooksServiceArgs {
@@ -336,7 +336,7 @@ export interface ControllerCustomTemplateArgs {
 }
 
 export interface ControllerDefaultBackendArgs {
-    affinity?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Affinity>;
+    affinity?: pulumi.Input<pulumiKubernetes.types.input.core.v1.AffinityArgs>;
     autoscaling?: pulumi.Input<inputs.AutoscalingArgs>;
     enabled?: pulumi.Input<boolean>;
     /**
@@ -344,20 +344,20 @@ export interface ControllerDefaultBackendArgs {
      */
     existingPsp?: pulumi.Input<string>;
     extraArgs?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    extraEnvs?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.EnvVar>[]>;
+    extraEnvs?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.EnvVarArgs>[]>;
     /**
      * Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
      */
-    extraVolume?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Volume>[]>;
+    extraVolume?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeArgs>[]>;
     /**
      * Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
      */
-    extraVolumeMounts?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeMount>[]>;
+    extraVolumeMounts?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeMountArgs>[]>;
     image?: pulumi.Input<inputs.ControllerImageArgs>;
     /**
      * Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    livenessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
+    livenessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ProbeArgs>;
     minAvailable?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
     /**
@@ -375,21 +375,21 @@ export interface ControllerDefaultBackendArgs {
     /**
      * Security Context policies for controller pods. See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.
      */
-    podSecurityContext?: pulumi.Input<pulumiKubernetes.types.input.core.v1.PodSecurityContext>;
+    podSecurityContext?: pulumi.Input<pulumiKubernetes.types.input.core.v1.PodSecurityContextArgs>;
     port?: pulumi.Input<number>;
     priorityClassName?: pulumi.Input<string>;
     /**
      * Readiness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    readinessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
+    readinessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ProbeArgs>;
     replicaCount?: pulumi.Input<number>;
-    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements>;
+    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirementsArgs>;
     service?: pulumi.Input<inputs.ControllerDefaultBackendServiceArgs>;
     serviceAccount?: pulumi.Input<inputs.ControllerServiceAccountArgs>;
     /**
      * Node tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
      */
-    tolerations?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Toleration>[]>;
+    tolerations?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.TolerationArgs>[]>;
 }
 
 export interface ControllerDefaultBackendServiceArgs {
