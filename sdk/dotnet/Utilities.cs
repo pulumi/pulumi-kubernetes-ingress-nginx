@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection;
 using Pulumi;
 
-namespace Pulumi.ChartIngressNginx
+namespace Pulumi.KubernetesIngressNginx
 {
     static class Utilities
     {
@@ -66,7 +66,7 @@ namespace Pulumi.ChartIngressNginx
         static Utilities()
         {
             var assembly = typeof(Utilities).GetTypeInfo().Assembly;
-            using var stream = assembly.GetManifestResourceStream("Pulumi.ChartIngressNginx.version.txt");
+            using var stream = assembly.GetManifestResourceStream("Pulumi.KubernetesIngressNginx.version.txt");
             using var reader = new StreamReader(stream ?? throw new NotSupportedException("Missing embedded version.txt file"));
             version = reader.ReadToEnd().Trim();
             var parts = version.Split("\n");
@@ -78,9 +78,9 @@ namespace Pulumi.ChartIngressNginx
         }
     }
 
-    internal sealed class ChartIngressNginxResourceTypeAttribute : Pulumi.ResourceTypeAttribute
+    internal sealed class KubernetesIngressNginxResourceTypeAttribute : Pulumi.ResourceTypeAttribute
     {
-        public ChartIngressNginxResourceTypeAttribute(string type) : base(type, Utilities.Version)
+        public KubernetesIngressNginxResourceTypeAttribute(string type) : base(type, Utilities.Version)
         {
         }
     }

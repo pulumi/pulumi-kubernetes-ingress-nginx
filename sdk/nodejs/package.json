@@ -1,5 +1,5 @@
 {
-    "name": "@pulumi/chart-ingress-nginx",
+    "name": "@pulumi/kubernetes-ingress-nginx",
     "version": "${VERSION}",
     "scripts": {
         "build": "tsc"

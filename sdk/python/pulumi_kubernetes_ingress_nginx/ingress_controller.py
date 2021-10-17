@@ -323,7 +323,7 @@ class IngressController(pulumi.ComponentResource):
             __props__.__dict__["udp"] = udp
             __props__.__dict__["status"] = None
         super(IngressController, __self__).__init__(
-            'chart-ingress-nginx:index:IngressController',
+            'kubernetes-ingress-nginx:index:IngressController',
             resource_name,
             __props__,
             opts,

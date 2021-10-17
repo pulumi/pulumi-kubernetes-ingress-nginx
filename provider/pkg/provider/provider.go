@@ -24,7 +24,7 @@ import (
 )
 
 const (
-	ProviderName  = "chart-ingress-nginx"
+	ProviderName  = "kubernetes-ingress-nginx"
 	ComponentName = ProviderName + ":index:IngressController"
 )
 

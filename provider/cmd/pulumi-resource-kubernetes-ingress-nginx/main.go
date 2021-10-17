@@ -17,8 +17,8 @@
 package main
 
 import (
-	"github.com/joeduffy/pulumi-helm-ingress-nginx/pkg/provider"
-	"github.com/joeduffy/pulumi-helm-ingress-nginx/pkg/version"
+	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/pkg/provider"
+	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/pkg/version"
 )
 
 func main() {

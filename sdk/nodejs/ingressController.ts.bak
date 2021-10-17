@@ -12,7 +12,7 @@ import * as pulumiKubernetes from "@pulumi/kubernetes";
  */
 export class IngressController extends pulumi.ComponentResource {
     /** @internal */
-    public static readonly __pulumiType = 'chart-ingress-nginx:index:IngressController';
+    public static readonly __pulumiType = 'kubernetes-ingress-nginx:index:IngressController';
 
     /**
      * Returns true if the given object is an instance of IngressController.  This is designed to work even

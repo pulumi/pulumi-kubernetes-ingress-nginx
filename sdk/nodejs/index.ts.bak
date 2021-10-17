@@ -22,21 +22,21 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "chart-ingress-nginx:index:IngressController":
+            case "kubernetes-ingress-nginx:index:IngressController":
                 return new IngressController(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("chart-ingress-nginx", "index", _module)
+pulumi.runtime.registerResourceModule("kubernetes-ingress-nginx", "index", _module)
 
 import { Provider } from "./provider";
 
-pulumi.runtime.registerResourcePackage("chart-ingress-nginx", {
+pulumi.runtime.registerResourcePackage("kubernetes-ingress-nginx", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
-        if (type !== "pulumi:providers:chart-ingress-nginx") {
+        if (type !== "pulumi:providers:kubernetes-ingress-nginx") {
             throw new Error(`unknown provider type ${type}`);
         }
         return new Provider(name, <any>undefined, { urn });

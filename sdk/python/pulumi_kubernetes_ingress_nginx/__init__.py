@@ -13,11 +13,11 @@ _utilities.register(
     resource_modules="""
 [
  {
-  "pkg": "chart-ingress-nginx",
+  "pkg": "kubernetes-ingress-nginx",
   "mod": "index",
-  "fqn": "pulumi_chart_ingress_nginx",
+  "fqn": "pulumi_kubernetes_ingress_nginx",
   "classes": {
-   "chart-ingress-nginx:index:IngressController": "IngressController"
+   "kubernetes-ingress-nginx:index:IngressController": "IngressController"
   }
  }
 ]
@@ -25,9 +25,9 @@ _utilities.register(
     resource_packages="""
 [
  {
-  "pkg": "chart-ingress-nginx",
-  "token": "pulumi:providers:chart-ingress-nginx",
-  "fqn": "pulumi_chart_ingress_nginx",
+  "pkg": "kubernetes-ingress-nginx",
+  "token": "pulumi:providers:kubernetes-ingress-nginx",
+  "fqn": "pulumi_kubernetes_ingress_nginx",
   "class": "Provider"
  }
 ]

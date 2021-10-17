@@ -7,9 +7,9 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.ChartIngressNginx
+namespace Pulumi.KubernetesIngressNginx
 {
-    [ChartIngressNginxResourceType("pulumi:providers:chart-ingress-nginx")]
+    [KubernetesIngressNginxResourceType("pulumi:providers:kubernetes-ingress-nginx")]
     public partial class Provider : Pulumi.ProviderResource
     {
         /// <summary>
@@ -20,7 +20,7 @@ namespace Pulumi.ChartIngressNginx
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
-            : base("chart-ingress-nginx", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
+            : base("kubernetes-ingress-nginx", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
 

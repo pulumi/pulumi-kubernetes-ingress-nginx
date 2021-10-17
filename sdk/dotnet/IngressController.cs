@@ -7,12 +7,12 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.ChartIngressNginx
+namespace Pulumi.KubernetesIngressNginx
 {
     /// <summary>
     /// Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
     /// </summary>
-    [ChartIngressNginxResourceType("chart-ingress-nginx:index:IngressController")]
+    [KubernetesIngressNginxResourceType("kubernetes-ingress-nginx:index:IngressController")]
     public partial class IngressController : Pulumi.ComponentResource
     {
         /// <summary>
@@ -30,7 +30,7 @@ namespace Pulumi.ChartIngressNginx
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public IngressController(string name, IngressControllerArgs? args = null, ComponentResourceOptions? options = null)
-            : base("chart-ingress-nginx:index:IngressController", name, args ?? new IngressControllerArgs(), MakeResourceOptions(options, ""), remote: true)
+            : base("kubernetes-ingress-nginx:index:IngressController", name, args ?? new IngressControllerArgs(), MakeResourceOptions(options, ""), remote: true)
         {
         }
 

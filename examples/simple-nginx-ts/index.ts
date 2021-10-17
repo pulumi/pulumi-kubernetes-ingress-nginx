@@ -3,7 +3,7 @@
 // Note that, as described in that article, you will need to configure DNS for hw1/hw2.your_domain_name.
 
 import * as k8s from "@pulumi/kubernetes";
-import * as nginx from "@pulumi/chart-ingress-nginx";
+import * as nginx from "@pulumi/kubernetes-ingress-nginx";
 
 // Install the NGINX ingress controller to our cluster. The controller
 // consists of a Pod and a Service. Install it and configure the controller
