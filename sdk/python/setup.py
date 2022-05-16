@@ -48,6 +48,7 @@ setup(name='pulumi_kubernetes_ingress_nginx',
       package_data={
           'pulumi_kubernetes_ingress_nginx': [
               'py.typed',
+              'pulumi-plugin.json',
           ]
       },
       install_requires=[
