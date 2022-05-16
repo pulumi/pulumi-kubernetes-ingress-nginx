@@ -15,6 +15,7 @@
 package provider
 
 import (
+	helmbase "github.com/pulumi/pulumi-go-helmbase"
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/core/v1"
 	helmv3 "github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/helm/v3"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -68,10 +69,10 @@ type IngressControllerArgs struct {
 
 	// HelmOptions is an escape hatch that lets the end user control any aspect of the
 	// Helm deployment. This exposes the entirety of the underlying Helm Release component args.
-	HelmOptions *helmv3.ReleaseType `pulumi:"helmOptions" pschema:"ref=#/types/chart-ingress-nginx:index:Release" json:"-"`
+	HelmOptions *helmbase.ReleaseType `pulumi:"helmOptions" pschema:"ref=#/types/chart-ingress-nginx:index:Release" json:"-"`
 }
 
-func (args *IngressControllerArgs) R() **helmv3.ReleaseType { return &args.HelmOptions }
+func (args *IngressControllerArgs) R() **helmbase.ReleaseType { return &args.HelmOptions }
 
 type Controller struct {
 	Name  *string          `pulumi:"name"`

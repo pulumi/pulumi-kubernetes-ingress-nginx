@@ -38,30 +38,28 @@ export class IngressController extends pulumi.ComponentResource {
      * @param opts A bag of options that control this resource's behavior.
      */
     constructor(name: string, args?: IngressControllerArgs, opts?: pulumi.ComponentResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
-            inputs["controller"] = args ? args.controller : undefined;
-            inputs["defaultBackend"] = args ? args.defaultBackend : undefined;
-            inputs["dhParam"] = args ? args.dhParam : undefined;
-            inputs["fullnameOverride"] = args ? args.fullnameOverride : undefined;
-            inputs["helmOptions"] = args ? args.helmOptions : undefined;
-            inputs["imagePullSecrets"] = args ? args.imagePullSecrets : undefined;
-            inputs["nameOverride"] = args ? args.nameOverride : undefined;
-            inputs["podSecurityPolicy"] = args ? args.podSecurityPolicy : undefined;
-            inputs["rbac"] = args ? args.rbac : undefined;
-            inputs["revisionHistoryLimit"] = args ? args.revisionHistoryLimit : undefined;
-            inputs["serviceAccount"] = args ? args.serviceAccount : undefined;
-            inputs["tcp"] = args ? args.tcp : undefined;
-            inputs["udp"] = args ? args.udp : undefined;
-            inputs["status"] = undefined /*out*/;
+            resourceInputs["controller"] = args ? args.controller : undefined;
+            resourceInputs["defaultBackend"] = args ? args.defaultBackend : undefined;
+            resourceInputs["dhParam"] = args ? args.dhParam : undefined;
+            resourceInputs["fullnameOverride"] = args ? args.fullnameOverride : undefined;
+            resourceInputs["helmOptions"] = args ? args.helmOptions : undefined;
+            resourceInputs["imagePullSecrets"] = args ? args.imagePullSecrets : undefined;
+            resourceInputs["nameOverride"] = args ? args.nameOverride : undefined;
+            resourceInputs["podSecurityPolicy"] = args ? args.podSecurityPolicy : undefined;
+            resourceInputs["rbac"] = args ? args.rbac : undefined;
+            resourceInputs["revisionHistoryLimit"] = args ? args.revisionHistoryLimit : undefined;
+            resourceInputs["serviceAccount"] = args ? args.serviceAccount : undefined;
+            resourceInputs["tcp"] = args ? args.tcp : undefined;
+            resourceInputs["udp"] = args ? args.udp : undefined;
+            resourceInputs["status"] = undefined /*out*/;
         } else {
-            inputs["status"] = undefined /*out*/;
+            resourceInputs["status"] = undefined /*out*/;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(IngressController.__pulumiType, name, inputs, opts, true /*remote*/);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(IngressController.__pulumiType, name, resourceInputs, opts, true /*remote*/);
     }
 }
 

@@ -5,6 +5,9 @@
 import * as k8s from "@pulumi/kubernetes";
 import * as nginx from "@pulumi/kubernetes-ingress-nginx";
 
+// Create a sandbox namespace.
+const ns = new k8s.core.v1.Namespace("sandbox-ns");
+
 // Install the NGINX ingress controller to our cluster. The controller
 // consists of a Pod and a Service. Install it and configure the controller
 // to publish the load balancer IP address on each Ingress so that
@@ -14,6 +17,9 @@ const ctrl = new nginx.IngressController("myctrl", {
         publishService: {
             enabled: true,
         },
+    },
+    helmOptions: {
+        namespace: ns.metadata.name,
     },
 });
 
@@ -25,7 +31,10 @@ const appBase = "hello-k8s";
 const appNames = [ `${appBase}-first`, `${appBase}-second` ];
 for (const appName of appNames) {
     const appSvc = new k8s.core.v1.Service(`${appName}-svc`, {
-        metadata: { name: appName },
+        metadata: { 
+            name: appName,
+            namespace: ns.metadata.name
+        },
         spec: {
             type: "ClusterIP",
             ports: [{ port: 80, targetPort: 8080 }],
@@ -33,7 +42,10 @@ for (const appName of appNames) {
         },
     });
     const appDep = new k8s.apps.v1.Deployment(`${appName}-dep`, {
-        metadata: { name: appName },
+        metadata: { 
+            name: appName,
+            namespace: ns.metadata.name
+        },
         spec: {
             replicas: 3,
             selector: {
@@ -64,6 +76,7 @@ const appIngress = new k8s.networking.v1.Ingress(`${appBase}-ingress`, {
         annotations: {
             "kubernetes.io/ingress.class": "nginx",
         },
+        namespace: ns.metadata.name
     },
     spec: {
         rules: [
