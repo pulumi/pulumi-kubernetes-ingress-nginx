@@ -16,6 +16,5 @@
     },
     "pulumi": {
         "resource": true
-    },
-    "files": ["**/*.js", "**/*.ts"]
+    }
 }
