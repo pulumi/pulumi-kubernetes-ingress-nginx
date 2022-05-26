@@ -44,6 +44,7 @@ setup(name='pulumi_kubernetes_ingress_nginx',
       cmdclass={
           'install': InstallPluginCommand,
       },
+      keywords='pulumi kubernetes nginx kind/component category/infrastructure',
       packages=find_packages(),
       package_data={
           'pulumi_kubernetes_ingress_nginx': [

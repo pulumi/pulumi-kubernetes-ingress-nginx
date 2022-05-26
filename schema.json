@@ -1,5 +1,14 @@
 {
     "name": "kubernetes-ingress-nginx",
+    "displayName": "NGINX Ingress Controller",
+    "keywords": [
+        "pulumi",
+        "kubernetes",
+        "nginx",
+        "kind/component",
+        "category/infrastructure"
+    ],
+    "publisher": "Pulumi",
     "resources": {
         "kubernetes-ingress-nginx:index:IngressController": {
             "description": "Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer",

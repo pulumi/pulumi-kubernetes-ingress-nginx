@@ -1,6 +1,13 @@
 {
     "name": "@pulumi/kubernetes-ingress-nginx",
     "version": "${VERSION}",
+    "keywords": [
+        "pulumi",
+        "kubernetes",
+        "nginx",
+        "kind/component",
+        "category/infrastructure"
+    ],
     "scripts": {
         "build": "tsc",
         "install": "node scripts/install-pulumi-plugin.js resource kubernetes-ingress-nginx ${VERSION}"
