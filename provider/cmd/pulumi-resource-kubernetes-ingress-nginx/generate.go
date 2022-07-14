@@ -1,4 +1,4 @@
-// Copyright 2016-2021, Pulumi Corporation.
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,13 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build ignore
+//go:build ignore
 
 package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -54,9 +53,7 @@ func main() {
 		log.Fatalf("cannot reserialize schema: %v", err)
 	}
 
-	err = ioutil.WriteFile("./schema.go", []byte(fmt.Sprintf(`package main
-var pulumiSchema = %#v
-`, versionedContents)), 0600)
+	err = ioutil.WriteFile("./schema-embed.json", versionedContents, 0600)
 	if err != nil {
 		log.Fatal(err)
 	}
