@@ -1576,7 +1576,8 @@
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk/go/kubernetes-ingress-nginx"
+            "importBasePath": "github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk/go/kubernetes-ingress-nginx",
+            "generateExtraInputTypes": true
         },
         "nodejs": {
             "dependencies": {

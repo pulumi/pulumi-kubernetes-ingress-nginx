@@ -16,6 +16,6 @@ nuget/
 ci-scripts/
 *.tar.gz
 
-/provider/cmd/pulumi-resource-*/schema.go
+/provider/cmd/pulumi-resource-*/schema-embed.json
 .vscode/
 **/*.bak

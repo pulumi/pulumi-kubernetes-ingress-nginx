@@ -98,4 +98,4 @@ build_python_sdk:: gen_python_sdk
 		cd ./bin && python3 setup.py build sdist
 
 ## Empty build target for Go
-build_go_sdk::
+build_go_sdk:: gen_go_sdk
