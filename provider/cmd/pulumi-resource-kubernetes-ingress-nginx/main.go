@@ -17,9 +17,14 @@
 package main
 
 import (
+	_ "embed"
+
 	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/pkg/provider"
 	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/pkg/version"
 )
+
+//go:embed schema-embed.json
+var pulumiSchema []byte
 
 func main() {
 	provider.Serve(version.Version, pulumiSchema)
