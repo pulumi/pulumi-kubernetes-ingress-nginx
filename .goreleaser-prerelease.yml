@@ -1,0 +1,27 @@
+archives:
+  - id: archive
+    name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
+before:
+  hooks:
+    - make build_provider
+builds:
+  - binary: pulumi-resource-kubernetes-ingress-nginx
+    dir: provider
+    env:
+      - CGO_ENABLED=0
+    goarch:
+      - amd64
+      - arm64
+    goos:
+      - darwin
+      - windows
+      - linux
+    ldflags:
+      - -X github.com/pulumi/pulumi-kubernetes-ingress-nginx/pkg/version.Version={{.Tag }}
+    main: ./cmd/pulumi-resource-kubernetes-ingress-nginx/
+changelog:
+  skip: true
+release:
+  disable: true
+snapshot:
+  name_template: '{{ .Tag }}-SNAPSHOT'
