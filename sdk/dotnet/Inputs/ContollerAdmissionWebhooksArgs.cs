@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ContollerAdmissionWebhooksArgs : Pulumi.ResourceArgs
+    public sealed class ContollerAdmissionWebhooksArgs : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
         private InputMap<ImmutableDictionary<string, string>>? _annotations;
@@ -75,5 +75,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ContollerAdmissionWebhooksArgs()
         {
         }
+        public static new ContollerAdmissionWebhooksArgs Empty => new ContollerAdmissionWebhooksArgs();
     }
 }

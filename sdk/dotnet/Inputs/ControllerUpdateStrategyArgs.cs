@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerUpdateStrategyArgs : Pulumi.ResourceArgs
+    public sealed class ControllerUpdateStrategyArgs : global::Pulumi.ResourceArgs
     {
         [Input("rollingUpdate")]
         public Input<Inputs.ControllerRollingUpdateArgs>? RollingUpdate { get; set; }
@@ -21,5 +21,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerUpdateStrategyArgs()
         {
         }
+        public static new ControllerUpdateStrategyArgs Empty => new ControllerUpdateStrategyArgs();
     }
 }

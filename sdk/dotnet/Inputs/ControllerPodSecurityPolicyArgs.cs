@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerPodSecurityPolicyArgs : Pulumi.ResourceArgs
+    public sealed class ControllerPodSecurityPolicyArgs : global::Pulumi.ResourceArgs
     {
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
@@ -18,5 +18,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerPodSecurityPolicyArgs()
         {
         }
+        public static new ControllerPodSecurityPolicyArgs Empty => new ControllerPodSecurityPolicyArgs();
     }
 }

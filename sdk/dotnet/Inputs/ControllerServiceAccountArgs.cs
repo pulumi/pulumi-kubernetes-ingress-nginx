@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerServiceAccountArgs : Pulumi.ResourceArgs
+    public sealed class ControllerServiceAccountArgs : global::Pulumi.ResourceArgs
     {
         [Input("automountServiceAccountToken")]
         public Input<bool>? AutomountServiceAccountToken { get; set; }
@@ -24,5 +24,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerServiceAccountArgs()
         {
         }
+        public static new ControllerServiceAccountArgs Empty => new ControllerServiceAccountArgs();
     }
 }

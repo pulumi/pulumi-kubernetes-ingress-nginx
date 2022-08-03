@@ -74,7 +74,7 @@ namespace Pulumi.KubernetesIngressNginx
         }
     }
 
-    internal sealed class KubernetesIngressNginxResourceTypeAttribute : Pulumi.ResourceTypeAttribute
+    internal sealed class KubernetesIngressNginxResourceTypeAttribute : global::Pulumi.ResourceTypeAttribute
     {
         public KubernetesIngressNginxResourceTypeAttribute(string type) : base(type, Utilities.Version)
         {

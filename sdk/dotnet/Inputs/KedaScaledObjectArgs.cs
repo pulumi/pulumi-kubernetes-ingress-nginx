@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class KedaScaledObjectArgs : Pulumi.ResourceArgs
+    public sealed class KedaScaledObjectArgs : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
         private InputMap<string>? _annotations;
@@ -27,5 +27,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public KedaScaledObjectArgs()
         {
         }
+        public static new KedaScaledObjectArgs Empty => new KedaScaledObjectArgs();
     }
 }

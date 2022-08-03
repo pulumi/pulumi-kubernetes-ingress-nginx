@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerAdmissionWebhooksPatchArgs : Pulumi.ResourceArgs
+    public sealed class ControllerAdmissionWebhooksPatchArgs : global::Pulumi.ResourceArgs
     {
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
@@ -54,5 +54,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerAdmissionWebhooksPatchArgs()
         {
         }
+        public static new ControllerAdmissionWebhooksPatchArgs Empty => new ControllerAdmissionWebhooksPatchArgs();
     }
 }

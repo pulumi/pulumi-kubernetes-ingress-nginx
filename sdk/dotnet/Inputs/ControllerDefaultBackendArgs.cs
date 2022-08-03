@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerDefaultBackendArgs : Pulumi.ResourceArgs
+    public sealed class ControllerDefaultBackendArgs : global::Pulumi.ResourceArgs
     {
         [Input("affinity")]
         public Input<Pulumi.Kubernetes.Types.Inputs.Core.V1.AffinityArgs>? Affinity { get; set; }
@@ -163,5 +163,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerDefaultBackendArgs()
         {
         }
+        public static new ControllerDefaultBackendArgs Empty => new ControllerDefaultBackendArgs();
     }
 }

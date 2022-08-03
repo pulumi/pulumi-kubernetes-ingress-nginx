@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class KedaArgs : Pulumi.ResourceArgs
+    public sealed class KedaArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// apiVersion changes with keda 1.x vs 2.x: 2.x = keda.sh/v1alpha1, 1.x = keda.k8s.io/v1alpha1.
@@ -53,5 +53,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public KedaArgs()
         {
         }
+        public static new KedaArgs Empty => new KedaArgs();
     }
 }

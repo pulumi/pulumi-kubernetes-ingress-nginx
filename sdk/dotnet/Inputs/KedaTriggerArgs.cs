@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class KedaTriggerArgs : Pulumi.ResourceArgs
+    public sealed class KedaTriggerArgs : global::Pulumi.ResourceArgs
     {
         [Input("metadata")]
         private InputMap<ImmutableDictionary<string, string>>? _metadata;
@@ -26,5 +26,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public KedaTriggerArgs()
         {
         }
+        public static new KedaTriggerArgs Empty => new KedaTriggerArgs();
     }
 }

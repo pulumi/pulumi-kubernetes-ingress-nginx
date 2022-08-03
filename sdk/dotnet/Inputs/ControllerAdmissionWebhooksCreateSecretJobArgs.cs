@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerAdmissionWebhooksCreateSecretJobArgs : Pulumi.ResourceArgs
+    public sealed class ControllerAdmissionWebhooksCreateSecretJobArgs : global::Pulumi.ResourceArgs
     {
         [Input("resources")]
         public Input<Pulumi.Kubernetes.Types.Inputs.Core.V1.ResourceRequirementsArgs>? Resources { get; set; }
@@ -18,5 +18,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerAdmissionWebhooksCreateSecretJobArgs()
         {
         }
+        public static new ControllerAdmissionWebhooksCreateSecretJobArgs Empty => new ControllerAdmissionWebhooksCreateSecretJobArgs();
     }
 }

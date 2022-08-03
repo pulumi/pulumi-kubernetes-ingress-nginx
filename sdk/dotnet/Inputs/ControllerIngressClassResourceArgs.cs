@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerIngressClassResourceArgs : Pulumi.ResourceArgs
+    public sealed class ControllerIngressClassResourceArgs : global::Pulumi.ResourceArgs
     {
         [Input("controllerValue")]
         public Input<string>? ControllerValue { get; set; }
@@ -39,5 +39,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerIngressClassResourceArgs()
         {
         }
+        public static new ControllerIngressClassResourceArgs Empty => new ControllerIngressClassResourceArgs();
     }
 }
