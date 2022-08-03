@@ -26,7 +26,7 @@ env:
 jobs:
   publish_binary:
     name: Publish Provider Binary
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
