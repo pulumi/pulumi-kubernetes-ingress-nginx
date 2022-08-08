@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class AutoscalingBehaviorArgs : Pulumi.ResourceArgs
+    public sealed class AutoscalingBehaviorArgs : global::Pulumi.ResourceArgs
     {
         [Input("scaleDown")]
         public Input<Inputs.AutoscalingBehaviorScalingArgs>? ScaleDown { get; set; }
@@ -21,5 +21,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public AutoscalingBehaviorArgs()
         {
         }
+        public static new AutoscalingBehaviorArgs Empty => new AutoscalingBehaviorArgs();
     }
 }

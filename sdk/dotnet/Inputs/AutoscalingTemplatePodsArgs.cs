@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class AutoscalingTemplatePodsArgs : Pulumi.ResourceArgs
+    public sealed class AutoscalingTemplatePodsArgs : global::Pulumi.ResourceArgs
     {
         [Input("metric")]
         public Input<Inputs.AutoscalingTemplatePodsMetricArgs>? Metric { get; set; }
@@ -21,5 +21,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public AutoscalingTemplatePodsArgs()
         {
         }
+        public static new AutoscalingTemplatePodsArgs Empty => new AutoscalingTemplatePodsArgs();
     }
 }

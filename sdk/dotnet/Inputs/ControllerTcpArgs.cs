@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerTcpArgs : Pulumi.ResourceArgs
+    public sealed class ControllerTcpArgs : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
         private InputMap<string>? _annotations;
@@ -30,5 +30,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerTcpArgs()
         {
         }
+        public static new ControllerTcpArgs Empty => new ControllerTcpArgs();
     }
 }

@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class AutoscalingBehaviorScalingPolicyArgs : Pulumi.ResourceArgs
+    public sealed class AutoscalingBehaviorScalingPolicyArgs : global::Pulumi.ResourceArgs
     {
         [Input("periodSeconds")]
         public Input<int>? PeriodSeconds { get; set; }
@@ -24,5 +24,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public AutoscalingBehaviorScalingPolicyArgs()
         {
         }
+        public static new AutoscalingBehaviorScalingPolicyArgs Empty => new AutoscalingBehaviorScalingPolicyArgs();
     }
 }

@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerServiceNodePortsArgs : Pulumi.ResourceArgs
+    public sealed class ControllerServiceNodePortsArgs : global::Pulumi.ResourceArgs
     {
         [Input("http")]
         public Input<string>? Http { get; set; }
@@ -37,5 +37,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerServiceNodePortsArgs()
         {
         }
+        public static new ControllerServiceNodePortsArgs Empty => new ControllerServiceNodePortsArgs();
     }
 }

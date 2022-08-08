@@ -13,7 +13,7 @@ namespace Pulumi.KubernetesIngressNginx
     /// Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
     /// </summary>
     [KubernetesIngressNginxResourceType("kubernetes-ingress-nginx:index:IngressController")]
-    public partial class IngressController : Pulumi.ComponentResource
+    public partial class IngressController : global::Pulumi.ComponentResource
     {
         /// <summary>
         /// Detailed information about the status of the underlying Helm deployment.
@@ -47,7 +47,7 @@ namespace Pulumi.KubernetesIngressNginx
         }
     }
 
-    public sealed class IngressControllerArgs : Pulumi.ResourceArgs
+    public sealed class IngressControllerArgs : global::Pulumi.ResourceArgs
     {
         [Input("controller")]
         public Input<Inputs.ControllerArgs>? Controller { get; set; }
@@ -142,5 +142,6 @@ namespace Pulumi.KubernetesIngressNginx
         public IngressControllerArgs()
         {
         }
+        public static new IngressControllerArgs Empty => new IngressControllerArgs();
     }
 }

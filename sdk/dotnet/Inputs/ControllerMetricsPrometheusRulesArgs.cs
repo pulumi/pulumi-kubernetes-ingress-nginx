@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerMetricsPrometheusRulesArgs : Pulumi.ResourceArgs
+    public sealed class ControllerMetricsPrometheusRulesArgs : global::Pulumi.ResourceArgs
     {
         [Input("additionalLabels")]
         private InputMap<ImmutableDictionary<string, string>>? _additionalLabels;
@@ -37,5 +37,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerMetricsPrometheusRulesArgs()
         {
         }
+        public static new ControllerMetricsPrometheusRulesArgs Empty => new ControllerMetricsPrometheusRulesArgs();
     }
 }

@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerScopeArgs : Pulumi.ResourceArgs
+    public sealed class ControllerScopeArgs : global::Pulumi.ResourceArgs
     {
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
@@ -21,5 +21,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerScopeArgs()
         {
         }
+        public static new ControllerScopeArgs Empty => new ControllerScopeArgs();
     }
 }

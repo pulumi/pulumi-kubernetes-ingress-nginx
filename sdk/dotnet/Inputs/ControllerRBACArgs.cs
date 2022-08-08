@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerRBACArgs : Pulumi.ResourceArgs
+    public sealed class ControllerRBACArgs : global::Pulumi.ResourceArgs
     {
         [Input("create")]
         public Input<bool>? Create { get; set; }
@@ -21,5 +21,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerRBACArgs()
         {
         }
+        public static new ControllerRBACArgs Empty => new ControllerRBACArgs();
     }
 }

@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerImageArgs : Pulumi.ResourceArgs
+    public sealed class ControllerImageArgs : global::Pulumi.ResourceArgs
     {
         [Input("allowPrivilegeEscalation")]
         public Input<bool>? AllowPrivilegeEscalation { get; set; }
@@ -48,5 +48,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerImageArgs()
         {
         }
+        public static new ControllerImageArgs Empty => new ControllerImageArgs();
     }
 }

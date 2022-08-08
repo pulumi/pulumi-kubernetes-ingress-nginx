@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerArgs : Pulumi.ResourceArgs
+    public sealed class ControllerArgs : global::Pulumi.ResourceArgs
     {
         [Input("addHeaders")]
         private InputMap<ImmutableDictionary<string, string>>? _addHeaders;
@@ -480,5 +480,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerArgs()
         {
         }
+        public static new ControllerArgs Empty => new ControllerArgs();
     }
 }

@@ -1,0 +1,122 @@
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  comment-notification:
+    if: github.event_name == 'repository_dispatch'
+    name: comment-notification
+    runs-on: ubuntu-latest
+    steps:
+      - id: run-url
+        name: Create URL to the run output
+        run: echo ::set-output
+          name=run-url::https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+      - name: Update with Result
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          body: "Please view the PR build: ${{ steps.run-url.outputs.run-url }}"
+          issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          token: ${{ secrets.PULUMI_BOT_TOKEN }}
+  build_binary:
+    if: github.event_name == 'repository_dispatch' ||
+      github.event.pull_request.head.repo.full_name == github.repository
+    name: Build Provider Binary
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow --tags
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.18.x
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@v1.1.0
+        with:
+          repo: pulumi/pulumictl
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@v1.0.1
+      - name: Set PreRelease Version
+        run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)"
+          >> $GITHUB_ENV
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v2
+        with:
+          args: -f .goreleaser-prerelease.yml --rm-dist --skip-validate
+          version: latest
+  build_sdk:
+    if: github.event_name == 'repository_dispatch' ||
+      github.event.pull_request.head.repo.full_name == github.repository
+    name: Build SDKs
+    runs-on: ubuntu-latest
+    needs: build_binary
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow --tags
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.goversion }}
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@v1.1.0
+        with:
+          repo: pulumi/pulumictl
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@v1.0.1
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.nodeversion}}
+      - name: Setup DotNet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{matrix.dotnetverson}}
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{matrix.pythonversion}}
+      - name: Build SDK
+        run: make build_${{ matrix.language }}_sdk
+      - name: Check worktree clean
+        run: |
+          git update-index -q --refresh
+          if ! git diff-files --quiet; then
+              >&2 echo "error: working tree is not clean, aborting!"
+              git status
+              git diff
+              exit 1
+          fi
+    strategy:
+      fail-fast: true
+      matrix:
+        dotnetversion:
+          - 3.1.301
+        goversion:
+          - 1.18.x
+        language:
+          - nodejs
+          - python
+          - dotnet
+          - go
+        nodeversion:
+          - 14.x
+        pythonversion:
+          - "3.9"
+name: CI
+"on":
+  pull_request:
+    branches:
+      - master
+      - main
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+    tags-ignore:
+      - v*
+      - sdk/*
+      - "**"

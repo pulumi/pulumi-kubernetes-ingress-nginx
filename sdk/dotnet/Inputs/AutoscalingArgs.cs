@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class AutoscalingArgs : Pulumi.ResourceArgs
+    public sealed class AutoscalingArgs : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
         private InputMap<string>? _annotations;
@@ -41,5 +41,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public AutoscalingArgs()
         {
         }
+        public static new AutoscalingArgs Empty => new AutoscalingArgs();
     }
 }

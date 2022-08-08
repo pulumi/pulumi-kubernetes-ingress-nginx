@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerRollingUpdateArgs : Pulumi.ResourceArgs
+    public sealed class ControllerRollingUpdateArgs : global::Pulumi.ResourceArgs
     {
         [Input("maxUnavailable")]
         public Input<int>? MaxUnavailable { get; set; }
@@ -18,5 +18,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerRollingUpdateArgs()
         {
         }
+        public static new ControllerRollingUpdateArgs Empty => new ControllerRollingUpdateArgs();
     }
 }

@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.KubernetesIngressNginx.Inputs
 {
 
-    public sealed class ControllerCustomTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ControllerCustomTemplateArgs : global::Pulumi.ResourceArgs
     {
         [Input("configMapKey")]
         public Input<string>? ConfigMapKey { get; set; }
@@ -21,5 +21,6 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public ControllerCustomTemplateArgs()
         {
         }
+        public static new ControllerCustomTemplateArgs Empty => new ControllerCustomTemplateArgs();
     }
 }
