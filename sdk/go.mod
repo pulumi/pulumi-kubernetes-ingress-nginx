@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-kubernetes-ingess-nginx/sdk
+module github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk
 
 go 1.17
 
