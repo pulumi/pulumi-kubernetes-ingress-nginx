@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -44,32 +44,65 @@ class IngressControllerArgs:
         :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] tcp: TCP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
         :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] udp: UDP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
         """
+        IngressControllerArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            controller=controller,
+            default_backend=default_backend,
+            dh_param=dh_param,
+            fullname_override=fullname_override,
+            helm_options=helm_options,
+            image_pull_secrets=image_pull_secrets,
+            name_override=name_override,
+            pod_security_policy=pod_security_policy,
+            rbac=rbac,
+            revision_history_limit=revision_history_limit,
+            service_account=service_account,
+            tcp=tcp,
+            udp=udp,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             controller: Optional[pulumi.Input['ControllerArgs']] = None,
+             default_backend: Optional[pulumi.Input['ControllerDefaultBackendArgs']] = None,
+             dh_param: Optional[pulumi.Input[str]] = None,
+             fullname_override: Optional[pulumi.Input[str]] = None,
+             helm_options: Optional[pulumi.Input['ReleaseArgs']] = None,
+             image_pull_secrets: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.LocalObjectReferenceArgs']]]] = None,
+             name_override: Optional[pulumi.Input[str]] = None,
+             pod_security_policy: Optional[pulumi.Input['ControllerPodSecurityPolicyArgs']] = None,
+             rbac: Optional[pulumi.Input['ControllerRBACArgs']] = None,
+             revision_history_limit: Optional[pulumi.Input[int]] = None,
+             service_account: Optional[pulumi.Input['ControllerServiceAccountArgs']] = None,
+             tcp: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             udp: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if controller is not None:
-            pulumi.set(__self__, "controller", controller)
+            _setter("controller", controller)
         if default_backend is not None:
-            pulumi.set(__self__, "default_backend", default_backend)
+            _setter("default_backend", default_backend)
         if dh_param is not None:
-            pulumi.set(__self__, "dh_param", dh_param)
+            _setter("dh_param", dh_param)
         if fullname_override is not None:
-            pulumi.set(__self__, "fullname_override", fullname_override)
+            _setter("fullname_override", fullname_override)
         if helm_options is not None:
-            pulumi.set(__self__, "helm_options", helm_options)
+            _setter("helm_options", helm_options)
         if image_pull_secrets is not None:
-            pulumi.set(__self__, "image_pull_secrets", image_pull_secrets)
+            _setter("image_pull_secrets", image_pull_secrets)
         if name_override is not None:
-            pulumi.set(__self__, "name_override", name_override)
+            _setter("name_override", name_override)
         if pod_security_policy is not None:
-            pulumi.set(__self__, "pod_security_policy", pod_security_policy)
+            _setter("pod_security_policy", pod_security_policy)
         if rbac is not None:
-            pulumi.set(__self__, "rbac", rbac)
+            _setter("rbac", rbac)
         if revision_history_limit is not None:
-            pulumi.set(__self__, "revision_history_limit", revision_history_limit)
+            _setter("revision_history_limit", revision_history_limit)
         if service_account is not None:
-            pulumi.set(__self__, "service_account", service_account)
+            _setter("service_account", service_account)
         if tcp is not None:
-            pulumi.set(__self__, "tcp", tcp)
+            _setter("tcp", tcp)
         if udp is not None:
-            pulumi.set(__self__, "udp", udp)
+            _setter("udp", udp)
 
     @property
     @pulumi.getter
@@ -277,6 +310,10 @@ class IngressController(pulumi.ComponentResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            IngressControllerArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -306,16 +343,46 @@ class IngressController(pulumi.ComponentResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = IngressControllerArgs.__new__(IngressControllerArgs)
 
+            if controller is not None and not isinstance(controller, ControllerArgs):
+                controller = controller or {}
+                def _setter(key, value):
+                    controller[key] = value
+                ControllerArgs._configure(_setter, **controller)
             __props__.__dict__["controller"] = controller
+            if default_backend is not None and not isinstance(default_backend, ControllerDefaultBackendArgs):
+                default_backend = default_backend or {}
+                def _setter(key, value):
+                    default_backend[key] = value
+                ControllerDefaultBackendArgs._configure(_setter, **default_backend)
             __props__.__dict__["default_backend"] = default_backend
             __props__.__dict__["dh_param"] = dh_param
             __props__.__dict__["fullname_override"] = fullname_override
+            if helm_options is not None and not isinstance(helm_options, ReleaseArgs):
+                helm_options = helm_options or {}
+                def _setter(key, value):
+                    helm_options[key] = value
+                ReleaseArgs._configure(_setter, **helm_options)
             __props__.__dict__["helm_options"] = helm_options
             __props__.__dict__["image_pull_secrets"] = image_pull_secrets
             __props__.__dict__["name_override"] = name_override
+            if pod_security_policy is not None and not isinstance(pod_security_policy, ControllerPodSecurityPolicyArgs):
+                pod_security_policy = pod_security_policy or {}
+                def _setter(key, value):
+                    pod_security_policy[key] = value
+                ControllerPodSecurityPolicyArgs._configure(_setter, **pod_security_policy)
             __props__.__dict__["pod_security_policy"] = pod_security_policy
+            if rbac is not None and not isinstance(rbac, ControllerRBACArgs):
+                rbac = rbac or {}
+                def _setter(key, value):
+                    rbac[key] = value
+                ControllerRBACArgs._configure(_setter, **rbac)
             __props__.__dict__["rbac"] = rbac
             __props__.__dict__["revision_history_limit"] = revision_history_limit
+            if service_account is not None and not isinstance(service_account, ControllerServiceAccountArgs):
+                service_account = service_account or {}
+                def _setter(key, value):
+                    service_account[key] = value
+                ControllerServiceAccountArgs._configure(_setter, **service_account)
             __props__.__dict__["service_account"] = service_account
             __props__.__dict__["tcp"] = tcp
             __props__.__dict__["udp"] = udp

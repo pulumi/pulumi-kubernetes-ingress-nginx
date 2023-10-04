@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -49,13 +49,34 @@ class ReleaseStatus(dict):
         :param str status: Status of the release.
         :param str version: A SemVer 2 conformant version string of the chart.
         """
-        pulumi.set(__self__, "app_version", app_version)
-        pulumi.set(__self__, "chart", chart)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "namespace", namespace)
-        pulumi.set(__self__, "revision", revision)
-        pulumi.set(__self__, "status", status)
-        pulumi.set(__self__, "version", version)
+        ReleaseStatus._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            app_version=app_version,
+            chart=chart,
+            name=name,
+            namespace=namespace,
+            revision=revision,
+            status=status,
+            version=version,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             app_version: str,
+             chart: str,
+             name: str,
+             namespace: str,
+             revision: int,
+             status: str,
+             version: str,
+             opts: Optional[pulumi.ResourceOptions]=None):
+        _setter("app_version", app_version)
+        _setter("chart", chart)
+        _setter("name", name)
+        _setter("namespace", namespace)
+        _setter("revision", revision)
+        _setter("status", status)
+        _setter("version", version)
 
     @property
     @pulumi.getter(name="appVersion")

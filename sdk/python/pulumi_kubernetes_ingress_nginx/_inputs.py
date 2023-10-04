@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 import pulumi_kubernetes
 
@@ -62,12 +62,25 @@ class AutoscalingBehaviorScalingPolicyArgs:
                  period_seconds: Optional[pulumi.Input[int]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[int]] = None):
+        AutoscalingBehaviorScalingPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            period_seconds=period_seconds,
+            type=type,
+            value=value,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             period_seconds: Optional[pulumi.Input[int]] = None,
+             type: Optional[pulumi.Input[str]] = None,
+             value: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if period_seconds is not None:
-            pulumi.set(__self__, "period_seconds", period_seconds)
+            _setter("period_seconds", period_seconds)
         if type is not None:
-            pulumi.set(__self__, "type", type)
+            _setter("type", type)
         if value is not None:
-            pulumi.set(__self__, "value", value)
+            _setter("value", value)
 
     @property
     @pulumi.getter(name="periodSeconds")
@@ -102,10 +115,21 @@ class AutoscalingBehaviorScalingArgs:
     def __init__(__self__, *,
                  policies: Optional[pulumi.Input[Sequence[pulumi.Input['AutoscalingBehaviorScalingPolicyArgs']]]] = None,
                  stabilization_window_seconds: Optional[pulumi.Input[int]] = None):
+        AutoscalingBehaviorScalingArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            policies=policies,
+            stabilization_window_seconds=stabilization_window_seconds,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             policies: Optional[pulumi.Input[Sequence[pulumi.Input['AutoscalingBehaviorScalingPolicyArgs']]]] = None,
+             stabilization_window_seconds: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if policies is not None:
-            pulumi.set(__self__, "policies", policies)
+            _setter("policies", policies)
         if stabilization_window_seconds is not None:
-            pulumi.set(__self__, "stabilization_window_seconds", stabilization_window_seconds)
+            _setter("stabilization_window_seconds", stabilization_window_seconds)
 
     @property
     @pulumi.getter
@@ -131,10 +155,21 @@ class AutoscalingBehaviorArgs:
     def __init__(__self__, *,
                  scale_down: Optional[pulumi.Input['AutoscalingBehaviorScalingArgs']] = None,
                  scale_up: Optional[pulumi.Input['AutoscalingBehaviorScalingArgs']] = None):
+        AutoscalingBehaviorArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            scale_down=scale_down,
+            scale_up=scale_up,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             scale_down: Optional[pulumi.Input['AutoscalingBehaviorScalingArgs']] = None,
+             scale_up: Optional[pulumi.Input['AutoscalingBehaviorScalingArgs']] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if scale_down is not None:
-            pulumi.set(__self__, "scale_down", scale_down)
+            _setter("scale_down", scale_down)
         if scale_up is not None:
-            pulumi.set(__self__, "scale_up", scale_up)
+            _setter("scale_up", scale_up)
 
     @property
     @pulumi.getter(name="scaleDown")
@@ -159,8 +194,17 @@ class AutoscalingBehaviorArgs:
 class AutoscalingTemplatePodsMetricArgs:
     def __init__(__self__, *,
                  name: Optional[pulumi.Input[str]] = None):
+        AutoscalingTemplatePodsMetricArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            name=name,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             name: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
 
     @property
     @pulumi.getter
@@ -177,10 +221,21 @@ class AutoscalingTemplatePodsTargetArgs:
     def __init__(__self__, *,
                  average_value: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        AutoscalingTemplatePodsTargetArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            average_value=average_value,
+            type=type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             average_value: Optional[pulumi.Input[str]] = None,
+             type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if average_value is not None:
-            pulumi.set(__self__, "average_value", average_value)
+            _setter("average_value", average_value)
         if type is not None:
-            pulumi.set(__self__, "type", type)
+            _setter("type", type)
 
     @property
     @pulumi.getter(name="averageValue")
@@ -206,10 +261,21 @@ class AutoscalingTemplatePodsArgs:
     def __init__(__self__, *,
                  metric: Optional[pulumi.Input['AutoscalingTemplatePodsMetricArgs']] = None,
                  target: Optional[pulumi.Input['AutoscalingTemplatePodsTargetArgs']] = None):
+        AutoscalingTemplatePodsArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            metric=metric,
+            target=target,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             metric: Optional[pulumi.Input['AutoscalingTemplatePodsMetricArgs']] = None,
+             target: Optional[pulumi.Input['AutoscalingTemplatePodsTargetArgs']] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if metric is not None:
-            pulumi.set(__self__, "metric", metric)
+            _setter("metric", metric)
         if target is not None:
-            pulumi.set(__self__, "target", target)
+            _setter("target", target)
 
     @property
     @pulumi.getter
@@ -235,10 +301,21 @@ class AutoscalingTemplateArgs:
     def __init__(__self__, *,
                  pods: Optional[pulumi.Input['AutoscalingTemplatePodsArgs']] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        AutoscalingTemplateArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            pods=pods,
+            type=type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             pods: Optional[pulumi.Input['AutoscalingTemplatePodsArgs']] = None,
+             type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if pods is not None:
-            pulumi.set(__self__, "pods", pods)
+            _setter("pods", pods)
         if type is not None:
-            pulumi.set(__self__, "type", type)
+            _setter("type", type)
 
     @property
     @pulumi.getter
@@ -269,20 +346,41 @@ class AutoscalingArgs:
                  min_replicas: Optional[pulumi.Input[int]] = None,
                  target_cpu_utilization_percentage: Optional[pulumi.Input[int]] = None,
                  target_memory_utilization_percentage: Optional[pulumi.Input[int]] = None):
+        AutoscalingArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+            controller_autoscaling_behavior=controller_autoscaling_behavior,
+            enabled=enabled,
+            max_replicas=max_replicas,
+            min_replicas=min_replicas,
+            target_cpu_utilization_percentage=target_cpu_utilization_percentage,
+            target_memory_utilization_percentage=target_memory_utilization_percentage,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             controller_autoscaling_behavior: Optional[pulumi.Input['AutoscalingBehaviorArgs']] = None,
+             enabled: Optional[pulumi.Input[bool]] = None,
+             max_replicas: Optional[pulumi.Input[int]] = None,
+             min_replicas: Optional[pulumi.Input[int]] = None,
+             target_cpu_utilization_percentage: Optional[pulumi.Input[int]] = None,
+             target_memory_utilization_percentage: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if controller_autoscaling_behavior is not None:
-            pulumi.set(__self__, "controller_autoscaling_behavior", controller_autoscaling_behavior)
+            _setter("controller_autoscaling_behavior", controller_autoscaling_behavior)
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if max_replicas is not None:
-            pulumi.set(__self__, "max_replicas", max_replicas)
+            _setter("max_replicas", max_replicas)
         if min_replicas is not None:
-            pulumi.set(__self__, "min_replicas", min_replicas)
+            _setter("min_replicas", min_replicas)
         if target_cpu_utilization_percentage is not None:
-            pulumi.set(__self__, "target_cpu_utilization_percentage", target_cpu_utilization_percentage)
+            _setter("target_cpu_utilization_percentage", target_cpu_utilization_percentage)
         if target_memory_utilization_percentage is not None:
-            pulumi.set(__self__, "target_memory_utilization_percentage", target_memory_utilization_percentage)
+            _setter("target_memory_utilization_percentage", target_memory_utilization_percentage)
 
     @property
     @pulumi.getter
@@ -368,34 +466,69 @@ class ContollerAdmissionWebhooksArgs:
         """
         :param pulumi.Input[str] existing_psp: Use an existing PSP instead of creating one.
         """
+        ContollerAdmissionWebhooksArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+            certificate=certificate,
+            create_secret_job=create_secret_job,
+            enabled=enabled,
+            existing_psp=existing_psp,
+            failure_policy=failure_policy,
+            key=key,
+            namespace_selector=namespace_selector,
+            object_selector=object_selector,
+            patch=patch,
+            patch_webhook_job=patch_webhook_job,
+            port=port,
+            service=service,
+            timeout_seconds=timeout_seconds,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             certificate: Optional[pulumi.Input[str]] = None,
+             create_secret_job: Optional[pulumi.Input['ControllerAdmissionWebhooksCreateSecretJobArgs']] = None,
+             enabled: Optional[pulumi.Input[bool]] = None,
+             existing_psp: Optional[pulumi.Input[str]] = None,
+             failure_policy: Optional[pulumi.Input[str]] = None,
+             key: Optional[pulumi.Input[str]] = None,
+             namespace_selector: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             object_selector: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             patch: Optional[pulumi.Input['ControllerAdmissionWebhooksPatchArgs']] = None,
+             patch_webhook_job: Optional[pulumi.Input['ControllerAdmissionWebhooksPatchWebhbookJobArgs']] = None,
+             port: Optional[pulumi.Input[int]] = None,
+             service: Optional[pulumi.Input['ControllerAdmissionWebhooksServiceArgs']] = None,
+             timeout_seconds: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if certificate is not None:
-            pulumi.set(__self__, "certificate", certificate)
+            _setter("certificate", certificate)
         if create_secret_job is not None:
-            pulumi.set(__self__, "create_secret_job", create_secret_job)
+            _setter("create_secret_job", create_secret_job)
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if existing_psp is not None:
-            pulumi.set(__self__, "existing_psp", existing_psp)
+            _setter("existing_psp", existing_psp)
         if failure_policy is not None:
-            pulumi.set(__self__, "failure_policy", failure_policy)
+            _setter("failure_policy", failure_policy)
         if key is not None:
-            pulumi.set(__self__, "key", key)
+            _setter("key", key)
         if namespace_selector is not None:
-            pulumi.set(__self__, "namespace_selector", namespace_selector)
+            _setter("namespace_selector", namespace_selector)
         if object_selector is not None:
-            pulumi.set(__self__, "object_selector", object_selector)
+            _setter("object_selector", object_selector)
         if patch is not None:
-            pulumi.set(__self__, "patch", patch)
+            _setter("patch", patch)
         if patch_webhook_job is not None:
-            pulumi.set(__self__, "patch_webhook_job", patch_webhook_job)
+            _setter("patch_webhook_job", patch_webhook_job)
         if port is not None:
-            pulumi.set(__self__, "port", port)
+            _setter("port", port)
         if service is not None:
-            pulumi.set(__self__, "service", service)
+            _setter("service", service)
         if timeout_seconds is not None:
-            pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+            _setter("timeout_seconds", timeout_seconds)
 
     @property
     @pulumi.getter
@@ -531,8 +664,17 @@ class ContollerAdmissionWebhooksArgs:
 class ControllerAdmissionWebhooksCreateSecretJobArgs:
     def __init__(__self__, *,
                  resources: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']] = None):
+        ControllerAdmissionWebhooksCreateSecretJobArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            resources=resources,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             resources: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if resources is not None:
-            pulumi.set(__self__, "resources", resources)
+            _setter("resources", resources)
 
     @property
     @pulumi.getter
@@ -548,8 +690,17 @@ class ControllerAdmissionWebhooksCreateSecretJobArgs:
 class ControllerAdmissionWebhooksPatchWebhbookJobArgs:
     def __init__(__self__, *,
                  resources: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']] = None):
+        ControllerAdmissionWebhooksPatchWebhbookJobArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            resources=resources,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             resources: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if resources is not None:
-            pulumi.set(__self__, "resources", resources)
+            _setter("resources", resources)
 
     @property
     @pulumi.getter
@@ -574,20 +725,41 @@ class ControllerAdmissionWebhooksPatchArgs:
         """
         :param pulumi.Input[str] priority_class_name: Provide a priority class name to the webhook patching job.
         """
+        ControllerAdmissionWebhooksPatchArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            enabled=enabled,
+            image=image,
+            node_selector=node_selector,
+            pod_annotations=pod_annotations,
+            priority_class_name=priority_class_name,
+            run_as_user=run_as_user,
+            tolerations=tolerations,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             enabled: Optional[pulumi.Input[bool]] = None,
+             image: Optional[pulumi.Input['ControllerImageArgs']] = None,
+             node_selector: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             pod_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             priority_class_name: Optional[pulumi.Input[str]] = None,
+             run_as_user: Optional[pulumi.Input[int]] = None,
+             tolerations: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if image is not None:
-            pulumi.set(__self__, "image", image)
+            _setter("image", image)
         if node_selector is not None:
-            pulumi.set(__self__, "node_selector", node_selector)
+            _setter("node_selector", node_selector)
         if pod_annotations is not None:
-            pulumi.set(__self__, "pod_annotations", pod_annotations)
+            _setter("pod_annotations", pod_annotations)
         if priority_class_name is not None:
-            pulumi.set(__self__, "priority_class_name", priority_class_name)
+            _setter("priority_class_name", priority_class_name)
         if run_as_user is not None:
-            pulumi.set(__self__, "run_as_user", run_as_user)
+            _setter("run_as_user", run_as_user)
         if tolerations is not None:
-            pulumi.set(__self__, "tolerations", tolerations)
+            _setter("tolerations", tolerations)
 
     @property
     @pulumi.getter
@@ -666,20 +838,41 @@ class ControllerAdmissionWebhooksServiceArgs:
                  load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  service_port: Optional[pulumi.Input[int]] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        ControllerAdmissionWebhooksServiceArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+            cluster_ip=cluster_ip,
+            external_ips=external_ips,
+            load_balancer_ips=load_balancer_ips,
+            load_balancer_source_ranges=load_balancer_source_ranges,
+            service_port=service_port,
+            type=type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             cluster_ip: Optional[pulumi.Input[str]] = None,
+             external_ips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             load_balancer_ips: Optional[pulumi.Input[str]] = None,
+             load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             service_port: Optional[pulumi.Input[int]] = None,
+             type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if cluster_ip is not None:
-            pulumi.set(__self__, "cluster_ip", cluster_ip)
+            _setter("cluster_ip", cluster_ip)
         if external_ips is not None:
-            pulumi.set(__self__, "external_ips", external_ips)
+            _setter("external_ips", external_ips)
         if load_balancer_ips is not None:
-            pulumi.set(__self__, "load_balancer_ips", load_balancer_ips)
+            _setter("load_balancer_ips", load_balancer_ips)
         if load_balancer_source_ranges is not None:
-            pulumi.set(__self__, "load_balancer_source_ranges", load_balancer_source_ranges)
+            _setter("load_balancer_source_ranges", load_balancer_source_ranges)
         if service_port is not None:
-            pulumi.set(__self__, "service_port", service_port)
+            _setter("service_port", service_port)
         if type is not None:
-            pulumi.set(__self__, "type", type)
+            _setter("type", type)
 
     @property
     @pulumi.getter
@@ -750,10 +943,21 @@ class ControllerCustomTemplateArgs:
     def __init__(__self__, *,
                  config_map_key: Optional[pulumi.Input[str]] = None,
                  config_map_name: Optional[pulumi.Input[str]] = None):
+        ControllerCustomTemplateArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            config_map_key=config_map_key,
+            config_map_name=config_map_name,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             config_map_key: Optional[pulumi.Input[str]] = None,
+             config_map_name: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if config_map_key is not None:
-            pulumi.set(__self__, "config_map_key", config_map_key)
+            _setter("config_map_key", config_map_key)
         if config_map_name is not None:
-            pulumi.set(__self__, "config_map_name", config_map_name)
+            _setter("config_map_name", config_map_name)
 
     @property
     @pulumi.getter(name="configMapKey")
@@ -787,20 +991,41 @@ class ControllerDefaultBackendServiceArgs:
         """
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_ips: List of IP addresses at which the default backend service is available. Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
         """
+        ControllerDefaultBackendServiceArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+            cluster_ip=cluster_ip,
+            external_ips=external_ips,
+            load_balancer_ip=load_balancer_ip,
+            load_balancer_source_ranges=load_balancer_source_ranges,
+            service_port=service_port,
+            type=type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             cluster_ip: Optional[pulumi.Input[str]] = None,
+             external_ips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             load_balancer_ip: Optional[pulumi.Input[str]] = None,
+             load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             service_port: Optional[pulumi.Input[int]] = None,
+             type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if cluster_ip is not None:
-            pulumi.set(__self__, "cluster_ip", cluster_ip)
+            _setter("cluster_ip", cluster_ip)
         if external_ips is not None:
-            pulumi.set(__self__, "external_ips", external_ips)
+            _setter("external_ips", external_ips)
         if load_balancer_ip is not None:
-            pulumi.set(__self__, "load_balancer_ip", load_balancer_ip)
+            _setter("load_balancer_ip", load_balancer_ip)
         if load_balancer_source_ranges is not None:
-            pulumi.set(__self__, "load_balancer_source_ranges", load_balancer_source_ranges)
+            _setter("load_balancer_source_ranges", load_balancer_source_ranges)
         if service_port is not None:
-            pulumi.set(__self__, "service_port", service_port)
+            _setter("service_port", service_port)
         if type is not None:
-            pulumi.set(__self__, "type", type)
+            _setter("type", type)
 
     @property
     @pulumi.getter
@@ -908,54 +1133,109 @@ class ControllerDefaultBackendArgs:
         :param pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs'] readiness_probe: Readiness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
         :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]] tolerations: Node tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
         """
+        ControllerDefaultBackendArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            affinity=affinity,
+            autoscaling=autoscaling,
+            enabled=enabled,
+            existing_psp=existing_psp,
+            extra_args=extra_args,
+            extra_envs=extra_envs,
+            extra_volume_mounts=extra_volume_mounts,
+            extra_volumes=extra_volumes,
+            image=image,
+            liveness_probe=liveness_probe,
+            min_available=min_available,
+            name=name,
+            node_selector=node_selector,
+            pod_annotations=pod_annotations,
+            pod_labels=pod_labels,
+            pod_security_context=pod_security_context,
+            port=port,
+            priority_class_name=priority_class_name,
+            readiness_probe=readiness_probe,
+            replica_count=replica_count,
+            resources=resources,
+            service=service,
+            service_account=service_account,
+            tolerations=tolerations,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             affinity: Optional[pulumi.Input['pulumi_kubernetes.core.v1.AffinityArgs']] = None,
+             autoscaling: Optional[pulumi.Input['AutoscalingArgs']] = None,
+             enabled: Optional[pulumi.Input[bool]] = None,
+             existing_psp: Optional[pulumi.Input[str]] = None,
+             extra_args: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             extra_envs: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]]] = None,
+             extra_volume_mounts: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]] = None,
+             extra_volumes: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]] = None,
+             image: Optional[pulumi.Input['ControllerImageArgs']] = None,
+             liveness_probe: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']] = None,
+             min_available: Optional[pulumi.Input[int]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             node_selector: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             pod_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             pod_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             pod_security_context: Optional[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs']] = None,
+             port: Optional[pulumi.Input[int]] = None,
+             priority_class_name: Optional[pulumi.Input[str]] = None,
+             readiness_probe: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']] = None,
+             replica_count: Optional[pulumi.Input[int]] = None,
+             resources: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']] = None,
+             service: Optional[pulumi.Input['ControllerDefaultBackendServiceArgs']] = None,
+             service_account: Optional[pulumi.Input['ControllerServiceAccountArgs']] = None,
+             tolerations: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if affinity is not None:
-            pulumi.set(__self__, "affinity", affinity)
+            _setter("affinity", affinity)
         if autoscaling is not None:
-            pulumi.set(__self__, "autoscaling", autoscaling)
+            _setter("autoscaling", autoscaling)
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if existing_psp is not None:
-            pulumi.set(__self__, "existing_psp", existing_psp)
+            _setter("existing_psp", existing_psp)
         if extra_args is not None:
-            pulumi.set(__self__, "extra_args", extra_args)
+            _setter("extra_args", extra_args)
         if extra_envs is not None:
-            pulumi.set(__self__, "extra_envs", extra_envs)
+            _setter("extra_envs", extra_envs)
         if extra_volume_mounts is not None:
-            pulumi.set(__self__, "extra_volume_mounts", extra_volume_mounts)
+            _setter("extra_volume_mounts", extra_volume_mounts)
         if extra_volumes is not None:
-            pulumi.set(__self__, "extra_volumes", extra_volumes)
+            _setter("extra_volumes", extra_volumes)
         if image is not None:
-            pulumi.set(__self__, "image", image)
+            _setter("image", image)
         if liveness_probe is not None:
-            pulumi.set(__self__, "liveness_probe", liveness_probe)
+            _setter("liveness_probe", liveness_probe)
         if min_available is not None:
-            pulumi.set(__self__, "min_available", min_available)
+            _setter("min_available", min_available)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if node_selector is not None:
-            pulumi.set(__self__, "node_selector", node_selector)
+            _setter("node_selector", node_selector)
         if pod_annotations is not None:
-            pulumi.set(__self__, "pod_annotations", pod_annotations)
+            _setter("pod_annotations", pod_annotations)
         if pod_labels is not None:
-            pulumi.set(__self__, "pod_labels", pod_labels)
+            _setter("pod_labels", pod_labels)
         if pod_security_context is not None:
-            pulumi.set(__self__, "pod_security_context", pod_security_context)
+            _setter("pod_security_context", pod_security_context)
         if port is not None:
-            pulumi.set(__self__, "port", port)
+            _setter("port", port)
         if priority_class_name is not None:
-            pulumi.set(__self__, "priority_class_name", priority_class_name)
+            _setter("priority_class_name", priority_class_name)
         if readiness_probe is not None:
-            pulumi.set(__self__, "readiness_probe", readiness_probe)
+            _setter("readiness_probe", readiness_probe)
         if replica_count is not None:
-            pulumi.set(__self__, "replica_count", replica_count)
+            _setter("replica_count", replica_count)
         if resources is not None:
-            pulumi.set(__self__, "resources", resources)
+            _setter("resources", resources)
         if service is not None:
-            pulumi.set(__self__, "service", service)
+            _setter("service", service)
         if service_account is not None:
-            pulumi.set(__self__, "service_account", service_account)
+            _setter("service_account", service_account)
         if tolerations is not None:
-            pulumi.set(__self__, "tolerations", tolerations)
+            _setter("tolerations", tolerations)
 
     @property
     @pulumi.getter
@@ -1209,10 +1489,21 @@ class ControllerHostPortPortsArgs:
     def __init__(__self__, *,
                  http: Optional[pulumi.Input[int]] = None,
                  https: Optional[pulumi.Input[int]] = None):
+        ControllerHostPortPortsArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            http=http,
+            https=https,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             http: Optional[pulumi.Input[int]] = None,
+             https: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if http is not None:
-            pulumi.set(__self__, "http", http)
+            _setter("http", http)
         if https is not None:
-            pulumi.set(__self__, "https", https)
+            _setter("https", https)
 
     @property
     @pulumi.getter
@@ -1238,10 +1529,21 @@ class ControllerHostPortArgs:
     def __init__(__self__, *,
                  enabled: Optional[pulumi.Input[bool]] = None,
                  ports: Optional[pulumi.Input['ControllerHostPortPortsArgs']] = None):
+        ControllerHostPortArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            enabled=enabled,
+            ports=ports,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             enabled: Optional[pulumi.Input[bool]] = None,
+             ports: Optional[pulumi.Input['ControllerHostPortPortsArgs']] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if ports is not None:
-            pulumi.set(__self__, "ports", ports)
+            _setter("ports", ports)
 
     @property
     @pulumi.getter
@@ -1278,26 +1580,53 @@ class ControllerImageArgs:
         """
         :param pulumi.Input[str] repository: for backwards compatibility consider setting the full image url via the repository value below use *either* current default registry/image or repository format or installing will fail.
         """
+        ControllerImageArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            allow_privilege_escalation=allow_privilege_escalation,
+            digest=digest,
+            image=image,
+            pull_policy=pull_policy,
+            read_only_root_filesystem=read_only_root_filesystem,
+            registry=registry,
+            repository=repository,
+            run_as_non_root=run_as_non_root,
+            run_as_user=run_as_user,
+            tag=tag,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             allow_privilege_escalation: Optional[pulumi.Input[bool]] = None,
+             digest: Optional[pulumi.Input[str]] = None,
+             image: Optional[pulumi.Input[str]] = None,
+             pull_policy: Optional[pulumi.Input[str]] = None,
+             read_only_root_filesystem: Optional[pulumi.Input[bool]] = None,
+             registry: Optional[pulumi.Input[str]] = None,
+             repository: Optional[pulumi.Input[str]] = None,
+             run_as_non_root: Optional[pulumi.Input[bool]] = None,
+             run_as_user: Optional[pulumi.Input[str]] = None,
+             tag: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if allow_privilege_escalation is not None:
-            pulumi.set(__self__, "allow_privilege_escalation", allow_privilege_escalation)
+            _setter("allow_privilege_escalation", allow_privilege_escalation)
         if digest is not None:
-            pulumi.set(__self__, "digest", digest)
+            _setter("digest", digest)
         if image is not None:
-            pulumi.set(__self__, "image", image)
+            _setter("image", image)
         if pull_policy is not None:
-            pulumi.set(__self__, "pull_policy", pull_policy)
+            _setter("pull_policy", pull_policy)
         if read_only_root_filesystem is not None:
-            pulumi.set(__self__, "read_only_root_filesystem", read_only_root_filesystem)
+            _setter("read_only_root_filesystem", read_only_root_filesystem)
         if registry is not None:
-            pulumi.set(__self__, "registry", registry)
+            _setter("registry", registry)
         if repository is not None:
-            pulumi.set(__self__, "repository", repository)
+            _setter("repository", repository)
         if run_as_non_root is not None:
-            pulumi.set(__self__, "run_as_non_root", run_as_non_root)
+            _setter("run_as_non_root", run_as_non_root)
         if run_as_user is not None:
-            pulumi.set(__self__, "run_as_user", run_as_user)
+            _setter("run_as_user", run_as_user)
         if tag is not None:
-            pulumi.set(__self__, "tag", tag)
+            _setter("tag", tag)
 
     @property
     @pulumi.getter(name="allowPrivilegeEscalation")
@@ -1404,16 +1733,33 @@ class ControllerIngressClassResourceArgs:
         """
         :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] parameters: Parameters is a link to a custom resource containing additional configuration for the controller. This is optional if the controller does not require extra parameters.
         """
+        ControllerIngressClassResourceArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            controller_value=controller_value,
+            default=default,
+            enabled=enabled,
+            name=name,
+            parameters=parameters,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             controller_value: Optional[pulumi.Input[str]] = None,
+             default: Optional[pulumi.Input[bool]] = None,
+             enabled: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             parameters: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if controller_value is not None:
-            pulumi.set(__self__, "controller_value", controller_value)
+            _setter("controller_value", controller_value)
         if default is not None:
-            pulumi.set(__self__, "default", default)
+            _setter("default", default)
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if parameters is not None:
-            pulumi.set(__self__, "parameters", parameters)
+            _setter("parameters", parameters)
 
     @property
     @pulumi.getter(name="controllerValue")
@@ -1471,14 +1817,29 @@ class ControllerMetricsPrometheusRulesArgs:
                  enabled: Optional[pulumi.Input[bool]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  rules: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None):
+        ControllerMetricsPrometheusRulesArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            additional_labels=additional_labels,
+            enabled=enabled,
+            namespace=namespace,
+            rules=rules,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             additional_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             enabled: Optional[pulumi.Input[bool]] = None,
+             namespace: Optional[pulumi.Input[str]] = None,
+             rules: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if additional_labels is not None:
-            pulumi.set(__self__, "additional_labels", additional_labels)
+            _setter("additional_labels", additional_labels)
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
+            _setter("namespace", namespace)
         if rules is not None:
-            pulumi.set(__self__, "rules", rules)
+            _setter("rules", rules)
 
     @property
     @pulumi.getter(name="additionalLabels")
@@ -1532,24 +1893,49 @@ class ControllerMetricsServiceMonitorArgs:
         """
         :param pulumi.Input[str] job_label: The label to use to retrieve the job name from.
         """
+        ControllerMetricsServiceMonitorArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            additional_labels=additional_labels,
+            enabled=enabled,
+            honor_labels=honor_labels,
+            job_label=job_label,
+            metric_relabelings=metric_relabelings,
+            namespace=namespace,
+            namespace_selector=namespace_selector,
+            scrape_interval=scrape_interval,
+            target_labels=target_labels,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             additional_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             enabled: Optional[pulumi.Input[bool]] = None,
+             honor_labels: Optional[pulumi.Input[bool]] = None,
+             job_label: Optional[pulumi.Input[str]] = None,
+             metric_relabelings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             namespace: Optional[pulumi.Input[str]] = None,
+             namespace_selector: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             scrape_interval: Optional[pulumi.Input[str]] = None,
+             target_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if additional_labels is not None:
-            pulumi.set(__self__, "additional_labels", additional_labels)
+            _setter("additional_labels", additional_labels)
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if honor_labels is not None:
-            pulumi.set(__self__, "honor_labels", honor_labels)
+            _setter("honor_labels", honor_labels)
         if job_label is not None:
-            pulumi.set(__self__, "job_label", job_label)
+            _setter("job_label", job_label)
         if metric_relabelings is not None:
-            pulumi.set(__self__, "metric_relabelings", metric_relabelings)
+            _setter("metric_relabelings", metric_relabelings)
         if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
+            _setter("namespace", namespace)
         if namespace_selector is not None:
-            pulumi.set(__self__, "namespace_selector", namespace_selector)
+            _setter("namespace_selector", namespace_selector)
         if scrape_interval is not None:
-            pulumi.set(__self__, "scrape_interval", scrape_interval)
+            _setter("scrape_interval", scrape_interval)
         if target_labels is not None:
-            pulumi.set(__self__, "target_labels", target_labels)
+            _setter("target_labels", target_labels)
 
     @property
     @pulumi.getter(name="additionalLabels")
@@ -1648,24 +2034,49 @@ class ControllerMetricsServiceArgs:
                  node_port: Optional[pulumi.Input[str]] = None,
                  service_port: Optional[pulumi.Input[int]] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        ControllerMetricsServiceArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+            cluster_ip=cluster_ip,
+            external_ips=external_ips,
+            external_traffic_policy=external_traffic_policy,
+            load_balancer_ips=load_balancer_ips,
+            load_balancer_source_ranges=load_balancer_source_ranges,
+            node_port=node_port,
+            service_port=service_port,
+            type=type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             cluster_ip: Optional[pulumi.Input[str]] = None,
+             external_ips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             external_traffic_policy: Optional[pulumi.Input[str]] = None,
+             load_balancer_ips: Optional[pulumi.Input[str]] = None,
+             load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             node_port: Optional[pulumi.Input[str]] = None,
+             service_port: Optional[pulumi.Input[int]] = None,
+             type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if cluster_ip is not None:
-            pulumi.set(__self__, "cluster_ip", cluster_ip)
+            _setter("cluster_ip", cluster_ip)
         if external_ips is not None:
-            pulumi.set(__self__, "external_ips", external_ips)
+            _setter("external_ips", external_ips)
         if external_traffic_policy is not None:
-            pulumi.set(__self__, "external_traffic_policy", external_traffic_policy)
+            _setter("external_traffic_policy", external_traffic_policy)
         if load_balancer_ips is not None:
-            pulumi.set(__self__, "load_balancer_ips", load_balancer_ips)
+            _setter("load_balancer_ips", load_balancer_ips)
         if load_balancer_source_ranges is not None:
-            pulumi.set(__self__, "load_balancer_source_ranges", load_balancer_source_ranges)
+            _setter("load_balancer_source_ranges", load_balancer_source_ranges)
         if node_port is not None:
-            pulumi.set(__self__, "node_port", node_port)
+            _setter("node_port", node_port)
         if service_port is not None:
-            pulumi.set(__self__, "service_port", service_port)
+            _setter("service_port", service_port)
         if type is not None:
-            pulumi.set(__self__, "type", type)
+            _setter("type", type)
 
     @property
     @pulumi.getter
@@ -1760,16 +2171,33 @@ class ControllerMetricsArgs:
         """
         :param pulumi.Input[int] port: if this port is changed, change healthz-port: in extraArgs: accordingly.
         """
+        ControllerMetricsArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            enabled=enabled,
+            port=port,
+            prometheus_rule=prometheus_rule,
+            service=service,
+            service_monitor=service_monitor,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             enabled: Optional[pulumi.Input[bool]] = None,
+             port: Optional[pulumi.Input[int]] = None,
+             prometheus_rule: Optional[pulumi.Input['ControllerMetricsPrometheusRulesArgs']] = None,
+             service: Optional[pulumi.Input['ControllerMetricsServiceArgs']] = None,
+             service_monitor: Optional[pulumi.Input['ControllerMetricsServiceMonitorArgs']] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if port is not None:
-            pulumi.set(__self__, "port", port)
+            _setter("port", port)
         if prometheus_rule is not None:
-            pulumi.set(__self__, "prometheus_rule", prometheus_rule)
+            _setter("prometheus_rule", prometheus_rule)
         if service is not None:
-            pulumi.set(__self__, "service", service)
+            _setter("service", service)
         if service_monitor is not None:
-            pulumi.set(__self__, "service_monitor", service_monitor)
+            _setter("service_monitor", service_monitor)
 
     @property
     @pulumi.getter
@@ -1824,8 +2252,17 @@ class ControllerMetricsArgs:
 class ControllerPodSecurityPolicyArgs:
     def __init__(__self__, *,
                  enabled: Optional[pulumi.Input[bool]] = None):
+        ControllerPodSecurityPolicyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            enabled=enabled,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             enabled: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
 
     @property
     @pulumi.getter
@@ -1842,10 +2279,21 @@ class ControllerPortArgs:
     def __init__(__self__, *,
                  http: Optional[pulumi.Input[int]] = None,
                  https: Optional[pulumi.Input[int]] = None):
+        ControllerPortArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            http=http,
+            https=https,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             http: Optional[pulumi.Input[int]] = None,
+             https: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if http is not None:
-            pulumi.set(__self__, "http", http)
+            _setter("http", http)
         if https is not None:
-            pulumi.set(__self__, "https", https)
+            _setter("https", https)
 
     @property
     @pulumi.getter
@@ -1874,10 +2322,21 @@ class ControllerPublishServiceArgs:
         """
         :param pulumi.Input[str] path_override: Allows overriding of the publish service to bind to. Must be <namespace>/<service_name>.
         """
+        ControllerPublishServiceArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            enabled=enabled,
+            path_override=path_override,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             enabled: Optional[pulumi.Input[bool]] = None,
+             path_override: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if path_override is not None:
-            pulumi.set(__self__, "path_override", path_override)
+            _setter("path_override", path_override)
 
     @property
     @pulumi.getter
@@ -1906,10 +2365,21 @@ class ControllerRBACArgs:
     def __init__(__self__, *,
                  create: Optional[pulumi.Input[bool]] = None,
                  scope: Optional[pulumi.Input[bool]] = None):
+        ControllerRBACArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            create=create,
+            scope=scope,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             create: Optional[pulumi.Input[bool]] = None,
+             scope: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if create is not None:
-            pulumi.set(__self__, "create", create)
+            _setter("create", create)
         if scope is not None:
-            pulumi.set(__self__, "scope", scope)
+            _setter("scope", scope)
 
     @property
     @pulumi.getter
@@ -1934,8 +2404,17 @@ class ControllerRBACArgs:
 class ControllerRollingUpdateArgs:
     def __init__(__self__, *,
                  max_unavailable: Optional[pulumi.Input[int]] = None):
+        ControllerRollingUpdateArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            max_unavailable=max_unavailable,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             max_unavailable: Optional[pulumi.Input[int]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if max_unavailable is not None:
-            pulumi.set(__self__, "max_unavailable", max_unavailable)
+            _setter("max_unavailable", max_unavailable)
 
     @property
     @pulumi.getter(name="maxUnavailable")
@@ -1952,10 +2431,21 @@ class ControllerScopeArgs:
     def __init__(__self__, *,
                  enabled: Optional[pulumi.Input[bool]] = None,
                  namespace: Optional[pulumi.Input[str]] = None):
+        ControllerScopeArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            enabled=enabled,
+            namespace=namespace,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             enabled: Optional[pulumi.Input[bool]] = None,
+             namespace: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
+            _setter("namespace", namespace)
 
     @property
     @pulumi.getter
@@ -1982,12 +2472,25 @@ class ControllerServiceAccountArgs:
                  automount_service_account_token: Optional[pulumi.Input[bool]] = None,
                  create: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None):
+        ControllerServiceAccountArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            automount_service_account_token=automount_service_account_token,
+            create=create,
+            name=name,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             automount_service_account_token: Optional[pulumi.Input[bool]] = None,
+             create: Optional[pulumi.Input[bool]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if automount_service_account_token is not None:
-            pulumi.set(__self__, "automount_service_account_token", automount_service_account_token)
+            _setter("automount_service_account_token", automount_service_account_token)
         if create is not None:
-            pulumi.set(__self__, "create", create)
+            _setter("create", create)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
 
     @property
     @pulumi.getter(name="automountServiceAccountToken")
@@ -2030,18 +2533,37 @@ class ControllerServiceInternalArgs:
         :param pulumi.Input[str] external_traffic_policy: Set external traffic policy to: "Local" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
         :param pulumi.Input[Sequence[pulumi.Input[str]]] load_balancer_source_ranges: Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.
         """
+        ControllerServiceInternalArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+            enabled=enabled,
+            external_traffic_policy=external_traffic_policy,
+            labels=labels,
+            load_balancer_ips=load_balancer_ips,
+            load_balancer_source_ranges=load_balancer_source_ranges,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             enabled: Optional[pulumi.Input[bool]] = None,
+             external_traffic_policy: Optional[pulumi.Input[str]] = None,
+             labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             load_balancer_ips: Optional[pulumi.Input[str]] = None,
+             load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if external_traffic_policy is not None:
-            pulumi.set(__self__, "external_traffic_policy", external_traffic_policy)
+            _setter("external_traffic_policy", external_traffic_policy)
         if labels is not None:
-            pulumi.set(__self__, "labels", labels)
+            _setter("labels", labels)
         if load_balancer_ips is not None:
-            pulumi.set(__self__, "load_balancer_ips", load_balancer_ips)
+            _setter("load_balancer_ips", load_balancer_ips)
         if load_balancer_source_ranges is not None:
-            pulumi.set(__self__, "load_balancer_source_ranges", load_balancer_source_ranges)
+            _setter("load_balancer_source_ranges", load_balancer_source_ranges)
 
     @property
     @pulumi.getter
@@ -2111,14 +2633,29 @@ class ControllerServiceNodePortsArgs:
                  https: Optional[pulumi.Input[str]] = None,
                  tcp: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
                  udp: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None):
+        ControllerServiceNodePortsArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            http=http,
+            https=https,
+            tcp=tcp,
+            udp=udp,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             http: Optional[pulumi.Input[str]] = None,
+             https: Optional[pulumi.Input[str]] = None,
+             tcp: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             udp: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if http is not None:
-            pulumi.set(__self__, "http", http)
+            _setter("http", http)
         if https is not None:
-            pulumi.set(__self__, "https", https)
+            _setter("https", https)
         if tcp is not None:
-            pulumi.set(__self__, "tcp", tcp)
+            _setter("tcp", tcp)
         if udp is not None:
-            pulumi.set(__self__, "udp", udp)
+            _setter("udp", udp)
 
     @property
     @pulumi.getter
@@ -2184,40 +2721,81 @@ class ControllerServiceArgs:
         :param pulumi.Input['ControllerServiceInternalArgs'] internal: Enables an additional internal load balancer (besides the external one). Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
         :param pulumi.Input[str] session_affinity: Must be either "None" or "ClientIP" if set. Kubernetes will default to "None". Ref: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
         """
+        ControllerServiceArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+            cluster_ip=cluster_ip,
+            enable_http=enable_http,
+            enable_https=enable_https,
+            enabled=enabled,
+            external_ips=external_ips,
+            external_traffic_policy=external_traffic_policy,
+            health_check_node_port=health_check_node_port,
+            internal=internal,
+            labels=labels,
+            load_balancer_ips=load_balancer_ips,
+            load_balancer_source_ranges=load_balancer_source_ranges,
+            node_ports=node_ports,
+            ports=ports,
+            session_affinity=session_affinity,
+            target_ports=target_ports,
+            type=type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             cluster_ip: Optional[pulumi.Input[str]] = None,
+             enable_http: Optional[pulumi.Input[bool]] = None,
+             enable_https: Optional[pulumi.Input[bool]] = None,
+             enabled: Optional[pulumi.Input[bool]] = None,
+             external_ips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             external_traffic_policy: Optional[pulumi.Input[str]] = None,
+             health_check_node_port: Optional[pulumi.Input[int]] = None,
+             internal: Optional[pulumi.Input['ControllerServiceInternalArgs']] = None,
+             labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             load_balancer_ips: Optional[pulumi.Input[str]] = None,
+             load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             node_ports: Optional[pulumi.Input['ControllerServiceNodePortsArgs']] = None,
+             ports: Optional[pulumi.Input['ControllerPortArgs']] = None,
+             session_affinity: Optional[pulumi.Input[str]] = None,
+             target_ports: Optional[pulumi.Input['ControllerPortArgs']] = None,
+             type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if cluster_ip is not None:
-            pulumi.set(__self__, "cluster_ip", cluster_ip)
+            _setter("cluster_ip", cluster_ip)
         if enable_http is not None:
-            pulumi.set(__self__, "enable_http", enable_http)
+            _setter("enable_http", enable_http)
         if enable_https is not None:
-            pulumi.set(__self__, "enable_https", enable_https)
+            _setter("enable_https", enable_https)
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if external_ips is not None:
-            pulumi.set(__self__, "external_ips", external_ips)
+            _setter("external_ips", external_ips)
         if external_traffic_policy is not None:
-            pulumi.set(__self__, "external_traffic_policy", external_traffic_policy)
+            _setter("external_traffic_policy", external_traffic_policy)
         if health_check_node_port is not None:
-            pulumi.set(__self__, "health_check_node_port", health_check_node_port)
+            _setter("health_check_node_port", health_check_node_port)
         if internal is not None:
-            pulumi.set(__self__, "internal", internal)
+            _setter("internal", internal)
         if labels is not None:
-            pulumi.set(__self__, "labels", labels)
+            _setter("labels", labels)
         if load_balancer_ips is not None:
-            pulumi.set(__self__, "load_balancer_ips", load_balancer_ips)
+            _setter("load_balancer_ips", load_balancer_ips)
         if load_balancer_source_ranges is not None:
-            pulumi.set(__self__, "load_balancer_source_ranges", load_balancer_source_ranges)
+            _setter("load_balancer_source_ranges", load_balancer_source_ranges)
         if node_ports is not None:
-            pulumi.set(__self__, "node_ports", node_ports)
+            _setter("node_ports", node_ports)
         if ports is not None:
-            pulumi.set(__self__, "ports", ports)
+            _setter("ports", ports)
         if session_affinity is not None:
-            pulumi.set(__self__, "session_affinity", session_affinity)
+            _setter("session_affinity", session_affinity)
         if target_ports is not None:
-            pulumi.set(__self__, "target_ports", target_ports)
+            _setter("target_ports", target_ports)
         if type is not None:
-            pulumi.set(__self__, "type", type)
+            _setter("type", type)
 
     @property
     @pulumi.getter
@@ -2396,10 +2974,21 @@ class ControllerTcpArgs:
         """
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] annotations: Annotations to be added to the tcp config configmap.
         """
+        ControllerTcpArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+            config_map_namespace=config_map_namespace,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             config_map_namespace: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if config_map_namespace is not None:
-            pulumi.set(__self__, "config_map_namespace", config_map_namespace)
+            _setter("config_map_namespace", config_map_namespace)
 
     @property
     @pulumi.getter
@@ -2431,10 +3020,21 @@ class ControllerUdpArgs:
         """
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] annotations: Annotations to be added to the udp config configmap.
         """
+        ControllerUdpArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+            config_map_namespace=config_map_namespace,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             config_map_namespace: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if config_map_namespace is not None:
-            pulumi.set(__self__, "config_map_namespace", config_map_namespace)
+            _setter("config_map_namespace", config_map_namespace)
 
     @property
     @pulumi.getter
@@ -2463,10 +3063,21 @@ class ControllerUpdateStrategyArgs:
     def __init__(__self__, *,
                  rolling_update: Optional[pulumi.Input['ControllerRollingUpdateArgs']] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        ControllerUpdateStrategyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            rolling_update=rolling_update,
+            type=type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             rolling_update: Optional[pulumi.Input['ControllerRollingUpdateArgs']] = None,
+             type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if rolling_update is not None:
-            pulumi.set(__self__, "rolling_update", rolling_update)
+            _setter("rolling_update", rolling_update)
         if type is not None:
-            pulumi.set(__self__, "type", type)
+            _setter("type", type)
 
     @property
     @pulumi.getter(name="rollingUpdate")
@@ -2609,132 +3220,265 @@ class ControllerArgs:
         :param pulumi.Input['ControllerUpdateStrategyArgs'] update_strategy: The update strategy to apply to the Deployment or DaemonSet.
         :param pulumi.Input[bool] watch_ingress_without_class: Process Ingress objects without ingressClass annotation/ingressClassName field. Overrides value for --watch-ingress-without-class flag of the controller binary. Defaults to false.
         """
+        ControllerArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            add_headers=add_headers,
+            admission_webhooks=admission_webhooks,
+            affinity=affinity,
+            allow_snippet_annotations=allow_snippet_annotations,
+            annotations=annotations,
+            autoscaling=autoscaling,
+            autoscaling_template=autoscaling_template,
+            config=config,
+            config_annotations=config_annotations,
+            config_map_namespace=config_map_namespace,
+            container_name=container_name,
+            container_port=container_port,
+            custom_template=custom_template,
+            dns_config=dns_config,
+            dns_policy=dns_policy,
+            election_id=election_id,
+            enable_mimalloc=enable_mimalloc,
+            existing_psp=existing_psp,
+            extra_args=extra_args,
+            extra_containers=extra_containers,
+            extra_envs=extra_envs,
+            extra_init_containers=extra_init_containers,
+            extra_volume_mounts=extra_volume_mounts,
+            extra_volumes=extra_volumes,
+            health_check_path=health_check_path,
+            heath_check_host=heath_check_host,
+            host_network=host_network,
+            host_port=host_port,
+            hostname=hostname,
+            image=image,
+            ingress_class_by_name=ingress_class_by_name,
+            ingress_class_resource=ingress_class_resource,
+            keda=keda,
+            kind=kind,
+            lifecycle=lifecycle,
+            liveness_probe=liveness_probe,
+            maxmind_license_key=maxmind_license_key,
+            metrics=metrics,
+            min_available=min_available,
+            min_ready_seconds=min_ready_seconds,
+            name=name,
+            node_selector=node_selector,
+            pod_annotations=pod_annotations,
+            pod_labels=pod_labels,
+            pod_security_context=pod_security_context,
+            priority_class_name=priority_class_name,
+            proxy_set_headers=proxy_set_headers,
+            publish_service=publish_service,
+            readiness_probe=readiness_probe,
+            replica_count=replica_count,
+            report_node_internal_ip=report_node_internal_ip,
+            resources=resources,
+            scope=scope,
+            service=service,
+            startup_probe=startup_probe,
+            sysctls=sysctls,
+            tcp=tcp,
+            terminate_grace_period_seconds=terminate_grace_period_seconds,
+            tolerations=tolerations,
+            topology_spread_constraints=topology_spread_constraints,
+            udp=udp,
+            update_strategy=update_strategy,
+            watch_ingress_without_class=watch_ingress_without_class,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             add_headers: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             admission_webhooks: Optional[pulumi.Input['ContollerAdmissionWebhooksArgs']] = None,
+             affinity: Optional[pulumi.Input['pulumi_kubernetes.core.v1.AffinityArgs']] = None,
+             allow_snippet_annotations: Optional[pulumi.Input[bool]] = None,
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             autoscaling: Optional[pulumi.Input['AutoscalingArgs']] = None,
+             autoscaling_template: Optional[pulumi.Input[Sequence[pulumi.Input['AutoscalingTemplateArgs']]]] = None,
+             config: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             config_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             config_map_namespace: Optional[pulumi.Input[str]] = None,
+             container_name: Optional[pulumi.Input[str]] = None,
+             container_port: Optional[pulumi.Input['ControllerPortArgs']] = None,
+             custom_template: Optional[pulumi.Input['ControllerCustomTemplateArgs']] = None,
+             dns_config: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             dns_policy: Optional[pulumi.Input[str]] = None,
+             election_id: Optional[pulumi.Input[str]] = None,
+             enable_mimalloc: Optional[pulumi.Input[bool]] = None,
+             existing_psp: Optional[pulumi.Input[str]] = None,
+             extra_args: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             extra_containers: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgs']]]] = None,
+             extra_envs: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]]] = None,
+             extra_init_containers: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgs']]]] = None,
+             extra_volume_mounts: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]] = None,
+             extra_volumes: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]] = None,
+             health_check_path: Optional[pulumi.Input[str]] = None,
+             heath_check_host: Optional[pulumi.Input[str]] = None,
+             host_network: Optional[pulumi.Input[bool]] = None,
+             host_port: Optional[pulumi.Input['ControllerHostPortArgs']] = None,
+             hostname: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             image: Optional[pulumi.Input['ControllerImageArgs']] = None,
+             ingress_class_by_name: Optional[pulumi.Input[bool]] = None,
+             ingress_class_resource: Optional[pulumi.Input['ControllerIngressClassResourceArgs']] = None,
+             keda: Optional[pulumi.Input['KedaArgs']] = None,
+             kind: Optional[pulumi.Input[str]] = None,
+             lifecycle: Optional[pulumi.Input['pulumi_kubernetes.core.v1.LifecycleArgs']] = None,
+             liveness_probe: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']] = None,
+             maxmind_license_key: Optional[pulumi.Input[str]] = None,
+             metrics: Optional[pulumi.Input['ControllerMetricsArgs']] = None,
+             min_available: Optional[pulumi.Input[int]] = None,
+             min_ready_seconds: Optional[pulumi.Input[int]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             node_selector: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             pod_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             pod_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             pod_security_context: Optional[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs']] = None,
+             priority_class_name: Optional[pulumi.Input[str]] = None,
+             proxy_set_headers: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             publish_service: Optional[pulumi.Input['ControllerPublishServiceArgs']] = None,
+             readiness_probe: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']] = None,
+             replica_count: Optional[pulumi.Input[int]] = None,
+             report_node_internal_ip: Optional[pulumi.Input[bool]] = None,
+             resources: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']] = None,
+             scope: Optional[pulumi.Input['ControllerScopeArgs']] = None,
+             service: Optional[pulumi.Input['ControllerServiceArgs']] = None,
+             startup_probe: Optional[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']] = None,
+             sysctls: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             tcp: Optional[pulumi.Input['ControllerTcpArgs']] = None,
+             terminate_grace_period_seconds: Optional[pulumi.Input[int]] = None,
+             tolerations: Optional[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']] = None,
+             topology_spread_constraints: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TopologySpreadConstraintArgs']]]] = None,
+             udp: Optional[pulumi.Input['ControllerUdpArgs']] = None,
+             update_strategy: Optional[pulumi.Input['ControllerUpdateStrategyArgs']] = None,
+             watch_ingress_without_class: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if add_headers is not None:
-            pulumi.set(__self__, "add_headers", add_headers)
+            _setter("add_headers", add_headers)
         if admission_webhooks is not None:
-            pulumi.set(__self__, "admission_webhooks", admission_webhooks)
+            _setter("admission_webhooks", admission_webhooks)
         if affinity is not None:
-            pulumi.set(__self__, "affinity", affinity)
+            _setter("affinity", affinity)
         if allow_snippet_annotations is not None:
-            pulumi.set(__self__, "allow_snippet_annotations", allow_snippet_annotations)
+            _setter("allow_snippet_annotations", allow_snippet_annotations)
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
         if autoscaling is not None:
-            pulumi.set(__self__, "autoscaling", autoscaling)
+            _setter("autoscaling", autoscaling)
         if autoscaling_template is not None:
-            pulumi.set(__self__, "autoscaling_template", autoscaling_template)
+            _setter("autoscaling_template", autoscaling_template)
         if config is not None:
-            pulumi.set(__self__, "config", config)
+            _setter("config", config)
         if config_annotations is not None:
-            pulumi.set(__self__, "config_annotations", config_annotations)
+            _setter("config_annotations", config_annotations)
         if config_map_namespace is not None:
-            pulumi.set(__self__, "config_map_namespace", config_map_namespace)
+            _setter("config_map_namespace", config_map_namespace)
         if container_name is not None:
-            pulumi.set(__self__, "container_name", container_name)
+            _setter("container_name", container_name)
         if container_port is not None:
-            pulumi.set(__self__, "container_port", container_port)
+            _setter("container_port", container_port)
         if custom_template is not None:
-            pulumi.set(__self__, "custom_template", custom_template)
+            _setter("custom_template", custom_template)
         if dns_config is not None:
-            pulumi.set(__self__, "dns_config", dns_config)
+            _setter("dns_config", dns_config)
         if dns_policy is not None:
-            pulumi.set(__self__, "dns_policy", dns_policy)
+            _setter("dns_policy", dns_policy)
         if election_id is not None:
-            pulumi.set(__self__, "election_id", election_id)
+            _setter("election_id", election_id)
         if enable_mimalloc is not None:
-            pulumi.set(__self__, "enable_mimalloc", enable_mimalloc)
+            _setter("enable_mimalloc", enable_mimalloc)
         if existing_psp is not None:
-            pulumi.set(__self__, "existing_psp", existing_psp)
+            _setter("existing_psp", existing_psp)
         if extra_args is not None:
-            pulumi.set(__self__, "extra_args", extra_args)
+            _setter("extra_args", extra_args)
         if extra_containers is not None:
-            pulumi.set(__self__, "extra_containers", extra_containers)
+            _setter("extra_containers", extra_containers)
         if extra_envs is not None:
-            pulumi.set(__self__, "extra_envs", extra_envs)
+            _setter("extra_envs", extra_envs)
         if extra_init_containers is not None:
-            pulumi.set(__self__, "extra_init_containers", extra_init_containers)
+            _setter("extra_init_containers", extra_init_containers)
         if extra_volume_mounts is not None:
-            pulumi.set(__self__, "extra_volume_mounts", extra_volume_mounts)
+            _setter("extra_volume_mounts", extra_volume_mounts)
         if extra_volumes is not None:
-            pulumi.set(__self__, "extra_volumes", extra_volumes)
+            _setter("extra_volumes", extra_volumes)
         if health_check_path is not None:
-            pulumi.set(__self__, "health_check_path", health_check_path)
+            _setter("health_check_path", health_check_path)
         if heath_check_host is not None:
-            pulumi.set(__self__, "heath_check_host", heath_check_host)
+            _setter("heath_check_host", heath_check_host)
         if host_network is not None:
-            pulumi.set(__self__, "host_network", host_network)
+            _setter("host_network", host_network)
         if host_port is not None:
-            pulumi.set(__self__, "host_port", host_port)
+            _setter("host_port", host_port)
         if hostname is not None:
-            pulumi.set(__self__, "hostname", hostname)
+            _setter("hostname", hostname)
         if image is not None:
-            pulumi.set(__self__, "image", image)
+            _setter("image", image)
         if ingress_class_by_name is not None:
-            pulumi.set(__self__, "ingress_class_by_name", ingress_class_by_name)
+            _setter("ingress_class_by_name", ingress_class_by_name)
         if ingress_class_resource is not None:
-            pulumi.set(__self__, "ingress_class_resource", ingress_class_resource)
+            _setter("ingress_class_resource", ingress_class_resource)
         if keda is not None:
-            pulumi.set(__self__, "keda", keda)
+            _setter("keda", keda)
         if kind is not None:
-            pulumi.set(__self__, "kind", kind)
+            _setter("kind", kind)
         if lifecycle is not None:
-            pulumi.set(__self__, "lifecycle", lifecycle)
+            _setter("lifecycle", lifecycle)
         if liveness_probe is not None:
-            pulumi.set(__self__, "liveness_probe", liveness_probe)
+            _setter("liveness_probe", liveness_probe)
         if maxmind_license_key is not None:
-            pulumi.set(__self__, "maxmind_license_key", maxmind_license_key)
+            _setter("maxmind_license_key", maxmind_license_key)
         if metrics is not None:
-            pulumi.set(__self__, "metrics", metrics)
+            _setter("metrics", metrics)
         if min_available is not None:
-            pulumi.set(__self__, "min_available", min_available)
+            _setter("min_available", min_available)
         if min_ready_seconds is not None:
-            pulumi.set(__self__, "min_ready_seconds", min_ready_seconds)
+            _setter("min_ready_seconds", min_ready_seconds)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if node_selector is not None:
-            pulumi.set(__self__, "node_selector", node_selector)
+            _setter("node_selector", node_selector)
         if pod_annotations is not None:
-            pulumi.set(__self__, "pod_annotations", pod_annotations)
+            _setter("pod_annotations", pod_annotations)
         if pod_labels is not None:
-            pulumi.set(__self__, "pod_labels", pod_labels)
+            _setter("pod_labels", pod_labels)
         if pod_security_context is not None:
-            pulumi.set(__self__, "pod_security_context", pod_security_context)
+            _setter("pod_security_context", pod_security_context)
         if priority_class_name is not None:
-            pulumi.set(__self__, "priority_class_name", priority_class_name)
+            _setter("priority_class_name", priority_class_name)
         if proxy_set_headers is not None:
-            pulumi.set(__self__, "proxy_set_headers", proxy_set_headers)
+            _setter("proxy_set_headers", proxy_set_headers)
         if publish_service is not None:
-            pulumi.set(__self__, "publish_service", publish_service)
+            _setter("publish_service", publish_service)
         if readiness_probe is not None:
-            pulumi.set(__self__, "readiness_probe", readiness_probe)
+            _setter("readiness_probe", readiness_probe)
         if replica_count is not None:
-            pulumi.set(__self__, "replica_count", replica_count)
+            _setter("replica_count", replica_count)
         if report_node_internal_ip is not None:
-            pulumi.set(__self__, "report_node_internal_ip", report_node_internal_ip)
+            _setter("report_node_internal_ip", report_node_internal_ip)
         if resources is not None:
-            pulumi.set(__self__, "resources", resources)
+            _setter("resources", resources)
         if scope is not None:
-            pulumi.set(__self__, "scope", scope)
+            _setter("scope", scope)
         if service is not None:
-            pulumi.set(__self__, "service", service)
+            _setter("service", service)
         if startup_probe is not None:
-            pulumi.set(__self__, "startup_probe", startup_probe)
+            _setter("startup_probe", startup_probe)
         if sysctls is not None:
-            pulumi.set(__self__, "sysctls", sysctls)
+            _setter("sysctls", sysctls)
         if tcp is not None:
-            pulumi.set(__self__, "tcp", tcp)
+            _setter("tcp", tcp)
         if terminate_grace_period_seconds is not None:
-            pulumi.set(__self__, "terminate_grace_period_seconds", terminate_grace_period_seconds)
+            _setter("terminate_grace_period_seconds", terminate_grace_period_seconds)
         if tolerations is not None:
-            pulumi.set(__self__, "tolerations", tolerations)
+            _setter("tolerations", tolerations)
         if topology_spread_constraints is not None:
-            pulumi.set(__self__, "topology_spread_constraints", topology_spread_constraints)
+            _setter("topology_spread_constraints", topology_spread_constraints)
         if udp is not None:
-            pulumi.set(__self__, "udp", udp)
+            _setter("udp", udp)
         if update_strategy is not None:
-            pulumi.set(__self__, "update_strategy", update_strategy)
+            _setter("update_strategy", update_strategy)
         if watch_ingress_without_class is not None:
-            pulumi.set(__self__, "watch_ingress_without_class", watch_ingress_without_class)
+            _setter("watch_ingress_without_class", watch_ingress_without_class)
 
     @property
     @pulumi.getter(name="addHeaders")
@@ -3473,8 +4217,17 @@ class KedaScaledObjectArgs:
         """
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] annotations: Custom annotations for ScaledObject resource.
         """
+        KedaScaledObjectArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            annotations=annotations,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if annotations is not None:
-            pulumi.set(__self__, "annotations", annotations)
+            _setter("annotations", annotations)
 
     @property
     @pulumi.getter
@@ -3494,10 +4247,21 @@ class KedaTriggerArgs:
     def __init__(__self__, *,
                  metadata: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        KedaTriggerArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            metadata=metadata,
+            type=type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             metadata: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+             type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if metadata is not None:
-            pulumi.set(__self__, "metadata", metadata)
+            _setter("metadata", metadata)
         if type is not None:
-            pulumi.set(__self__, "type", type)
+            _setter("type", type)
 
     @property
     @pulumi.getter
@@ -3534,26 +4298,53 @@ class KedaArgs:
         """
         :param pulumi.Input[str] api_version: apiVersion changes with keda 1.x vs 2.x: 2.x = keda.sh/v1alpha1, 1.x = keda.k8s.io/v1alpha1.
         """
+        KedaArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            api_version=api_version,
+            behavior=behavior,
+            cooldown_period=cooldown_period,
+            enabled=enabled,
+            max_replicas=max_replicas,
+            min_replicas=min_replicas,
+            polling_interval=polling_interval,
+            restore_to_original_replica_count=restore_to_original_replica_count,
+            scaled_object=scaled_object,
+            triggers=triggers,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             api_version: Optional[pulumi.Input[str]] = None,
+             behavior: Optional[pulumi.Input['AutoscalingBehaviorArgs']] = None,
+             cooldown_period: Optional[pulumi.Input[int]] = None,
+             enabled: Optional[pulumi.Input[bool]] = None,
+             max_replicas: Optional[pulumi.Input[int]] = None,
+             min_replicas: Optional[pulumi.Input[int]] = None,
+             polling_interval: Optional[pulumi.Input[int]] = None,
+             restore_to_original_replica_count: Optional[pulumi.Input[bool]] = None,
+             scaled_object: Optional[pulumi.Input['KedaScaledObjectArgs']] = None,
+             triggers: Optional[pulumi.Input[Sequence[pulumi.Input['KedaTriggerArgs']]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if api_version is not None:
-            pulumi.set(__self__, "api_version", api_version)
+            _setter("api_version", api_version)
         if behavior is not None:
-            pulumi.set(__self__, "behavior", behavior)
+            _setter("behavior", behavior)
         if cooldown_period is not None:
-            pulumi.set(__self__, "cooldown_period", cooldown_period)
+            _setter("cooldown_period", cooldown_period)
         if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+            _setter("enabled", enabled)
         if max_replicas is not None:
-            pulumi.set(__self__, "max_replicas", max_replicas)
+            _setter("max_replicas", max_replicas)
         if min_replicas is not None:
-            pulumi.set(__self__, "min_replicas", min_replicas)
+            _setter("min_replicas", min_replicas)
         if polling_interval is not None:
-            pulumi.set(__self__, "polling_interval", polling_interval)
+            _setter("polling_interval", polling_interval)
         if restore_to_original_replica_count is not None:
-            pulumi.set(__self__, "restore_to_original_replica_count", restore_to_original_replica_count)
+            _setter("restore_to_original_replica_count", restore_to_original_replica_count)
         if scaled_object is not None:
-            pulumi.set(__self__, "scaled_object", scaled_object)
+            _setter("scaled_object", scaled_object)
         if triggers is not None:
-            pulumi.set(__self__, "triggers", triggers)
+            _setter("triggers", triggers)
 
     @property
     @pulumi.getter(name="apiVersion")
@@ -3723,72 +4514,145 @@ class ReleaseArgs:
         :param pulumi.Input[str] version: Specify the exact chart version to install. If this is not specified, the latest version is installed.
         :param pulumi.Input[bool] wait_for_jobs: Will wait until all Jobs have been completed before marking the release as successful. This is ignored if `skipAwait` is enabled.
         """
+        ReleaseArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            atomic=atomic,
+            chart=chart,
+            cleanup_on_fail=cleanup_on_fail,
+            create_namespace=create_namespace,
+            dependency_update=dependency_update,
+            description=description,
+            devel=devel,
+            disable_crd_hooks=disable_crd_hooks,
+            disable_openapi_validation=disable_openapi_validation,
+            disable_webhooks=disable_webhooks,
+            force_update=force_update,
+            keyring=keyring,
+            lint=lint,
+            manifest=manifest,
+            max_history=max_history,
+            name=name,
+            namespace=namespace,
+            postrender=postrender,
+            recreate_pods=recreate_pods,
+            render_subchart_notes=render_subchart_notes,
+            replace=replace,
+            repository_opts=repository_opts,
+            reset_values=reset_values,
+            resource_names=resource_names,
+            reuse_values=reuse_values,
+            skip_await=skip_await,
+            skip_crds=skip_crds,
+            timeout=timeout,
+            value_yaml_files=value_yaml_files,
+            values=values,
+            verify=verify,
+            version=version,
+            wait_for_jobs=wait_for_jobs,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             atomic: Optional[pulumi.Input[bool]] = None,
+             chart: Optional[pulumi.Input[str]] = None,
+             cleanup_on_fail: Optional[pulumi.Input[bool]] = None,
+             create_namespace: Optional[pulumi.Input[bool]] = None,
+             dependency_update: Optional[pulumi.Input[bool]] = None,
+             description: Optional[pulumi.Input[str]] = None,
+             devel: Optional[pulumi.Input[bool]] = None,
+             disable_crd_hooks: Optional[pulumi.Input[bool]] = None,
+             disable_openapi_validation: Optional[pulumi.Input[bool]] = None,
+             disable_webhooks: Optional[pulumi.Input[bool]] = None,
+             force_update: Optional[pulumi.Input[bool]] = None,
+             keyring: Optional[pulumi.Input[str]] = None,
+             lint: Optional[pulumi.Input[bool]] = None,
+             manifest: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+             max_history: Optional[pulumi.Input[int]] = None,
+             name: Optional[pulumi.Input[str]] = None,
+             namespace: Optional[pulumi.Input[str]] = None,
+             postrender: Optional[pulumi.Input[str]] = None,
+             recreate_pods: Optional[pulumi.Input[bool]] = None,
+             render_subchart_notes: Optional[pulumi.Input[bool]] = None,
+             replace: Optional[pulumi.Input[bool]] = None,
+             repository_opts: Optional[pulumi.Input['RepositoryOptsArgs']] = None,
+             reset_values: Optional[pulumi.Input[bool]] = None,
+             resource_names: Optional[pulumi.Input[Mapping[str, pulumi.Input[Sequence[pulumi.Input[str]]]]]] = None,
+             reuse_values: Optional[pulumi.Input[bool]] = None,
+             skip_await: Optional[pulumi.Input[bool]] = None,
+             skip_crds: Optional[pulumi.Input[bool]] = None,
+             timeout: Optional[pulumi.Input[int]] = None,
+             value_yaml_files: Optional[pulumi.Input[Sequence[pulumi.Input[Union[pulumi.Asset, pulumi.Archive]]]]] = None,
+             values: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+             verify: Optional[pulumi.Input[bool]] = None,
+             version: Optional[pulumi.Input[str]] = None,
+             wait_for_jobs: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if atomic is not None:
-            pulumi.set(__self__, "atomic", atomic)
+            _setter("atomic", atomic)
         if chart is not None:
-            pulumi.set(__self__, "chart", chart)
+            _setter("chart", chart)
         if cleanup_on_fail is not None:
-            pulumi.set(__self__, "cleanup_on_fail", cleanup_on_fail)
+            _setter("cleanup_on_fail", cleanup_on_fail)
         if create_namespace is not None:
-            pulumi.set(__self__, "create_namespace", create_namespace)
+            _setter("create_namespace", create_namespace)
         if dependency_update is not None:
-            pulumi.set(__self__, "dependency_update", dependency_update)
+            _setter("dependency_update", dependency_update)
         if description is not None:
-            pulumi.set(__self__, "description", description)
+            _setter("description", description)
         if devel is not None:
-            pulumi.set(__self__, "devel", devel)
+            _setter("devel", devel)
         if disable_crd_hooks is not None:
-            pulumi.set(__self__, "disable_crd_hooks", disable_crd_hooks)
+            _setter("disable_crd_hooks", disable_crd_hooks)
         if disable_openapi_validation is not None:
-            pulumi.set(__self__, "disable_openapi_validation", disable_openapi_validation)
+            _setter("disable_openapi_validation", disable_openapi_validation)
         if disable_webhooks is not None:
-            pulumi.set(__self__, "disable_webhooks", disable_webhooks)
+            _setter("disable_webhooks", disable_webhooks)
         if force_update is not None:
-            pulumi.set(__self__, "force_update", force_update)
+            _setter("force_update", force_update)
         if keyring is not None:
-            pulumi.set(__self__, "keyring", keyring)
+            _setter("keyring", keyring)
         if lint is not None:
-            pulumi.set(__self__, "lint", lint)
+            _setter("lint", lint)
         if manifest is not None:
-            pulumi.set(__self__, "manifest", manifest)
+            _setter("manifest", manifest)
         if max_history is not None:
-            pulumi.set(__self__, "max_history", max_history)
+            _setter("max_history", max_history)
         if name is not None:
-            pulumi.set(__self__, "name", name)
+            _setter("name", name)
         if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
+            _setter("namespace", namespace)
         if postrender is not None:
-            pulumi.set(__self__, "postrender", postrender)
+            _setter("postrender", postrender)
         if recreate_pods is not None:
-            pulumi.set(__self__, "recreate_pods", recreate_pods)
+            _setter("recreate_pods", recreate_pods)
         if render_subchart_notes is not None:
-            pulumi.set(__self__, "render_subchart_notes", render_subchart_notes)
+            _setter("render_subchart_notes", render_subchart_notes)
         if replace is not None:
-            pulumi.set(__self__, "replace", replace)
+            _setter("replace", replace)
         if repository_opts is not None:
-            pulumi.set(__self__, "repository_opts", repository_opts)
+            _setter("repository_opts", repository_opts)
         if reset_values is not None:
-            pulumi.set(__self__, "reset_values", reset_values)
+            _setter("reset_values", reset_values)
         if resource_names is not None:
-            pulumi.set(__self__, "resource_names", resource_names)
+            _setter("resource_names", resource_names)
         if reuse_values is not None:
-            pulumi.set(__self__, "reuse_values", reuse_values)
+            _setter("reuse_values", reuse_values)
         if skip_await is not None:
-            pulumi.set(__self__, "skip_await", skip_await)
+            _setter("skip_await", skip_await)
         if skip_crds is not None:
-            pulumi.set(__self__, "skip_crds", skip_crds)
+            _setter("skip_crds", skip_crds)
         if timeout is not None:
-            pulumi.set(__self__, "timeout", timeout)
+            _setter("timeout", timeout)
         if value_yaml_files is not None:
-            pulumi.set(__self__, "value_yaml_files", value_yaml_files)
+            _setter("value_yaml_files", value_yaml_files)
         if values is not None:
-            pulumi.set(__self__, "values", values)
+            _setter("values", values)
         if verify is not None:
-            pulumi.set(__self__, "verify", verify)
+            _setter("verify", verify)
         if version is not None:
-            pulumi.set(__self__, "version", version)
+            _setter("version", version)
         if wait_for_jobs is not None:
-            pulumi.set(__self__, "wait_for_jobs", wait_for_jobs)
+            _setter("wait_for_jobs", wait_for_jobs)
 
     @property
     @pulumi.getter
@@ -4205,18 +5069,37 @@ class RepositoryOptsArgs:
         :param pulumi.Input[str] repo: Repository where to locate the requested chart. If is a URL the chart is installed without installing the repository.
         :param pulumi.Input[str] username: Username for HTTP basic authentication
         """
+        RepositoryOptsArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            ca_file=ca_file,
+            cert_file=cert_file,
+            key_file=key_file,
+            password=password,
+            repo=repo,
+            username=username,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             ca_file: Optional[pulumi.Input[str]] = None,
+             cert_file: Optional[pulumi.Input[str]] = None,
+             key_file: Optional[pulumi.Input[str]] = None,
+             password: Optional[pulumi.Input[str]] = None,
+             repo: Optional[pulumi.Input[str]] = None,
+             username: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if ca_file is not None:
-            pulumi.set(__self__, "ca_file", ca_file)
+            _setter("ca_file", ca_file)
         if cert_file is not None:
-            pulumi.set(__self__, "cert_file", cert_file)
+            _setter("cert_file", cert_file)
         if key_file is not None:
-            pulumi.set(__self__, "key_file", key_file)
+            _setter("key_file", key_file)
         if password is not None:
-            pulumi.set(__self__, "password", password)
+            _setter("password", password)
         if repo is not None:
-            pulumi.set(__self__, "repo", repo)
+            _setter("repo", repo)
         if username is not None:
-            pulumi.set(__self__, "username", username)
+            _setter("username", username)
 
     @property
     @pulumi.getter(name="caFile")
