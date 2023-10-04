@@ -1,3 +1,4 @@
+project_name: pulumi-kubernetes-ingress-nginx
 archives:
   - id: archive
     name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
