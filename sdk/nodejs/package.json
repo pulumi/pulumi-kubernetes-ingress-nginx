@@ -16,7 +16,7 @@
         "@pulumi/kubernetes": "^3.7.1"
     },
     "devDependencies": {
-        "typescript": "^3.7.0"
+        "typescript": "^5.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
