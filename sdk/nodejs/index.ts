@@ -5,8 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export * from "./ingressController";
-export * from "./provider";
+export { IngressControllerArgs } from "./ingressController";
+export type IngressController = import("./ingressController").IngressController;
+export const IngressController: typeof import("./ingressController").IngressController = null as any;
+utilities.lazyLoad(exports, ["IngressController"], () => require("./ingressController"));
+
+export { ProviderArgs } from "./provider";
+export type Provider = import("./provider").Provider;
+export const Provider: typeof import("./provider").Provider = null as any;
+utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+
 
 // Export sub-modules:
 import * as types from "./types";
@@ -14,9 +22,6 @@ import * as types from "./types";
 export {
     types,
 };
-
-// Import resources to register:
-import { IngressController } from "./ingressController";
 
 const _module = {
     version: utilities.getVersion(),
@@ -30,9 +35,6 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("kubernetes-ingress-nginx", "index", _module)
-
-import { Provider } from "./provider";
-
 pulumi.runtime.registerResourcePackage("kubernetes-ingress-nginx", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
