@@ -7,9 +7,13 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk/go/kubernetes-ingress-nginx/internal"
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/core/v1"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type Autoscaling struct {
 	Annotations                       map[string]string    `pulumi:"annotations"`
@@ -24,7 +28,7 @@ type Autoscaling struct {
 // AutoscalingInput is an input type that accepts AutoscalingArgs and AutoscalingOutput values.
 // You can construct a concrete instance of `AutoscalingInput` via:
 //
-//          AutoscalingArgs{...}
+//	AutoscalingArgs{...}
 type AutoscalingInput interface {
 	pulumi.Input
 
@@ -54,6 +58,12 @@ func (i AutoscalingArgs) ToAutoscalingOutputWithContext(ctx context.Context) Aut
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingOutput)
 }
 
+func (i AutoscalingArgs) ToOutput(ctx context.Context) pulumix.Output[Autoscaling] {
+	return pulumix.Output[Autoscaling]{
+		OutputState: i.ToAutoscalingOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i AutoscalingArgs) ToAutoscalingPtrOutput() AutoscalingPtrOutput {
 	return i.ToAutoscalingPtrOutputWithContext(context.Background())
 }
@@ -65,11 +75,11 @@ func (i AutoscalingArgs) ToAutoscalingPtrOutputWithContext(ctx context.Context) 
 // AutoscalingPtrInput is an input type that accepts AutoscalingArgs, AutoscalingPtr and AutoscalingPtrOutput values.
 // You can construct a concrete instance of `AutoscalingPtrInput` via:
 //
-//          AutoscalingArgs{...}
+//	        AutoscalingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AutoscalingPtrInput interface {
 	pulumi.Input
 
@@ -95,6 +105,12 @@ func (i *autoscalingPtrType) ToAutoscalingPtrOutputWithContext(ctx context.Conte
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingPtrOutput)
 }
 
+func (i *autoscalingPtrType) ToOutput(ctx context.Context) pulumix.Output[*Autoscaling] {
+	return pulumix.Output[*Autoscaling]{
+		OutputState: i.ToAutoscalingPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type AutoscalingOutput struct{ *pulumi.OutputState }
 
 func (AutoscalingOutput) ElementType() reflect.Type {
@@ -117,6 +133,12 @@ func (o AutoscalingOutput) ToAutoscalingPtrOutputWithContext(ctx context.Context
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v Autoscaling) *Autoscaling {
 		return &v
 	}).(AutoscalingPtrOutput)
+}
+
+func (o AutoscalingOutput) ToOutput(ctx context.Context) pulumix.Output[Autoscaling] {
+	return pulumix.Output[Autoscaling]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o AutoscalingOutput) Annotations() pulumi.StringMapOutput {
@@ -159,6 +181,12 @@ func (o AutoscalingPtrOutput) ToAutoscalingPtrOutput() AutoscalingPtrOutput {
 
 func (o AutoscalingPtrOutput) ToAutoscalingPtrOutputWithContext(ctx context.Context) AutoscalingPtrOutput {
 	return o
+}
+
+func (o AutoscalingPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Autoscaling] {
+	return pulumix.Output[*Autoscaling]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o AutoscalingPtrOutput) Elem() AutoscalingOutput {
@@ -242,7 +270,7 @@ type AutoscalingBehavior struct {
 // AutoscalingBehaviorInput is an input type that accepts AutoscalingBehaviorArgs and AutoscalingBehaviorOutput values.
 // You can construct a concrete instance of `AutoscalingBehaviorInput` via:
 //
-//          AutoscalingBehaviorArgs{...}
+//	AutoscalingBehaviorArgs{...}
 type AutoscalingBehaviorInput interface {
 	pulumi.Input
 
@@ -267,6 +295,12 @@ func (i AutoscalingBehaviorArgs) ToAutoscalingBehaviorOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingBehaviorOutput)
 }
 
+func (i AutoscalingBehaviorArgs) ToOutput(ctx context.Context) pulumix.Output[AutoscalingBehavior] {
+	return pulumix.Output[AutoscalingBehavior]{
+		OutputState: i.ToAutoscalingBehaviorOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i AutoscalingBehaviorArgs) ToAutoscalingBehaviorPtrOutput() AutoscalingBehaviorPtrOutput {
 	return i.ToAutoscalingBehaviorPtrOutputWithContext(context.Background())
 }
@@ -278,11 +312,11 @@ func (i AutoscalingBehaviorArgs) ToAutoscalingBehaviorPtrOutputWithContext(ctx c
 // AutoscalingBehaviorPtrInput is an input type that accepts AutoscalingBehaviorArgs, AutoscalingBehaviorPtr and AutoscalingBehaviorPtrOutput values.
 // You can construct a concrete instance of `AutoscalingBehaviorPtrInput` via:
 //
-//          AutoscalingBehaviorArgs{...}
+//	        AutoscalingBehaviorArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AutoscalingBehaviorPtrInput interface {
 	pulumi.Input
 
@@ -306,6 +340,12 @@ func (i *autoscalingBehaviorPtrType) ToAutoscalingBehaviorPtrOutput() Autoscalin
 
 func (i *autoscalingBehaviorPtrType) ToAutoscalingBehaviorPtrOutputWithContext(ctx context.Context) AutoscalingBehaviorPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingBehaviorPtrOutput)
+}
+
+func (i *autoscalingBehaviorPtrType) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingBehavior] {
+	return pulumix.Output[*AutoscalingBehavior]{
+		OutputState: i.ToAutoscalingBehaviorPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type AutoscalingBehaviorOutput struct{ *pulumi.OutputState }
@@ -332,6 +372,12 @@ func (o AutoscalingBehaviorOutput) ToAutoscalingBehaviorPtrOutputWithContext(ctx
 	}).(AutoscalingBehaviorPtrOutput)
 }
 
+func (o AutoscalingBehaviorOutput) ToOutput(ctx context.Context) pulumix.Output[AutoscalingBehavior] {
+	return pulumix.Output[AutoscalingBehavior]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o AutoscalingBehaviorOutput) ScaleDown() AutoscalingBehaviorScalingPtrOutput {
 	return o.ApplyT(func(v AutoscalingBehavior) *AutoscalingBehaviorScaling { return v.ScaleDown }).(AutoscalingBehaviorScalingPtrOutput)
 }
@@ -352,6 +398,12 @@ func (o AutoscalingBehaviorPtrOutput) ToAutoscalingBehaviorPtrOutput() Autoscali
 
 func (o AutoscalingBehaviorPtrOutput) ToAutoscalingBehaviorPtrOutputWithContext(ctx context.Context) AutoscalingBehaviorPtrOutput {
 	return o
+}
+
+func (o AutoscalingBehaviorPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingBehavior] {
+	return pulumix.Output[*AutoscalingBehavior]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o AutoscalingBehaviorPtrOutput) Elem() AutoscalingBehaviorOutput {
@@ -390,7 +442,7 @@ type AutoscalingBehaviorScaling struct {
 // AutoscalingBehaviorScalingInput is an input type that accepts AutoscalingBehaviorScalingArgs and AutoscalingBehaviorScalingOutput values.
 // You can construct a concrete instance of `AutoscalingBehaviorScalingInput` via:
 //
-//          AutoscalingBehaviorScalingArgs{...}
+//	AutoscalingBehaviorScalingArgs{...}
 type AutoscalingBehaviorScalingInput interface {
 	pulumi.Input
 
@@ -415,6 +467,12 @@ func (i AutoscalingBehaviorScalingArgs) ToAutoscalingBehaviorScalingOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingBehaviorScalingOutput)
 }
 
+func (i AutoscalingBehaviorScalingArgs) ToOutput(ctx context.Context) pulumix.Output[AutoscalingBehaviorScaling] {
+	return pulumix.Output[AutoscalingBehaviorScaling]{
+		OutputState: i.ToAutoscalingBehaviorScalingOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i AutoscalingBehaviorScalingArgs) ToAutoscalingBehaviorScalingPtrOutput() AutoscalingBehaviorScalingPtrOutput {
 	return i.ToAutoscalingBehaviorScalingPtrOutputWithContext(context.Background())
 }
@@ -426,11 +484,11 @@ func (i AutoscalingBehaviorScalingArgs) ToAutoscalingBehaviorScalingPtrOutputWit
 // AutoscalingBehaviorScalingPtrInput is an input type that accepts AutoscalingBehaviorScalingArgs, AutoscalingBehaviorScalingPtr and AutoscalingBehaviorScalingPtrOutput values.
 // You can construct a concrete instance of `AutoscalingBehaviorScalingPtrInput` via:
 //
-//          AutoscalingBehaviorScalingArgs{...}
+//	        AutoscalingBehaviorScalingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AutoscalingBehaviorScalingPtrInput interface {
 	pulumi.Input
 
@@ -454,6 +512,12 @@ func (i *autoscalingBehaviorScalingPtrType) ToAutoscalingBehaviorScalingPtrOutpu
 
 func (i *autoscalingBehaviorScalingPtrType) ToAutoscalingBehaviorScalingPtrOutputWithContext(ctx context.Context) AutoscalingBehaviorScalingPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingBehaviorScalingPtrOutput)
+}
+
+func (i *autoscalingBehaviorScalingPtrType) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingBehaviorScaling] {
+	return pulumix.Output[*AutoscalingBehaviorScaling]{
+		OutputState: i.ToAutoscalingBehaviorScalingPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type AutoscalingBehaviorScalingOutput struct{ *pulumi.OutputState }
@@ -480,6 +544,12 @@ func (o AutoscalingBehaviorScalingOutput) ToAutoscalingBehaviorScalingPtrOutputW
 	}).(AutoscalingBehaviorScalingPtrOutput)
 }
 
+func (o AutoscalingBehaviorScalingOutput) ToOutput(ctx context.Context) pulumix.Output[AutoscalingBehaviorScaling] {
+	return pulumix.Output[AutoscalingBehaviorScaling]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o AutoscalingBehaviorScalingOutput) Policies() AutoscalingBehaviorScalingPolicyArrayOutput {
 	return o.ApplyT(func(v AutoscalingBehaviorScaling) []AutoscalingBehaviorScalingPolicy { return v.Policies }).(AutoscalingBehaviorScalingPolicyArrayOutput)
 }
@@ -500,6 +570,12 @@ func (o AutoscalingBehaviorScalingPtrOutput) ToAutoscalingBehaviorScalingPtrOutp
 
 func (o AutoscalingBehaviorScalingPtrOutput) ToAutoscalingBehaviorScalingPtrOutputWithContext(ctx context.Context) AutoscalingBehaviorScalingPtrOutput {
 	return o
+}
+
+func (o AutoscalingBehaviorScalingPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingBehaviorScaling] {
+	return pulumix.Output[*AutoscalingBehaviorScaling]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o AutoscalingBehaviorScalingPtrOutput) Elem() AutoscalingBehaviorScalingOutput {
@@ -539,7 +615,7 @@ type AutoscalingBehaviorScalingPolicy struct {
 // AutoscalingBehaviorScalingPolicyInput is an input type that accepts AutoscalingBehaviorScalingPolicyArgs and AutoscalingBehaviorScalingPolicyOutput values.
 // You can construct a concrete instance of `AutoscalingBehaviorScalingPolicyInput` via:
 //
-//          AutoscalingBehaviorScalingPolicyArgs{...}
+//	AutoscalingBehaviorScalingPolicyArgs{...}
 type AutoscalingBehaviorScalingPolicyInput interface {
 	pulumi.Input
 
@@ -565,10 +641,16 @@ func (i AutoscalingBehaviorScalingPolicyArgs) ToAutoscalingBehaviorScalingPolicy
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingBehaviorScalingPolicyOutput)
 }
 
+func (i AutoscalingBehaviorScalingPolicyArgs) ToOutput(ctx context.Context) pulumix.Output[AutoscalingBehaviorScalingPolicy] {
+	return pulumix.Output[AutoscalingBehaviorScalingPolicy]{
+		OutputState: i.ToAutoscalingBehaviorScalingPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 // AutoscalingBehaviorScalingPolicyArrayInput is an input type that accepts AutoscalingBehaviorScalingPolicyArray and AutoscalingBehaviorScalingPolicyArrayOutput values.
 // You can construct a concrete instance of `AutoscalingBehaviorScalingPolicyArrayInput` via:
 //
-//          AutoscalingBehaviorScalingPolicyArray{ AutoscalingBehaviorScalingPolicyArgs{...} }
+//	AutoscalingBehaviorScalingPolicyArray{ AutoscalingBehaviorScalingPolicyArgs{...} }
 type AutoscalingBehaviorScalingPolicyArrayInput interface {
 	pulumi.Input
 
@@ -590,6 +672,12 @@ func (i AutoscalingBehaviorScalingPolicyArray) ToAutoscalingBehaviorScalingPolic
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingBehaviorScalingPolicyArrayOutput)
 }
 
+func (i AutoscalingBehaviorScalingPolicyArray) ToOutput(ctx context.Context) pulumix.Output[[]AutoscalingBehaviorScalingPolicy] {
+	return pulumix.Output[[]AutoscalingBehaviorScalingPolicy]{
+		OutputState: i.ToAutoscalingBehaviorScalingPolicyArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type AutoscalingBehaviorScalingPolicyOutput struct{ *pulumi.OutputState }
 
 func (AutoscalingBehaviorScalingPolicyOutput) ElementType() reflect.Type {
@@ -602,6 +690,12 @@ func (o AutoscalingBehaviorScalingPolicyOutput) ToAutoscalingBehaviorScalingPoli
 
 func (o AutoscalingBehaviorScalingPolicyOutput) ToAutoscalingBehaviorScalingPolicyOutputWithContext(ctx context.Context) AutoscalingBehaviorScalingPolicyOutput {
 	return o
+}
+
+func (o AutoscalingBehaviorScalingPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[AutoscalingBehaviorScalingPolicy] {
+	return pulumix.Output[AutoscalingBehaviorScalingPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o AutoscalingBehaviorScalingPolicyOutput) PeriodSeconds() pulumi.IntPtrOutput {
@@ -630,6 +724,12 @@ func (o AutoscalingBehaviorScalingPolicyArrayOutput) ToAutoscalingBehaviorScalin
 	return o
 }
 
+func (o AutoscalingBehaviorScalingPolicyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]AutoscalingBehaviorScalingPolicy] {
+	return pulumix.Output[[]AutoscalingBehaviorScalingPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o AutoscalingBehaviorScalingPolicyArrayOutput) Index(i pulumi.IntInput) AutoscalingBehaviorScalingPolicyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AutoscalingBehaviorScalingPolicy {
 		return vs[0].([]AutoscalingBehaviorScalingPolicy)[vs[1].(int)]
@@ -644,7 +744,7 @@ type AutoscalingTemplate struct {
 // AutoscalingTemplateInput is an input type that accepts AutoscalingTemplateArgs and AutoscalingTemplateOutput values.
 // You can construct a concrete instance of `AutoscalingTemplateInput` via:
 //
-//          AutoscalingTemplateArgs{...}
+//	AutoscalingTemplateArgs{...}
 type AutoscalingTemplateInput interface {
 	pulumi.Input
 
@@ -669,10 +769,16 @@ func (i AutoscalingTemplateArgs) ToAutoscalingTemplateOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingTemplateOutput)
 }
 
+func (i AutoscalingTemplateArgs) ToOutput(ctx context.Context) pulumix.Output[AutoscalingTemplate] {
+	return pulumix.Output[AutoscalingTemplate]{
+		OutputState: i.ToAutoscalingTemplateOutputWithContext(ctx).OutputState,
+	}
+}
+
 // AutoscalingTemplateArrayInput is an input type that accepts AutoscalingTemplateArray and AutoscalingTemplateArrayOutput values.
 // You can construct a concrete instance of `AutoscalingTemplateArrayInput` via:
 //
-//          AutoscalingTemplateArray{ AutoscalingTemplateArgs{...} }
+//	AutoscalingTemplateArray{ AutoscalingTemplateArgs{...} }
 type AutoscalingTemplateArrayInput interface {
 	pulumi.Input
 
@@ -694,6 +800,12 @@ func (i AutoscalingTemplateArray) ToAutoscalingTemplateArrayOutputWithContext(ct
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingTemplateArrayOutput)
 }
 
+func (i AutoscalingTemplateArray) ToOutput(ctx context.Context) pulumix.Output[[]AutoscalingTemplate] {
+	return pulumix.Output[[]AutoscalingTemplate]{
+		OutputState: i.ToAutoscalingTemplateArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type AutoscalingTemplateOutput struct{ *pulumi.OutputState }
 
 func (AutoscalingTemplateOutput) ElementType() reflect.Type {
@@ -706,6 +818,12 @@ func (o AutoscalingTemplateOutput) ToAutoscalingTemplateOutput() AutoscalingTemp
 
 func (o AutoscalingTemplateOutput) ToAutoscalingTemplateOutputWithContext(ctx context.Context) AutoscalingTemplateOutput {
 	return o
+}
+
+func (o AutoscalingTemplateOutput) ToOutput(ctx context.Context) pulumix.Output[AutoscalingTemplate] {
+	return pulumix.Output[AutoscalingTemplate]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o AutoscalingTemplateOutput) Pods() AutoscalingTemplatePodsPtrOutput {
@@ -730,6 +848,12 @@ func (o AutoscalingTemplateArrayOutput) ToAutoscalingTemplateArrayOutputWithCont
 	return o
 }
 
+func (o AutoscalingTemplateArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]AutoscalingTemplate] {
+	return pulumix.Output[[]AutoscalingTemplate]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o AutoscalingTemplateArrayOutput) Index(i pulumi.IntInput) AutoscalingTemplateOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AutoscalingTemplate {
 		return vs[0].([]AutoscalingTemplate)[vs[1].(int)]
@@ -744,7 +868,7 @@ type AutoscalingTemplatePods struct {
 // AutoscalingTemplatePodsInput is an input type that accepts AutoscalingTemplatePodsArgs and AutoscalingTemplatePodsOutput values.
 // You can construct a concrete instance of `AutoscalingTemplatePodsInput` via:
 //
-//          AutoscalingTemplatePodsArgs{...}
+//	AutoscalingTemplatePodsArgs{...}
 type AutoscalingTemplatePodsInput interface {
 	pulumi.Input
 
@@ -769,6 +893,12 @@ func (i AutoscalingTemplatePodsArgs) ToAutoscalingTemplatePodsOutputWithContext(
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingTemplatePodsOutput)
 }
 
+func (i AutoscalingTemplatePodsArgs) ToOutput(ctx context.Context) pulumix.Output[AutoscalingTemplatePods] {
+	return pulumix.Output[AutoscalingTemplatePods]{
+		OutputState: i.ToAutoscalingTemplatePodsOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i AutoscalingTemplatePodsArgs) ToAutoscalingTemplatePodsPtrOutput() AutoscalingTemplatePodsPtrOutput {
 	return i.ToAutoscalingTemplatePodsPtrOutputWithContext(context.Background())
 }
@@ -780,11 +910,11 @@ func (i AutoscalingTemplatePodsArgs) ToAutoscalingTemplatePodsPtrOutputWithConte
 // AutoscalingTemplatePodsPtrInput is an input type that accepts AutoscalingTemplatePodsArgs, AutoscalingTemplatePodsPtr and AutoscalingTemplatePodsPtrOutput values.
 // You can construct a concrete instance of `AutoscalingTemplatePodsPtrInput` via:
 //
-//          AutoscalingTemplatePodsArgs{...}
+//	        AutoscalingTemplatePodsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AutoscalingTemplatePodsPtrInput interface {
 	pulumi.Input
 
@@ -808,6 +938,12 @@ func (i *autoscalingTemplatePodsPtrType) ToAutoscalingTemplatePodsPtrOutput() Au
 
 func (i *autoscalingTemplatePodsPtrType) ToAutoscalingTemplatePodsPtrOutputWithContext(ctx context.Context) AutoscalingTemplatePodsPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingTemplatePodsPtrOutput)
+}
+
+func (i *autoscalingTemplatePodsPtrType) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingTemplatePods] {
+	return pulumix.Output[*AutoscalingTemplatePods]{
+		OutputState: i.ToAutoscalingTemplatePodsPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type AutoscalingTemplatePodsOutput struct{ *pulumi.OutputState }
@@ -834,6 +970,12 @@ func (o AutoscalingTemplatePodsOutput) ToAutoscalingTemplatePodsPtrOutputWithCon
 	}).(AutoscalingTemplatePodsPtrOutput)
 }
 
+func (o AutoscalingTemplatePodsOutput) ToOutput(ctx context.Context) pulumix.Output[AutoscalingTemplatePods] {
+	return pulumix.Output[AutoscalingTemplatePods]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o AutoscalingTemplatePodsOutput) Metric() AutoscalingTemplatePodsMetricPtrOutput {
 	return o.ApplyT(func(v AutoscalingTemplatePods) *AutoscalingTemplatePodsMetric { return v.Metric }).(AutoscalingTemplatePodsMetricPtrOutput)
 }
@@ -854,6 +996,12 @@ func (o AutoscalingTemplatePodsPtrOutput) ToAutoscalingTemplatePodsPtrOutput() A
 
 func (o AutoscalingTemplatePodsPtrOutput) ToAutoscalingTemplatePodsPtrOutputWithContext(ctx context.Context) AutoscalingTemplatePodsPtrOutput {
 	return o
+}
+
+func (o AutoscalingTemplatePodsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingTemplatePods] {
+	return pulumix.Output[*AutoscalingTemplatePods]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o AutoscalingTemplatePodsPtrOutput) Elem() AutoscalingTemplatePodsOutput {
@@ -891,7 +1039,7 @@ type AutoscalingTemplatePodsMetric struct {
 // AutoscalingTemplatePodsMetricInput is an input type that accepts AutoscalingTemplatePodsMetricArgs and AutoscalingTemplatePodsMetricOutput values.
 // You can construct a concrete instance of `AutoscalingTemplatePodsMetricInput` via:
 //
-//          AutoscalingTemplatePodsMetricArgs{...}
+//	AutoscalingTemplatePodsMetricArgs{...}
 type AutoscalingTemplatePodsMetricInput interface {
 	pulumi.Input
 
@@ -915,6 +1063,12 @@ func (i AutoscalingTemplatePodsMetricArgs) ToAutoscalingTemplatePodsMetricOutput
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingTemplatePodsMetricOutput)
 }
 
+func (i AutoscalingTemplatePodsMetricArgs) ToOutput(ctx context.Context) pulumix.Output[AutoscalingTemplatePodsMetric] {
+	return pulumix.Output[AutoscalingTemplatePodsMetric]{
+		OutputState: i.ToAutoscalingTemplatePodsMetricOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i AutoscalingTemplatePodsMetricArgs) ToAutoscalingTemplatePodsMetricPtrOutput() AutoscalingTemplatePodsMetricPtrOutput {
 	return i.ToAutoscalingTemplatePodsMetricPtrOutputWithContext(context.Background())
 }
@@ -926,11 +1080,11 @@ func (i AutoscalingTemplatePodsMetricArgs) ToAutoscalingTemplatePodsMetricPtrOut
 // AutoscalingTemplatePodsMetricPtrInput is an input type that accepts AutoscalingTemplatePodsMetricArgs, AutoscalingTemplatePodsMetricPtr and AutoscalingTemplatePodsMetricPtrOutput values.
 // You can construct a concrete instance of `AutoscalingTemplatePodsMetricPtrInput` via:
 //
-//          AutoscalingTemplatePodsMetricArgs{...}
+//	        AutoscalingTemplatePodsMetricArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AutoscalingTemplatePodsMetricPtrInput interface {
 	pulumi.Input
 
@@ -954,6 +1108,12 @@ func (i *autoscalingTemplatePodsMetricPtrType) ToAutoscalingTemplatePodsMetricPt
 
 func (i *autoscalingTemplatePodsMetricPtrType) ToAutoscalingTemplatePodsMetricPtrOutputWithContext(ctx context.Context) AutoscalingTemplatePodsMetricPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingTemplatePodsMetricPtrOutput)
+}
+
+func (i *autoscalingTemplatePodsMetricPtrType) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingTemplatePodsMetric] {
+	return pulumix.Output[*AutoscalingTemplatePodsMetric]{
+		OutputState: i.ToAutoscalingTemplatePodsMetricPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type AutoscalingTemplatePodsMetricOutput struct{ *pulumi.OutputState }
@@ -980,6 +1140,12 @@ func (o AutoscalingTemplatePodsMetricOutput) ToAutoscalingTemplatePodsMetricPtrO
 	}).(AutoscalingTemplatePodsMetricPtrOutput)
 }
 
+func (o AutoscalingTemplatePodsMetricOutput) ToOutput(ctx context.Context) pulumix.Output[AutoscalingTemplatePodsMetric] {
+	return pulumix.Output[AutoscalingTemplatePodsMetric]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o AutoscalingTemplatePodsMetricOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutoscalingTemplatePodsMetric) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
@@ -996,6 +1162,12 @@ func (o AutoscalingTemplatePodsMetricPtrOutput) ToAutoscalingTemplatePodsMetricP
 
 func (o AutoscalingTemplatePodsMetricPtrOutput) ToAutoscalingTemplatePodsMetricPtrOutputWithContext(ctx context.Context) AutoscalingTemplatePodsMetricPtrOutput {
 	return o
+}
+
+func (o AutoscalingTemplatePodsMetricPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingTemplatePodsMetric] {
+	return pulumix.Output[*AutoscalingTemplatePodsMetric]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o AutoscalingTemplatePodsMetricPtrOutput) Elem() AutoscalingTemplatePodsMetricOutput {
@@ -1025,7 +1197,7 @@ type AutoscalingTemplatePodsTarget struct {
 // AutoscalingTemplatePodsTargetInput is an input type that accepts AutoscalingTemplatePodsTargetArgs and AutoscalingTemplatePodsTargetOutput values.
 // You can construct a concrete instance of `AutoscalingTemplatePodsTargetInput` via:
 //
-//          AutoscalingTemplatePodsTargetArgs{...}
+//	AutoscalingTemplatePodsTargetArgs{...}
 type AutoscalingTemplatePodsTargetInput interface {
 	pulumi.Input
 
@@ -1050,6 +1222,12 @@ func (i AutoscalingTemplatePodsTargetArgs) ToAutoscalingTemplatePodsTargetOutput
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingTemplatePodsTargetOutput)
 }
 
+func (i AutoscalingTemplatePodsTargetArgs) ToOutput(ctx context.Context) pulumix.Output[AutoscalingTemplatePodsTarget] {
+	return pulumix.Output[AutoscalingTemplatePodsTarget]{
+		OutputState: i.ToAutoscalingTemplatePodsTargetOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i AutoscalingTemplatePodsTargetArgs) ToAutoscalingTemplatePodsTargetPtrOutput() AutoscalingTemplatePodsTargetPtrOutput {
 	return i.ToAutoscalingTemplatePodsTargetPtrOutputWithContext(context.Background())
 }
@@ -1061,11 +1239,11 @@ func (i AutoscalingTemplatePodsTargetArgs) ToAutoscalingTemplatePodsTargetPtrOut
 // AutoscalingTemplatePodsTargetPtrInput is an input type that accepts AutoscalingTemplatePodsTargetArgs, AutoscalingTemplatePodsTargetPtr and AutoscalingTemplatePodsTargetPtrOutput values.
 // You can construct a concrete instance of `AutoscalingTemplatePodsTargetPtrInput` via:
 //
-//          AutoscalingTemplatePodsTargetArgs{...}
+//	        AutoscalingTemplatePodsTargetArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AutoscalingTemplatePodsTargetPtrInput interface {
 	pulumi.Input
 
@@ -1089,6 +1267,12 @@ func (i *autoscalingTemplatePodsTargetPtrType) ToAutoscalingTemplatePodsTargetPt
 
 func (i *autoscalingTemplatePodsTargetPtrType) ToAutoscalingTemplatePodsTargetPtrOutputWithContext(ctx context.Context) AutoscalingTemplatePodsTargetPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(AutoscalingTemplatePodsTargetPtrOutput)
+}
+
+func (i *autoscalingTemplatePodsTargetPtrType) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingTemplatePodsTarget] {
+	return pulumix.Output[*AutoscalingTemplatePodsTarget]{
+		OutputState: i.ToAutoscalingTemplatePodsTargetPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type AutoscalingTemplatePodsTargetOutput struct{ *pulumi.OutputState }
@@ -1115,6 +1299,12 @@ func (o AutoscalingTemplatePodsTargetOutput) ToAutoscalingTemplatePodsTargetPtrO
 	}).(AutoscalingTemplatePodsTargetPtrOutput)
 }
 
+func (o AutoscalingTemplatePodsTargetOutput) ToOutput(ctx context.Context) pulumix.Output[AutoscalingTemplatePodsTarget] {
+	return pulumix.Output[AutoscalingTemplatePodsTarget]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o AutoscalingTemplatePodsTargetOutput) AverageValue() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AutoscalingTemplatePodsTarget) *string { return v.AverageValue }).(pulumi.StringPtrOutput)
 }
@@ -1135,6 +1325,12 @@ func (o AutoscalingTemplatePodsTargetPtrOutput) ToAutoscalingTemplatePodsTargetP
 
 func (o AutoscalingTemplatePodsTargetPtrOutput) ToAutoscalingTemplatePodsTargetPtrOutputWithContext(ctx context.Context) AutoscalingTemplatePodsTargetPtrOutput {
 	return o
+}
+
+func (o AutoscalingTemplatePodsTargetPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*AutoscalingTemplatePodsTarget] {
+	return pulumix.Output[*AutoscalingTemplatePodsTarget]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o AutoscalingTemplatePodsTargetPtrOutput) Elem() AutoscalingTemplatePodsTargetOutput {
@@ -1186,7 +1382,7 @@ type ContollerAdmissionWebhooks struct {
 // ContollerAdmissionWebhooksInput is an input type that accepts ContollerAdmissionWebhooksArgs and ContollerAdmissionWebhooksOutput values.
 // You can construct a concrete instance of `ContollerAdmissionWebhooksInput` via:
 //
-//          ContollerAdmissionWebhooksArgs{...}
+//	ContollerAdmissionWebhooksArgs{...}
 type ContollerAdmissionWebhooksInput interface {
 	pulumi.Input
 
@@ -1224,6 +1420,12 @@ func (i ContollerAdmissionWebhooksArgs) ToContollerAdmissionWebhooksOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(ContollerAdmissionWebhooksOutput)
 }
 
+func (i ContollerAdmissionWebhooksArgs) ToOutput(ctx context.Context) pulumix.Output[ContollerAdmissionWebhooks] {
+	return pulumix.Output[ContollerAdmissionWebhooks]{
+		OutputState: i.ToContollerAdmissionWebhooksOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ContollerAdmissionWebhooksArgs) ToContollerAdmissionWebhooksPtrOutput() ContollerAdmissionWebhooksPtrOutput {
 	return i.ToContollerAdmissionWebhooksPtrOutputWithContext(context.Background())
 }
@@ -1235,11 +1437,11 @@ func (i ContollerAdmissionWebhooksArgs) ToContollerAdmissionWebhooksPtrOutputWit
 // ContollerAdmissionWebhooksPtrInput is an input type that accepts ContollerAdmissionWebhooksArgs, ContollerAdmissionWebhooksPtr and ContollerAdmissionWebhooksPtrOutput values.
 // You can construct a concrete instance of `ContollerAdmissionWebhooksPtrInput` via:
 //
-//          ContollerAdmissionWebhooksArgs{...}
+//	        ContollerAdmissionWebhooksArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ContollerAdmissionWebhooksPtrInput interface {
 	pulumi.Input
 
@@ -1265,6 +1467,12 @@ func (i *contollerAdmissionWebhooksPtrType) ToContollerAdmissionWebhooksPtrOutpu
 	return pulumi.ToOutputWithContext(ctx, i).(ContollerAdmissionWebhooksPtrOutput)
 }
 
+func (i *contollerAdmissionWebhooksPtrType) ToOutput(ctx context.Context) pulumix.Output[*ContollerAdmissionWebhooks] {
+	return pulumix.Output[*ContollerAdmissionWebhooks]{
+		OutputState: i.ToContollerAdmissionWebhooksPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ContollerAdmissionWebhooksOutput struct{ *pulumi.OutputState }
 
 func (ContollerAdmissionWebhooksOutput) ElementType() reflect.Type {
@@ -1287,6 +1495,12 @@ func (o ContollerAdmissionWebhooksOutput) ToContollerAdmissionWebhooksPtrOutputW
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ContollerAdmissionWebhooks) *ContollerAdmissionWebhooks {
 		return &v
 	}).(ContollerAdmissionWebhooksPtrOutput)
+}
+
+func (o ContollerAdmissionWebhooksOutput) ToOutput(ctx context.Context) pulumix.Output[ContollerAdmissionWebhooks] {
+	return pulumix.Output[ContollerAdmissionWebhooks]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ContollerAdmissionWebhooksOutput) Annotations() pulumi.StringMapMapOutput {
@@ -1362,6 +1576,12 @@ func (o ContollerAdmissionWebhooksPtrOutput) ToContollerAdmissionWebhooksPtrOutp
 
 func (o ContollerAdmissionWebhooksPtrOutput) ToContollerAdmissionWebhooksPtrOutputWithContext(ctx context.Context) ContollerAdmissionWebhooksPtrOutput {
 	return o
+}
+
+func (o ContollerAdmissionWebhooksPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ContollerAdmissionWebhooks] {
+	return pulumix.Output[*ContollerAdmissionWebhooks]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ContollerAdmissionWebhooksPtrOutput) Elem() ContollerAdmissionWebhooksOutput {
@@ -1624,7 +1844,7 @@ type Controller struct {
 // ControllerInput is an input type that accepts ControllerArgs and ControllerOutput values.
 // You can construct a concrete instance of `ControllerInput` via:
 //
-//          ControllerArgs{...}
+//	ControllerArgs{...}
 type ControllerInput interface {
 	pulumi.Input
 
@@ -1764,6 +1984,12 @@ func (i ControllerArgs) ToControllerOutputWithContext(ctx context.Context) Contr
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerOutput)
 }
 
+func (i ControllerArgs) ToOutput(ctx context.Context) pulumix.Output[Controller] {
+	return pulumix.Output[Controller]{
+		OutputState: i.ToControllerOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerArgs) ToControllerPtrOutput() ControllerPtrOutput {
 	return i.ToControllerPtrOutputWithContext(context.Background())
 }
@@ -1775,11 +2001,11 @@ func (i ControllerArgs) ToControllerPtrOutputWithContext(ctx context.Context) Co
 // ControllerPtrInput is an input type that accepts ControllerArgs, ControllerPtr and ControllerPtrOutput values.
 // You can construct a concrete instance of `ControllerPtrInput` via:
 //
-//          ControllerArgs{...}
+//	        ControllerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerPtrInput interface {
 	pulumi.Input
 
@@ -1805,6 +2031,12 @@ func (i *controllerPtrType) ToControllerPtrOutputWithContext(ctx context.Context
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerPtrOutput)
 }
 
+func (i *controllerPtrType) ToOutput(ctx context.Context) pulumix.Output[*Controller] {
+	return pulumix.Output[*Controller]{
+		OutputState: i.ToControllerPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerOutput struct{ *pulumi.OutputState }
 
 func (ControllerOutput) ElementType() reflect.Type {
@@ -1827,6 +2059,12 @@ func (o ControllerOutput) ToControllerPtrOutputWithContext(ctx context.Context) 
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v Controller) *Controller {
 		return &v
 	}).(ControllerPtrOutput)
+}
+
+func (o ControllerOutput) ToOutput(ctx context.Context) pulumix.Output[Controller] {
+	return pulumix.Output[Controller]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers.
@@ -2147,6 +2385,12 @@ func (o ControllerPtrOutput) ToControllerPtrOutput() ControllerPtrOutput {
 
 func (o ControllerPtrOutput) ToControllerPtrOutputWithContext(ctx context.Context) ControllerPtrOutput {
 	return o
+}
+
+func (o ControllerPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Controller] {
+	return pulumix.Output[*Controller]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerPtrOutput) Elem() ControllerOutput {
@@ -2787,7 +3031,7 @@ type ControllerAdmissionWebhooksCreateSecretJob struct {
 // ControllerAdmissionWebhooksCreateSecretJobInput is an input type that accepts ControllerAdmissionWebhooksCreateSecretJobArgs and ControllerAdmissionWebhooksCreateSecretJobOutput values.
 // You can construct a concrete instance of `ControllerAdmissionWebhooksCreateSecretJobInput` via:
 //
-//          ControllerAdmissionWebhooksCreateSecretJobArgs{...}
+//	ControllerAdmissionWebhooksCreateSecretJobArgs{...}
 type ControllerAdmissionWebhooksCreateSecretJobInput interface {
 	pulumi.Input
 
@@ -2811,6 +3055,12 @@ func (i ControllerAdmissionWebhooksCreateSecretJobArgs) ToControllerAdmissionWeb
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerAdmissionWebhooksCreateSecretJobOutput)
 }
 
+func (i ControllerAdmissionWebhooksCreateSecretJobArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerAdmissionWebhooksCreateSecretJob] {
+	return pulumix.Output[ControllerAdmissionWebhooksCreateSecretJob]{
+		OutputState: i.ToControllerAdmissionWebhooksCreateSecretJobOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerAdmissionWebhooksCreateSecretJobArgs) ToControllerAdmissionWebhooksCreateSecretJobPtrOutput() ControllerAdmissionWebhooksCreateSecretJobPtrOutput {
 	return i.ToControllerAdmissionWebhooksCreateSecretJobPtrOutputWithContext(context.Background())
 }
@@ -2822,11 +3072,11 @@ func (i ControllerAdmissionWebhooksCreateSecretJobArgs) ToControllerAdmissionWeb
 // ControllerAdmissionWebhooksCreateSecretJobPtrInput is an input type that accepts ControllerAdmissionWebhooksCreateSecretJobArgs, ControllerAdmissionWebhooksCreateSecretJobPtr and ControllerAdmissionWebhooksCreateSecretJobPtrOutput values.
 // You can construct a concrete instance of `ControllerAdmissionWebhooksCreateSecretJobPtrInput` via:
 //
-//          ControllerAdmissionWebhooksCreateSecretJobArgs{...}
+//	        ControllerAdmissionWebhooksCreateSecretJobArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerAdmissionWebhooksCreateSecretJobPtrInput interface {
 	pulumi.Input
 
@@ -2850,6 +3100,12 @@ func (i *controllerAdmissionWebhooksCreateSecretJobPtrType) ToControllerAdmissio
 
 func (i *controllerAdmissionWebhooksCreateSecretJobPtrType) ToControllerAdmissionWebhooksCreateSecretJobPtrOutputWithContext(ctx context.Context) ControllerAdmissionWebhooksCreateSecretJobPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerAdmissionWebhooksCreateSecretJobPtrOutput)
+}
+
+func (i *controllerAdmissionWebhooksCreateSecretJobPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerAdmissionWebhooksCreateSecretJob] {
+	return pulumix.Output[*ControllerAdmissionWebhooksCreateSecretJob]{
+		OutputState: i.ToControllerAdmissionWebhooksCreateSecretJobPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerAdmissionWebhooksCreateSecretJobOutput struct{ *pulumi.OutputState }
@@ -2876,6 +3132,12 @@ func (o ControllerAdmissionWebhooksCreateSecretJobOutput) ToControllerAdmissionW
 	}).(ControllerAdmissionWebhooksCreateSecretJobPtrOutput)
 }
 
+func (o ControllerAdmissionWebhooksCreateSecretJobOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerAdmissionWebhooksCreateSecretJob] {
+	return pulumix.Output[ControllerAdmissionWebhooksCreateSecretJob]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerAdmissionWebhooksCreateSecretJobOutput) Resources() corev1.ResourceRequirementsPtrOutput {
 	return o.ApplyT(func(v ControllerAdmissionWebhooksCreateSecretJob) *corev1.ResourceRequirements { return v.Resources }).(corev1.ResourceRequirementsPtrOutput)
 }
@@ -2892,6 +3154,12 @@ func (o ControllerAdmissionWebhooksCreateSecretJobPtrOutput) ToControllerAdmissi
 
 func (o ControllerAdmissionWebhooksCreateSecretJobPtrOutput) ToControllerAdmissionWebhooksCreateSecretJobPtrOutputWithContext(ctx context.Context) ControllerAdmissionWebhooksCreateSecretJobPtrOutput {
 	return o
+}
+
+func (o ControllerAdmissionWebhooksCreateSecretJobPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerAdmissionWebhooksCreateSecretJob] {
+	return pulumix.Output[*ControllerAdmissionWebhooksCreateSecretJob]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerAdmissionWebhooksCreateSecretJobPtrOutput) Elem() ControllerAdmissionWebhooksCreateSecretJobOutput {
@@ -2927,7 +3195,7 @@ type ControllerAdmissionWebhooksPatch struct {
 // ControllerAdmissionWebhooksPatchInput is an input type that accepts ControllerAdmissionWebhooksPatchArgs and ControllerAdmissionWebhooksPatchOutput values.
 // You can construct a concrete instance of `ControllerAdmissionWebhooksPatchInput` via:
 //
-//          ControllerAdmissionWebhooksPatchArgs{...}
+//	ControllerAdmissionWebhooksPatchArgs{...}
 type ControllerAdmissionWebhooksPatchInput interface {
 	pulumi.Input
 
@@ -2958,6 +3226,12 @@ func (i ControllerAdmissionWebhooksPatchArgs) ToControllerAdmissionWebhooksPatch
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerAdmissionWebhooksPatchOutput)
 }
 
+func (i ControllerAdmissionWebhooksPatchArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerAdmissionWebhooksPatch] {
+	return pulumix.Output[ControllerAdmissionWebhooksPatch]{
+		OutputState: i.ToControllerAdmissionWebhooksPatchOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerAdmissionWebhooksPatchArgs) ToControllerAdmissionWebhooksPatchPtrOutput() ControllerAdmissionWebhooksPatchPtrOutput {
 	return i.ToControllerAdmissionWebhooksPatchPtrOutputWithContext(context.Background())
 }
@@ -2969,11 +3243,11 @@ func (i ControllerAdmissionWebhooksPatchArgs) ToControllerAdmissionWebhooksPatch
 // ControllerAdmissionWebhooksPatchPtrInput is an input type that accepts ControllerAdmissionWebhooksPatchArgs, ControllerAdmissionWebhooksPatchPtr and ControllerAdmissionWebhooksPatchPtrOutput values.
 // You can construct a concrete instance of `ControllerAdmissionWebhooksPatchPtrInput` via:
 //
-//          ControllerAdmissionWebhooksPatchArgs{...}
+//	        ControllerAdmissionWebhooksPatchArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerAdmissionWebhooksPatchPtrInput interface {
 	pulumi.Input
 
@@ -2999,6 +3273,12 @@ func (i *controllerAdmissionWebhooksPatchPtrType) ToControllerAdmissionWebhooksP
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerAdmissionWebhooksPatchPtrOutput)
 }
 
+func (i *controllerAdmissionWebhooksPatchPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerAdmissionWebhooksPatch] {
+	return pulumix.Output[*ControllerAdmissionWebhooksPatch]{
+		OutputState: i.ToControllerAdmissionWebhooksPatchPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerAdmissionWebhooksPatchOutput struct{ *pulumi.OutputState }
 
 func (ControllerAdmissionWebhooksPatchOutput) ElementType() reflect.Type {
@@ -3021,6 +3301,12 @@ func (o ControllerAdmissionWebhooksPatchOutput) ToControllerAdmissionWebhooksPat
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerAdmissionWebhooksPatch) *ControllerAdmissionWebhooksPatch {
 		return &v
 	}).(ControllerAdmissionWebhooksPatchPtrOutput)
+}
+
+func (o ControllerAdmissionWebhooksPatchOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerAdmissionWebhooksPatch] {
+	return pulumix.Output[ControllerAdmissionWebhooksPatch]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerAdmissionWebhooksPatchOutput) Enabled() pulumi.BoolPtrOutput {
@@ -3064,6 +3350,12 @@ func (o ControllerAdmissionWebhooksPatchPtrOutput) ToControllerAdmissionWebhooks
 
 func (o ControllerAdmissionWebhooksPatchPtrOutput) ToControllerAdmissionWebhooksPatchPtrOutputWithContext(ctx context.Context) ControllerAdmissionWebhooksPatchPtrOutput {
 	return o
+}
+
+func (o ControllerAdmissionWebhooksPatchPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerAdmissionWebhooksPatch] {
+	return pulumix.Output[*ControllerAdmissionWebhooksPatch]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerAdmissionWebhooksPatchPtrOutput) Elem() ControllerAdmissionWebhooksPatchOutput {
@@ -3147,7 +3439,7 @@ type ControllerAdmissionWebhooksPatchWebhbookJob struct {
 // ControllerAdmissionWebhooksPatchWebhbookJobInput is an input type that accepts ControllerAdmissionWebhooksPatchWebhbookJobArgs and ControllerAdmissionWebhooksPatchWebhbookJobOutput values.
 // You can construct a concrete instance of `ControllerAdmissionWebhooksPatchWebhbookJobInput` via:
 //
-//          ControllerAdmissionWebhooksPatchWebhbookJobArgs{...}
+//	ControllerAdmissionWebhooksPatchWebhbookJobArgs{...}
 type ControllerAdmissionWebhooksPatchWebhbookJobInput interface {
 	pulumi.Input
 
@@ -3171,6 +3463,12 @@ func (i ControllerAdmissionWebhooksPatchWebhbookJobArgs) ToControllerAdmissionWe
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerAdmissionWebhooksPatchWebhbookJobOutput)
 }
 
+func (i ControllerAdmissionWebhooksPatchWebhbookJobArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerAdmissionWebhooksPatchWebhbookJob] {
+	return pulumix.Output[ControllerAdmissionWebhooksPatchWebhbookJob]{
+		OutputState: i.ToControllerAdmissionWebhooksPatchWebhbookJobOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerAdmissionWebhooksPatchWebhbookJobArgs) ToControllerAdmissionWebhooksPatchWebhbookJobPtrOutput() ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput {
 	return i.ToControllerAdmissionWebhooksPatchWebhbookJobPtrOutputWithContext(context.Background())
 }
@@ -3182,11 +3480,11 @@ func (i ControllerAdmissionWebhooksPatchWebhbookJobArgs) ToControllerAdmissionWe
 // ControllerAdmissionWebhooksPatchWebhbookJobPtrInput is an input type that accepts ControllerAdmissionWebhooksPatchWebhbookJobArgs, ControllerAdmissionWebhooksPatchWebhbookJobPtr and ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput values.
 // You can construct a concrete instance of `ControllerAdmissionWebhooksPatchWebhbookJobPtrInput` via:
 //
-//          ControllerAdmissionWebhooksPatchWebhbookJobArgs{...}
+//	        ControllerAdmissionWebhooksPatchWebhbookJobArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerAdmissionWebhooksPatchWebhbookJobPtrInput interface {
 	pulumi.Input
 
@@ -3210,6 +3508,12 @@ func (i *controllerAdmissionWebhooksPatchWebhbookJobPtrType) ToControllerAdmissi
 
 func (i *controllerAdmissionWebhooksPatchWebhbookJobPtrType) ToControllerAdmissionWebhooksPatchWebhbookJobPtrOutputWithContext(ctx context.Context) ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput)
+}
+
+func (i *controllerAdmissionWebhooksPatchWebhbookJobPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerAdmissionWebhooksPatchWebhbookJob] {
+	return pulumix.Output[*ControllerAdmissionWebhooksPatchWebhbookJob]{
+		OutputState: i.ToControllerAdmissionWebhooksPatchWebhbookJobPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerAdmissionWebhooksPatchWebhbookJobOutput struct{ *pulumi.OutputState }
@@ -3236,6 +3540,12 @@ func (o ControllerAdmissionWebhooksPatchWebhbookJobOutput) ToControllerAdmission
 	}).(ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput)
 }
 
+func (o ControllerAdmissionWebhooksPatchWebhbookJobOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerAdmissionWebhooksPatchWebhbookJob] {
+	return pulumix.Output[ControllerAdmissionWebhooksPatchWebhbookJob]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerAdmissionWebhooksPatchWebhbookJobOutput) Resources() corev1.ResourceRequirementsPtrOutput {
 	return o.ApplyT(func(v ControllerAdmissionWebhooksPatchWebhbookJob) *corev1.ResourceRequirements { return v.Resources }).(corev1.ResourceRequirementsPtrOutput)
 }
@@ -3252,6 +3562,12 @@ func (o ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput) ToControllerAdmiss
 
 func (o ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput) ToControllerAdmissionWebhooksPatchWebhbookJobPtrOutputWithContext(ctx context.Context) ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput {
 	return o
+}
+
+func (o ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerAdmissionWebhooksPatchWebhbookJob] {
+	return pulumix.Output[*ControllerAdmissionWebhooksPatchWebhbookJob]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput) Elem() ControllerAdmissionWebhooksPatchWebhbookJobOutput {
@@ -3286,7 +3602,7 @@ type ControllerAdmissionWebhooksService struct {
 // ControllerAdmissionWebhooksServiceInput is an input type that accepts ControllerAdmissionWebhooksServiceArgs and ControllerAdmissionWebhooksServiceOutput values.
 // You can construct a concrete instance of `ControllerAdmissionWebhooksServiceInput` via:
 //
-//          ControllerAdmissionWebhooksServiceArgs{...}
+//	ControllerAdmissionWebhooksServiceArgs{...}
 type ControllerAdmissionWebhooksServiceInput interface {
 	pulumi.Input
 
@@ -3316,6 +3632,12 @@ func (i ControllerAdmissionWebhooksServiceArgs) ToControllerAdmissionWebhooksSer
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerAdmissionWebhooksServiceOutput)
 }
 
+func (i ControllerAdmissionWebhooksServiceArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerAdmissionWebhooksService] {
+	return pulumix.Output[ControllerAdmissionWebhooksService]{
+		OutputState: i.ToControllerAdmissionWebhooksServiceOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerAdmissionWebhooksServiceArgs) ToControllerAdmissionWebhooksServicePtrOutput() ControllerAdmissionWebhooksServicePtrOutput {
 	return i.ToControllerAdmissionWebhooksServicePtrOutputWithContext(context.Background())
 }
@@ -3327,11 +3649,11 @@ func (i ControllerAdmissionWebhooksServiceArgs) ToControllerAdmissionWebhooksSer
 // ControllerAdmissionWebhooksServicePtrInput is an input type that accepts ControllerAdmissionWebhooksServiceArgs, ControllerAdmissionWebhooksServicePtr and ControllerAdmissionWebhooksServicePtrOutput values.
 // You can construct a concrete instance of `ControllerAdmissionWebhooksServicePtrInput` via:
 //
-//          ControllerAdmissionWebhooksServiceArgs{...}
+//	        ControllerAdmissionWebhooksServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerAdmissionWebhooksServicePtrInput interface {
 	pulumi.Input
 
@@ -3357,6 +3679,12 @@ func (i *controllerAdmissionWebhooksServicePtrType) ToControllerAdmissionWebhook
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerAdmissionWebhooksServicePtrOutput)
 }
 
+func (i *controllerAdmissionWebhooksServicePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerAdmissionWebhooksService] {
+	return pulumix.Output[*ControllerAdmissionWebhooksService]{
+		OutputState: i.ToControllerAdmissionWebhooksServicePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerAdmissionWebhooksServiceOutput struct{ *pulumi.OutputState }
 
 func (ControllerAdmissionWebhooksServiceOutput) ElementType() reflect.Type {
@@ -3379,6 +3707,12 @@ func (o ControllerAdmissionWebhooksServiceOutput) ToControllerAdmissionWebhooksS
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerAdmissionWebhooksService) *ControllerAdmissionWebhooksService {
 		return &v
 	}).(ControllerAdmissionWebhooksServicePtrOutput)
+}
+
+func (o ControllerAdmissionWebhooksServiceOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerAdmissionWebhooksService] {
+	return pulumix.Output[ControllerAdmissionWebhooksService]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerAdmissionWebhooksServiceOutput) Annotations() pulumi.StringMapMapOutput {
@@ -3421,6 +3755,12 @@ func (o ControllerAdmissionWebhooksServicePtrOutput) ToControllerAdmissionWebhoo
 
 func (o ControllerAdmissionWebhooksServicePtrOutput) ToControllerAdmissionWebhooksServicePtrOutputWithContext(ctx context.Context) ControllerAdmissionWebhooksServicePtrOutput {
 	return o
+}
+
+func (o ControllerAdmissionWebhooksServicePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerAdmissionWebhooksService] {
+	return pulumix.Output[*ControllerAdmissionWebhooksService]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerAdmissionWebhooksServicePtrOutput) Elem() ControllerAdmissionWebhooksServiceOutput {
@@ -3504,7 +3844,7 @@ type ControllerCustomTemplate struct {
 // ControllerCustomTemplateInput is an input type that accepts ControllerCustomTemplateArgs and ControllerCustomTemplateOutput values.
 // You can construct a concrete instance of `ControllerCustomTemplateInput` via:
 //
-//          ControllerCustomTemplateArgs{...}
+//	ControllerCustomTemplateArgs{...}
 type ControllerCustomTemplateInput interface {
 	pulumi.Input
 
@@ -3529,6 +3869,12 @@ func (i ControllerCustomTemplateArgs) ToControllerCustomTemplateOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerCustomTemplateOutput)
 }
 
+func (i ControllerCustomTemplateArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerCustomTemplate] {
+	return pulumix.Output[ControllerCustomTemplate]{
+		OutputState: i.ToControllerCustomTemplateOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerCustomTemplateArgs) ToControllerCustomTemplatePtrOutput() ControllerCustomTemplatePtrOutput {
 	return i.ToControllerCustomTemplatePtrOutputWithContext(context.Background())
 }
@@ -3540,11 +3886,11 @@ func (i ControllerCustomTemplateArgs) ToControllerCustomTemplatePtrOutputWithCon
 // ControllerCustomTemplatePtrInput is an input type that accepts ControllerCustomTemplateArgs, ControllerCustomTemplatePtr and ControllerCustomTemplatePtrOutput values.
 // You can construct a concrete instance of `ControllerCustomTemplatePtrInput` via:
 //
-//          ControllerCustomTemplateArgs{...}
+//	        ControllerCustomTemplateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerCustomTemplatePtrInput interface {
 	pulumi.Input
 
@@ -3568,6 +3914,12 @@ func (i *controllerCustomTemplatePtrType) ToControllerCustomTemplatePtrOutput() 
 
 func (i *controllerCustomTemplatePtrType) ToControllerCustomTemplatePtrOutputWithContext(ctx context.Context) ControllerCustomTemplatePtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerCustomTemplatePtrOutput)
+}
+
+func (i *controllerCustomTemplatePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerCustomTemplate] {
+	return pulumix.Output[*ControllerCustomTemplate]{
+		OutputState: i.ToControllerCustomTemplatePtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerCustomTemplateOutput struct{ *pulumi.OutputState }
@@ -3594,6 +3946,12 @@ func (o ControllerCustomTemplateOutput) ToControllerCustomTemplatePtrOutputWithC
 	}).(ControllerCustomTemplatePtrOutput)
 }
 
+func (o ControllerCustomTemplateOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerCustomTemplate] {
+	return pulumix.Output[ControllerCustomTemplate]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerCustomTemplateOutput) ConfigMapKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ControllerCustomTemplate) *string { return v.ConfigMapKey }).(pulumi.StringPtrOutput)
 }
@@ -3614,6 +3972,12 @@ func (o ControllerCustomTemplatePtrOutput) ToControllerCustomTemplatePtrOutput()
 
 func (o ControllerCustomTemplatePtrOutput) ToControllerCustomTemplatePtrOutputWithContext(ctx context.Context) ControllerCustomTemplatePtrOutput {
 	return o
+}
+
+func (o ControllerCustomTemplatePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerCustomTemplate] {
+	return pulumix.Output[*ControllerCustomTemplate]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerCustomTemplatePtrOutput) Elem() ControllerCustomTemplateOutput {
@@ -3684,7 +4048,7 @@ type ControllerDefaultBackend struct {
 // ControllerDefaultBackendInput is an input type that accepts ControllerDefaultBackendArgs and ControllerDefaultBackendOutput values.
 // You can construct a concrete instance of `ControllerDefaultBackendInput` via:
 //
-//          ControllerDefaultBackendArgs{...}
+//	ControllerDefaultBackendArgs{...}
 type ControllerDefaultBackendInput interface {
 	pulumi.Input
 
@@ -3741,6 +4105,12 @@ func (i ControllerDefaultBackendArgs) ToControllerDefaultBackendOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerDefaultBackendOutput)
 }
 
+func (i ControllerDefaultBackendArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerDefaultBackend] {
+	return pulumix.Output[ControllerDefaultBackend]{
+		OutputState: i.ToControllerDefaultBackendOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerDefaultBackendArgs) ToControllerDefaultBackendPtrOutput() ControllerDefaultBackendPtrOutput {
 	return i.ToControllerDefaultBackendPtrOutputWithContext(context.Background())
 }
@@ -3752,11 +4122,11 @@ func (i ControllerDefaultBackendArgs) ToControllerDefaultBackendPtrOutputWithCon
 // ControllerDefaultBackendPtrInput is an input type that accepts ControllerDefaultBackendArgs, ControllerDefaultBackendPtr and ControllerDefaultBackendPtrOutput values.
 // You can construct a concrete instance of `ControllerDefaultBackendPtrInput` via:
 //
-//          ControllerDefaultBackendArgs{...}
+//	        ControllerDefaultBackendArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerDefaultBackendPtrInput interface {
 	pulumi.Input
 
@@ -3782,6 +4152,12 @@ func (i *controllerDefaultBackendPtrType) ToControllerDefaultBackendPtrOutputWit
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerDefaultBackendPtrOutput)
 }
 
+func (i *controllerDefaultBackendPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerDefaultBackend] {
+	return pulumix.Output[*ControllerDefaultBackend]{
+		OutputState: i.ToControllerDefaultBackendPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerDefaultBackendOutput struct{ *pulumi.OutputState }
 
 func (ControllerDefaultBackendOutput) ElementType() reflect.Type {
@@ -3804,6 +4180,12 @@ func (o ControllerDefaultBackendOutput) ToControllerDefaultBackendPtrOutputWithC
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerDefaultBackend) *ControllerDefaultBackend {
 		return &v
 	}).(ControllerDefaultBackendPtrOutput)
+}
+
+func (o ControllerDefaultBackendOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerDefaultBackend] {
+	return pulumix.Output[ControllerDefaultBackend]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerDefaultBackendOutput) Affinity() corev1.AffinityPtrOutput {
@@ -3924,6 +4306,12 @@ func (o ControllerDefaultBackendPtrOutput) ToControllerDefaultBackendPtrOutput()
 
 func (o ControllerDefaultBackendPtrOutput) ToControllerDefaultBackendPtrOutputWithContext(ctx context.Context) ControllerDefaultBackendPtrOutput {
 	return o
+}
+
+func (o ControllerDefaultBackendPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerDefaultBackend] {
+	return pulumix.Output[*ControllerDefaultBackend]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerDefaultBackendPtrOutput) Elem() ControllerDefaultBackendOutput {
@@ -4176,7 +4564,7 @@ type ControllerDefaultBackendService struct {
 // ControllerDefaultBackendServiceInput is an input type that accepts ControllerDefaultBackendServiceArgs and ControllerDefaultBackendServiceOutput values.
 // You can construct a concrete instance of `ControllerDefaultBackendServiceInput` via:
 //
-//          ControllerDefaultBackendServiceArgs{...}
+//	ControllerDefaultBackendServiceArgs{...}
 type ControllerDefaultBackendServiceInput interface {
 	pulumi.Input
 
@@ -4207,6 +4595,12 @@ func (i ControllerDefaultBackendServiceArgs) ToControllerDefaultBackendServiceOu
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerDefaultBackendServiceOutput)
 }
 
+func (i ControllerDefaultBackendServiceArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerDefaultBackendService] {
+	return pulumix.Output[ControllerDefaultBackendService]{
+		OutputState: i.ToControllerDefaultBackendServiceOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerDefaultBackendServiceArgs) ToControllerDefaultBackendServicePtrOutput() ControllerDefaultBackendServicePtrOutput {
 	return i.ToControllerDefaultBackendServicePtrOutputWithContext(context.Background())
 }
@@ -4218,11 +4612,11 @@ func (i ControllerDefaultBackendServiceArgs) ToControllerDefaultBackendServicePt
 // ControllerDefaultBackendServicePtrInput is an input type that accepts ControllerDefaultBackendServiceArgs, ControllerDefaultBackendServicePtr and ControllerDefaultBackendServicePtrOutput values.
 // You can construct a concrete instance of `ControllerDefaultBackendServicePtrInput` via:
 //
-//          ControllerDefaultBackendServiceArgs{...}
+//	        ControllerDefaultBackendServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerDefaultBackendServicePtrInput interface {
 	pulumi.Input
 
@@ -4248,6 +4642,12 @@ func (i *controllerDefaultBackendServicePtrType) ToControllerDefaultBackendServi
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerDefaultBackendServicePtrOutput)
 }
 
+func (i *controllerDefaultBackendServicePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerDefaultBackendService] {
+	return pulumix.Output[*ControllerDefaultBackendService]{
+		OutputState: i.ToControllerDefaultBackendServicePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerDefaultBackendServiceOutput struct{ *pulumi.OutputState }
 
 func (ControllerDefaultBackendServiceOutput) ElementType() reflect.Type {
@@ -4270,6 +4670,12 @@ func (o ControllerDefaultBackendServiceOutput) ToControllerDefaultBackendService
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerDefaultBackendService) *ControllerDefaultBackendService {
 		return &v
 	}).(ControllerDefaultBackendServicePtrOutput)
+}
+
+func (o ControllerDefaultBackendServiceOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerDefaultBackendService] {
+	return pulumix.Output[ControllerDefaultBackendService]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerDefaultBackendServiceOutput) Annotations() pulumi.StringMapOutput {
@@ -4313,6 +4719,12 @@ func (o ControllerDefaultBackendServicePtrOutput) ToControllerDefaultBackendServ
 
 func (o ControllerDefaultBackendServicePtrOutput) ToControllerDefaultBackendServicePtrOutputWithContext(ctx context.Context) ControllerDefaultBackendServicePtrOutput {
 	return o
+}
+
+func (o ControllerDefaultBackendServicePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerDefaultBackendService] {
+	return pulumix.Output[*ControllerDefaultBackendService]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerDefaultBackendServicePtrOutput) Elem() ControllerDefaultBackendServiceOutput {
@@ -4397,7 +4809,7 @@ type ControllerHostPort struct {
 // ControllerHostPortInput is an input type that accepts ControllerHostPortArgs and ControllerHostPortOutput values.
 // You can construct a concrete instance of `ControllerHostPortInput` via:
 //
-//          ControllerHostPortArgs{...}
+//	ControllerHostPortArgs{...}
 type ControllerHostPortInput interface {
 	pulumi.Input
 
@@ -4422,6 +4834,12 @@ func (i ControllerHostPortArgs) ToControllerHostPortOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerHostPortOutput)
 }
 
+func (i ControllerHostPortArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerHostPort] {
+	return pulumix.Output[ControllerHostPort]{
+		OutputState: i.ToControllerHostPortOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerHostPortArgs) ToControllerHostPortPtrOutput() ControllerHostPortPtrOutput {
 	return i.ToControllerHostPortPtrOutputWithContext(context.Background())
 }
@@ -4433,11 +4851,11 @@ func (i ControllerHostPortArgs) ToControllerHostPortPtrOutputWithContext(ctx con
 // ControllerHostPortPtrInput is an input type that accepts ControllerHostPortArgs, ControllerHostPortPtr and ControllerHostPortPtrOutput values.
 // You can construct a concrete instance of `ControllerHostPortPtrInput` via:
 //
-//          ControllerHostPortArgs{...}
+//	        ControllerHostPortArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerHostPortPtrInput interface {
 	pulumi.Input
 
@@ -4461,6 +4879,12 @@ func (i *controllerHostPortPtrType) ToControllerHostPortPtrOutput() ControllerHo
 
 func (i *controllerHostPortPtrType) ToControllerHostPortPtrOutputWithContext(ctx context.Context) ControllerHostPortPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerHostPortPtrOutput)
+}
+
+func (i *controllerHostPortPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerHostPort] {
+	return pulumix.Output[*ControllerHostPort]{
+		OutputState: i.ToControllerHostPortPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerHostPortOutput struct{ *pulumi.OutputState }
@@ -4487,6 +4911,12 @@ func (o ControllerHostPortOutput) ToControllerHostPortPtrOutputWithContext(ctx c
 	}).(ControllerHostPortPtrOutput)
 }
 
+func (o ControllerHostPortOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerHostPort] {
+	return pulumix.Output[ControllerHostPort]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerHostPortOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ControllerHostPort) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
@@ -4507,6 +4937,12 @@ func (o ControllerHostPortPtrOutput) ToControllerHostPortPtrOutput() ControllerH
 
 func (o ControllerHostPortPtrOutput) ToControllerHostPortPtrOutputWithContext(ctx context.Context) ControllerHostPortPtrOutput {
 	return o
+}
+
+func (o ControllerHostPortPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerHostPort] {
+	return pulumix.Output[*ControllerHostPort]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerHostPortPtrOutput) Elem() ControllerHostPortOutput {
@@ -4545,7 +4981,7 @@ type ControllerHostPortPorts struct {
 // ControllerHostPortPortsInput is an input type that accepts ControllerHostPortPortsArgs and ControllerHostPortPortsOutput values.
 // You can construct a concrete instance of `ControllerHostPortPortsInput` via:
 //
-//          ControllerHostPortPortsArgs{...}
+//	ControllerHostPortPortsArgs{...}
 type ControllerHostPortPortsInput interface {
 	pulumi.Input
 
@@ -4570,6 +5006,12 @@ func (i ControllerHostPortPortsArgs) ToControllerHostPortPortsOutputWithContext(
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerHostPortPortsOutput)
 }
 
+func (i ControllerHostPortPortsArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerHostPortPorts] {
+	return pulumix.Output[ControllerHostPortPorts]{
+		OutputState: i.ToControllerHostPortPortsOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerHostPortPortsArgs) ToControllerHostPortPortsPtrOutput() ControllerHostPortPortsPtrOutput {
 	return i.ToControllerHostPortPortsPtrOutputWithContext(context.Background())
 }
@@ -4581,11 +5023,11 @@ func (i ControllerHostPortPortsArgs) ToControllerHostPortPortsPtrOutputWithConte
 // ControllerHostPortPortsPtrInput is an input type that accepts ControllerHostPortPortsArgs, ControllerHostPortPortsPtr and ControllerHostPortPortsPtrOutput values.
 // You can construct a concrete instance of `ControllerHostPortPortsPtrInput` via:
 //
-//          ControllerHostPortPortsArgs{...}
+//	        ControllerHostPortPortsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerHostPortPortsPtrInput interface {
 	pulumi.Input
 
@@ -4609,6 +5051,12 @@ func (i *controllerHostPortPortsPtrType) ToControllerHostPortPortsPtrOutput() Co
 
 func (i *controllerHostPortPortsPtrType) ToControllerHostPortPortsPtrOutputWithContext(ctx context.Context) ControllerHostPortPortsPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerHostPortPortsPtrOutput)
+}
+
+func (i *controllerHostPortPortsPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerHostPortPorts] {
+	return pulumix.Output[*ControllerHostPortPorts]{
+		OutputState: i.ToControllerHostPortPortsPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerHostPortPortsOutput struct{ *pulumi.OutputState }
@@ -4635,6 +5083,12 @@ func (o ControllerHostPortPortsOutput) ToControllerHostPortPortsPtrOutputWithCon
 	}).(ControllerHostPortPortsPtrOutput)
 }
 
+func (o ControllerHostPortPortsOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerHostPortPorts] {
+	return pulumix.Output[ControllerHostPortPorts]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerHostPortPortsOutput) Http() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ControllerHostPortPorts) *int { return v.Http }).(pulumi.IntPtrOutput)
 }
@@ -4655,6 +5109,12 @@ func (o ControllerHostPortPortsPtrOutput) ToControllerHostPortPortsPtrOutput() C
 
 func (o ControllerHostPortPortsPtrOutput) ToControllerHostPortPortsPtrOutputWithContext(ctx context.Context) ControllerHostPortPortsPtrOutput {
 	return o
+}
+
+func (o ControllerHostPortPortsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerHostPortPorts] {
+	return pulumix.Output[*ControllerHostPortPorts]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerHostPortPortsPtrOutput) Elem() ControllerHostPortPortsOutput {
@@ -4702,7 +5162,7 @@ type ControllerImage struct {
 // ControllerImageInput is an input type that accepts ControllerImageArgs and ControllerImageOutput values.
 // You can construct a concrete instance of `ControllerImageInput` via:
 //
-//          ControllerImageArgs{...}
+//	ControllerImageArgs{...}
 type ControllerImageInput interface {
 	pulumi.Input
 
@@ -4736,6 +5196,12 @@ func (i ControllerImageArgs) ToControllerImageOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerImageOutput)
 }
 
+func (i ControllerImageArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerImage] {
+	return pulumix.Output[ControllerImage]{
+		OutputState: i.ToControllerImageOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerImageArgs) ToControllerImagePtrOutput() ControllerImagePtrOutput {
 	return i.ToControllerImagePtrOutputWithContext(context.Background())
 }
@@ -4747,11 +5213,11 @@ func (i ControllerImageArgs) ToControllerImagePtrOutputWithContext(ctx context.C
 // ControllerImagePtrInput is an input type that accepts ControllerImageArgs, ControllerImagePtr and ControllerImagePtrOutput values.
 // You can construct a concrete instance of `ControllerImagePtrInput` via:
 //
-//          ControllerImageArgs{...}
+//	        ControllerImageArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerImagePtrInput interface {
 	pulumi.Input
 
@@ -4777,6 +5243,12 @@ func (i *controllerImagePtrType) ToControllerImagePtrOutputWithContext(ctx conte
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerImagePtrOutput)
 }
 
+func (i *controllerImagePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerImage] {
+	return pulumix.Output[*ControllerImage]{
+		OutputState: i.ToControllerImagePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerImageOutput struct{ *pulumi.OutputState }
 
 func (ControllerImageOutput) ElementType() reflect.Type {
@@ -4799,6 +5271,12 @@ func (o ControllerImageOutput) ToControllerImagePtrOutputWithContext(ctx context
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerImage) *ControllerImage {
 		return &v
 	}).(ControllerImagePtrOutput)
+}
+
+func (o ControllerImageOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerImage] {
+	return pulumix.Output[ControllerImage]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerImageOutput) AllowPrivilegeEscalation() pulumi.BoolPtrOutput {
@@ -4854,6 +5332,12 @@ func (o ControllerImagePtrOutput) ToControllerImagePtrOutput() ControllerImagePt
 
 func (o ControllerImagePtrOutput) ToControllerImagePtrOutputWithContext(ctx context.Context) ControllerImagePtrOutput {
 	return o
+}
+
+func (o ControllerImagePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerImage] {
+	return pulumix.Output[*ControllerImage]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerImagePtrOutput) Elem() ControllerImageOutput {
@@ -4969,7 +5453,7 @@ type ControllerIngressClassResource struct {
 // ControllerIngressClassResourceInput is an input type that accepts ControllerIngressClassResourceArgs and ControllerIngressClassResourceOutput values.
 // You can construct a concrete instance of `ControllerIngressClassResourceInput` via:
 //
-//          ControllerIngressClassResourceArgs{...}
+//	ControllerIngressClassResourceArgs{...}
 type ControllerIngressClassResourceInput interface {
 	pulumi.Input
 
@@ -4998,6 +5482,12 @@ func (i ControllerIngressClassResourceArgs) ToControllerIngressClassResourceOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerIngressClassResourceOutput)
 }
 
+func (i ControllerIngressClassResourceArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerIngressClassResource] {
+	return pulumix.Output[ControllerIngressClassResource]{
+		OutputState: i.ToControllerIngressClassResourceOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerIngressClassResourceArgs) ToControllerIngressClassResourcePtrOutput() ControllerIngressClassResourcePtrOutput {
 	return i.ToControllerIngressClassResourcePtrOutputWithContext(context.Background())
 }
@@ -5009,11 +5499,11 @@ func (i ControllerIngressClassResourceArgs) ToControllerIngressClassResourcePtrO
 // ControllerIngressClassResourcePtrInput is an input type that accepts ControllerIngressClassResourceArgs, ControllerIngressClassResourcePtr and ControllerIngressClassResourcePtrOutput values.
 // You can construct a concrete instance of `ControllerIngressClassResourcePtrInput` via:
 //
-//          ControllerIngressClassResourceArgs{...}
+//	        ControllerIngressClassResourceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerIngressClassResourcePtrInput interface {
 	pulumi.Input
 
@@ -5039,6 +5529,12 @@ func (i *controllerIngressClassResourcePtrType) ToControllerIngressClassResource
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerIngressClassResourcePtrOutput)
 }
 
+func (i *controllerIngressClassResourcePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerIngressClassResource] {
+	return pulumix.Output[*ControllerIngressClassResource]{
+		OutputState: i.ToControllerIngressClassResourcePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerIngressClassResourceOutput struct{ *pulumi.OutputState }
 
 func (ControllerIngressClassResourceOutput) ElementType() reflect.Type {
@@ -5061,6 +5557,12 @@ func (o ControllerIngressClassResourceOutput) ToControllerIngressClassResourcePt
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerIngressClassResource) *ControllerIngressClassResource {
 		return &v
 	}).(ControllerIngressClassResourcePtrOutput)
+}
+
+func (o ControllerIngressClassResourceOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerIngressClassResource] {
+	return pulumix.Output[ControllerIngressClassResource]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerIngressClassResourceOutput) ControllerValue() pulumi.StringPtrOutput {
@@ -5096,6 +5598,12 @@ func (o ControllerIngressClassResourcePtrOutput) ToControllerIngressClassResourc
 
 func (o ControllerIngressClassResourcePtrOutput) ToControllerIngressClassResourcePtrOutputWithContext(ctx context.Context) ControllerIngressClassResourcePtrOutput {
 	return o
+}
+
+func (o ControllerIngressClassResourcePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerIngressClassResource] {
+	return pulumix.Output[*ControllerIngressClassResource]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerIngressClassResourcePtrOutput) Elem() ControllerIngressClassResourceOutput {
@@ -5166,7 +5674,7 @@ type ControllerMetrics struct {
 // ControllerMetricsInput is an input type that accepts ControllerMetricsArgs and ControllerMetricsOutput values.
 // You can construct a concrete instance of `ControllerMetricsInput` via:
 //
-//          ControllerMetricsArgs{...}
+//	ControllerMetricsArgs{...}
 type ControllerMetricsInput interface {
 	pulumi.Input
 
@@ -5195,6 +5703,12 @@ func (i ControllerMetricsArgs) ToControllerMetricsOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerMetricsOutput)
 }
 
+func (i ControllerMetricsArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerMetrics] {
+	return pulumix.Output[ControllerMetrics]{
+		OutputState: i.ToControllerMetricsOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerMetricsArgs) ToControllerMetricsPtrOutput() ControllerMetricsPtrOutput {
 	return i.ToControllerMetricsPtrOutputWithContext(context.Background())
 }
@@ -5206,11 +5720,11 @@ func (i ControllerMetricsArgs) ToControllerMetricsPtrOutputWithContext(ctx conte
 // ControllerMetricsPtrInput is an input type that accepts ControllerMetricsArgs, ControllerMetricsPtr and ControllerMetricsPtrOutput values.
 // You can construct a concrete instance of `ControllerMetricsPtrInput` via:
 //
-//          ControllerMetricsArgs{...}
+//	        ControllerMetricsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerMetricsPtrInput interface {
 	pulumi.Input
 
@@ -5236,6 +5750,12 @@ func (i *controllerMetricsPtrType) ToControllerMetricsPtrOutputWithContext(ctx c
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerMetricsPtrOutput)
 }
 
+func (i *controllerMetricsPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerMetrics] {
+	return pulumix.Output[*ControllerMetrics]{
+		OutputState: i.ToControllerMetricsPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerMetricsOutput struct{ *pulumi.OutputState }
 
 func (ControllerMetricsOutput) ElementType() reflect.Type {
@@ -5258,6 +5778,12 @@ func (o ControllerMetricsOutput) ToControllerMetricsPtrOutputWithContext(ctx con
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerMetrics) *ControllerMetrics {
 		return &v
 	}).(ControllerMetricsPtrOutput)
+}
+
+func (o ControllerMetricsOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerMetrics] {
+	return pulumix.Output[ControllerMetrics]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerMetricsOutput) Enabled() pulumi.BoolPtrOutput {
@@ -5293,6 +5819,12 @@ func (o ControllerMetricsPtrOutput) ToControllerMetricsPtrOutput() ControllerMet
 
 func (o ControllerMetricsPtrOutput) ToControllerMetricsPtrOutputWithContext(ctx context.Context) ControllerMetricsPtrOutput {
 	return o
+}
+
+func (o ControllerMetricsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerMetrics] {
+	return pulumix.Output[*ControllerMetrics]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerMetricsPtrOutput) Elem() ControllerMetricsOutput {
@@ -5361,7 +5893,7 @@ type ControllerMetricsPrometheusRules struct {
 // ControllerMetricsPrometheusRulesInput is an input type that accepts ControllerMetricsPrometheusRulesArgs and ControllerMetricsPrometheusRulesOutput values.
 // You can construct a concrete instance of `ControllerMetricsPrometheusRulesInput` via:
 //
-//          ControllerMetricsPrometheusRulesArgs{...}
+//	ControllerMetricsPrometheusRulesArgs{...}
 type ControllerMetricsPrometheusRulesInput interface {
 	pulumi.Input
 
@@ -5388,6 +5920,12 @@ func (i ControllerMetricsPrometheusRulesArgs) ToControllerMetricsPrometheusRules
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerMetricsPrometheusRulesOutput)
 }
 
+func (i ControllerMetricsPrometheusRulesArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerMetricsPrometheusRules] {
+	return pulumix.Output[ControllerMetricsPrometheusRules]{
+		OutputState: i.ToControllerMetricsPrometheusRulesOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerMetricsPrometheusRulesArgs) ToControllerMetricsPrometheusRulesPtrOutput() ControllerMetricsPrometheusRulesPtrOutput {
 	return i.ToControllerMetricsPrometheusRulesPtrOutputWithContext(context.Background())
 }
@@ -5399,11 +5937,11 @@ func (i ControllerMetricsPrometheusRulesArgs) ToControllerMetricsPrometheusRules
 // ControllerMetricsPrometheusRulesPtrInput is an input type that accepts ControllerMetricsPrometheusRulesArgs, ControllerMetricsPrometheusRulesPtr and ControllerMetricsPrometheusRulesPtrOutput values.
 // You can construct a concrete instance of `ControllerMetricsPrometheusRulesPtrInput` via:
 //
-//          ControllerMetricsPrometheusRulesArgs{...}
+//	        ControllerMetricsPrometheusRulesArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerMetricsPrometheusRulesPtrInput interface {
 	pulumi.Input
 
@@ -5429,6 +5967,12 @@ func (i *controllerMetricsPrometheusRulesPtrType) ToControllerMetricsPrometheusR
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerMetricsPrometheusRulesPtrOutput)
 }
 
+func (i *controllerMetricsPrometheusRulesPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerMetricsPrometheusRules] {
+	return pulumix.Output[*ControllerMetricsPrometheusRules]{
+		OutputState: i.ToControllerMetricsPrometheusRulesPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerMetricsPrometheusRulesOutput struct{ *pulumi.OutputState }
 
 func (ControllerMetricsPrometheusRulesOutput) ElementType() reflect.Type {
@@ -5451,6 +5995,12 @@ func (o ControllerMetricsPrometheusRulesOutput) ToControllerMetricsPrometheusRul
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerMetricsPrometheusRules) *ControllerMetricsPrometheusRules {
 		return &v
 	}).(ControllerMetricsPrometheusRulesPtrOutput)
+}
+
+func (o ControllerMetricsPrometheusRulesOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerMetricsPrometheusRules] {
+	return pulumix.Output[ControllerMetricsPrometheusRules]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerMetricsPrometheusRulesOutput) AdditionalLabels() pulumi.StringMapMapOutput {
@@ -5481,6 +6031,12 @@ func (o ControllerMetricsPrometheusRulesPtrOutput) ToControllerMetricsPrometheus
 
 func (o ControllerMetricsPrometheusRulesPtrOutput) ToControllerMetricsPrometheusRulesPtrOutputWithContext(ctx context.Context) ControllerMetricsPrometheusRulesPtrOutput {
 	return o
+}
+
+func (o ControllerMetricsPrometheusRulesPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerMetricsPrometheusRules] {
+	return pulumix.Output[*ControllerMetricsPrometheusRules]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerMetricsPrometheusRulesPtrOutput) Elem() ControllerMetricsPrometheusRulesOutput {
@@ -5544,7 +6100,7 @@ type ControllerMetricsService struct {
 // ControllerMetricsServiceInput is an input type that accepts ControllerMetricsServiceArgs and ControllerMetricsServiceOutput values.
 // You can construct a concrete instance of `ControllerMetricsServiceInput` via:
 //
-//          ControllerMetricsServiceArgs{...}
+//	ControllerMetricsServiceArgs{...}
 type ControllerMetricsServiceInput interface {
 	pulumi.Input
 
@@ -5576,6 +6132,12 @@ func (i ControllerMetricsServiceArgs) ToControllerMetricsServiceOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerMetricsServiceOutput)
 }
 
+func (i ControllerMetricsServiceArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerMetricsService] {
+	return pulumix.Output[ControllerMetricsService]{
+		OutputState: i.ToControllerMetricsServiceOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerMetricsServiceArgs) ToControllerMetricsServicePtrOutput() ControllerMetricsServicePtrOutput {
 	return i.ToControllerMetricsServicePtrOutputWithContext(context.Background())
 }
@@ -5587,11 +6149,11 @@ func (i ControllerMetricsServiceArgs) ToControllerMetricsServicePtrOutputWithCon
 // ControllerMetricsServicePtrInput is an input type that accepts ControllerMetricsServiceArgs, ControllerMetricsServicePtr and ControllerMetricsServicePtrOutput values.
 // You can construct a concrete instance of `ControllerMetricsServicePtrInput` via:
 //
-//          ControllerMetricsServiceArgs{...}
+//	        ControllerMetricsServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerMetricsServicePtrInput interface {
 	pulumi.Input
 
@@ -5617,6 +6179,12 @@ func (i *controllerMetricsServicePtrType) ToControllerMetricsServicePtrOutputWit
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerMetricsServicePtrOutput)
 }
 
+func (i *controllerMetricsServicePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerMetricsService] {
+	return pulumix.Output[*ControllerMetricsService]{
+		OutputState: i.ToControllerMetricsServicePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerMetricsServiceOutput struct{ *pulumi.OutputState }
 
 func (ControllerMetricsServiceOutput) ElementType() reflect.Type {
@@ -5639,6 +6207,12 @@ func (o ControllerMetricsServiceOutput) ToControllerMetricsServicePtrOutputWithC
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerMetricsService) *ControllerMetricsService {
 		return &v
 	}).(ControllerMetricsServicePtrOutput)
+}
+
+func (o ControllerMetricsServiceOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerMetricsService] {
+	return pulumix.Output[ControllerMetricsService]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerMetricsServiceOutput) Annotations() pulumi.StringMapOutput {
@@ -5689,6 +6263,12 @@ func (o ControllerMetricsServicePtrOutput) ToControllerMetricsServicePtrOutput()
 
 func (o ControllerMetricsServicePtrOutput) ToControllerMetricsServicePtrOutputWithContext(ctx context.Context) ControllerMetricsServicePtrOutput {
 	return o
+}
+
+func (o ControllerMetricsServicePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerMetricsService] {
+	return pulumix.Output[*ControllerMetricsService]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerMetricsServicePtrOutput) Elem() ControllerMetricsServiceOutput {
@@ -5798,7 +6378,7 @@ type ControllerMetricsServiceMonitor struct {
 // ControllerMetricsServiceMonitorInput is an input type that accepts ControllerMetricsServiceMonitorArgs and ControllerMetricsServiceMonitorOutput values.
 // You can construct a concrete instance of `ControllerMetricsServiceMonitorInput` via:
 //
-//          ControllerMetricsServiceMonitorArgs{...}
+//	ControllerMetricsServiceMonitorArgs{...}
 type ControllerMetricsServiceMonitorInput interface {
 	pulumi.Input
 
@@ -5831,6 +6411,12 @@ func (i ControllerMetricsServiceMonitorArgs) ToControllerMetricsServiceMonitorOu
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerMetricsServiceMonitorOutput)
 }
 
+func (i ControllerMetricsServiceMonitorArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerMetricsServiceMonitor] {
+	return pulumix.Output[ControllerMetricsServiceMonitor]{
+		OutputState: i.ToControllerMetricsServiceMonitorOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerMetricsServiceMonitorArgs) ToControllerMetricsServiceMonitorPtrOutput() ControllerMetricsServiceMonitorPtrOutput {
 	return i.ToControllerMetricsServiceMonitorPtrOutputWithContext(context.Background())
 }
@@ -5842,11 +6428,11 @@ func (i ControllerMetricsServiceMonitorArgs) ToControllerMetricsServiceMonitorPt
 // ControllerMetricsServiceMonitorPtrInput is an input type that accepts ControllerMetricsServiceMonitorArgs, ControllerMetricsServiceMonitorPtr and ControllerMetricsServiceMonitorPtrOutput values.
 // You can construct a concrete instance of `ControllerMetricsServiceMonitorPtrInput` via:
 //
-//          ControllerMetricsServiceMonitorArgs{...}
+//	        ControllerMetricsServiceMonitorArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerMetricsServiceMonitorPtrInput interface {
 	pulumi.Input
 
@@ -5872,6 +6458,12 @@ func (i *controllerMetricsServiceMonitorPtrType) ToControllerMetricsServiceMonit
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerMetricsServiceMonitorPtrOutput)
 }
 
+func (i *controllerMetricsServiceMonitorPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerMetricsServiceMonitor] {
+	return pulumix.Output[*ControllerMetricsServiceMonitor]{
+		OutputState: i.ToControllerMetricsServiceMonitorPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerMetricsServiceMonitorOutput struct{ *pulumi.OutputState }
 
 func (ControllerMetricsServiceMonitorOutput) ElementType() reflect.Type {
@@ -5894,6 +6486,12 @@ func (o ControllerMetricsServiceMonitorOutput) ToControllerMetricsServiceMonitor
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerMetricsServiceMonitor) *ControllerMetricsServiceMonitor {
 		return &v
 	}).(ControllerMetricsServiceMonitorPtrOutput)
+}
+
+func (o ControllerMetricsServiceMonitorOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerMetricsServiceMonitor] {
+	return pulumix.Output[ControllerMetricsServiceMonitor]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerMetricsServiceMonitorOutput) AdditionalLabels() pulumi.StringMapMapOutput {
@@ -5945,6 +6543,12 @@ func (o ControllerMetricsServiceMonitorPtrOutput) ToControllerMetricsServiceMoni
 
 func (o ControllerMetricsServiceMonitorPtrOutput) ToControllerMetricsServiceMonitorPtrOutputWithContext(ctx context.Context) ControllerMetricsServiceMonitorPtrOutput {
 	return o
+}
+
+func (o ControllerMetricsServiceMonitorPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerMetricsServiceMonitor] {
+	return pulumix.Output[*ControllerMetricsServiceMonitor]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerMetricsServiceMonitorPtrOutput) Elem() ControllerMetricsServiceMonitorOutput {
@@ -6046,7 +6650,7 @@ type ControllerPodSecurityPolicy struct {
 // ControllerPodSecurityPolicyInput is an input type that accepts ControllerPodSecurityPolicyArgs and ControllerPodSecurityPolicyOutput values.
 // You can construct a concrete instance of `ControllerPodSecurityPolicyInput` via:
 //
-//          ControllerPodSecurityPolicyArgs{...}
+//	ControllerPodSecurityPolicyArgs{...}
 type ControllerPodSecurityPolicyInput interface {
 	pulumi.Input
 
@@ -6070,6 +6674,12 @@ func (i ControllerPodSecurityPolicyArgs) ToControllerPodSecurityPolicyOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerPodSecurityPolicyOutput)
 }
 
+func (i ControllerPodSecurityPolicyArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerPodSecurityPolicy] {
+	return pulumix.Output[ControllerPodSecurityPolicy]{
+		OutputState: i.ToControllerPodSecurityPolicyOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerPodSecurityPolicyArgs) ToControllerPodSecurityPolicyPtrOutput() ControllerPodSecurityPolicyPtrOutput {
 	return i.ToControllerPodSecurityPolicyPtrOutputWithContext(context.Background())
 }
@@ -6081,11 +6691,11 @@ func (i ControllerPodSecurityPolicyArgs) ToControllerPodSecurityPolicyPtrOutputW
 // ControllerPodSecurityPolicyPtrInput is an input type that accepts ControllerPodSecurityPolicyArgs, ControllerPodSecurityPolicyPtr and ControllerPodSecurityPolicyPtrOutput values.
 // You can construct a concrete instance of `ControllerPodSecurityPolicyPtrInput` via:
 //
-//          ControllerPodSecurityPolicyArgs{...}
+//	        ControllerPodSecurityPolicyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerPodSecurityPolicyPtrInput interface {
 	pulumi.Input
 
@@ -6109,6 +6719,12 @@ func (i *controllerPodSecurityPolicyPtrType) ToControllerPodSecurityPolicyPtrOut
 
 func (i *controllerPodSecurityPolicyPtrType) ToControllerPodSecurityPolicyPtrOutputWithContext(ctx context.Context) ControllerPodSecurityPolicyPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerPodSecurityPolicyPtrOutput)
+}
+
+func (i *controllerPodSecurityPolicyPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerPodSecurityPolicy] {
+	return pulumix.Output[*ControllerPodSecurityPolicy]{
+		OutputState: i.ToControllerPodSecurityPolicyPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerPodSecurityPolicyOutput struct{ *pulumi.OutputState }
@@ -6135,6 +6751,12 @@ func (o ControllerPodSecurityPolicyOutput) ToControllerPodSecurityPolicyPtrOutpu
 	}).(ControllerPodSecurityPolicyPtrOutput)
 }
 
+func (o ControllerPodSecurityPolicyOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerPodSecurityPolicy] {
+	return pulumix.Output[ControllerPodSecurityPolicy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerPodSecurityPolicyOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ControllerPodSecurityPolicy) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
@@ -6151,6 +6773,12 @@ func (o ControllerPodSecurityPolicyPtrOutput) ToControllerPodSecurityPolicyPtrOu
 
 func (o ControllerPodSecurityPolicyPtrOutput) ToControllerPodSecurityPolicyPtrOutputWithContext(ctx context.Context) ControllerPodSecurityPolicyPtrOutput {
 	return o
+}
+
+func (o ControllerPodSecurityPolicyPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerPodSecurityPolicy] {
+	return pulumix.Output[*ControllerPodSecurityPolicy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerPodSecurityPolicyPtrOutput) Elem() ControllerPodSecurityPolicyOutput {
@@ -6180,7 +6808,7 @@ type ControllerPort struct {
 // ControllerPortInput is an input type that accepts ControllerPortArgs and ControllerPortOutput values.
 // You can construct a concrete instance of `ControllerPortInput` via:
 //
-//          ControllerPortArgs{...}
+//	ControllerPortArgs{...}
 type ControllerPortInput interface {
 	pulumi.Input
 
@@ -6205,6 +6833,12 @@ func (i ControllerPortArgs) ToControllerPortOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerPortOutput)
 }
 
+func (i ControllerPortArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerPort] {
+	return pulumix.Output[ControllerPort]{
+		OutputState: i.ToControllerPortOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerPortArgs) ToControllerPortPtrOutput() ControllerPortPtrOutput {
 	return i.ToControllerPortPtrOutputWithContext(context.Background())
 }
@@ -6216,11 +6850,11 @@ func (i ControllerPortArgs) ToControllerPortPtrOutputWithContext(ctx context.Con
 // ControllerPortPtrInput is an input type that accepts ControllerPortArgs, ControllerPortPtr and ControllerPortPtrOutput values.
 // You can construct a concrete instance of `ControllerPortPtrInput` via:
 //
-//          ControllerPortArgs{...}
+//	        ControllerPortArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerPortPtrInput interface {
 	pulumi.Input
 
@@ -6244,6 +6878,12 @@ func (i *controllerPortPtrType) ToControllerPortPtrOutput() ControllerPortPtrOut
 
 func (i *controllerPortPtrType) ToControllerPortPtrOutputWithContext(ctx context.Context) ControllerPortPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerPortPtrOutput)
+}
+
+func (i *controllerPortPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerPort] {
+	return pulumix.Output[*ControllerPort]{
+		OutputState: i.ToControllerPortPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerPortOutput struct{ *pulumi.OutputState }
@@ -6270,6 +6910,12 @@ func (o ControllerPortOutput) ToControllerPortPtrOutputWithContext(ctx context.C
 	}).(ControllerPortPtrOutput)
 }
 
+func (o ControllerPortOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerPort] {
+	return pulumix.Output[ControllerPort]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerPortOutput) Http() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ControllerPort) *int { return v.Http }).(pulumi.IntPtrOutput)
 }
@@ -6290,6 +6936,12 @@ func (o ControllerPortPtrOutput) ToControllerPortPtrOutput() ControllerPortPtrOu
 
 func (o ControllerPortPtrOutput) ToControllerPortPtrOutputWithContext(ctx context.Context) ControllerPortPtrOutput {
 	return o
+}
+
+func (o ControllerPortPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerPort] {
+	return pulumix.Output[*ControllerPort]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerPortPtrOutput) Elem() ControllerPortOutput {
@@ -6329,7 +6981,7 @@ type ControllerPublishService struct {
 // ControllerPublishServiceInput is an input type that accepts ControllerPublishServiceArgs and ControllerPublishServiceOutput values.
 // You can construct a concrete instance of `ControllerPublishServiceInput` via:
 //
-//          ControllerPublishServiceArgs{...}
+//	ControllerPublishServiceArgs{...}
 type ControllerPublishServiceInput interface {
 	pulumi.Input
 
@@ -6355,6 +7007,12 @@ func (i ControllerPublishServiceArgs) ToControllerPublishServiceOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerPublishServiceOutput)
 }
 
+func (i ControllerPublishServiceArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerPublishService] {
+	return pulumix.Output[ControllerPublishService]{
+		OutputState: i.ToControllerPublishServiceOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerPublishServiceArgs) ToControllerPublishServicePtrOutput() ControllerPublishServicePtrOutput {
 	return i.ToControllerPublishServicePtrOutputWithContext(context.Background())
 }
@@ -6366,11 +7024,11 @@ func (i ControllerPublishServiceArgs) ToControllerPublishServicePtrOutputWithCon
 // ControllerPublishServicePtrInput is an input type that accepts ControllerPublishServiceArgs, ControllerPublishServicePtr and ControllerPublishServicePtrOutput values.
 // You can construct a concrete instance of `ControllerPublishServicePtrInput` via:
 //
-//          ControllerPublishServiceArgs{...}
+//	        ControllerPublishServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerPublishServicePtrInput interface {
 	pulumi.Input
 
@@ -6394,6 +7052,12 @@ func (i *controllerPublishServicePtrType) ToControllerPublishServicePtrOutput() 
 
 func (i *controllerPublishServicePtrType) ToControllerPublishServicePtrOutputWithContext(ctx context.Context) ControllerPublishServicePtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerPublishServicePtrOutput)
+}
+
+func (i *controllerPublishServicePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerPublishService] {
+	return pulumix.Output[*ControllerPublishService]{
+		OutputState: i.ToControllerPublishServicePtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerPublishServiceOutput struct{ *pulumi.OutputState }
@@ -6420,6 +7084,12 @@ func (o ControllerPublishServiceOutput) ToControllerPublishServicePtrOutputWithC
 	}).(ControllerPublishServicePtrOutput)
 }
 
+func (o ControllerPublishServiceOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerPublishService] {
+	return pulumix.Output[ControllerPublishService]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerPublishServiceOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ControllerPublishService) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
@@ -6441,6 +7111,12 @@ func (o ControllerPublishServicePtrOutput) ToControllerPublishServicePtrOutput()
 
 func (o ControllerPublishServicePtrOutput) ToControllerPublishServicePtrOutputWithContext(ctx context.Context) ControllerPublishServicePtrOutput {
 	return o
+}
+
+func (o ControllerPublishServicePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerPublishService] {
+	return pulumix.Output[*ControllerPublishService]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerPublishServicePtrOutput) Elem() ControllerPublishServiceOutput {
@@ -6480,7 +7156,7 @@ type ControllerRBAC struct {
 // ControllerRBACInput is an input type that accepts ControllerRBACArgs and ControllerRBACOutput values.
 // You can construct a concrete instance of `ControllerRBACInput` via:
 //
-//          ControllerRBACArgs{...}
+//	ControllerRBACArgs{...}
 type ControllerRBACInput interface {
 	pulumi.Input
 
@@ -6505,6 +7181,12 @@ func (i ControllerRBACArgs) ToControllerRBACOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerRBACOutput)
 }
 
+func (i ControllerRBACArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerRBAC] {
+	return pulumix.Output[ControllerRBAC]{
+		OutputState: i.ToControllerRBACOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerRBACArgs) ToControllerRBACPtrOutput() ControllerRBACPtrOutput {
 	return i.ToControllerRBACPtrOutputWithContext(context.Background())
 }
@@ -6516,11 +7198,11 @@ func (i ControllerRBACArgs) ToControllerRBACPtrOutputWithContext(ctx context.Con
 // ControllerRBACPtrInput is an input type that accepts ControllerRBACArgs, ControllerRBACPtr and ControllerRBACPtrOutput values.
 // You can construct a concrete instance of `ControllerRBACPtrInput` via:
 //
-//          ControllerRBACArgs{...}
+//	        ControllerRBACArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerRBACPtrInput interface {
 	pulumi.Input
 
@@ -6544,6 +7226,12 @@ func (i *controllerRBACPtrType) ToControllerRBACPtrOutput() ControllerRBACPtrOut
 
 func (i *controllerRBACPtrType) ToControllerRBACPtrOutputWithContext(ctx context.Context) ControllerRBACPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerRBACPtrOutput)
+}
+
+func (i *controllerRBACPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerRBAC] {
+	return pulumix.Output[*ControllerRBAC]{
+		OutputState: i.ToControllerRBACPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerRBACOutput struct{ *pulumi.OutputState }
@@ -6570,6 +7258,12 @@ func (o ControllerRBACOutput) ToControllerRBACPtrOutputWithContext(ctx context.C
 	}).(ControllerRBACPtrOutput)
 }
 
+func (o ControllerRBACOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerRBAC] {
+	return pulumix.Output[ControllerRBAC]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerRBACOutput) Create() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ControllerRBAC) *bool { return v.Create }).(pulumi.BoolPtrOutput)
 }
@@ -6590,6 +7284,12 @@ func (o ControllerRBACPtrOutput) ToControllerRBACPtrOutput() ControllerRBACPtrOu
 
 func (o ControllerRBACPtrOutput) ToControllerRBACPtrOutputWithContext(ctx context.Context) ControllerRBACPtrOutput {
 	return o
+}
+
+func (o ControllerRBACPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerRBAC] {
+	return pulumix.Output[*ControllerRBAC]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerRBACPtrOutput) Elem() ControllerRBACOutput {
@@ -6627,7 +7327,7 @@ type ControllerRollingUpdate struct {
 // ControllerRollingUpdateInput is an input type that accepts ControllerRollingUpdateArgs and ControllerRollingUpdateOutput values.
 // You can construct a concrete instance of `ControllerRollingUpdateInput` via:
 //
-//          ControllerRollingUpdateArgs{...}
+//	ControllerRollingUpdateArgs{...}
 type ControllerRollingUpdateInput interface {
 	pulumi.Input
 
@@ -6651,6 +7351,12 @@ func (i ControllerRollingUpdateArgs) ToControllerRollingUpdateOutputWithContext(
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerRollingUpdateOutput)
 }
 
+func (i ControllerRollingUpdateArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerRollingUpdate] {
+	return pulumix.Output[ControllerRollingUpdate]{
+		OutputState: i.ToControllerRollingUpdateOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerRollingUpdateArgs) ToControllerRollingUpdatePtrOutput() ControllerRollingUpdatePtrOutput {
 	return i.ToControllerRollingUpdatePtrOutputWithContext(context.Background())
 }
@@ -6662,11 +7368,11 @@ func (i ControllerRollingUpdateArgs) ToControllerRollingUpdatePtrOutputWithConte
 // ControllerRollingUpdatePtrInput is an input type that accepts ControllerRollingUpdateArgs, ControllerRollingUpdatePtr and ControllerRollingUpdatePtrOutput values.
 // You can construct a concrete instance of `ControllerRollingUpdatePtrInput` via:
 //
-//          ControllerRollingUpdateArgs{...}
+//	        ControllerRollingUpdateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerRollingUpdatePtrInput interface {
 	pulumi.Input
 
@@ -6690,6 +7396,12 @@ func (i *controllerRollingUpdatePtrType) ToControllerRollingUpdatePtrOutput() Co
 
 func (i *controllerRollingUpdatePtrType) ToControllerRollingUpdatePtrOutputWithContext(ctx context.Context) ControllerRollingUpdatePtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerRollingUpdatePtrOutput)
+}
+
+func (i *controllerRollingUpdatePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerRollingUpdate] {
+	return pulumix.Output[*ControllerRollingUpdate]{
+		OutputState: i.ToControllerRollingUpdatePtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerRollingUpdateOutput struct{ *pulumi.OutputState }
@@ -6716,6 +7428,12 @@ func (o ControllerRollingUpdateOutput) ToControllerRollingUpdatePtrOutputWithCon
 	}).(ControllerRollingUpdatePtrOutput)
 }
 
+func (o ControllerRollingUpdateOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerRollingUpdate] {
+	return pulumix.Output[ControllerRollingUpdate]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerRollingUpdateOutput) MaxUnavailable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ControllerRollingUpdate) *int { return v.MaxUnavailable }).(pulumi.IntPtrOutput)
 }
@@ -6732,6 +7450,12 @@ func (o ControllerRollingUpdatePtrOutput) ToControllerRollingUpdatePtrOutput() C
 
 func (o ControllerRollingUpdatePtrOutput) ToControllerRollingUpdatePtrOutputWithContext(ctx context.Context) ControllerRollingUpdatePtrOutput {
 	return o
+}
+
+func (o ControllerRollingUpdatePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerRollingUpdate] {
+	return pulumix.Output[*ControllerRollingUpdate]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerRollingUpdatePtrOutput) Elem() ControllerRollingUpdateOutput {
@@ -6761,7 +7485,7 @@ type ControllerScope struct {
 // ControllerScopeInput is an input type that accepts ControllerScopeArgs and ControllerScopeOutput values.
 // You can construct a concrete instance of `ControllerScopeInput` via:
 //
-//          ControllerScopeArgs{...}
+//	ControllerScopeArgs{...}
 type ControllerScopeInput interface {
 	pulumi.Input
 
@@ -6786,6 +7510,12 @@ func (i ControllerScopeArgs) ToControllerScopeOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerScopeOutput)
 }
 
+func (i ControllerScopeArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerScope] {
+	return pulumix.Output[ControllerScope]{
+		OutputState: i.ToControllerScopeOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerScopeArgs) ToControllerScopePtrOutput() ControllerScopePtrOutput {
 	return i.ToControllerScopePtrOutputWithContext(context.Background())
 }
@@ -6797,11 +7527,11 @@ func (i ControllerScopeArgs) ToControllerScopePtrOutputWithContext(ctx context.C
 // ControllerScopePtrInput is an input type that accepts ControllerScopeArgs, ControllerScopePtr and ControllerScopePtrOutput values.
 // You can construct a concrete instance of `ControllerScopePtrInput` via:
 //
-//          ControllerScopeArgs{...}
+//	        ControllerScopeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerScopePtrInput interface {
 	pulumi.Input
 
@@ -6825,6 +7555,12 @@ func (i *controllerScopePtrType) ToControllerScopePtrOutput() ControllerScopePtr
 
 func (i *controllerScopePtrType) ToControllerScopePtrOutputWithContext(ctx context.Context) ControllerScopePtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerScopePtrOutput)
+}
+
+func (i *controllerScopePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerScope] {
+	return pulumix.Output[*ControllerScope]{
+		OutputState: i.ToControllerScopePtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerScopeOutput struct{ *pulumi.OutputState }
@@ -6851,6 +7587,12 @@ func (o ControllerScopeOutput) ToControllerScopePtrOutputWithContext(ctx context
 	}).(ControllerScopePtrOutput)
 }
 
+func (o ControllerScopeOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerScope] {
+	return pulumix.Output[ControllerScope]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerScopeOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ControllerScope) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
@@ -6871,6 +7613,12 @@ func (o ControllerScopePtrOutput) ToControllerScopePtrOutput() ControllerScopePt
 
 func (o ControllerScopePtrOutput) ToControllerScopePtrOutputWithContext(ctx context.Context) ControllerScopePtrOutput {
 	return o
+}
+
+func (o ControllerScopePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerScope] {
+	return pulumix.Output[*ControllerScope]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerScopePtrOutput) Elem() ControllerScopeOutput {
@@ -6929,7 +7677,7 @@ type ControllerService struct {
 // ControllerServiceInput is an input type that accepts ControllerServiceArgs and ControllerServiceOutput values.
 // You can construct a concrete instance of `ControllerServiceInput` via:
 //
-//          ControllerServiceArgs{...}
+//	ControllerServiceArgs{...}
 type ControllerServiceInput interface {
 	pulumi.Input
 
@@ -6974,6 +7722,12 @@ func (i ControllerServiceArgs) ToControllerServiceOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerServiceOutput)
 }
 
+func (i ControllerServiceArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerService] {
+	return pulumix.Output[ControllerService]{
+		OutputState: i.ToControllerServiceOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerServiceArgs) ToControllerServicePtrOutput() ControllerServicePtrOutput {
 	return i.ToControllerServicePtrOutputWithContext(context.Background())
 }
@@ -6985,11 +7739,11 @@ func (i ControllerServiceArgs) ToControllerServicePtrOutputWithContext(ctx conte
 // ControllerServicePtrInput is an input type that accepts ControllerServiceArgs, ControllerServicePtr and ControllerServicePtrOutput values.
 // You can construct a concrete instance of `ControllerServicePtrInput` via:
 //
-//          ControllerServiceArgs{...}
+//	        ControllerServiceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerServicePtrInput interface {
 	pulumi.Input
 
@@ -7015,6 +7769,12 @@ func (i *controllerServicePtrType) ToControllerServicePtrOutputWithContext(ctx c
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerServicePtrOutput)
 }
 
+func (i *controllerServicePtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerService] {
+	return pulumix.Output[*ControllerService]{
+		OutputState: i.ToControllerServicePtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerServiceOutput struct{ *pulumi.OutputState }
 
 func (ControllerServiceOutput) ElementType() reflect.Type {
@@ -7037,6 +7797,12 @@ func (o ControllerServiceOutput) ToControllerServicePtrOutputWithContext(ctx con
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerService) *ControllerService {
 		return &v
 	}).(ControllerServicePtrOutput)
+}
+
+func (o ControllerServiceOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerService] {
+	return pulumix.Output[ControllerService]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerServiceOutput) Annotations() pulumi.StringMapMapOutput {
@@ -7124,6 +7890,12 @@ func (o ControllerServicePtrOutput) ToControllerServicePtrOutput() ControllerSer
 
 func (o ControllerServicePtrOutput) ToControllerServicePtrOutputWithContext(ctx context.Context) ControllerServicePtrOutput {
 	return o
+}
+
+func (o ControllerServicePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerService] {
+	return pulumix.Output[*ControllerService]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerServicePtrOutput) Elem() ControllerServiceOutput {
@@ -7303,7 +8075,7 @@ type ControllerServiceAccount struct {
 // ControllerServiceAccountInput is an input type that accepts ControllerServiceAccountArgs and ControllerServiceAccountOutput values.
 // You can construct a concrete instance of `ControllerServiceAccountInput` via:
 //
-//          ControllerServiceAccountArgs{...}
+//	ControllerServiceAccountArgs{...}
 type ControllerServiceAccountInput interface {
 	pulumi.Input
 
@@ -7329,6 +8101,12 @@ func (i ControllerServiceAccountArgs) ToControllerServiceAccountOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerServiceAccountOutput)
 }
 
+func (i ControllerServiceAccountArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerServiceAccount] {
+	return pulumix.Output[ControllerServiceAccount]{
+		OutputState: i.ToControllerServiceAccountOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerServiceAccountArgs) ToControllerServiceAccountPtrOutput() ControllerServiceAccountPtrOutput {
 	return i.ToControllerServiceAccountPtrOutputWithContext(context.Background())
 }
@@ -7340,11 +8118,11 @@ func (i ControllerServiceAccountArgs) ToControllerServiceAccountPtrOutputWithCon
 // ControllerServiceAccountPtrInput is an input type that accepts ControllerServiceAccountArgs, ControllerServiceAccountPtr and ControllerServiceAccountPtrOutput values.
 // You can construct a concrete instance of `ControllerServiceAccountPtrInput` via:
 //
-//          ControllerServiceAccountArgs{...}
+//	        ControllerServiceAccountArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerServiceAccountPtrInput interface {
 	pulumi.Input
 
@@ -7368,6 +8146,12 @@ func (i *controllerServiceAccountPtrType) ToControllerServiceAccountPtrOutput() 
 
 func (i *controllerServiceAccountPtrType) ToControllerServiceAccountPtrOutputWithContext(ctx context.Context) ControllerServiceAccountPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerServiceAccountPtrOutput)
+}
+
+func (i *controllerServiceAccountPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerServiceAccount] {
+	return pulumix.Output[*ControllerServiceAccount]{
+		OutputState: i.ToControllerServiceAccountPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerServiceAccountOutput struct{ *pulumi.OutputState }
@@ -7394,6 +8178,12 @@ func (o ControllerServiceAccountOutput) ToControllerServiceAccountPtrOutputWithC
 	}).(ControllerServiceAccountPtrOutput)
 }
 
+func (o ControllerServiceAccountOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerServiceAccount] {
+	return pulumix.Output[ControllerServiceAccount]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerServiceAccountOutput) AutomountServiceAccountToken() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ControllerServiceAccount) *bool { return v.AutomountServiceAccountToken }).(pulumi.BoolPtrOutput)
 }
@@ -7418,6 +8208,12 @@ func (o ControllerServiceAccountPtrOutput) ToControllerServiceAccountPtrOutput()
 
 func (o ControllerServiceAccountPtrOutput) ToControllerServiceAccountPtrOutputWithContext(ctx context.Context) ControllerServiceAccountPtrOutput {
 	return o
+}
+
+func (o ControllerServiceAccountPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerServiceAccount] {
+	return pulumix.Output[*ControllerServiceAccount]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerServiceAccountPtrOutput) Elem() ControllerServiceAccountOutput {
@@ -7471,7 +8267,7 @@ type ControllerServiceInternal struct {
 // ControllerServiceInternalInput is an input type that accepts ControllerServiceInternalArgs and ControllerServiceInternalOutput values.
 // You can construct a concrete instance of `ControllerServiceInternalInput` via:
 //
-//          ControllerServiceInternalArgs{...}
+//	ControllerServiceInternalArgs{...}
 type ControllerServiceInternalInput interface {
 	pulumi.Input
 
@@ -7502,6 +8298,12 @@ func (i ControllerServiceInternalArgs) ToControllerServiceInternalOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerServiceInternalOutput)
 }
 
+func (i ControllerServiceInternalArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerServiceInternal] {
+	return pulumix.Output[ControllerServiceInternal]{
+		OutputState: i.ToControllerServiceInternalOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerServiceInternalArgs) ToControllerServiceInternalPtrOutput() ControllerServiceInternalPtrOutput {
 	return i.ToControllerServiceInternalPtrOutputWithContext(context.Background())
 }
@@ -7513,11 +8315,11 @@ func (i ControllerServiceInternalArgs) ToControllerServiceInternalPtrOutputWithC
 // ControllerServiceInternalPtrInput is an input type that accepts ControllerServiceInternalArgs, ControllerServiceInternalPtr and ControllerServiceInternalPtrOutput values.
 // You can construct a concrete instance of `ControllerServiceInternalPtrInput` via:
 //
-//          ControllerServiceInternalArgs{...}
+//	        ControllerServiceInternalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerServiceInternalPtrInput interface {
 	pulumi.Input
 
@@ -7543,6 +8345,12 @@ func (i *controllerServiceInternalPtrType) ToControllerServiceInternalPtrOutputW
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerServiceInternalPtrOutput)
 }
 
+func (i *controllerServiceInternalPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerServiceInternal] {
+	return pulumix.Output[*ControllerServiceInternal]{
+		OutputState: i.ToControllerServiceInternalPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerServiceInternalOutput struct{ *pulumi.OutputState }
 
 func (ControllerServiceInternalOutput) ElementType() reflect.Type {
@@ -7565,6 +8373,12 @@ func (o ControllerServiceInternalOutput) ToControllerServiceInternalPtrOutputWit
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerServiceInternal) *ControllerServiceInternal {
 		return &v
 	}).(ControllerServiceInternalPtrOutput)
+}
+
+func (o ControllerServiceInternalOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerServiceInternal] {
+	return pulumix.Output[ControllerServiceInternal]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerServiceInternalOutput) Annotations() pulumi.StringMapMapOutput {
@@ -7605,6 +8419,12 @@ func (o ControllerServiceInternalPtrOutput) ToControllerServiceInternalPtrOutput
 
 func (o ControllerServiceInternalPtrOutput) ToControllerServiceInternalPtrOutputWithContext(ctx context.Context) ControllerServiceInternalPtrOutput {
 	return o
+}
+
+func (o ControllerServiceInternalPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerServiceInternal] {
+	return pulumix.Output[*ControllerServiceInternal]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerServiceInternalPtrOutput) Elem() ControllerServiceInternalOutput {
@@ -7683,7 +8503,7 @@ type ControllerServiceNodePorts struct {
 // ControllerServiceNodePortsInput is an input type that accepts ControllerServiceNodePortsArgs and ControllerServiceNodePortsOutput values.
 // You can construct a concrete instance of `ControllerServiceNodePortsInput` via:
 //
-//          ControllerServiceNodePortsArgs{...}
+//	ControllerServiceNodePortsArgs{...}
 type ControllerServiceNodePortsInput interface {
 	pulumi.Input
 
@@ -7710,6 +8530,12 @@ func (i ControllerServiceNodePortsArgs) ToControllerServiceNodePortsOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerServiceNodePortsOutput)
 }
 
+func (i ControllerServiceNodePortsArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerServiceNodePorts] {
+	return pulumix.Output[ControllerServiceNodePorts]{
+		OutputState: i.ToControllerServiceNodePortsOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerServiceNodePortsArgs) ToControllerServiceNodePortsPtrOutput() ControllerServiceNodePortsPtrOutput {
 	return i.ToControllerServiceNodePortsPtrOutputWithContext(context.Background())
 }
@@ -7721,11 +8547,11 @@ func (i ControllerServiceNodePortsArgs) ToControllerServiceNodePortsPtrOutputWit
 // ControllerServiceNodePortsPtrInput is an input type that accepts ControllerServiceNodePortsArgs, ControllerServiceNodePortsPtr and ControllerServiceNodePortsPtrOutput values.
 // You can construct a concrete instance of `ControllerServiceNodePortsPtrInput` via:
 //
-//          ControllerServiceNodePortsArgs{...}
+//	        ControllerServiceNodePortsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerServiceNodePortsPtrInput interface {
 	pulumi.Input
 
@@ -7751,6 +8577,12 @@ func (i *controllerServiceNodePortsPtrType) ToControllerServiceNodePortsPtrOutpu
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerServiceNodePortsPtrOutput)
 }
 
+func (i *controllerServiceNodePortsPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerServiceNodePorts] {
+	return pulumix.Output[*ControllerServiceNodePorts]{
+		OutputState: i.ToControllerServiceNodePortsPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ControllerServiceNodePortsOutput struct{ *pulumi.OutputState }
 
 func (ControllerServiceNodePortsOutput) ElementType() reflect.Type {
@@ -7773,6 +8605,12 @@ func (o ControllerServiceNodePortsOutput) ToControllerServiceNodePortsPtrOutputW
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControllerServiceNodePorts) *ControllerServiceNodePorts {
 		return &v
 	}).(ControllerServiceNodePortsPtrOutput)
+}
+
+func (o ControllerServiceNodePortsOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerServiceNodePorts] {
+	return pulumix.Output[ControllerServiceNodePorts]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerServiceNodePortsOutput) Http() pulumi.StringPtrOutput {
@@ -7803,6 +8641,12 @@ func (o ControllerServiceNodePortsPtrOutput) ToControllerServiceNodePortsPtrOutp
 
 func (o ControllerServiceNodePortsPtrOutput) ToControllerServiceNodePortsPtrOutputWithContext(ctx context.Context) ControllerServiceNodePortsPtrOutput {
 	return o
+}
+
+func (o ControllerServiceNodePortsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerServiceNodePorts] {
+	return pulumix.Output[*ControllerServiceNodePorts]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerServiceNodePortsPtrOutput) Elem() ControllerServiceNodePortsOutput {
@@ -7860,7 +8704,7 @@ type ControllerTcp struct {
 // ControllerTcpInput is an input type that accepts ControllerTcpArgs and ControllerTcpOutput values.
 // You can construct a concrete instance of `ControllerTcpInput` via:
 //
-//          ControllerTcpArgs{...}
+//	ControllerTcpArgs{...}
 type ControllerTcpInput interface {
 	pulumi.Input
 
@@ -7886,6 +8730,12 @@ func (i ControllerTcpArgs) ToControllerTcpOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerTcpOutput)
 }
 
+func (i ControllerTcpArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerTcp] {
+	return pulumix.Output[ControllerTcp]{
+		OutputState: i.ToControllerTcpOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerTcpArgs) ToControllerTcpPtrOutput() ControllerTcpPtrOutput {
 	return i.ToControllerTcpPtrOutputWithContext(context.Background())
 }
@@ -7897,11 +8747,11 @@ func (i ControllerTcpArgs) ToControllerTcpPtrOutputWithContext(ctx context.Conte
 // ControllerTcpPtrInput is an input type that accepts ControllerTcpArgs, ControllerTcpPtr and ControllerTcpPtrOutput values.
 // You can construct a concrete instance of `ControllerTcpPtrInput` via:
 //
-//          ControllerTcpArgs{...}
+//	        ControllerTcpArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerTcpPtrInput interface {
 	pulumi.Input
 
@@ -7925,6 +8775,12 @@ func (i *controllerTcpPtrType) ToControllerTcpPtrOutput() ControllerTcpPtrOutput
 
 func (i *controllerTcpPtrType) ToControllerTcpPtrOutputWithContext(ctx context.Context) ControllerTcpPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerTcpPtrOutput)
+}
+
+func (i *controllerTcpPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerTcp] {
+	return pulumix.Output[*ControllerTcp]{
+		OutputState: i.ToControllerTcpPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerTcpOutput struct{ *pulumi.OutputState }
@@ -7951,6 +8807,12 @@ func (o ControllerTcpOutput) ToControllerTcpPtrOutputWithContext(ctx context.Con
 	}).(ControllerTcpPtrOutput)
 }
 
+func (o ControllerTcpOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerTcp] {
+	return pulumix.Output[ControllerTcp]{
+		OutputState: o.OutputState,
+	}
+}
+
 // Annotations to be added to the tcp config configmap.
 func (o ControllerTcpOutput) Annotations() pulumi.StringMapOutput {
 	return o.ApplyT(func(v ControllerTcp) map[string]string { return v.Annotations }).(pulumi.StringMapOutput)
@@ -7972,6 +8834,12 @@ func (o ControllerTcpPtrOutput) ToControllerTcpPtrOutput() ControllerTcpPtrOutpu
 
 func (o ControllerTcpPtrOutput) ToControllerTcpPtrOutputWithContext(ctx context.Context) ControllerTcpPtrOutput {
 	return o
+}
+
+func (o ControllerTcpPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerTcp] {
+	return pulumix.Output[*ControllerTcp]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerTcpPtrOutput) Elem() ControllerTcpOutput {
@@ -8012,7 +8880,7 @@ type ControllerUdp struct {
 // ControllerUdpInput is an input type that accepts ControllerUdpArgs and ControllerUdpOutput values.
 // You can construct a concrete instance of `ControllerUdpInput` via:
 //
-//          ControllerUdpArgs{...}
+//	ControllerUdpArgs{...}
 type ControllerUdpInput interface {
 	pulumi.Input
 
@@ -8038,6 +8906,12 @@ func (i ControllerUdpArgs) ToControllerUdpOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerUdpOutput)
 }
 
+func (i ControllerUdpArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerUdp] {
+	return pulumix.Output[ControllerUdp]{
+		OutputState: i.ToControllerUdpOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerUdpArgs) ToControllerUdpPtrOutput() ControllerUdpPtrOutput {
 	return i.ToControllerUdpPtrOutputWithContext(context.Background())
 }
@@ -8049,11 +8923,11 @@ func (i ControllerUdpArgs) ToControllerUdpPtrOutputWithContext(ctx context.Conte
 // ControllerUdpPtrInput is an input type that accepts ControllerUdpArgs, ControllerUdpPtr and ControllerUdpPtrOutput values.
 // You can construct a concrete instance of `ControllerUdpPtrInput` via:
 //
-//          ControllerUdpArgs{...}
+//	        ControllerUdpArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerUdpPtrInput interface {
 	pulumi.Input
 
@@ -8077,6 +8951,12 @@ func (i *controllerUdpPtrType) ToControllerUdpPtrOutput() ControllerUdpPtrOutput
 
 func (i *controllerUdpPtrType) ToControllerUdpPtrOutputWithContext(ctx context.Context) ControllerUdpPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerUdpPtrOutput)
+}
+
+func (i *controllerUdpPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerUdp] {
+	return pulumix.Output[*ControllerUdp]{
+		OutputState: i.ToControllerUdpPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerUdpOutput struct{ *pulumi.OutputState }
@@ -8103,6 +8983,12 @@ func (o ControllerUdpOutput) ToControllerUdpPtrOutputWithContext(ctx context.Con
 	}).(ControllerUdpPtrOutput)
 }
 
+func (o ControllerUdpOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerUdp] {
+	return pulumix.Output[ControllerUdp]{
+		OutputState: o.OutputState,
+	}
+}
+
 // Annotations to be added to the udp config configmap.
 func (o ControllerUdpOutput) Annotations() pulumi.StringMapOutput {
 	return o.ApplyT(func(v ControllerUdp) map[string]string { return v.Annotations }).(pulumi.StringMapOutput)
@@ -8124,6 +9010,12 @@ func (o ControllerUdpPtrOutput) ToControllerUdpPtrOutput() ControllerUdpPtrOutpu
 
 func (o ControllerUdpPtrOutput) ToControllerUdpPtrOutputWithContext(ctx context.Context) ControllerUdpPtrOutput {
 	return o
+}
+
+func (o ControllerUdpPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerUdp] {
+	return pulumix.Output[*ControllerUdp]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerUdpPtrOutput) Elem() ControllerUdpOutput {
@@ -8163,7 +9055,7 @@ type ControllerUpdateStrategy struct {
 // ControllerUpdateStrategyInput is an input type that accepts ControllerUpdateStrategyArgs and ControllerUpdateStrategyOutput values.
 // You can construct a concrete instance of `ControllerUpdateStrategyInput` via:
 //
-//          ControllerUpdateStrategyArgs{...}
+//	ControllerUpdateStrategyArgs{...}
 type ControllerUpdateStrategyInput interface {
 	pulumi.Input
 
@@ -8188,6 +9080,12 @@ func (i ControllerUpdateStrategyArgs) ToControllerUpdateStrategyOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerUpdateStrategyOutput)
 }
 
+func (i ControllerUpdateStrategyArgs) ToOutput(ctx context.Context) pulumix.Output[ControllerUpdateStrategy] {
+	return pulumix.Output[ControllerUpdateStrategy]{
+		OutputState: i.ToControllerUpdateStrategyOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ControllerUpdateStrategyArgs) ToControllerUpdateStrategyPtrOutput() ControllerUpdateStrategyPtrOutput {
 	return i.ToControllerUpdateStrategyPtrOutputWithContext(context.Background())
 }
@@ -8199,11 +9097,11 @@ func (i ControllerUpdateStrategyArgs) ToControllerUpdateStrategyPtrOutputWithCon
 // ControllerUpdateStrategyPtrInput is an input type that accepts ControllerUpdateStrategyArgs, ControllerUpdateStrategyPtr and ControllerUpdateStrategyPtrOutput values.
 // You can construct a concrete instance of `ControllerUpdateStrategyPtrInput` via:
 //
-//          ControllerUpdateStrategyArgs{...}
+//	        ControllerUpdateStrategyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ControllerUpdateStrategyPtrInput interface {
 	pulumi.Input
 
@@ -8227,6 +9125,12 @@ func (i *controllerUpdateStrategyPtrType) ToControllerUpdateStrategyPtrOutput() 
 
 func (i *controllerUpdateStrategyPtrType) ToControllerUpdateStrategyPtrOutputWithContext(ctx context.Context) ControllerUpdateStrategyPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ControllerUpdateStrategyPtrOutput)
+}
+
+func (i *controllerUpdateStrategyPtrType) ToOutput(ctx context.Context) pulumix.Output[*ControllerUpdateStrategy] {
+	return pulumix.Output[*ControllerUpdateStrategy]{
+		OutputState: i.ToControllerUpdateStrategyPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type ControllerUpdateStrategyOutput struct{ *pulumi.OutputState }
@@ -8253,6 +9157,12 @@ func (o ControllerUpdateStrategyOutput) ToControllerUpdateStrategyPtrOutputWithC
 	}).(ControllerUpdateStrategyPtrOutput)
 }
 
+func (o ControllerUpdateStrategyOutput) ToOutput(ctx context.Context) pulumix.Output[ControllerUpdateStrategy] {
+	return pulumix.Output[ControllerUpdateStrategy]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ControllerUpdateStrategyOutput) RollingUpdate() ControllerRollingUpdatePtrOutput {
 	return o.ApplyT(func(v ControllerUpdateStrategy) *ControllerRollingUpdate { return v.RollingUpdate }).(ControllerRollingUpdatePtrOutput)
 }
@@ -8273,6 +9183,12 @@ func (o ControllerUpdateStrategyPtrOutput) ToControllerUpdateStrategyPtrOutput()
 
 func (o ControllerUpdateStrategyPtrOutput) ToControllerUpdateStrategyPtrOutputWithContext(ctx context.Context) ControllerUpdateStrategyPtrOutput {
 	return o
+}
+
+func (o ControllerUpdateStrategyPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ControllerUpdateStrategy] {
+	return pulumix.Output[*ControllerUpdateStrategy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ControllerUpdateStrategyPtrOutput) Elem() ControllerUpdateStrategyOutput {
@@ -8320,7 +9236,7 @@ type Keda struct {
 // KedaInput is an input type that accepts KedaArgs and KedaOutput values.
 // You can construct a concrete instance of `KedaInput` via:
 //
-//          KedaArgs{...}
+//	KedaArgs{...}
 type KedaInput interface {
 	pulumi.Input
 
@@ -8354,6 +9270,12 @@ func (i KedaArgs) ToKedaOutputWithContext(ctx context.Context) KedaOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(KedaOutput)
 }
 
+func (i KedaArgs) ToOutput(ctx context.Context) pulumix.Output[Keda] {
+	return pulumix.Output[Keda]{
+		OutputState: i.ToKedaOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i KedaArgs) ToKedaPtrOutput() KedaPtrOutput {
 	return i.ToKedaPtrOutputWithContext(context.Background())
 }
@@ -8365,11 +9287,11 @@ func (i KedaArgs) ToKedaPtrOutputWithContext(ctx context.Context) KedaPtrOutput 
 // KedaPtrInput is an input type that accepts KedaArgs, KedaPtr and KedaPtrOutput values.
 // You can construct a concrete instance of `KedaPtrInput` via:
 //
-//          KedaArgs{...}
+//	        KedaArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type KedaPtrInput interface {
 	pulumi.Input
 
@@ -8395,6 +9317,12 @@ func (i *kedaPtrType) ToKedaPtrOutputWithContext(ctx context.Context) KedaPtrOut
 	return pulumi.ToOutputWithContext(ctx, i).(KedaPtrOutput)
 }
 
+func (i *kedaPtrType) ToOutput(ctx context.Context) pulumix.Output[*Keda] {
+	return pulumix.Output[*Keda]{
+		OutputState: i.ToKedaPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 type KedaOutput struct{ *pulumi.OutputState }
 
 func (KedaOutput) ElementType() reflect.Type {
@@ -8417,6 +9345,12 @@ func (o KedaOutput) ToKedaPtrOutputWithContext(ctx context.Context) KedaPtrOutpu
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v Keda) *Keda {
 		return &v
 	}).(KedaPtrOutput)
+}
+
+func (o KedaOutput) ToOutput(ctx context.Context) pulumix.Output[Keda] {
+	return pulumix.Output[Keda]{
+		OutputState: o.OutputState,
+	}
 }
 
 // apiVersion changes with keda 1.x vs 2.x: 2.x = keda.sh/v1alpha1, 1.x = keda.k8s.io/v1alpha1.
@@ -8472,6 +9406,12 @@ func (o KedaPtrOutput) ToKedaPtrOutput() KedaPtrOutput {
 
 func (o KedaPtrOutput) ToKedaPtrOutputWithContext(ctx context.Context) KedaPtrOutput {
 	return o
+}
+
+func (o KedaPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Keda] {
+	return pulumix.Output[*Keda]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o KedaPtrOutput) Elem() KedaOutput {
@@ -8583,7 +9523,7 @@ type KedaScaledObject struct {
 // KedaScaledObjectInput is an input type that accepts KedaScaledObjectArgs and KedaScaledObjectOutput values.
 // You can construct a concrete instance of `KedaScaledObjectInput` via:
 //
-//          KedaScaledObjectArgs{...}
+//	KedaScaledObjectArgs{...}
 type KedaScaledObjectInput interface {
 	pulumi.Input
 
@@ -8608,6 +9548,12 @@ func (i KedaScaledObjectArgs) ToKedaScaledObjectOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(KedaScaledObjectOutput)
 }
 
+func (i KedaScaledObjectArgs) ToOutput(ctx context.Context) pulumix.Output[KedaScaledObject] {
+	return pulumix.Output[KedaScaledObject]{
+		OutputState: i.ToKedaScaledObjectOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i KedaScaledObjectArgs) ToKedaScaledObjectPtrOutput() KedaScaledObjectPtrOutput {
 	return i.ToKedaScaledObjectPtrOutputWithContext(context.Background())
 }
@@ -8619,11 +9565,11 @@ func (i KedaScaledObjectArgs) ToKedaScaledObjectPtrOutputWithContext(ctx context
 // KedaScaledObjectPtrInput is an input type that accepts KedaScaledObjectArgs, KedaScaledObjectPtr and KedaScaledObjectPtrOutput values.
 // You can construct a concrete instance of `KedaScaledObjectPtrInput` via:
 //
-//          KedaScaledObjectArgs{...}
+//	        KedaScaledObjectArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type KedaScaledObjectPtrInput interface {
 	pulumi.Input
 
@@ -8647,6 +9593,12 @@ func (i *kedaScaledObjectPtrType) ToKedaScaledObjectPtrOutput() KedaScaledObject
 
 func (i *kedaScaledObjectPtrType) ToKedaScaledObjectPtrOutputWithContext(ctx context.Context) KedaScaledObjectPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(KedaScaledObjectPtrOutput)
+}
+
+func (i *kedaScaledObjectPtrType) ToOutput(ctx context.Context) pulumix.Output[*KedaScaledObject] {
+	return pulumix.Output[*KedaScaledObject]{
+		OutputState: i.ToKedaScaledObjectPtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 type KedaScaledObjectOutput struct{ *pulumi.OutputState }
@@ -8673,6 +9625,12 @@ func (o KedaScaledObjectOutput) ToKedaScaledObjectPtrOutputWithContext(ctx conte
 	}).(KedaScaledObjectPtrOutput)
 }
 
+func (o KedaScaledObjectOutput) ToOutput(ctx context.Context) pulumix.Output[KedaScaledObject] {
+	return pulumix.Output[KedaScaledObject]{
+		OutputState: o.OutputState,
+	}
+}
+
 // Custom annotations for ScaledObject resource.
 func (o KedaScaledObjectOutput) Annotations() pulumi.StringMapOutput {
 	return o.ApplyT(func(v KedaScaledObject) map[string]string { return v.Annotations }).(pulumi.StringMapOutput)
@@ -8690,6 +9648,12 @@ func (o KedaScaledObjectPtrOutput) ToKedaScaledObjectPtrOutput() KedaScaledObjec
 
 func (o KedaScaledObjectPtrOutput) ToKedaScaledObjectPtrOutputWithContext(ctx context.Context) KedaScaledObjectPtrOutput {
 	return o
+}
+
+func (o KedaScaledObjectPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*KedaScaledObject] {
+	return pulumix.Output[*KedaScaledObject]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o KedaScaledObjectPtrOutput) Elem() KedaScaledObjectOutput {
@@ -8720,7 +9684,7 @@ type KedaTrigger struct {
 // KedaTriggerInput is an input type that accepts KedaTriggerArgs and KedaTriggerOutput values.
 // You can construct a concrete instance of `KedaTriggerInput` via:
 //
-//          KedaTriggerArgs{...}
+//	KedaTriggerArgs{...}
 type KedaTriggerInput interface {
 	pulumi.Input
 
@@ -8745,10 +9709,16 @@ func (i KedaTriggerArgs) ToKedaTriggerOutputWithContext(ctx context.Context) Ked
 	return pulumi.ToOutputWithContext(ctx, i).(KedaTriggerOutput)
 }
 
+func (i KedaTriggerArgs) ToOutput(ctx context.Context) pulumix.Output[KedaTrigger] {
+	return pulumix.Output[KedaTrigger]{
+		OutputState: i.ToKedaTriggerOutputWithContext(ctx).OutputState,
+	}
+}
+
 // KedaTriggerArrayInput is an input type that accepts KedaTriggerArray and KedaTriggerArrayOutput values.
 // You can construct a concrete instance of `KedaTriggerArrayInput` via:
 //
-//          KedaTriggerArray{ KedaTriggerArgs{...} }
+//	KedaTriggerArray{ KedaTriggerArgs{...} }
 type KedaTriggerArrayInput interface {
 	pulumi.Input
 
@@ -8770,6 +9740,12 @@ func (i KedaTriggerArray) ToKedaTriggerArrayOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(KedaTriggerArrayOutput)
 }
 
+func (i KedaTriggerArray) ToOutput(ctx context.Context) pulumix.Output[[]KedaTrigger] {
+	return pulumix.Output[[]KedaTrigger]{
+		OutputState: i.ToKedaTriggerArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type KedaTriggerOutput struct{ *pulumi.OutputState }
 
 func (KedaTriggerOutput) ElementType() reflect.Type {
@@ -8782,6 +9758,12 @@ func (o KedaTriggerOutput) ToKedaTriggerOutput() KedaTriggerOutput {
 
 func (o KedaTriggerOutput) ToKedaTriggerOutputWithContext(ctx context.Context) KedaTriggerOutput {
 	return o
+}
+
+func (o KedaTriggerOutput) ToOutput(ctx context.Context) pulumix.Output[KedaTrigger] {
+	return pulumix.Output[KedaTrigger]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o KedaTriggerOutput) Metadata() pulumi.StringMapMapOutput {
@@ -8804,6 +9786,12 @@ func (o KedaTriggerArrayOutput) ToKedaTriggerArrayOutput() KedaTriggerArrayOutpu
 
 func (o KedaTriggerArrayOutput) ToKedaTriggerArrayOutputWithContext(ctx context.Context) KedaTriggerArrayOutput {
 	return o
+}
+
+func (o KedaTriggerArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]KedaTrigger] {
+	return pulumix.Output[[]KedaTrigger]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o KedaTriggerArrayOutput) Index(i pulumi.IntInput) KedaTriggerOutput {
@@ -8887,7 +9875,7 @@ type Release struct {
 // ReleaseInput is an input type that accepts ReleaseArgs and ReleaseOutput values.
 // You can construct a concrete instance of `ReleaseInput` via:
 //
-//          ReleaseArgs{...}
+//	ReleaseArgs{...}
 type ReleaseInput interface {
 	pulumi.Input
 
@@ -8979,6 +9967,12 @@ func (i ReleaseArgs) ToReleaseOutputWithContext(ctx context.Context) ReleaseOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ReleaseOutput)
 }
 
+func (i ReleaseArgs) ToOutput(ctx context.Context) pulumix.Output[Release] {
+	return pulumix.Output[Release]{
+		OutputState: i.ToReleaseOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i ReleaseArgs) ToReleasePtrOutput() ReleasePtrOutput {
 	return i.ToReleasePtrOutputWithContext(context.Background())
 }
@@ -8990,11 +9984,11 @@ func (i ReleaseArgs) ToReleasePtrOutputWithContext(ctx context.Context) ReleaseP
 // ReleasePtrInput is an input type that accepts ReleaseArgs, ReleasePtr and ReleasePtrOutput values.
 // You can construct a concrete instance of `ReleasePtrInput` via:
 //
-//          ReleaseArgs{...}
+//	        ReleaseArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ReleasePtrInput interface {
 	pulumi.Input
 
@@ -9018,6 +10012,12 @@ func (i *releasePtrType) ToReleasePtrOutput() ReleasePtrOutput {
 
 func (i *releasePtrType) ToReleasePtrOutputWithContext(ctx context.Context) ReleasePtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ReleasePtrOutput)
+}
+
+func (i *releasePtrType) ToOutput(ctx context.Context) pulumix.Output[*Release] {
+	return pulumix.Output[*Release]{
+		OutputState: i.ToReleasePtrOutputWithContext(ctx).OutputState,
+	}
 }
 
 // A Release is an instance of a chart running in a Kubernetes cluster.
@@ -9045,6 +10045,12 @@ func (o ReleaseOutput) ToReleasePtrOutputWithContext(ctx context.Context) Releas
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v Release) *Release {
 		return &v
 	}).(ReleasePtrOutput)
+}
+
+func (o ReleaseOutput) ToOutput(ctx context.Context) pulumix.Output[Release] {
+	return pulumix.Output[Release]{
+		OutputState: o.OutputState,
+	}
 }
 
 // If set, installation process purges chart on fail. `skipAwait` will be disabled automatically if atomic is used.
@@ -9224,6 +10230,12 @@ func (o ReleasePtrOutput) ToReleasePtrOutput() ReleasePtrOutput {
 
 func (o ReleasePtrOutput) ToReleasePtrOutputWithContext(ctx context.Context) ReleasePtrOutput {
 	return o
+}
+
+func (o ReleasePtrOutput) ToOutput(ctx context.Context) pulumix.Output[*Release] {
+	return pulumix.Output[*Release]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ReleasePtrOutput) Elem() ReleaseOutput {
@@ -9586,7 +10598,7 @@ type ReleaseStatus struct {
 // ReleaseStatusInput is an input type that accepts ReleaseStatusArgs and ReleaseStatusOutput values.
 // You can construct a concrete instance of `ReleaseStatusInput` via:
 //
-//          ReleaseStatusArgs{...}
+//	ReleaseStatusArgs{...}
 type ReleaseStatusInput interface {
 	pulumi.Input
 
@@ -9623,6 +10635,12 @@ func (i ReleaseStatusArgs) ToReleaseStatusOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ReleaseStatusOutput)
 }
 
+func (i ReleaseStatusArgs) ToOutput(ctx context.Context) pulumix.Output[ReleaseStatus] {
+	return pulumix.Output[ReleaseStatus]{
+		OutputState: i.ToReleaseStatusOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ReleaseStatusOutput struct{ *pulumi.OutputState }
 
 func (ReleaseStatusOutput) ElementType() reflect.Type {
@@ -9635,6 +10653,12 @@ func (o ReleaseStatusOutput) ToReleaseStatusOutput() ReleaseStatusOutput {
 
 func (o ReleaseStatusOutput) ToReleaseStatusOutputWithContext(ctx context.Context) ReleaseStatusOutput {
 	return o
+}
+
+func (o ReleaseStatusOutput) ToOutput(ctx context.Context) pulumix.Output[ReleaseStatus] {
+	return pulumix.Output[ReleaseStatus]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The version number of the application being deployed.
@@ -9691,7 +10715,7 @@ type RepositoryOpts struct {
 // RepositoryOptsInput is an input type that accepts RepositoryOptsArgs and RepositoryOptsOutput values.
 // You can construct a concrete instance of `RepositoryOptsInput` via:
 //
-//          RepositoryOptsArgs{...}
+//	RepositoryOptsArgs{...}
 type RepositoryOptsInput interface {
 	pulumi.Input
 
@@ -9727,6 +10751,12 @@ func (i RepositoryOptsArgs) ToRepositoryOptsOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(RepositoryOptsOutput)
 }
 
+func (i RepositoryOptsArgs) ToOutput(ctx context.Context) pulumix.Output[RepositoryOpts] {
+	return pulumix.Output[RepositoryOpts]{
+		OutputState: i.ToRepositoryOptsOutputWithContext(ctx).OutputState,
+	}
+}
+
 func (i RepositoryOptsArgs) ToRepositoryOptsPtrOutput() RepositoryOptsPtrOutput {
 	return i.ToRepositoryOptsPtrOutputWithContext(context.Background())
 }
@@ -9738,11 +10768,11 @@ func (i RepositoryOptsArgs) ToRepositoryOptsPtrOutputWithContext(ctx context.Con
 // RepositoryOptsPtrInput is an input type that accepts RepositoryOptsArgs, RepositoryOptsPtr and RepositoryOptsPtrOutput values.
 // You can construct a concrete instance of `RepositoryOptsPtrInput` via:
 //
-//          RepositoryOptsArgs{...}
+//	        RepositoryOptsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RepositoryOptsPtrInput interface {
 	pulumi.Input
 
@@ -9768,6 +10798,12 @@ func (i *repositoryOptsPtrType) ToRepositoryOptsPtrOutputWithContext(ctx context
 	return pulumi.ToOutputWithContext(ctx, i).(RepositoryOptsPtrOutput)
 }
 
+func (i *repositoryOptsPtrType) ToOutput(ctx context.Context) pulumix.Output[*RepositoryOpts] {
+	return pulumix.Output[*RepositoryOpts]{
+		OutputState: i.ToRepositoryOptsPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
 // Specification defining the Helm chart repository to use.
 type RepositoryOptsOutput struct{ *pulumi.OutputState }
 
@@ -9791,6 +10827,12 @@ func (o RepositoryOptsOutput) ToRepositoryOptsPtrOutputWithContext(ctx context.C
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v RepositoryOpts) *RepositoryOpts {
 		return &v
 	}).(RepositoryOptsPtrOutput)
+}
+
+func (o RepositoryOptsOutput) ToOutput(ctx context.Context) pulumix.Output[RepositoryOpts] {
+	return pulumix.Output[RepositoryOpts]{
+		OutputState: o.OutputState,
+	}
 }
 
 // The Repository's CA File
@@ -9835,6 +10877,12 @@ func (o RepositoryOptsPtrOutput) ToRepositoryOptsPtrOutput() RepositoryOptsPtrOu
 
 func (o RepositoryOptsPtrOutput) ToRepositoryOptsPtrOutputWithContext(ctx context.Context) RepositoryOptsPtrOutput {
 	return o
+}
+
+func (o RepositoryOptsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*RepositoryOpts] {
+	return pulumix.Output[*RepositoryOpts]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o RepositoryOptsPtrOutput) Elem() RepositoryOptsOutput {
