@@ -7,8 +7,10 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk/go/kubernetes-ingress-nginx/internal"
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/core/v1"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
@@ -26,6 +28,7 @@ func NewIngressController(ctx *pulumi.Context,
 		args = &IngressControllerArgs{}
 	}
 
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IngressController
 	err := ctx.RegisterRemoteComponentResource("kubernetes-ingress-nginx:index:IngressController", name, args, &resource, opts...)
 	if err != nil {
@@ -112,10 +115,16 @@ func (i *IngressController) ToIngressControllerOutputWithContext(ctx context.Con
 	return pulumi.ToOutputWithContext(ctx, i).(IngressControllerOutput)
 }
 
+func (i *IngressController) ToOutput(ctx context.Context) pulumix.Output[*IngressController] {
+	return pulumix.Output[*IngressController]{
+		OutputState: i.ToIngressControllerOutputWithContext(ctx).OutputState,
+	}
+}
+
 // IngressControllerArrayInput is an input type that accepts IngressControllerArray and IngressControllerArrayOutput values.
 // You can construct a concrete instance of `IngressControllerArrayInput` via:
 //
-//          IngressControllerArray{ IngressControllerArgs{...} }
+//	IngressControllerArray{ IngressControllerArgs{...} }
 type IngressControllerArrayInput interface {
 	pulumi.Input
 
@@ -137,10 +146,16 @@ func (i IngressControllerArray) ToIngressControllerArrayOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(IngressControllerArrayOutput)
 }
 
+func (i IngressControllerArray) ToOutput(ctx context.Context) pulumix.Output[[]*IngressController] {
+	return pulumix.Output[[]*IngressController]{
+		OutputState: i.ToIngressControllerArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // IngressControllerMapInput is an input type that accepts IngressControllerMap and IngressControllerMapOutput values.
 // You can construct a concrete instance of `IngressControllerMapInput` via:
 //
-//          IngressControllerMap{ "key": IngressControllerArgs{...} }
+//	IngressControllerMap{ "key": IngressControllerArgs{...} }
 type IngressControllerMapInput interface {
 	pulumi.Input
 
@@ -162,6 +177,12 @@ func (i IngressControllerMap) ToIngressControllerMapOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(IngressControllerMapOutput)
 }
 
+func (i IngressControllerMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*IngressController] {
+	return pulumix.Output[map[string]*IngressController]{
+		OutputState: i.ToIngressControllerMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type IngressControllerOutput struct{ *pulumi.OutputState }
 
 func (IngressControllerOutput) ElementType() reflect.Type {
@@ -174,6 +195,12 @@ func (o IngressControllerOutput) ToIngressControllerOutput() IngressControllerOu
 
 func (o IngressControllerOutput) ToIngressControllerOutputWithContext(ctx context.Context) IngressControllerOutput {
 	return o
+}
+
+func (o IngressControllerOutput) ToOutput(ctx context.Context) pulumix.Output[*IngressController] {
+	return pulumix.Output[*IngressController]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Detailed information about the status of the underlying Helm deployment.
@@ -195,6 +222,12 @@ func (o IngressControllerArrayOutput) ToIngressControllerArrayOutputWithContext(
 	return o
 }
 
+func (o IngressControllerArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*IngressController] {
+	return pulumix.Output[[]*IngressController]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o IngressControllerArrayOutput) Index(i pulumi.IntInput) IngressControllerOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *IngressController {
 		return vs[0].([]*IngressController)[vs[1].(int)]
@@ -213,6 +246,12 @@ func (o IngressControllerMapOutput) ToIngressControllerMapOutput() IngressContro
 
 func (o IngressControllerMapOutput) ToIngressControllerMapOutputWithContext(ctx context.Context) IngressControllerMapOutput {
 	return o
+}
+
+func (o IngressControllerMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*IngressController] {
+	return pulumix.Output[map[string]*IngressController]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o IngressControllerMapOutput) MapIndex(k pulumi.StringInput) IngressControllerOutput {
