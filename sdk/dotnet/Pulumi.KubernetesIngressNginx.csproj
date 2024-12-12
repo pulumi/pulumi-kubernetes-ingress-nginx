@@ -4,10 +4,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Pulumi</Authors>
     <Company>Pulumi</Company>
-    <Description></Description>
-    <PackageLicenseExpression></PackageLicenseExpression>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
+    <Description>Strongly-typed NGINX Ingress Controller installation</Description>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://pulumi.io</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pulumi/pulumi-kubernetes-ingress-nginx</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
     <Version>1.0.0-alpha.0+dev</Version>
 

@@ -542,7 +542,7 @@ export interface ControllerServiceArgs {
      */
     internal?: pulumi.Input<inputs.ControllerServiceInternalArgs>;
     labels?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    loadBalancerIPs?: pulumi.Input<string>;
+    loadBalancerIP?: pulumi.Input<string>;
     loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
     nodePorts?: pulumi.Input<inputs.ControllerServiceNodePortsArgs>;
     ports?: pulumi.Input<inputs.ControllerPortArgs>;

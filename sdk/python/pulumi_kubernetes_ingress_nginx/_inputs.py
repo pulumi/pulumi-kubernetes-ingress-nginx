@@ -662,7 +662,7 @@ class ContollerAdmissionWebhooksArgs:
 
 if not MYPY:
     class ControllerAdmissionWebhooksCreateSecretJobArgsDict(TypedDict):
-        resources: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']]
+        resources: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgsDict']]
 elif False:
     ControllerAdmissionWebhooksCreateSecretJobArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -685,7 +685,7 @@ class ControllerAdmissionWebhooksCreateSecretJobArgs:
 
 if not MYPY:
     class ControllerAdmissionWebhooksPatchWebhbookJobArgsDict(TypedDict):
-        resources: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']]
+        resources: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgsDict']]
 elif False:
     ControllerAdmissionWebhooksPatchWebhbookJobArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -717,7 +717,7 @@ if not MYPY:
         Provide a priority class name to the webhook patching job.
         """
         run_as_user: NotRequired[pulumi.Input[int]]
-        tolerations: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]]]
+        tolerations: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgsDict']]]]
 elif False:
     ControllerAdmissionWebhooksPatchArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -1065,7 +1065,7 @@ class ControllerDefaultBackendServiceArgs:
 
 if not MYPY:
     class ControllerDefaultBackendArgsDict(TypedDict):
-        affinity: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.AffinityArgs']]
+        affinity: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.AffinityArgsDict']]
         autoscaling: NotRequired[pulumi.Input['AutoscalingArgsDict']]
         enabled: NotRequired[pulumi.Input[bool]]
         existing_psp: NotRequired[pulumi.Input[str]]
@@ -1073,17 +1073,17 @@ if not MYPY:
         Use an existing PSP instead of creating one.
         """
         extra_args: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
-        extra_envs: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]]]
-        extra_volume_mounts: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]]
+        extra_envs: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgsDict']]]]
+        extra_volume_mounts: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgsDict']]]]
         """
         Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
         """
-        extra_volumes: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]]
+        extra_volumes: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgsDict']]]]
         """
         Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
         """
         image: NotRequired[pulumi.Input['ControllerImageArgsDict']]
-        liveness_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']]
+        liveness_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgsDict']]
         """
         Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
         """
@@ -1101,21 +1101,21 @@ if not MYPY:
         """
         labels to add to the pod container metadata
         """
-        pod_security_context: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs']]
+        pod_security_context: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgsDict']]
         """
         Security Context policies for controller pods. See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.
         """
         port: NotRequired[pulumi.Input[int]]
         priority_class_name: NotRequired[pulumi.Input[str]]
-        readiness_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']]
+        readiness_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgsDict']]
         """
         Readiness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
         """
         replica_count: NotRequired[pulumi.Input[int]]
-        resources: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']]
+        resources: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgsDict']]
         service: NotRequired[pulumi.Input['ControllerDefaultBackendServiceArgsDict']]
         service_account: NotRequired[pulumi.Input['ControllerServiceAccountArgsDict']]
-        tolerations: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]]]
+        tolerations: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgsDict']]]]
         """
         Node tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
         """
@@ -2609,7 +2609,7 @@ if not MYPY:
         Enables an additional internal load balancer (besides the external one). Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
         """
         labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
-        load_balancer_ips: NotRequired[pulumi.Input[str]]
+        load_balancer_ip: NotRequired[pulumi.Input[str]]
         load_balancer_source_ranges: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
         node_ports: NotRequired[pulumi.Input['ControllerServiceNodePortsArgsDict']]
         ports: NotRequired[pulumi.Input['ControllerPortArgsDict']]
@@ -2635,7 +2635,7 @@ class ControllerServiceArgs:
                  health_check_node_port: Optional[pulumi.Input[int]] = None,
                  internal: Optional[pulumi.Input['ControllerServiceInternalArgs']] = None,
                  labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
-                 load_balancer_ips: Optional[pulumi.Input[str]] = None,
+                 load_balancer_ip: Optional[pulumi.Input[str]] = None,
                  load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  node_ports: Optional[pulumi.Input['ControllerServiceNodePortsArgs']] = None,
                  ports: Optional[pulumi.Input['ControllerPortArgs']] = None,
@@ -2669,8 +2669,8 @@ class ControllerServiceArgs:
             pulumi.set(__self__, "internal", internal)
         if labels is not None:
             pulumi.set(__self__, "labels", labels)
-        if load_balancer_ips is not None:
-            pulumi.set(__self__, "load_balancer_ips", load_balancer_ips)
+        if load_balancer_ip is not None:
+            pulumi.set(__self__, "load_balancer_ip", load_balancer_ip)
         if load_balancer_source_ranges is not None:
             pulumi.set(__self__, "load_balancer_source_ranges", load_balancer_source_ranges)
         if node_ports is not None:
@@ -2787,13 +2787,13 @@ class ControllerServiceArgs:
         pulumi.set(self, "labels", value)
 
     @property
-    @pulumi.getter(name="loadBalancerIPs")
-    def load_balancer_ips(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "load_balancer_ips")
+    @pulumi.getter(name="loadBalancerIP")
+    def load_balancer_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "load_balancer_ip")
 
-    @load_balancer_ips.setter
-    def load_balancer_ips(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "load_balancer_ips", value)
+    @load_balancer_ip.setter
+    def load_balancer_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "load_balancer_ip", value)
 
     @property
     @pulumi.getter(name="loadBalancerSourceRanges")
@@ -2986,7 +2986,7 @@ if not MYPY:
         Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers.
         """
         admission_webhooks: NotRequired[pulumi.Input['ContollerAdmissionWebhooksArgsDict']]
-        affinity: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.AffinityArgs']]
+        affinity: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.AffinityArgsDict']]
         """
         Affinity and anti-affinity Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity.
         """
@@ -3054,23 +3054,23 @@ if not MYPY:
         """
         Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
         """
-        extra_containers: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgs']]]]
+        extra_containers: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgsDict']]]]
         """
         Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
         """
-        extra_envs: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]]]
+        extra_envs: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgsDict']]]]
         """
         Additional environment variables to set.
         """
-        extra_init_containers: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgs']]]]
+        extra_init_containers: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgsDict']]]]
         """
         Containers, which are run before the app containers are started. - name: init-myservice   image: busybox   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
         """
-        extra_volume_mounts: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgs']]]]
+        extra_volume_mounts: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeMountArgsDict']]]]
         """
         Additional volumeMounts to the controller main container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
         """
-        extra_volumes: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgs']]]]
+        extra_volumes: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.VolumeArgsDict']]]]
         """
         Additional volumes to the controller pod.  - name: copy-portal-skins    emptyDir: {}
         """
@@ -3111,11 +3111,11 @@ if not MYPY:
         """
         DaemonSet or Deployment.
         """
-        lifecycle: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.LifecycleArgs']]
+        lifecycle: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.LifecycleArgsDict']]
         """
         Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
         """
-        liveness_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']]
+        liveness_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgsDict']]
         """
         Liveness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
         """
@@ -3142,7 +3142,7 @@ if not MYPY:
         """
         labels to add to the pod container metadata.
         """
-        pod_security_context: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs']]
+        pod_security_context: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgsDict']]
         """
         Security Context policies for controller pods.
         """
@@ -3155,7 +3155,7 @@ if not MYPY:
         """
         Allows customization of the source of the IP address or FQDN to report in the ingress status field. By default, it reads the information provided by the service. If disable, the status field reports the IP address of the node or nodes where an ingress controller pod is running.
         """
-        readiness_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']]
+        readiness_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgsDict']]
         """
         Readiness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
         """
@@ -3164,7 +3164,7 @@ if not MYPY:
         """
         Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply.
         """
-        resources: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgs']]
+        resources: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ResourceRequirementsArgsDict']]
         """
         Define requests resources to avoid probe issues due to CPU utilization in busy nodes ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903 Ideally, there should be no limits. https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/
         """
@@ -3173,7 +3173,7 @@ if not MYPY:
         Limit the scope of the controller.
         """
         service: NotRequired[pulumi.Input['ControllerServiceArgsDict']]
-        startup_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgs']]
+        startup_probe: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.ProbeArgsDict']]
         """
         Startup probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
         """
@@ -3189,11 +3189,11 @@ if not MYPY:
         """
         How long to wait for the drain of connections.
         """
-        tolerations: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]
+        tolerations: NotRequired[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgsDict']]
         """
         Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
         """
-        topology_spread_constraints: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TopologySpreadConstraintArgs']]]]
+        topology_spread_constraints: NotRequired[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TopologySpreadConstraintArgsDict']]]]
         """
         Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
         """

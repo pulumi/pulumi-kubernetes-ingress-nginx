@@ -70,8 +70,8 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
             set => _labels = value;
         }
 
-        [Input("loadBalancerIPs")]
-        public Input<string>? LoadBalancerIPs { get; set; }
+        [Input("loadBalancerIP")]
+        public Input<string>? LoadBalancerIP { get; set; }
 
         [Input("loadBalancerSourceRanges")]
         private InputList<string>? _loadBalancerSourceRanges;

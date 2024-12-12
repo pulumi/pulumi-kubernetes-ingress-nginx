@@ -1,10 +1,16 @@
 [project]
   name = "pulumi_kubernetes_ingress_nginx"
+  description = "Strongly-typed NGINX Ingress Controller installation"
   dependencies = ["parver>=0.2.1", "pulumi>=3.0.0,<4.0.0", "pulumi-kubernetes>=4.0.0,<5.0.0", "semver>=2.8.1", "typing-extensions>=4.11; python_version < \"3.11\""]
   keywords = ["pulumi", "kubernetes", "nginx", "kind/component", "category/infrastructure"]
   readme = "README.md"
   requires-python = ">=3.9"
   version = "1.0.0a0+dev"
+  [project.license]
+    text = "Apache-2.0"
+  [project.urls]
+    Homepage = "https://pulumi.io"
+    Repository = "https://github.com/pulumi/pulumi-kubernetes-ingress-nginx"
 
 [build-system]
   requires = ["setuptools>=61.0"]
