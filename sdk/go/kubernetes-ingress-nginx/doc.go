@@ -1,3 +1,2 @@
-// Package kubernetes-ingress-nginx exports types, functions, subpackages for provisioning kubernetes-ingress-nginx resources.
-//
+// Package kubernetesingressnginx exports types, functions, subpackages for provisioning kubernetesingressnginx resources.
 package kubernetesingressnginx
