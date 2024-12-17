@@ -2610,6 +2610,7 @@ if not MYPY:
         """
         labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
         load_balancer_ip: NotRequired[pulumi.Input[str]]
+        load_balancer_ips: NotRequired[pulumi.Input[str]]
         load_balancer_source_ranges: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
         node_ports: NotRequired[pulumi.Input['ControllerServiceNodePortsArgsDict']]
         ports: NotRequired[pulumi.Input['ControllerPortArgsDict']]
@@ -2636,6 +2637,7 @@ class ControllerServiceArgs:
                  internal: Optional[pulumi.Input['ControllerServiceInternalArgs']] = None,
                  labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
                  load_balancer_ip: Optional[pulumi.Input[str]] = None,
+                 load_balancer_ips: Optional[pulumi.Input[str]] = None,
                  load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  node_ports: Optional[pulumi.Input['ControllerServiceNodePortsArgs']] = None,
                  ports: Optional[pulumi.Input['ControllerPortArgs']] = None,
@@ -2671,6 +2673,8 @@ class ControllerServiceArgs:
             pulumi.set(__self__, "labels", labels)
         if load_balancer_ip is not None:
             pulumi.set(__self__, "load_balancer_ip", load_balancer_ip)
+        if load_balancer_ips is not None:
+            pulumi.set(__self__, "load_balancer_ips", load_balancer_ips)
         if load_balancer_source_ranges is not None:
             pulumi.set(__self__, "load_balancer_source_ranges", load_balancer_source_ranges)
         if node_ports is not None:
@@ -2794,6 +2798,15 @@ class ControllerServiceArgs:
     @load_balancer_ip.setter
     def load_balancer_ip(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "load_balancer_ip", value)
+
+    @property
+    @pulumi.getter(name="loadBalancerIPs")
+    def load_balancer_ips(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "load_balancer_ips")
+
+    @load_balancer_ips.setter
+    def load_balancer_ips(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "load_balancer_ips", value)
 
     @property
     @pulumi.getter(name="loadBalancerSourceRanges")

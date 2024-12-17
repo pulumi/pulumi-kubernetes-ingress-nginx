@@ -131,6 +131,13 @@ public final class ControllerServiceArgs extends com.pulumi.resources.ResourceAr
         return Optional.ofNullable(this.loadBalancerIP);
     }
 
+    @Import(name="loadBalancerIPs")
+    private @Nullable Output<String> loadBalancerIPs;
+
+    public Optional<Output<String>> loadBalancerIPs() {
+        return Optional.ofNullable(this.loadBalancerIPs);
+    }
+
     @Import(name="loadBalancerSourceRanges")
     private @Nullable Output<List<String>> loadBalancerSourceRanges;
 
@@ -195,6 +202,7 @@ public final class ControllerServiceArgs extends com.pulumi.resources.ResourceAr
         this.internal = $.internal;
         this.labels = $.labels;
         this.loadBalancerIP = $.loadBalancerIP;
+        this.loadBalancerIPs = $.loadBalancerIPs;
         this.loadBalancerSourceRanges = $.loadBalancerSourceRanges;
         this.nodePorts = $.nodePorts;
         this.ports = $.ports;
@@ -376,6 +384,15 @@ public final class ControllerServiceArgs extends com.pulumi.resources.ResourceAr
 
         public Builder loadBalancerIP(String loadBalancerIP) {
             return loadBalancerIP(Output.of(loadBalancerIP));
+        }
+
+        public Builder loadBalancerIPs(@Nullable Output<String> loadBalancerIPs) {
+            $.loadBalancerIPs = loadBalancerIPs;
+            return this;
+        }
+
+        public Builder loadBalancerIPs(String loadBalancerIPs) {
+            return loadBalancerIPs(Output.of(loadBalancerIPs));
         }
 
         public Builder loadBalancerSourceRanges(@Nullable Output<List<String>> loadBalancerSourceRanges) {

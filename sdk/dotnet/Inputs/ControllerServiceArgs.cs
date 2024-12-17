@@ -73,6 +73,9 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         [Input("loadBalancerIP")]
         public Input<string>? LoadBalancerIP { get; set; }
 
+        [Input("loadBalancerIPs")]
+        public Input<string>? LoadBalancerIPs { get; set; }
+
         [Input("loadBalancerSourceRanges")]
         private InputList<string>? _loadBalancerSourceRanges;
         public InputList<string> LoadBalancerSourceRanges

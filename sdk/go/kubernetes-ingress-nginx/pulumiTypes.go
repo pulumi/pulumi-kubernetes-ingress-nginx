@@ -6920,6 +6920,7 @@ type ControllerService struct {
 	Internal                 *ControllerServiceInternal   `pulumi:"internal"`
 	Labels                   map[string]map[string]string `pulumi:"labels"`
 	LoadBalancerIP           *string                      `pulumi:"loadBalancerIP"`
+	LoadBalancerIPs          *string                      `pulumi:"loadBalancerIPs"`
 	LoadBalancerSourceRanges []string                     `pulumi:"loadBalancerSourceRanges"`
 	NodePorts                *ControllerServiceNodePorts  `pulumi:"nodePorts"`
 	Ports                    *ControllerPort              `pulumi:"ports"`
@@ -6956,6 +6957,7 @@ type ControllerServiceArgs struct {
 	Internal                 ControllerServiceInternalPtrInput  `pulumi:"internal"`
 	Labels                   pulumi.StringMapMapInput           `pulumi:"labels"`
 	LoadBalancerIP           pulumi.StringPtrInput              `pulumi:"loadBalancerIP"`
+	LoadBalancerIPs          pulumi.StringPtrInput              `pulumi:"loadBalancerIPs"`
 	LoadBalancerSourceRanges pulumi.StringArrayInput            `pulumi:"loadBalancerSourceRanges"`
 	NodePorts                ControllerServiceNodePortsPtrInput `pulumi:"nodePorts"`
 	Ports                    ControllerPortPtrInput             `pulumi:"ports"`
@@ -7088,6 +7090,10 @@ func (o ControllerServiceOutput) Labels() pulumi.StringMapMapOutput {
 
 func (o ControllerServiceOutput) LoadBalancerIP() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ControllerService) *string { return v.LoadBalancerIP }).(pulumi.StringPtrOutput)
+}
+
+func (o ControllerServiceOutput) LoadBalancerIPs() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ControllerService) *string { return v.LoadBalancerIPs }).(pulumi.StringPtrOutput)
 }
 
 func (o ControllerServiceOutput) LoadBalancerSourceRanges() pulumi.StringArrayOutput {
@@ -7239,6 +7245,15 @@ func (o ControllerServicePtrOutput) LoadBalancerIP() pulumi.StringPtrOutput {
 			return nil
 		}
 		return v.LoadBalancerIP
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o ControllerServicePtrOutput) LoadBalancerIPs() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ControllerService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LoadBalancerIPs
 	}).(pulumi.StringPtrOutput)
 }
 

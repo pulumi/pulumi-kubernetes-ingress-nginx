@@ -30,7 +30,7 @@ func TestPyExamples(t *testing.T) {
 		directoryName    string
 		additionalConfig map[string]string
 	}{
-		"TestSimpleCertManagerPy": {directoryName: "simple-nginx-py"},
+		"TestSimpleIngressNginxPy": {directoryName: "simple-nginx-py"},
 	}
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {

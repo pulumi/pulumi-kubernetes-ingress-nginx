@@ -18,7 +18,7 @@ func TestTsExamples(t *testing.T) {
 		directoryName    string
 		additionalConfig map[string]string
 	}{
-		"TestSimpleCertManagerTs": {directoryName: "simple-nginx-ts"},
+		"TestSimpleIngressNginxTs": {directoryName: "simple-nginx-ts"},
 	}
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {

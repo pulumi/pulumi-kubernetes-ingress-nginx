@@ -1365,6 +1365,9 @@
                 "loadBalancerIP": {
                     "type": "string"
                 },
+                "loadBalancerIPs": {
+                    "type": "string"
+                },
                 "loadBalancerSourceRanges": {
                     "items": {
                         "type": "string"
