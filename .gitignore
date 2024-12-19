@@ -19,3 +19,13 @@ ci-scripts/
 /provider/cmd/pulumi-resource-*/schema-embed.json
 .vscode/
 **/*.bak
+ci-scripts/
+*.tar.gz
+
+sdk/dotnet/version.txt
+sdk/java/.gradle
+sdk/java/build/
+sdk/java/build.gradle
+sdk/python/venv
+sdk/python/pulumi_kubernetes_ingress_nginx.egg-info/
+sdk/python/pulumi_kubernetes_ingress_nginx/__pycache__/

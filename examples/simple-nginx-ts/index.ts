@@ -14,9 +14,16 @@ const ns = new k8s.core.v1.Namespace("sandbox-ns");
 // applications can depend on the IP address of the load balancer if needed.
 const ctrl = new nginx.IngressController("myctrl", {
     controller: {
+        hostPort: {
+            enabled: true,
+        },
         publishService: {
             enabled: true,
         },
+        service: {
+            type: "NodePort",
+            externalTrafficPolicy: "Local"
+        }
     },
     helmOptions: {
         namespace: ns.metadata.name,
@@ -28,10 +35,10 @@ const ctrl = new nginx.IngressController("myctrl", {
 // one domain name per application instance.
 const apps = [];
 const appBase = "hello-k8s";
-const appNames = [ `${appBase}-first`, `${appBase}-second` ];
+const appNames = [`${appBase}-first`, `${appBase}-second`];
 for (const appName of appNames) {
     const appSvc = new k8s.core.v1.Service(`${appName}-svc`, {
-        metadata: { 
+        metadata: {
             name: appName,
             namespace: ns.metadata.name
         },
@@ -42,7 +49,7 @@ for (const appName of appNames) {
         },
     });
     const appDep = new k8s.apps.v1.Deployment(`${appName}-dep`, {
-        metadata: { 
+        metadata: {
             name: appName,
             namespace: ns.metadata.name
         },
