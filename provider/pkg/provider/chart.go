@@ -406,11 +406,11 @@ type ControllerService struct {
 	ClusterIP   *string                 `pulumi:"clusterIP"`
 	// List of IP addresses at which the controller services are available
 	// Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
-	ExternalIPs              *[]string `pulumi:"externalIPs"`
-	LoadBalancerIP           *string   `pulumi:"loadBalancerIPs"`
-	LoadBalancerSourceRanges *[]string `pulumi:"loadBalancerSourceRanges"`
-	EnableHttp               *bool     `pulumi:"enableHttp"`
-	EnableHttps              *bool     `pulumi:"enableHttps"`
+	ExternalIPs              *[]string             `pulumi:"externalIPs"`
+	LoadBalancerIP           pulumi.StringPtrInput `pulumi:"loadBalancerIPs"`
+	LoadBalancerSourceRanges *[]string             `pulumi:"loadBalancerSourceRanges"`
+	EnableHttp               *bool                 `pulumi:"enableHttp"`
+	EnableHttps              *bool                 `pulumi:"enableHttps"`
 	// Set external traffic policy to: "Local" to preserve source IP on
 	// providers supporting it.
 	// Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
