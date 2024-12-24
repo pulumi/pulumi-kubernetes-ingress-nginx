@@ -148,13 +148,13 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
      * 
      */
     @Import(name="config")
-    private @Nullable Output<Map<String,Map<String,String>>> config;
+    private @Nullable Output<Map<String,String>> config;
 
     /**
      * @return Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
      * 
      */
-    public Optional<Output<Map<String,Map<String,String>>>> config() {
+    public Optional<Output<Map<String,String>>> config() {
         return Optional.ofNullable(this.config);
     }
 
@@ -163,13 +163,13 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
      * 
      */
     @Import(name="configAnnotations")
-    private @Nullable Output<Map<String,Map<String,String>>> configAnnotations;
+    private @Nullable Output<Map<String,String>> configAnnotations;
 
     /**
      * @return Annotations to be added to the controller config configuration configmap.
      * 
      */
-    public Optional<Output<Map<String,Map<String,String>>>> configAnnotations() {
+    public Optional<Output<Map<String,String>>> configAnnotations() {
         return Optional.ofNullable(this.configAnnotations);
     }
 
@@ -238,13 +238,13 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
      * 
      */
     @Import(name="dnsConfig")
-    private @Nullable Output<Map<String,Map<String,String>>> dnsConfig;
+    private @Nullable Output<Map<String,String>> dnsConfig;
 
     /**
      * @return Optionally customize the pod dnsConfig.
      * 
      */
-    public Optional<Output<Map<String,Map<String,String>>>> dnsConfig() {
+    public Optional<Output<Map<String,String>>> dnsConfig() {
         return Optional.ofNullable(this.dnsConfig);
     }
 
@@ -313,13 +313,13 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
      * 
      */
     @Import(name="extraArgs")
-    private @Nullable Output<Map<String,Map<String,String>>> extraArgs;
+    private @Nullable Output<Map<String,String>> extraArgs;
 
     /**
      * @return Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: &#34;&lt;namespace&gt;/&lt;secret_name&gt;&#34;`.
      * 
      */
-    public Optional<Output<Map<String,Map<String,String>>>> extraArgs() {
+    public Optional<Output<Map<String,String>>> extraArgs() {
         return Optional.ofNullable(this.extraArgs);
     }
 
@@ -1156,7 +1156,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder config(@Nullable Output<Map<String,Map<String,String>>> config) {
+        public Builder config(@Nullable Output<Map<String,String>> config) {
             $.config = config;
             return this;
         }
@@ -1167,7 +1167,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder config(Map<String,Map<String,String>> config) {
+        public Builder config(Map<String,String> config) {
             return config(Output.of(config));
         }
 
@@ -1177,7 +1177,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder configAnnotations(@Nullable Output<Map<String,Map<String,String>>> configAnnotations) {
+        public Builder configAnnotations(@Nullable Output<Map<String,String>> configAnnotations) {
             $.configAnnotations = configAnnotations;
             return this;
         }
@@ -1188,7 +1188,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder configAnnotations(Map<String,Map<String,String>> configAnnotations) {
+        public Builder configAnnotations(Map<String,String> configAnnotations) {
             return configAnnotations(Output.of(configAnnotations));
         }
 
@@ -1282,7 +1282,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder dnsConfig(@Nullable Output<Map<String,Map<String,String>>> dnsConfig) {
+        public Builder dnsConfig(@Nullable Output<Map<String,String>> dnsConfig) {
             $.dnsConfig = dnsConfig;
             return this;
         }
@@ -1293,7 +1293,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder dnsConfig(Map<String,Map<String,String>> dnsConfig) {
+        public Builder dnsConfig(Map<String,String> dnsConfig) {
             return dnsConfig(Output.of(dnsConfig));
         }
 
@@ -1387,7 +1387,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder extraArgs(@Nullable Output<Map<String,Map<String,String>>> extraArgs) {
+        public Builder extraArgs(@Nullable Output<Map<String,String>> extraArgs) {
             $.extraArgs = extraArgs;
             return this;
         }
@@ -1398,7 +1398,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder extraArgs(Map<String,Map<String,String>> extraArgs) {
+        public Builder extraArgs(Map<String,String> extraArgs) {
             return extraArgs(Output.of(extraArgs));
         }
 

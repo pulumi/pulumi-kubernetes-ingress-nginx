@@ -14,6 +14,9 @@ const ns = new k8s.core.v1.Namespace("sandbox-ns");
 // applications can depend on the IP address of the load balancer if needed.
 const ctrl = new nginx.IngressController("myctrl", {
     controller: {
+        config: {
+            "hsts-max-age": "31536000",
+        },
         hostPort: {
             enabled: true,
         },
@@ -125,3 +128,4 @@ const appIngress = new k8s.networking.v1.Ingress(`${appBase}-ingress`, {
 
 export const appStatuses = apps;
 export const controllerStatus = ctrl.status;
+export const namespace = ns.metadata.name;
