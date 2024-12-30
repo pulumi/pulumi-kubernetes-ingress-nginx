@@ -1,2 +1,2 @@
-// Package kubernetesingressnginx exports types, functions, subpackages for provisioning kubernetesingressnginx resources.
+// Strongly-typed NGINX Ingress Controller installation
 package kubernetesingressnginx

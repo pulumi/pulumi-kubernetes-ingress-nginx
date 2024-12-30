@@ -23,7 +23,7 @@ import (
 	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/pkg/version"
 )
 
-//go:embed schema-embed.json
+//go:embed schema.json
 var pulumiSchema []byte
 
 func main() {
