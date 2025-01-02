@@ -101,11 +101,11 @@ export interface ControllerArgs {
     /**
      * Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
      */
-    config?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    config?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Annotations to be added to the controller config configuration configmap.
      */
-    configAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    configAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Allows customization of the configmap / nginx-configmap namespace.
      */
@@ -125,7 +125,7 @@ export interface ControllerArgs {
     /**
      * Optionally customize the pod dnsConfig.
      */
-    dnsConfig?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    dnsConfig?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
      */
@@ -145,7 +145,7 @@ export interface ControllerArgs {
     /**
      * Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
      */
-    extraArgs?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    extraArgs?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
      */

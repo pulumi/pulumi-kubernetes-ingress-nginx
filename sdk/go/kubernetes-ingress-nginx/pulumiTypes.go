@@ -1519,9 +1519,9 @@ type Controller struct {
 	// Custom or additional autoscaling metrics ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
 	AutoscalingTemplate []AutoscalingTemplate `pulumi:"autoscalingTemplate"`
 	// Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
-	Config map[string]map[string]string `pulumi:"config"`
+	Config map[string]string `pulumi:"config"`
 	// Annotations to be added to the controller config configuration configmap.
-	ConfigAnnotations map[string]map[string]string `pulumi:"configAnnotations"`
+	ConfigAnnotations map[string]string `pulumi:"configAnnotations"`
 	// Allows customization of the configmap / nginx-configmap namespace.
 	ConfigMapNamespace *string `pulumi:"configMapNamespace"`
 	// Configures the controller container name.
@@ -1531,7 +1531,7 @@ type Controller struct {
 	// Override NGINX template.
 	CustomTemplate *ControllerCustomTemplate `pulumi:"customTemplate"`
 	// Optionally customize the pod dnsConfig.
-	DnsConfig map[string]map[string]string `pulumi:"dnsConfig"`
+	DnsConfig map[string]string `pulumi:"dnsConfig"`
 	// Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
 	DnsPolicy *string `pulumi:"dnsPolicy"`
 	// Election ID to use for status update.
@@ -1541,7 +1541,7 @@ type Controller struct {
 	// Use an existing PSP instead of creating one.
 	ExistingPsp *string `pulumi:"existingPsp"`
 	// Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
-	ExtraArgs map[string]map[string]string `pulumi:"extraArgs"`
+	ExtraArgs map[string]string `pulumi:"extraArgs"`
 	// Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
 	ExtraContainers []corev1.Container `pulumi:"extraContainers"`
 	// Additional environment variables to set.
@@ -1650,9 +1650,9 @@ type ControllerArgs struct {
 	// Custom or additional autoscaling metrics ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
 	AutoscalingTemplate AutoscalingTemplateArrayInput `pulumi:"autoscalingTemplate"`
 	// Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
-	Config pulumi.StringMapMapInput `pulumi:"config"`
+	Config pulumi.StringMapInput `pulumi:"config"`
 	// Annotations to be added to the controller config configuration configmap.
-	ConfigAnnotations pulumi.StringMapMapInput `pulumi:"configAnnotations"`
+	ConfigAnnotations pulumi.StringMapInput `pulumi:"configAnnotations"`
 	// Allows customization of the configmap / nginx-configmap namespace.
 	ConfigMapNamespace pulumi.StringPtrInput `pulumi:"configMapNamespace"`
 	// Configures the controller container name.
@@ -1662,7 +1662,7 @@ type ControllerArgs struct {
 	// Override NGINX template.
 	CustomTemplate ControllerCustomTemplatePtrInput `pulumi:"customTemplate"`
 	// Optionally customize the pod dnsConfig.
-	DnsConfig pulumi.StringMapMapInput `pulumi:"dnsConfig"`
+	DnsConfig pulumi.StringMapInput `pulumi:"dnsConfig"`
 	// Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
 	DnsPolicy pulumi.StringPtrInput `pulumi:"dnsPolicy"`
 	// Election ID to use for status update.
@@ -1672,7 +1672,7 @@ type ControllerArgs struct {
 	// Use an existing PSP instead of creating one.
 	ExistingPsp pulumi.StringPtrInput `pulumi:"existingPsp"`
 	// Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
-	ExtraArgs pulumi.StringMapMapInput `pulumi:"extraArgs"`
+	ExtraArgs pulumi.StringMapInput `pulumi:"extraArgs"`
 	// Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
 	ExtraContainers corev1.ContainerArrayInput `pulumi:"extraContainers"`
 	// Additional environment variables to set.
@@ -1867,13 +1867,13 @@ func (o ControllerOutput) AutoscalingTemplate() AutoscalingTemplateArrayOutput {
 }
 
 // Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
-func (o ControllerOutput) Config() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v Controller) map[string]map[string]string { return v.Config }).(pulumi.StringMapMapOutput)
+func (o ControllerOutput) Config() pulumi.StringMapOutput {
+	return o.ApplyT(func(v Controller) map[string]string { return v.Config }).(pulumi.StringMapOutput)
 }
 
 // Annotations to be added to the controller config configuration configmap.
-func (o ControllerOutput) ConfigAnnotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v Controller) map[string]map[string]string { return v.ConfigAnnotations }).(pulumi.StringMapMapOutput)
+func (o ControllerOutput) ConfigAnnotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v Controller) map[string]string { return v.ConfigAnnotations }).(pulumi.StringMapOutput)
 }
 
 // Allows customization of the configmap / nginx-configmap namespace.
@@ -1897,8 +1897,8 @@ func (o ControllerOutput) CustomTemplate() ControllerCustomTemplatePtrOutput {
 }
 
 // Optionally customize the pod dnsConfig.
-func (o ControllerOutput) DnsConfig() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v Controller) map[string]map[string]string { return v.DnsConfig }).(pulumi.StringMapMapOutput)
+func (o ControllerOutput) DnsConfig() pulumi.StringMapOutput {
+	return o.ApplyT(func(v Controller) map[string]string { return v.DnsConfig }).(pulumi.StringMapOutput)
 }
 
 // Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
@@ -1922,8 +1922,8 @@ func (o ControllerOutput) ExistingPsp() pulumi.StringPtrOutput {
 }
 
 // Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
-func (o ControllerOutput) ExtraArgs() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v Controller) map[string]map[string]string { return v.ExtraArgs }).(pulumi.StringMapMapOutput)
+func (o ControllerOutput) ExtraArgs() pulumi.StringMapOutput {
+	return o.ApplyT(func(v Controller) map[string]string { return v.ExtraArgs }).(pulumi.StringMapOutput)
 }
 
 // Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
@@ -2232,23 +2232,23 @@ func (o ControllerPtrOutput) AutoscalingTemplate() AutoscalingTemplateArrayOutpu
 }
 
 // Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
-func (o ControllerPtrOutput) Config() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *Controller) map[string]map[string]string {
+func (o ControllerPtrOutput) Config() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Controller) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.Config
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 // Annotations to be added to the controller config configuration configmap.
-func (o ControllerPtrOutput) ConfigAnnotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *Controller) map[string]map[string]string {
+func (o ControllerPtrOutput) ConfigAnnotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Controller) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.ConfigAnnotations
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 // Allows customization of the configmap / nginx-configmap namespace.
@@ -2292,13 +2292,13 @@ func (o ControllerPtrOutput) CustomTemplate() ControllerCustomTemplatePtrOutput 
 }
 
 // Optionally customize the pod dnsConfig.
-func (o ControllerPtrOutput) DnsConfig() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *Controller) map[string]map[string]string {
+func (o ControllerPtrOutput) DnsConfig() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Controller) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.DnsConfig
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 // Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
@@ -2342,13 +2342,13 @@ func (o ControllerPtrOutput) ExistingPsp() pulumi.StringPtrOutput {
 }
 
 // Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
-func (o ControllerPtrOutput) ExtraArgs() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *Controller) map[string]map[string]string {
+func (o ControllerPtrOutput) ExtraArgs() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Controller) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.ExtraArgs
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 // Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.

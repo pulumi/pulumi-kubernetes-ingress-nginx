@@ -533,16 +533,10 @@
                     "type": "array"
                 },
                 "config": {
-                    "additionalProperties": {
-                        "type": "object"
-                    },
                     "description": "Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.",
                     "type": "object"
                 },
                 "configAnnotations": {
-                    "additionalProperties": {
-                        "type": "object"
-                    },
                     "description": "Annotations to be added to the controller config configuration configmap.",
                     "type": "object"
                 },
@@ -563,9 +557,6 @@
                     "description": "Override NGINX template."
                 },
                 "dnsConfig": {
-                    "additionalProperties": {
-                        "type": "object"
-                    },
                     "description": "Optionally customize the pod dnsConfig.",
                     "type": "object"
                 },
@@ -586,9 +577,6 @@
                     "type": "string"
                 },
                 "extraArgs": {
-                    "additionalProperties": {
-                        "type": "object"
-                    },
                     "description": "Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: \"<namespace>/<secret_name>\"`.",
                     "type": "object"
                 },
@@ -1602,6 +1590,7 @@
         },
         "nodejs": {
             "dependencies": {
+                "@pulumi/pulumi": "^3.0.0",
                 "@pulumi/kubernetes": "^4.0.0"
             },
             "devDependencies": {

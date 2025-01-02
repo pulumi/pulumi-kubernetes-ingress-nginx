@@ -70,26 +70,26 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         }
 
         [Input("config")]
-        private InputMap<ImmutableDictionary<string, string>>? _config;
+        private InputMap<string>? _config;
 
         /// <summary>
         /// Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
         /// </summary>
-        public InputMap<ImmutableDictionary<string, string>> Config
+        public InputMap<string> Config
         {
-            get => _config ?? (_config = new InputMap<ImmutableDictionary<string, string>>());
+            get => _config ?? (_config = new InputMap<string>());
             set => _config = value;
         }
 
         [Input("configAnnotations")]
-        private InputMap<ImmutableDictionary<string, string>>? _configAnnotations;
+        private InputMap<string>? _configAnnotations;
 
         /// <summary>
         /// Annotations to be added to the controller config configuration configmap.
         /// </summary>
-        public InputMap<ImmutableDictionary<string, string>> ConfigAnnotations
+        public InputMap<string> ConfigAnnotations
         {
-            get => _configAnnotations ?? (_configAnnotations = new InputMap<ImmutableDictionary<string, string>>());
+            get => _configAnnotations ?? (_configAnnotations = new InputMap<string>());
             set => _configAnnotations = value;
         }
 
@@ -118,14 +118,14 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public Input<Inputs.ControllerCustomTemplateArgs>? CustomTemplate { get; set; }
 
         [Input("dnsConfig")]
-        private InputMap<ImmutableDictionary<string, string>>? _dnsConfig;
+        private InputMap<string>? _dnsConfig;
 
         /// <summary>
         /// Optionally customize the pod dnsConfig.
         /// </summary>
-        public InputMap<ImmutableDictionary<string, string>> DnsConfig
+        public InputMap<string> DnsConfig
         {
-            get => _dnsConfig ?? (_dnsConfig = new InputMap<ImmutableDictionary<string, string>>());
+            get => _dnsConfig ?? (_dnsConfig = new InputMap<string>());
             set => _dnsConfig = value;
         }
 
@@ -154,14 +154,14 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public Input<string>? ExistingPsp { get; set; }
 
         [Input("extraArgs")]
-        private InputMap<ImmutableDictionary<string, string>>? _extraArgs;
+        private InputMap<string>? _extraArgs;
 
         /// <summary>
         /// Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "&lt;namespace&gt;/&lt;secret_name&gt;"`.
         /// </summary>
-        public InputMap<ImmutableDictionary<string, string>> ExtraArgs
+        public InputMap<string> ExtraArgs
         {
-            get => _extraArgs ?? (_extraArgs = new InputMap<ImmutableDictionary<string, string>>());
+            get => _extraArgs ?? (_extraArgs = new InputMap<string>());
             set => _extraArgs = value;
         }
 

@@ -3019,11 +3019,11 @@ if not MYPY:
         """
         Custom or additional autoscaling metrics ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
         """
-        config: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        config: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         """
         Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
         """
-        config_annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        config_annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         """
         Annotations to be added to the controller config configuration configmap.
         """
@@ -3043,7 +3043,7 @@ if not MYPY:
         """
         Override NGINX template.
         """
-        dns_config: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        dns_config: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         """
         Optionally customize the pod dnsConfig.
         """
@@ -3063,7 +3063,7 @@ if not MYPY:
         """
         Use an existing PSP instead of creating one.
         """
-        extra_args: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        extra_args: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         """
         Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
         """
@@ -3232,18 +3232,18 @@ class ControllerArgs:
                  annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  autoscaling: Optional[pulumi.Input['AutoscalingArgs']] = None,
                  autoscaling_template: Optional[pulumi.Input[Sequence[pulumi.Input['AutoscalingTemplateArgs']]]] = None,
-                 config: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
-                 config_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 config: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 config_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  config_map_namespace: Optional[pulumi.Input[str]] = None,
                  container_name: Optional[pulumi.Input[str]] = None,
                  container_port: Optional[pulumi.Input['ControllerPortArgs']] = None,
                  custom_template: Optional[pulumi.Input['ControllerCustomTemplateArgs']] = None,
-                 dns_config: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 dns_config: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  dns_policy: Optional[pulumi.Input[str]] = None,
                  election_id: Optional[pulumi.Input[str]] = None,
                  enable_mimalloc: Optional[pulumi.Input[bool]] = None,
                  existing_psp: Optional[pulumi.Input[str]] = None,
-                 extra_args: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 extra_args: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  extra_containers: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgs']]]] = None,
                  extra_envs: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]]] = None,
                  extra_init_containers: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgs']]]] = None,
@@ -3295,18 +3295,18 @@ class ControllerArgs:
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] annotations: Annotations to be added to the controller Deployment or DaemonSet.
         :param pulumi.Input['AutoscalingArgs'] autoscaling: Mutually exclusive with keda autoscaling.
         :param pulumi.Input[Sequence[pulumi.Input['AutoscalingTemplateArgs']]] autoscaling_template: Custom or additional autoscaling metrics ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
-        :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] config: Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
-        :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] config_annotations: Annotations to be added to the controller config configuration configmap.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] config: Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] config_annotations: Annotations to be added to the controller config configuration configmap.
         :param pulumi.Input[str] config_map_namespace: Allows customization of the configmap / nginx-configmap namespace.
         :param pulumi.Input[str] container_name: Configures the controller container name.
         :param pulumi.Input['ControllerPortArgs'] container_port: Configures the ports the nginx-controller listens on.
         :param pulumi.Input['ControllerCustomTemplateArgs'] custom_template: Override NGINX template.
-        :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] dns_config: Optionally customize the pod dnsConfig.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] dns_config: Optionally customize the pod dnsConfig.
         :param pulumi.Input[str] dns_policy: Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
         :param pulumi.Input[str] election_id: Election ID to use for status update.
         :param pulumi.Input[bool] enable_mimalloc: Enable mimalloc as a drop-in replacement for malloc. ref: https://github.com/microsoft/mimalloc.
         :param pulumi.Input[str] existing_psp: Use an existing PSP instead of creating one.
-        :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] extra_args: Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] extra_args: Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
         :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgs']]] extra_containers: Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
         :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.EnvVarArgs']]] extra_envs: Additional environment variables to set.
         :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.ContainerArgs']]] extra_init_containers: Containers, which are run before the app containers are started. - name: init-myservice   image: busybox   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
@@ -3554,26 +3554,26 @@ class ControllerArgs:
 
     @property
     @pulumi.getter
-    def config(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def config(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
         Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
         """
         return pulumi.get(self, "config")
 
     @config.setter
-    def config(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def config(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "config", value)
 
     @property
     @pulumi.getter(name="configAnnotations")
-    def config_annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def config_annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
         Annotations to be added to the controller config configuration configmap.
         """
         return pulumi.get(self, "config_annotations")
 
     @config_annotations.setter
-    def config_annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def config_annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "config_annotations", value)
 
     @property
@@ -3626,14 +3626,14 @@ class ControllerArgs:
 
     @property
     @pulumi.getter(name="dnsConfig")
-    def dns_config(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def dns_config(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
         Optionally customize the pod dnsConfig.
         """
         return pulumi.get(self, "dns_config")
 
     @dns_config.setter
-    def dns_config(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def dns_config(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "dns_config", value)
 
     @property
@@ -3686,14 +3686,14 @@ class ControllerArgs:
 
     @property
     @pulumi.getter(name="extraArgs")
-    def extra_args(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def extra_args(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
         Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
         """
         return pulumi.get(self, "extra_args")
 
     @extra_args.setter
-    def extra_args(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def extra_args(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "extra_args", value)
 
     @property
