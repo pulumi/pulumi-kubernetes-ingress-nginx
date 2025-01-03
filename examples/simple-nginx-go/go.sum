@@ -153,8 +153,8 @@ github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 h1:vkHw5I/plNdTr435
 github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231/go.mod h1:murToZ2N9hNJzewjHBgfFdXhZKjY3z5cYC1VXk+lbFE=
 github.com/pulumi/esc v0.11.1 h1:Ky07sE4lQmB6Ve2A3M3g+i0Y2No4nRVbDaCjTccuLII=
 github.com/pulumi/esc v0.11.1/go.mod h1:iCs5bP1xvleSzcMDwfNc1Ym/6EJ2P6xmrjy0iqb0ATs=
-github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.0.11-0.20250103141758-64dad13dcd66 h1:hopldRmfFopKPOcqpbfBG+1wTXWqE17uNLE2wg/DUYg=
-github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.0.11-0.20250103141758-64dad13dcd66/go.mod h1:kEqs1RnJ4ZYYovhsP/Vl04qKRE1SrYpznOYgGqXchUY=
+github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.0.11-0.20250103171011-3a427c8b33bc h1:UTDfSWtMKHSctByy8mRti+1+8bjICLjieAAcHV0Pv0U=
+github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.0.11-0.20250103171011-3a427c8b33bc/go.mod h1:kEqs1RnJ4ZYYovhsP/Vl04qKRE1SrYpznOYgGqXchUY=
 github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.19.0 h1:7AjJpUyW6YHHpZr0bI6Fy1A3/b7ERxq1LAo5mlyNN1Y=
 github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.19.0/go.mod h1:ATS+UN8pguMxypQAK+SaPewesU+UN5dpf93PNqVuHzs=
 github.com/pulumi/pulumi/sdk/v3 v3.144.1 h1:QQtCDERihhlfvcmRzqHeBmOER1Fg1VkFj9933Lxqv00=
