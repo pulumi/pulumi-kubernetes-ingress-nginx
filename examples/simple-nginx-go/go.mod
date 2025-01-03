@@ -5,7 +5,7 @@ go 1.23.1
 toolchain go1.23.4
 
 require (
-	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.0.11-0.20250102174840-1b87b85a1a20
+	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.0.11-0.20250103141758-64dad13dcd66
 	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.19.0
 	github.com/pulumi/pulumi/sdk/v3 v3.144.1
 )
