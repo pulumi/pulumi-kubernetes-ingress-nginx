@@ -5,7 +5,7 @@ go 1.23.1
 toolchain go1.23.4
 
 require (
-	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.0.11-0.20250103171011-3a427c8b33bc
+	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.0.10
 	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.19.0
 	github.com/pulumi/pulumi/sdk/v3 v3.144.1
 )
@@ -63,6 +63,7 @@ require (
 	github.com/pkg/term v1.1.0 // indirect
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/esc v0.11.1 // indirect
+	github.com/pulumi/pulumi-kubernetes/sdk/v3 v3.19.1 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.13.1 // indirect
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06 // indirect
