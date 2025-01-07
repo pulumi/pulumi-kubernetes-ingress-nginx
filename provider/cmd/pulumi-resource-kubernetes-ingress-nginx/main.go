@@ -19,8 +19,8 @@ package main
 import (
 	_ "embed"
 
-	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/pkg/provider"
-	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/pkg/version"
+	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/provider/pkg/provider"
+	"github.com/pulumi/pulumi-kubernetes-ingress-nginx/provider/pkg/version"
 )
 
 //go:embed schema.json

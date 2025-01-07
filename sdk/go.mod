@@ -1,6 +1,6 @@
 module github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk
 
-go 1.22
+go 1.22.4
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
