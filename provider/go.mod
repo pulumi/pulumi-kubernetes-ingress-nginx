@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-kubernetes-ingress-nginx
+module github.com/pulumi/pulumi-kubernetes-ingress-nginx/provider
 
 go 1.22.4
 
