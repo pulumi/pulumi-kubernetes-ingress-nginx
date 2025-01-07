@@ -128,3 +128,8 @@ install_java_sdk: # Required by CI
 .pulumi/bin/pulumi: HOME := $(WORKING_DIR)
 .pulumi/bin/pulumi: .pulumi.version
 	curl -fsSL https://get.pulumi.com | sh -s -- --version "$(PULUMI_VERSION)"
+
+tidy:
+	cd provider/ && go mod tidy && cd ..
+	cd examples/ && go mod tidy && cd ..
+	cd sdk/ && go mod tidy && cd ..

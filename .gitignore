@@ -21,6 +21,7 @@ ci-scripts/
 **/*.bak
 ci-scripts/
 *.tar.gz
+**/out.txt
 
 sdk/dotnet/version.txt
 sdk/java/.gradle
