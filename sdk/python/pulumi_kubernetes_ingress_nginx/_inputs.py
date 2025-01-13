@@ -461,7 +461,7 @@ class AutoscalingArgs:
 
 if not MYPY:
     class ContollerAdmissionWebhooksArgsDict(TypedDict):
-        annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         certificate: NotRequired[pulumi.Input[str]]
         create_secret_job: NotRequired[pulumi.Input['ControllerAdmissionWebhooksCreateSecretJobArgsDict']]
         enabled: NotRequired[pulumi.Input[bool]]
@@ -484,7 +484,7 @@ elif False:
 @pulumi.input_type
 class ContollerAdmissionWebhooksArgs:
     def __init__(__self__, *,
-                 annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  certificate: Optional[pulumi.Input[str]] = None,
                  create_secret_job: Optional[pulumi.Input['ControllerAdmissionWebhooksCreateSecretJobArgs']] = None,
                  enabled: Optional[pulumi.Input[bool]] = None,
@@ -532,11 +532,11 @@ class ContollerAdmissionWebhooksArgs:
 
     @property
     @pulumi.getter
-    def annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "annotations")
 
     @annotations.setter
-    def annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "annotations", value)
 
     @property
@@ -711,7 +711,7 @@ if not MYPY:
         enabled: NotRequired[pulumi.Input[bool]]
         image: NotRequired[pulumi.Input['ControllerImageArgsDict']]
         node_selector: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
-        pod_annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        pod_annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         priority_class_name: NotRequired[pulumi.Input[str]]
         """
         Provide a priority class name to the webhook patching job.
@@ -727,7 +727,7 @@ class ControllerAdmissionWebhooksPatchArgs:
                  enabled: Optional[pulumi.Input[bool]] = None,
                  image: Optional[pulumi.Input['ControllerImageArgs']] = None,
                  node_selector: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
-                 pod_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 pod_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  priority_class_name: Optional[pulumi.Input[str]] = None,
                  run_as_user: Optional[pulumi.Input[int]] = None,
                  tolerations: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.TolerationArgs']]]] = None):
@@ -778,11 +778,11 @@ class ControllerAdmissionWebhooksPatchArgs:
 
     @property
     @pulumi.getter(name="podAnnotations")
-    def pod_annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def pod_annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "pod_annotations")
 
     @pod_annotations.setter
-    def pod_annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def pod_annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "pod_annotations", value)
 
     @property
@@ -818,7 +818,7 @@ class ControllerAdmissionWebhooksPatchArgs:
 
 if not MYPY:
     class ControllerAdmissionWebhooksServiceArgsDict(TypedDict):
-        annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         cluster_ip: NotRequired[pulumi.Input[str]]
         external_ips: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
         load_balancer_ips: NotRequired[pulumi.Input[str]]
@@ -831,7 +831,7 @@ elif False:
 @pulumi.input_type
 class ControllerAdmissionWebhooksServiceArgs:
     def __init__(__self__, *,
-                 annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  cluster_ip: Optional[pulumi.Input[str]] = None,
                  external_ips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  load_balancer_ips: Optional[pulumi.Input[str]] = None,
@@ -855,11 +855,11 @@ class ControllerAdmissionWebhooksServiceArgs:
 
     @property
     @pulumi.getter
-    def annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "annotations")
 
     @annotations.setter
-    def annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "annotations", value)
 
     @property
@@ -1764,7 +1764,7 @@ class ControllerIngressClassResourceArgs:
 
 if not MYPY:
     class ControllerMetricsPrometheusRulesArgsDict(TypedDict):
-        additional_labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        additional_labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         enabled: NotRequired[pulumi.Input[bool]]
         namespace: NotRequired[pulumi.Input[str]]
         rules: NotRequired[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
@@ -1774,7 +1774,7 @@ elif False:
 @pulumi.input_type
 class ControllerMetricsPrometheusRulesArgs:
     def __init__(__self__, *,
-                 additional_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 additional_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  enabled: Optional[pulumi.Input[bool]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  rules: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None):
@@ -1789,11 +1789,11 @@ class ControllerMetricsPrometheusRulesArgs:
 
     @property
     @pulumi.getter(name="additionalLabels")
-    def additional_labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def additional_labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "additional_labels")
 
     @additional_labels.setter
-    def additional_labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def additional_labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "additional_labels", value)
 
     @property
@@ -1826,7 +1826,7 @@ class ControllerMetricsPrometheusRulesArgs:
 
 if not MYPY:
     class ControllerMetricsServiceMonitorArgsDict(TypedDict):
-        additional_labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        additional_labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         enabled: NotRequired[pulumi.Input[bool]]
         honor_labels: NotRequired[pulumi.Input[bool]]
         job_label: NotRequired[pulumi.Input[str]]
@@ -1844,7 +1844,7 @@ elif False:
 @pulumi.input_type
 class ControllerMetricsServiceMonitorArgs:
     def __init__(__self__, *,
-                 additional_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 additional_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  enabled: Optional[pulumi.Input[bool]] = None,
                  honor_labels: Optional[pulumi.Input[bool]] = None,
                  job_label: Optional[pulumi.Input[str]] = None,
@@ -1877,11 +1877,11 @@ class ControllerMetricsServiceMonitorArgs:
 
     @property
     @pulumi.getter(name="additionalLabels")
-    def additional_labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def additional_labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "additional_labels")
 
     @additional_labels.setter
-    def additional_labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def additional_labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "additional_labels", value)
 
     @property
@@ -2421,13 +2421,13 @@ class ControllerServiceAccountArgs:
 
 if not MYPY:
     class ControllerServiceInternalArgsDict(TypedDict):
-        annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         enabled: NotRequired[pulumi.Input[bool]]
         external_traffic_policy: NotRequired[pulumi.Input[str]]
         """
         Set external traffic policy to: "Local" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
         """
-        labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         load_balancer_ips: NotRequired[pulumi.Input[str]]
         load_balancer_source_ranges: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
         """
@@ -2439,10 +2439,10 @@ elif False:
 @pulumi.input_type
 class ControllerServiceInternalArgs:
     def __init__(__self__, *,
-                 annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  enabled: Optional[pulumi.Input[bool]] = None,
                  external_traffic_policy: Optional[pulumi.Input[str]] = None,
-                 labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  load_balancer_ips: Optional[pulumi.Input[str]] = None,
                  load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
@@ -2464,11 +2464,11 @@ class ControllerServiceInternalArgs:
 
     @property
     @pulumi.getter
-    def annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "annotations")
 
     @annotations.setter
-    def annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "annotations", value)
 
     @property
@@ -2494,11 +2494,11 @@ class ControllerServiceInternalArgs:
 
     @property
     @pulumi.getter
-    def labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "labels")
 
     @labels.setter
-    def labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "labels", value)
 
     @property
@@ -2587,7 +2587,7 @@ class ControllerServiceNodePortsArgs:
 
 if not MYPY:
     class ControllerServiceArgsDict(TypedDict):
-        annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        annotations: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         cluster_ip: NotRequired[pulumi.Input[str]]
         enable_http: NotRequired[pulumi.Input[bool]]
         enable_https: NotRequired[pulumi.Input[bool]]
@@ -2608,7 +2608,7 @@ if not MYPY:
         """
         Enables an additional internal load balancer (besides the external one). Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
         """
-        labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         load_balancer_ip: NotRequired[pulumi.Input[str]]
         load_balancer_ips: NotRequired[pulumi.Input[str]]
         load_balancer_source_ranges: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
@@ -2626,7 +2626,7 @@ elif False:
 @pulumi.input_type
 class ControllerServiceArgs:
     def __init__(__self__, *,
-                 annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  cluster_ip: Optional[pulumi.Input[str]] = None,
                  enable_http: Optional[pulumi.Input[bool]] = None,
                  enable_https: Optional[pulumi.Input[bool]] = None,
@@ -2635,7 +2635,7 @@ class ControllerServiceArgs:
                  external_traffic_policy: Optional[pulumi.Input[str]] = None,
                  health_check_node_port: Optional[pulumi.Input[int]] = None,
                  internal: Optional[pulumi.Input['ControllerServiceInternalArgs']] = None,
-                 labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  load_balancer_ip: Optional[pulumi.Input[str]] = None,
                  load_balancer_ips: Optional[pulumi.Input[str]] = None,
                  load_balancer_source_ranges: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -2690,11 +2690,11 @@ class ControllerServiceArgs:
 
     @property
     @pulumi.getter
-    def annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def annotations(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "annotations")
 
     @annotations.setter
-    def annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def annotations(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "annotations", value)
 
     @property
@@ -2783,11 +2783,11 @@ class ControllerServiceArgs:
 
     @property
     @pulumi.getter
-    def labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "labels")
 
     @labels.setter
-    def labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "labels", value)
 
     @property
@@ -3151,7 +3151,7 @@ if not MYPY:
         """
         Annotations to be added to controller pods.
         """
-        pod_labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]
+        pod_labels: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
         """
         labels to add to the pod container metadata.
         """
@@ -3268,7 +3268,7 @@ class ControllerArgs:
                  name: Optional[pulumi.Input[str]] = None,
                  node_selector: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  pod_annotations: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
-                 pod_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
+                 pod_labels: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  pod_security_context: Optional[pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs']] = None,
                  priority_class_name: Optional[pulumi.Input[str]] = None,
                  proxy_set_headers: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
@@ -3327,7 +3327,7 @@ class ControllerArgs:
         :param pulumi.Input[int] min_ready_seconds: minReadySeconds to avoid killing pods before we are ready.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] node_selector: Node labels for controller pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] pod_annotations: Annotations to be added to controller pods.
-        :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] pod_labels: labels to add to the pod container metadata.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] pod_labels: labels to add to the pod container metadata.
         :param pulumi.Input['pulumi_kubernetes.core.v1.PodSecurityContextArgs'] pod_security_context: Security Context policies for controller pods.
         :param pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]] proxy_set_headers: Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers.
         :param pulumi.Input['ControllerPublishServiceArgs'] publish_service: Allows customization of the source of the IP address or FQDN to report in the ingress status field. By default, it reads the information provided by the service. If disable, the status field reports the IP address of the node or nodes where an ingress controller pod is running.
@@ -3974,14 +3974,14 @@ class ControllerArgs:
 
     @property
     @pulumi.getter(name="podLabels")
-    def pod_labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+    def pod_labels(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
         labels to add to the pod container metadata.
         """
         return pulumi.get(self, "pod_labels")
 
     @pod_labels.setter
-    def pod_labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+    def pod_labels(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
         pulumi.set(self, "pod_labels", value)
 
     @property

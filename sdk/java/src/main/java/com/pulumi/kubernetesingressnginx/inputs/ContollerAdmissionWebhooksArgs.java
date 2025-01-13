@@ -23,9 +23,9 @@ public final class ContollerAdmissionWebhooksArgs extends com.pulumi.resources.R
     public static final ContollerAdmissionWebhooksArgs Empty = new ContollerAdmissionWebhooksArgs();
 
     @Import(name="annotations")
-    private @Nullable Output<Map<String,Map<String,String>>> annotations;
+    private @Nullable Output<Map<String,String>> annotations;
 
-    public Optional<Output<Map<String,Map<String,String>>>> annotations() {
+    public Optional<Output<Map<String,String>>> annotations() {
         return Optional.ofNullable(this.annotations);
     }
 
@@ -165,12 +165,12 @@ public final class ContollerAdmissionWebhooksArgs extends com.pulumi.resources.R
             $ = new ContollerAdmissionWebhooksArgs(Objects.requireNonNull(defaults));
         }
 
-        public Builder annotations(@Nullable Output<Map<String,Map<String,String>>> annotations) {
+        public Builder annotations(@Nullable Output<Map<String,String>> annotations) {
             $.annotations = annotations;
             return this;
         }
 
-        public Builder annotations(Map<String,Map<String,String>> annotations) {
+        public Builder annotations(Map<String,String> annotations) {
             return annotations(Output.of(annotations));
         }
 

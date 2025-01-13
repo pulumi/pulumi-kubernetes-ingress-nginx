@@ -441,7 +441,7 @@
             "properties": {
                 "annotations": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },
@@ -538,7 +538,10 @@
                 },
                 "configAnnotations": {
                     "description": "Annotations to be added to the controller config configuration configmap.",
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "configMapNamespace": {
                     "description": "Allows customization of the configmap / nginx-configmap namespace.",
@@ -698,7 +701,7 @@
                 },
                 "podLabels": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "description": "labels to add to the pod container metadata.",
                     "type": "object"
@@ -811,7 +814,7 @@
                 },
                 "podAnnotations": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },
@@ -843,7 +846,7 @@
             "properties": {
                 "annotations": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },
@@ -1139,7 +1142,7 @@
             "properties": {
                 "additionalLabels": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },
@@ -1203,7 +1206,7 @@
             "properties": {
                 "additionalLabels": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },
@@ -1309,7 +1312,7 @@
             "properties": {
                 "annotations": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },
@@ -1346,7 +1349,7 @@
                 },
                 "labels": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },
@@ -1399,7 +1402,7 @@
             "properties": {
                 "annotations": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },
@@ -1412,7 +1415,7 @@
                 },
                 "labels": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },

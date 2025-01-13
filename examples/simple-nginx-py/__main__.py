@@ -28,7 +28,14 @@ ctrl = IngressController(
         publish_service=ControllerPublishServiceArgs(
             enabled=True,
         ),
-        service=ControllerServiceArgs(type="NodePort", external_traffic_policy="Local"),
+        service=ControllerServiceArgs(
+            annotations={
+                "pulumi.com/test-annotation1": "test-value1",
+                "pulumi.com/test-annotation2": "test-value2",
+            },
+            type="NodePort",
+            external_traffic_policy="Local"
+        ),
     ),
 )
 

@@ -19,9 +19,9 @@ public final class ControllerMetricsServiceMonitorArgs extends com.pulumi.resour
     public static final ControllerMetricsServiceMonitorArgs Empty = new ControllerMetricsServiceMonitorArgs();
 
     @Import(name="additionalLabels")
-    private @Nullable Output<Map<String,Map<String,String>>> additionalLabels;
+    private @Nullable Output<Map<String,String>> additionalLabels;
 
-    public Optional<Output<Map<String,Map<String,String>>>> additionalLabels() {
+    public Optional<Output<Map<String,String>>> additionalLabels() {
         return Optional.ofNullable(this.additionalLabels);
     }
 
@@ -121,12 +121,12 @@ public final class ControllerMetricsServiceMonitorArgs extends com.pulumi.resour
             $ = new ControllerMetricsServiceMonitorArgs(Objects.requireNonNull(defaults));
         }
 
-        public Builder additionalLabels(@Nullable Output<Map<String,Map<String,String>>> additionalLabels) {
+        public Builder additionalLabels(@Nullable Output<Map<String,String>> additionalLabels) {
             $.additionalLabels = additionalLabels;
             return this;
         }
 
-        public Builder additionalLabels(Map<String,Map<String,String>> additionalLabels) {
+        public Builder additionalLabels(Map<String,String> additionalLabels) {
             return additionalLabels(Output.of(additionalLabels));
         }
 

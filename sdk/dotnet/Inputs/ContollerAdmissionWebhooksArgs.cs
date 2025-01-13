@@ -13,10 +13,10 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
     public sealed class ContollerAdmissionWebhooksArgs : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
-        private InputMap<ImmutableDictionary<string, string>>? _annotations;
-        public InputMap<ImmutableDictionary<string, string>> Annotations
+        private InputMap<string>? _annotations;
+        public InputMap<string> Annotations
         {
-            get => _annotations ?? (_annotations = new InputMap<ImmutableDictionary<string, string>>());
+            get => _annotations ?? (_annotations = new InputMap<string>());
             set => _annotations = value;
         }
 

@@ -656,13 +656,13 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
      * 
      */
     @Import(name="podLabels")
-    private @Nullable Output<Map<String,Map<String,String>>> podLabels;
+    private @Nullable Output<Map<String,String>> podLabels;
 
     /**
      * @return labels to add to the pod container metadata.
      * 
      */
-    public Optional<Output<Map<String,Map<String,String>>>> podLabels() {
+    public Optional<Output<Map<String,String>>> podLabels() {
         return Optional.ofNullable(this.podLabels);
     }
 
@@ -1914,7 +1914,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder podLabels(@Nullable Output<Map<String,Map<String,String>>> podLabels) {
+        public Builder podLabels(@Nullable Output<Map<String,String>> podLabels) {
             $.podLabels = podLabels;
             return this;
         }
@@ -1925,7 +1925,7 @@ public final class ControllerArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder podLabels(Map<String,Map<String,String>> podLabels) {
+        public Builder podLabels(Map<String,String> podLabels) {
             return podLabels(Output.of(podLabels));
         }
 
