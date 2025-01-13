@@ -29,7 +29,7 @@ func main() {
 					Enabled: pulumi.BoolPtr(true),
 				},
 				Service: &ingressnginx.ControllerServiceArgs{
-					Annotations:           pulumi.StringMap{"pulumi.com/test-annotation1": "test-value1", "pulumi.com/test-annotation2": "test-value2"},
+					Annotations:           pulumi.StringMap{"pulumi.com/test-annotation1": pulumi.String("test-value1"), "pulumi.com/test-annotation2": pulumi.String("test-value2")},
 					Type:                  pulumi.String("NodePort"),
 					ExternalTrafficPolicy: pulumi.String("Local"),
 				},
