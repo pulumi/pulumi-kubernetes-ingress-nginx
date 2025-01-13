@@ -23,9 +23,9 @@ public final class ControllerServiceArgs extends com.pulumi.resources.ResourceAr
     public static final ControllerServiceArgs Empty = new ControllerServiceArgs();
 
     @Import(name="annotations")
-    private @Nullable Output<Map<String,Map<String,String>>> annotations;
+    private @Nullable Output<Map<String,String>> annotations;
 
-    public Optional<Output<Map<String,Map<String,String>>>> annotations() {
+    public Optional<Output<Map<String,String>>> annotations() {
         return Optional.ofNullable(this.annotations);
     }
 
@@ -118,9 +118,9 @@ public final class ControllerServiceArgs extends com.pulumi.resources.ResourceAr
     }
 
     @Import(name="labels")
-    private @Nullable Output<Map<String,Map<String,String>>> labels;
+    private @Nullable Output<Map<String,String>> labels;
 
-    public Optional<Output<Map<String,Map<String,String>>>> labels() {
+    public Optional<Output<Map<String,String>>> labels() {
         return Optional.ofNullable(this.labels);
     }
 
@@ -229,12 +229,12 @@ public final class ControllerServiceArgs extends com.pulumi.resources.ResourceAr
             $ = new ControllerServiceArgs(Objects.requireNonNull(defaults));
         }
 
-        public Builder annotations(@Nullable Output<Map<String,Map<String,String>>> annotations) {
+        public Builder annotations(@Nullable Output<Map<String,String>> annotations) {
             $.annotations = annotations;
             return this;
         }
 
-        public Builder annotations(Map<String,Map<String,String>> annotations) {
+        public Builder annotations(Map<String,String> annotations) {
             return annotations(Output.of(annotations));
         }
 
@@ -368,12 +368,12 @@ public final class ControllerServiceArgs extends com.pulumi.resources.ResourceAr
             return internal(Output.of(internal));
         }
 
-        public Builder labels(@Nullable Output<Map<String,Map<String,String>>> labels) {
+        public Builder labels(@Nullable Output<Map<String,String>> labels) {
             $.labels = labels;
             return this;
         }
 
-        public Builder labels(Map<String,Map<String,String>> labels) {
+        public Builder labels(Map<String,String> labels) {
             return labels(Output.of(labels));
         }
 

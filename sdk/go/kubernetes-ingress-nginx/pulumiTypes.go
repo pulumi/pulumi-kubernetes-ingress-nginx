@@ -1169,7 +1169,7 @@ func (o AutoscalingTemplatePodsTargetPtrOutput) Type() pulumi.StringPtrOutput {
 }
 
 type ContollerAdmissionWebhooks struct {
-	Annotations     map[string]map[string]string                `pulumi:"annotations"`
+	Annotations     map[string]string                           `pulumi:"annotations"`
 	Certificate     *string                                     `pulumi:"certificate"`
 	CreateSecretJob *ControllerAdmissionWebhooksCreateSecretJob `pulumi:"createSecretJob"`
 	Enabled         *bool                                       `pulumi:"enabled"`
@@ -1198,7 +1198,7 @@ type ContollerAdmissionWebhooksInput interface {
 }
 
 type ContollerAdmissionWebhooksArgs struct {
-	Annotations     pulumi.StringMapMapInput                           `pulumi:"annotations"`
+	Annotations     pulumi.StringMapInput                              `pulumi:"annotations"`
 	Certificate     pulumi.StringPtrInput                              `pulumi:"certificate"`
 	CreateSecretJob ControllerAdmissionWebhooksCreateSecretJobPtrInput `pulumi:"createSecretJob"`
 	Enabled         pulumi.BoolPtrInput                                `pulumi:"enabled"`
@@ -1292,8 +1292,8 @@ func (o ContollerAdmissionWebhooksOutput) ToContollerAdmissionWebhooksPtrOutputW
 	}).(ContollerAdmissionWebhooksPtrOutput)
 }
 
-func (o ContollerAdmissionWebhooksOutput) Annotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v ContollerAdmissionWebhooks) map[string]map[string]string { return v.Annotations }).(pulumi.StringMapMapOutput)
+func (o ContollerAdmissionWebhooksOutput) Annotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ContollerAdmissionWebhooks) map[string]string { return v.Annotations }).(pulumi.StringMapOutput)
 }
 
 func (o ContollerAdmissionWebhooksOutput) Certificate() pulumi.StringPtrOutput {
@@ -1377,13 +1377,13 @@ func (o ContollerAdmissionWebhooksPtrOutput) Elem() ContollerAdmissionWebhooksOu
 	}).(ContollerAdmissionWebhooksOutput)
 }
 
-func (o ContollerAdmissionWebhooksPtrOutput) Annotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *ContollerAdmissionWebhooks) map[string]map[string]string {
+func (o ContollerAdmissionWebhooksPtrOutput) Annotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ContollerAdmissionWebhooks) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.Annotations
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 func (o ContollerAdmissionWebhooksPtrOutput) Certificate() pulumi.StringPtrOutput {
@@ -1587,7 +1587,7 @@ type Controller struct {
 	// Annotations to be added to controller pods.
 	PodAnnotations map[string]string `pulumi:"podAnnotations"`
 	// labels to add to the pod container metadata.
-	PodLabels map[string]map[string]string `pulumi:"podLabels"`
+	PodLabels map[string]string `pulumi:"podLabels"`
 	// Security Context policies for controller pods.
 	PodSecurityContext *corev1.PodSecurityContext `pulumi:"podSecurityContext"`
 	PriorityClassName  *string                    `pulumi:"priorityClassName"`
@@ -1718,7 +1718,7 @@ type ControllerArgs struct {
 	// Annotations to be added to controller pods.
 	PodAnnotations pulumi.StringMapInput `pulumi:"podAnnotations"`
 	// labels to add to the pod container metadata.
-	PodLabels pulumi.StringMapMapInput `pulumi:"podLabels"`
+	PodLabels pulumi.StringMapInput `pulumi:"podLabels"`
 	// Security Context policies for controller pods.
 	PodSecurityContext corev1.PodSecurityContextPtrInput `pulumi:"podSecurityContext"`
 	PriorityClassName  pulumi.StringPtrInput             `pulumi:"priorityClassName"`
@@ -2043,8 +2043,8 @@ func (o ControllerOutput) PodAnnotations() pulumi.StringMapOutput {
 }
 
 // labels to add to the pod container metadata.
-func (o ControllerOutput) PodLabels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v Controller) map[string]map[string]string { return v.PodLabels }).(pulumi.StringMapMapOutput)
+func (o ControllerOutput) PodLabels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v Controller) map[string]string { return v.PodLabels }).(pulumi.StringMapOutput)
 }
 
 // Security Context policies for controller pods.
@@ -2588,13 +2588,13 @@ func (o ControllerPtrOutput) PodAnnotations() pulumi.StringMapOutput {
 }
 
 // labels to add to the pod container metadata.
-func (o ControllerPtrOutput) PodLabels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *Controller) map[string]map[string]string {
+func (o ControllerPtrOutput) PodLabels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Controller) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.PodLabels
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 // Security Context policies for controller pods.
@@ -2917,10 +2917,10 @@ func (o ControllerAdmissionWebhooksCreateSecretJobPtrOutput) Resources() corev1.
 }
 
 type ControllerAdmissionWebhooksPatch struct {
-	Enabled        *bool                        `pulumi:"enabled"`
-	Image          *ControllerImage             `pulumi:"image"`
-	NodeSelector   map[string]string            `pulumi:"nodeSelector"`
-	PodAnnotations map[string]map[string]string `pulumi:"podAnnotations"`
+	Enabled        *bool             `pulumi:"enabled"`
+	Image          *ControllerImage  `pulumi:"image"`
+	NodeSelector   map[string]string `pulumi:"nodeSelector"`
+	PodAnnotations map[string]string `pulumi:"podAnnotations"`
 	// Provide a priority class name to the webhook patching job.
 	PriorityClassName *string             `pulumi:"priorityClassName"`
 	RunAsUser         *int                `pulumi:"runAsUser"`
@@ -2939,10 +2939,10 @@ type ControllerAdmissionWebhooksPatchInput interface {
 }
 
 type ControllerAdmissionWebhooksPatchArgs struct {
-	Enabled        pulumi.BoolPtrInput      `pulumi:"enabled"`
-	Image          ControllerImagePtrInput  `pulumi:"image"`
-	NodeSelector   pulumi.StringMapInput    `pulumi:"nodeSelector"`
-	PodAnnotations pulumi.StringMapMapInput `pulumi:"podAnnotations"`
+	Enabled        pulumi.BoolPtrInput     `pulumi:"enabled"`
+	Image          ControllerImagePtrInput `pulumi:"image"`
+	NodeSelector   pulumi.StringMapInput   `pulumi:"nodeSelector"`
+	PodAnnotations pulumi.StringMapInput   `pulumi:"podAnnotations"`
 	// Provide a priority class name to the webhook patching job.
 	PriorityClassName pulumi.StringPtrInput       `pulumi:"priorityClassName"`
 	RunAsUser         pulumi.IntPtrInput          `pulumi:"runAsUser"`
@@ -3038,8 +3038,8 @@ func (o ControllerAdmissionWebhooksPatchOutput) NodeSelector() pulumi.StringMapO
 	return o.ApplyT(func(v ControllerAdmissionWebhooksPatch) map[string]string { return v.NodeSelector }).(pulumi.StringMapOutput)
 }
 
-func (o ControllerAdmissionWebhooksPatchOutput) PodAnnotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v ControllerAdmissionWebhooksPatch) map[string]map[string]string { return v.PodAnnotations }).(pulumi.StringMapMapOutput)
+func (o ControllerAdmissionWebhooksPatchOutput) PodAnnotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ControllerAdmissionWebhooksPatch) map[string]string { return v.PodAnnotations }).(pulumi.StringMapOutput)
 }
 
 // Provide a priority class name to the webhook patching job.
@@ -3106,13 +3106,13 @@ func (o ControllerAdmissionWebhooksPatchPtrOutput) NodeSelector() pulumi.StringM
 	}).(pulumi.StringMapOutput)
 }
 
-func (o ControllerAdmissionWebhooksPatchPtrOutput) PodAnnotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *ControllerAdmissionWebhooksPatch) map[string]map[string]string {
+func (o ControllerAdmissionWebhooksPatchPtrOutput) PodAnnotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ControllerAdmissionWebhooksPatch) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.PodAnnotations
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 // Provide a priority class name to the webhook patching job.
@@ -3277,13 +3277,13 @@ func (o ControllerAdmissionWebhooksPatchWebhbookJobPtrOutput) Resources() corev1
 }
 
 type ControllerAdmissionWebhooksService struct {
-	Annotations              map[string]map[string]string `pulumi:"annotations"`
-	ClusterIP                *string                      `pulumi:"clusterIP"`
-	ExternalIPs              []string                     `pulumi:"externalIPs"`
-	LoadBalancerIPs          *string                      `pulumi:"loadBalancerIPs"`
-	LoadBalancerSourceRanges []string                     `pulumi:"loadBalancerSourceRanges"`
-	ServicePort              *int                         `pulumi:"servicePort"`
-	Type                     *string                      `pulumi:"type"`
+	Annotations              map[string]string `pulumi:"annotations"`
+	ClusterIP                *string           `pulumi:"clusterIP"`
+	ExternalIPs              []string          `pulumi:"externalIPs"`
+	LoadBalancerIPs          *string           `pulumi:"loadBalancerIPs"`
+	LoadBalancerSourceRanges []string          `pulumi:"loadBalancerSourceRanges"`
+	ServicePort              *int              `pulumi:"servicePort"`
+	Type                     *string           `pulumi:"type"`
 }
 
 // ControllerAdmissionWebhooksServiceInput is an input type that accepts ControllerAdmissionWebhooksServiceArgs and ControllerAdmissionWebhooksServiceOutput values.
@@ -3298,13 +3298,13 @@ type ControllerAdmissionWebhooksServiceInput interface {
 }
 
 type ControllerAdmissionWebhooksServiceArgs struct {
-	Annotations              pulumi.StringMapMapInput `pulumi:"annotations"`
-	ClusterIP                pulumi.StringPtrInput    `pulumi:"clusterIP"`
-	ExternalIPs              pulumi.StringArrayInput  `pulumi:"externalIPs"`
-	LoadBalancerIPs          pulumi.StringPtrInput    `pulumi:"loadBalancerIPs"`
-	LoadBalancerSourceRanges pulumi.StringArrayInput  `pulumi:"loadBalancerSourceRanges"`
-	ServicePort              pulumi.IntPtrInput       `pulumi:"servicePort"`
-	Type                     pulumi.StringPtrInput    `pulumi:"type"`
+	Annotations              pulumi.StringMapInput   `pulumi:"annotations"`
+	ClusterIP                pulumi.StringPtrInput   `pulumi:"clusterIP"`
+	ExternalIPs              pulumi.StringArrayInput `pulumi:"externalIPs"`
+	LoadBalancerIPs          pulumi.StringPtrInput   `pulumi:"loadBalancerIPs"`
+	LoadBalancerSourceRanges pulumi.StringArrayInput `pulumi:"loadBalancerSourceRanges"`
+	ServicePort              pulumi.IntPtrInput      `pulumi:"servicePort"`
+	Type                     pulumi.StringPtrInput   `pulumi:"type"`
 }
 
 func (ControllerAdmissionWebhooksServiceArgs) ElementType() reflect.Type {
@@ -3384,8 +3384,8 @@ func (o ControllerAdmissionWebhooksServiceOutput) ToControllerAdmissionWebhooksS
 	}).(ControllerAdmissionWebhooksServicePtrOutput)
 }
 
-func (o ControllerAdmissionWebhooksServiceOutput) Annotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v ControllerAdmissionWebhooksService) map[string]map[string]string { return v.Annotations }).(pulumi.StringMapMapOutput)
+func (o ControllerAdmissionWebhooksServiceOutput) Annotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ControllerAdmissionWebhooksService) map[string]string { return v.Annotations }).(pulumi.StringMapOutput)
 }
 
 func (o ControllerAdmissionWebhooksServiceOutput) ClusterIP() pulumi.StringPtrOutput {
@@ -3436,13 +3436,13 @@ func (o ControllerAdmissionWebhooksServicePtrOutput) Elem() ControllerAdmissionW
 	}).(ControllerAdmissionWebhooksServiceOutput)
 }
 
-func (o ControllerAdmissionWebhooksServicePtrOutput) Annotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *ControllerAdmissionWebhooksService) map[string]map[string]string {
+func (o ControllerAdmissionWebhooksServicePtrOutput) Annotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ControllerAdmissionWebhooksService) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.Annotations
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 func (o ControllerAdmissionWebhooksServicePtrOutput) ClusterIP() pulumi.StringPtrOutput {
@@ -5355,10 +5355,10 @@ func (o ControllerMetricsPtrOutput) ServiceMonitor() ControllerMetricsServiceMon
 }
 
 type ControllerMetricsPrometheusRules struct {
-	AdditionalLabels map[string]map[string]string `pulumi:"additionalLabels"`
-	Enabled          *bool                        `pulumi:"enabled"`
-	Namespace        *string                      `pulumi:"namespace"`
-	Rules            []map[string]string          `pulumi:"rules"`
+	AdditionalLabels map[string]string   `pulumi:"additionalLabels"`
+	Enabled          *bool               `pulumi:"enabled"`
+	Namespace        *string             `pulumi:"namespace"`
+	Rules            []map[string]string `pulumi:"rules"`
 }
 
 // ControllerMetricsPrometheusRulesInput is an input type that accepts ControllerMetricsPrometheusRulesArgs and ControllerMetricsPrometheusRulesOutput values.
@@ -5373,7 +5373,7 @@ type ControllerMetricsPrometheusRulesInput interface {
 }
 
 type ControllerMetricsPrometheusRulesArgs struct {
-	AdditionalLabels pulumi.StringMapMapInput   `pulumi:"additionalLabels"`
+	AdditionalLabels pulumi.StringMapInput      `pulumi:"additionalLabels"`
 	Enabled          pulumi.BoolPtrInput        `pulumi:"enabled"`
 	Namespace        pulumi.StringPtrInput      `pulumi:"namespace"`
 	Rules            pulumi.StringMapArrayInput `pulumi:"rules"`
@@ -5456,8 +5456,8 @@ func (o ControllerMetricsPrometheusRulesOutput) ToControllerMetricsPrometheusRul
 	}).(ControllerMetricsPrometheusRulesPtrOutput)
 }
 
-func (o ControllerMetricsPrometheusRulesOutput) AdditionalLabels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v ControllerMetricsPrometheusRules) map[string]map[string]string { return v.AdditionalLabels }).(pulumi.StringMapMapOutput)
+func (o ControllerMetricsPrometheusRulesOutput) AdditionalLabels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ControllerMetricsPrometheusRules) map[string]string { return v.AdditionalLabels }).(pulumi.StringMapOutput)
 }
 
 func (o ControllerMetricsPrometheusRulesOutput) Enabled() pulumi.BoolPtrOutput {
@@ -5496,13 +5496,13 @@ func (o ControllerMetricsPrometheusRulesPtrOutput) Elem() ControllerMetricsProme
 	}).(ControllerMetricsPrometheusRulesOutput)
 }
 
-func (o ControllerMetricsPrometheusRulesPtrOutput) AdditionalLabels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *ControllerMetricsPrometheusRules) map[string]map[string]string {
+func (o ControllerMetricsPrometheusRulesPtrOutput) AdditionalLabels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ControllerMetricsPrometheusRules) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.AdditionalLabels
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 func (o ControllerMetricsPrometheusRulesPtrOutput) Enabled() pulumi.BoolPtrOutput {
@@ -5786,9 +5786,9 @@ func (o ControllerMetricsServicePtrOutput) Type() pulumi.StringPtrOutput {
 }
 
 type ControllerMetricsServiceMonitor struct {
-	AdditionalLabels map[string]map[string]string `pulumi:"additionalLabels"`
-	Enabled          *bool                        `pulumi:"enabled"`
-	HonorLabels      *bool                        `pulumi:"honorLabels"`
+	AdditionalLabels map[string]string `pulumi:"additionalLabels"`
+	Enabled          *bool             `pulumi:"enabled"`
+	HonorLabels      *bool             `pulumi:"honorLabels"`
 	// The label to use to retrieve the job name from.
 	JobLabel          *string                      `pulumi:"jobLabel"`
 	MetricRelabelings []string                     `pulumi:"metricRelabelings"`
@@ -5810,9 +5810,9 @@ type ControllerMetricsServiceMonitorInput interface {
 }
 
 type ControllerMetricsServiceMonitorArgs struct {
-	AdditionalLabels pulumi.StringMapMapInput `pulumi:"additionalLabels"`
-	Enabled          pulumi.BoolPtrInput      `pulumi:"enabled"`
-	HonorLabels      pulumi.BoolPtrInput      `pulumi:"honorLabels"`
+	AdditionalLabels pulumi.StringMapInput `pulumi:"additionalLabels"`
+	Enabled          pulumi.BoolPtrInput   `pulumi:"enabled"`
+	HonorLabels      pulumi.BoolPtrInput   `pulumi:"honorLabels"`
 	// The label to use to retrieve the job name from.
 	JobLabel          pulumi.StringPtrInput    `pulumi:"jobLabel"`
 	MetricRelabelings pulumi.StringArrayInput  `pulumi:"metricRelabelings"`
@@ -5899,8 +5899,8 @@ func (o ControllerMetricsServiceMonitorOutput) ToControllerMetricsServiceMonitor
 	}).(ControllerMetricsServiceMonitorPtrOutput)
 }
 
-func (o ControllerMetricsServiceMonitorOutput) AdditionalLabels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v ControllerMetricsServiceMonitor) map[string]map[string]string { return v.AdditionalLabels }).(pulumi.StringMapMapOutput)
+func (o ControllerMetricsServiceMonitorOutput) AdditionalLabels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ControllerMetricsServiceMonitor) map[string]string { return v.AdditionalLabels }).(pulumi.StringMapOutput)
 }
 
 func (o ControllerMetricsServiceMonitorOutput) Enabled() pulumi.BoolPtrOutput {
@@ -5960,13 +5960,13 @@ func (o ControllerMetricsServiceMonitorPtrOutput) Elem() ControllerMetricsServic
 	}).(ControllerMetricsServiceMonitorOutput)
 }
 
-func (o ControllerMetricsServiceMonitorPtrOutput) AdditionalLabels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *ControllerMetricsServiceMonitor) map[string]map[string]string {
+func (o ControllerMetricsServiceMonitorPtrOutput) AdditionalLabels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ControllerMetricsServiceMonitor) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.AdditionalLabels
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 func (o ControllerMetricsServiceMonitorPtrOutput) Enabled() pulumi.BoolPtrOutput {
@@ -6905,11 +6905,11 @@ func (o ControllerScopePtrOutput) Namespace() pulumi.StringPtrOutput {
 }
 
 type ControllerService struct {
-	Annotations map[string]map[string]string `pulumi:"annotations"`
-	ClusterIP   *string                      `pulumi:"clusterIP"`
-	EnableHttp  *bool                        `pulumi:"enableHttp"`
-	EnableHttps *bool                        `pulumi:"enableHttps"`
-	Enabled     *bool                        `pulumi:"enabled"`
+	Annotations map[string]string `pulumi:"annotations"`
+	ClusterIP   *string           `pulumi:"clusterIP"`
+	EnableHttp  *bool             `pulumi:"enableHttp"`
+	EnableHttps *bool             `pulumi:"enableHttps"`
+	Enabled     *bool             `pulumi:"enabled"`
 	// List of IP addresses at which the controller services are available Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
 	ExternalIPs []string `pulumi:"externalIPs"`
 	// Set external traffic policy to: "Local" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
@@ -6917,13 +6917,13 @@ type ControllerService struct {
 	// specifies the health check node port (numeric port number) for the service. If healthCheckNodePort isn’t specified, the service controller allocates a port from your cluster’s NodePort range. Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
 	HealthCheckNodePort *int `pulumi:"healthCheckNodePort"`
 	// Enables an additional internal load balancer (besides the external one). Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
-	Internal                 *ControllerServiceInternal   `pulumi:"internal"`
-	Labels                   map[string]map[string]string `pulumi:"labels"`
-	LoadBalancerIP           *string                      `pulumi:"loadBalancerIP"`
-	LoadBalancerIPs          *string                      `pulumi:"loadBalancerIPs"`
-	LoadBalancerSourceRanges []string                     `pulumi:"loadBalancerSourceRanges"`
-	NodePorts                *ControllerServiceNodePorts  `pulumi:"nodePorts"`
-	Ports                    *ControllerPort              `pulumi:"ports"`
+	Internal                 *ControllerServiceInternal  `pulumi:"internal"`
+	Labels                   map[string]string           `pulumi:"labels"`
+	LoadBalancerIP           *string                     `pulumi:"loadBalancerIP"`
+	LoadBalancerIPs          *string                     `pulumi:"loadBalancerIPs"`
+	LoadBalancerSourceRanges []string                    `pulumi:"loadBalancerSourceRanges"`
+	NodePorts                *ControllerServiceNodePorts `pulumi:"nodePorts"`
+	Ports                    *ControllerPort             `pulumi:"ports"`
 	// Must be either "None" or "ClientIP" if set. Kubernetes will default to "None". Ref: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
 	SessionAffinity *string         `pulumi:"sessionAffinity"`
 	TargetPorts     *ControllerPort `pulumi:"targetPorts"`
@@ -6942,11 +6942,11 @@ type ControllerServiceInput interface {
 }
 
 type ControllerServiceArgs struct {
-	Annotations pulumi.StringMapMapInput `pulumi:"annotations"`
-	ClusterIP   pulumi.StringPtrInput    `pulumi:"clusterIP"`
-	EnableHttp  pulumi.BoolPtrInput      `pulumi:"enableHttp"`
-	EnableHttps pulumi.BoolPtrInput      `pulumi:"enableHttps"`
-	Enabled     pulumi.BoolPtrInput      `pulumi:"enabled"`
+	Annotations pulumi.StringMapInput `pulumi:"annotations"`
+	ClusterIP   pulumi.StringPtrInput `pulumi:"clusterIP"`
+	EnableHttp  pulumi.BoolPtrInput   `pulumi:"enableHttp"`
+	EnableHttps pulumi.BoolPtrInput   `pulumi:"enableHttps"`
+	Enabled     pulumi.BoolPtrInput   `pulumi:"enabled"`
 	// List of IP addresses at which the controller services are available Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
 	ExternalIPs pulumi.StringArrayInput `pulumi:"externalIPs"`
 	// Set external traffic policy to: "Local" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
@@ -6955,7 +6955,7 @@ type ControllerServiceArgs struct {
 	HealthCheckNodePort pulumi.IntPtrInput `pulumi:"healthCheckNodePort"`
 	// Enables an additional internal load balancer (besides the external one). Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
 	Internal                 ControllerServiceInternalPtrInput  `pulumi:"internal"`
-	Labels                   pulumi.StringMapMapInput           `pulumi:"labels"`
+	Labels                   pulumi.StringMapInput              `pulumi:"labels"`
 	LoadBalancerIP           pulumi.StringPtrInput              `pulumi:"loadBalancerIP"`
 	LoadBalancerIPs          pulumi.StringPtrInput              `pulumi:"loadBalancerIPs"`
 	LoadBalancerSourceRanges pulumi.StringArrayInput            `pulumi:"loadBalancerSourceRanges"`
@@ -7044,8 +7044,8 @@ func (o ControllerServiceOutput) ToControllerServicePtrOutputWithContext(ctx con
 	}).(ControllerServicePtrOutput)
 }
 
-func (o ControllerServiceOutput) Annotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v ControllerService) map[string]map[string]string { return v.Annotations }).(pulumi.StringMapMapOutput)
+func (o ControllerServiceOutput) Annotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ControllerService) map[string]string { return v.Annotations }).(pulumi.StringMapOutput)
 }
 
 func (o ControllerServiceOutput) ClusterIP() pulumi.StringPtrOutput {
@@ -7084,8 +7084,8 @@ func (o ControllerServiceOutput) Internal() ControllerServiceInternalPtrOutput {
 	return o.ApplyT(func(v ControllerService) *ControllerServiceInternal { return v.Internal }).(ControllerServiceInternalPtrOutput)
 }
 
-func (o ControllerServiceOutput) Labels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v ControllerService) map[string]map[string]string { return v.Labels }).(pulumi.StringMapMapOutput)
+func (o ControllerServiceOutput) Labels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ControllerService) map[string]string { return v.Labels }).(pulumi.StringMapOutput)
 }
 
 func (o ControllerServiceOutput) LoadBalancerIP() pulumi.StringPtrOutput {
@@ -7145,13 +7145,13 @@ func (o ControllerServicePtrOutput) Elem() ControllerServiceOutput {
 	}).(ControllerServiceOutput)
 }
 
-func (o ControllerServicePtrOutput) Annotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *ControllerService) map[string]map[string]string {
+func (o ControllerServicePtrOutput) Annotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ControllerService) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.Annotations
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 func (o ControllerServicePtrOutput) ClusterIP() pulumi.StringPtrOutput {
@@ -7230,13 +7230,13 @@ func (o ControllerServicePtrOutput) Internal() ControllerServiceInternalPtrOutpu
 	}).(ControllerServiceInternalPtrOutput)
 }
 
-func (o ControllerServicePtrOutput) Labels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *ControllerService) map[string]map[string]string {
+func (o ControllerServicePtrOutput) Labels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ControllerService) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.Labels
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 func (o ControllerServicePtrOutput) LoadBalancerIP() pulumi.StringPtrOutput {
@@ -7476,12 +7476,12 @@ func (o ControllerServiceAccountPtrOutput) Name() pulumi.StringPtrOutput {
 }
 
 type ControllerServiceInternal struct {
-	Annotations map[string]map[string]string `pulumi:"annotations"`
-	Enabled     *bool                        `pulumi:"enabled"`
+	Annotations map[string]string `pulumi:"annotations"`
+	Enabled     *bool             `pulumi:"enabled"`
 	// Set external traffic policy to: "Local" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
-	ExternalTrafficPolicy *string                      `pulumi:"externalTrafficPolicy"`
-	Labels                map[string]map[string]string `pulumi:"labels"`
-	LoadBalancerIPs       *string                      `pulumi:"loadBalancerIPs"`
+	ExternalTrafficPolicy *string           `pulumi:"externalTrafficPolicy"`
+	Labels                map[string]string `pulumi:"labels"`
+	LoadBalancerIPs       *string           `pulumi:"loadBalancerIPs"`
 	// Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.
 	LoadBalancerSourceRanges []string `pulumi:"loadBalancerSourceRanges"`
 }
@@ -7498,12 +7498,12 @@ type ControllerServiceInternalInput interface {
 }
 
 type ControllerServiceInternalArgs struct {
-	Annotations pulumi.StringMapMapInput `pulumi:"annotations"`
-	Enabled     pulumi.BoolPtrInput      `pulumi:"enabled"`
+	Annotations pulumi.StringMapInput `pulumi:"annotations"`
+	Enabled     pulumi.BoolPtrInput   `pulumi:"enabled"`
 	// Set external traffic policy to: "Local" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
-	ExternalTrafficPolicy pulumi.StringPtrInput    `pulumi:"externalTrafficPolicy"`
-	Labels                pulumi.StringMapMapInput `pulumi:"labels"`
-	LoadBalancerIPs       pulumi.StringPtrInput    `pulumi:"loadBalancerIPs"`
+	ExternalTrafficPolicy pulumi.StringPtrInput `pulumi:"externalTrafficPolicy"`
+	Labels                pulumi.StringMapInput `pulumi:"labels"`
+	LoadBalancerIPs       pulumi.StringPtrInput `pulumi:"loadBalancerIPs"`
 	// Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.
 	LoadBalancerSourceRanges pulumi.StringArrayInput `pulumi:"loadBalancerSourceRanges"`
 }
@@ -7585,8 +7585,8 @@ func (o ControllerServiceInternalOutput) ToControllerServiceInternalPtrOutputWit
 	}).(ControllerServiceInternalPtrOutput)
 }
 
-func (o ControllerServiceInternalOutput) Annotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v ControllerServiceInternal) map[string]map[string]string { return v.Annotations }).(pulumi.StringMapMapOutput)
+func (o ControllerServiceInternalOutput) Annotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ControllerServiceInternal) map[string]string { return v.Annotations }).(pulumi.StringMapOutput)
 }
 
 func (o ControllerServiceInternalOutput) Enabled() pulumi.BoolPtrOutput {
@@ -7598,8 +7598,8 @@ func (o ControllerServiceInternalOutput) ExternalTrafficPolicy() pulumi.StringPt
 	return o.ApplyT(func(v ControllerServiceInternal) *string { return v.ExternalTrafficPolicy }).(pulumi.StringPtrOutput)
 }
 
-func (o ControllerServiceInternalOutput) Labels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v ControllerServiceInternal) map[string]map[string]string { return v.Labels }).(pulumi.StringMapMapOutput)
+func (o ControllerServiceInternalOutput) Labels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ControllerServiceInternal) map[string]string { return v.Labels }).(pulumi.StringMapOutput)
 }
 
 func (o ControllerServiceInternalOutput) LoadBalancerIPs() pulumi.StringPtrOutput {
@@ -7635,13 +7635,13 @@ func (o ControllerServiceInternalPtrOutput) Elem() ControllerServiceInternalOutp
 	}).(ControllerServiceInternalOutput)
 }
 
-func (o ControllerServiceInternalPtrOutput) Annotations() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *ControllerServiceInternal) map[string]map[string]string {
+func (o ControllerServiceInternalPtrOutput) Annotations() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ControllerServiceInternal) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.Annotations
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 func (o ControllerServiceInternalPtrOutput) Enabled() pulumi.BoolPtrOutput {
@@ -7663,13 +7663,13 @@ func (o ControllerServiceInternalPtrOutput) ExternalTrafficPolicy() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o ControllerServiceInternalPtrOutput) Labels() pulumi.StringMapMapOutput {
-	return o.ApplyT(func(v *ControllerServiceInternal) map[string]map[string]string {
+func (o ControllerServiceInternalPtrOutput) Labels() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ControllerServiceInternal) map[string]string {
 		if v == nil {
 			return nil
 		}
 		return v.Labels
-	}).(pulumi.StringMapMapOutput)
+	}).(pulumi.StringMapOutput)
 }
 
 func (o ControllerServiceInternalPtrOutput) LoadBalancerIPs() pulumi.StringPtrOutput {

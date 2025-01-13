@@ -13,10 +13,10 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
     public sealed class ControllerServiceArgs : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
-        private InputMap<ImmutableDictionary<string, string>>? _annotations;
-        public InputMap<ImmutableDictionary<string, string>> Annotations
+        private InputMap<string>? _annotations;
+        public InputMap<string> Annotations
         {
-            get => _annotations ?? (_annotations = new InputMap<ImmutableDictionary<string, string>>());
+            get => _annotations ?? (_annotations = new InputMap<string>());
             set => _annotations = value;
         }
 
@@ -63,10 +63,10 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         public Input<Inputs.ControllerServiceInternalArgs>? Internal { get; set; }
 
         [Input("labels")]
-        private InputMap<ImmutableDictionary<string, string>>? _labels;
-        public InputMap<ImmutableDictionary<string, string>> Labels
+        private InputMap<string>? _labels;
+        public InputMap<string> Labels
         {
-            get => _labels ?? (_labels = new InputMap<ImmutableDictionary<string, string>>());
+            get => _labels ?? (_labels = new InputMap<string>());
             set => _labels = value;
         }
 

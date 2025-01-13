@@ -53,7 +53,7 @@ export interface AutoscalingTemplatePodsTargetArgs {
 }
 
 export interface ContollerAdmissionWebhooksArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     certificate?: pulumi.Input<string>;
     createSecretJob?: pulumi.Input<inputs.ControllerAdmissionWebhooksCreateSecretJobArgs>;
     enabled?: pulumi.Input<boolean>;
@@ -233,7 +233,7 @@ export interface ControllerArgs {
     /**
      * labels to add to the pod container metadata.
      */
-    podLabels?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    podLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Security Context policies for controller pods.
      */
@@ -308,7 +308,7 @@ export interface ControllerAdmissionWebhooksPatchArgs {
     enabled?: pulumi.Input<boolean>;
     image?: pulumi.Input<inputs.ControllerImageArgs>;
     nodeSelector?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    podAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    podAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Provide a priority class name to the webhook patching job.
      */
@@ -322,7 +322,7 @@ export interface ControllerAdmissionWebhooksPatchWebhbookJobArgs {
 }
 
 export interface ControllerAdmissionWebhooksServiceArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     clusterIP?: pulumi.Input<string>;
     externalIPs?: pulumi.Input<pulumi.Input<string>[]>;
     loadBalancerIPs?: pulumi.Input<string>;
@@ -455,7 +455,7 @@ export interface ControllerMetricsArgs {
 }
 
 export interface ControllerMetricsPrometheusRulesArgs {
-    additionalLabels?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    additionalLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     enabled?: pulumi.Input<boolean>;
     namespace?: pulumi.Input<string>;
     rules?: pulumi.Input<pulumi.Input<{[key: string]: pulumi.Input<string>}>[]>;
@@ -474,7 +474,7 @@ export interface ControllerMetricsServiceArgs {
 }
 
 export interface ControllerMetricsServiceMonitorArgs {
-    additionalLabels?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    additionalLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     enabled?: pulumi.Input<boolean>;
     honorLabels?: pulumi.Input<boolean>;
     /**
@@ -520,7 +520,7 @@ export interface ControllerScopeArgs {
 }
 
 export interface ControllerServiceArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     clusterIP?: pulumi.Input<string>;
     enableHttp?: pulumi.Input<boolean>;
     enableHttps?: pulumi.Input<boolean>;
@@ -541,7 +541,7 @@ export interface ControllerServiceArgs {
      * Enables an additional internal load balancer (besides the external one). Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
      */
     internal?: pulumi.Input<inputs.ControllerServiceInternalArgs>;
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     loadBalancerIP?: pulumi.Input<string>;
     loadBalancerIPs?: pulumi.Input<string>;
     loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
@@ -562,13 +562,13 @@ export interface ControllerServiceAccountArgs {
 }
 
 export interface ControllerServiceInternalArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     enabled?: pulumi.Input<boolean>;
     /**
      * Set external traffic policy to: "Local" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
      */
     externalTrafficPolicy?: pulumi.Input<string>;
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     loadBalancerIPs?: pulumi.Input<string>;
     /**
      * Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.

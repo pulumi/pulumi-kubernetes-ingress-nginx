@@ -346,14 +346,14 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         }
 
         [Input("podLabels")]
-        private InputMap<ImmutableDictionary<string, string>>? _podLabels;
+        private InputMap<string>? _podLabels;
 
         /// <summary>
         /// labels to add to the pod container metadata.
         /// </summary>
-        public InputMap<ImmutableDictionary<string, string>> PodLabels
+        public InputMap<string> PodLabels
         {
-            get => _podLabels ?? (_podLabels = new InputMap<ImmutableDictionary<string, string>>());
+            get => _podLabels ?? (_podLabels = new InputMap<string>());
             set => _podLabels = value;
         }
 

@@ -27,10 +27,10 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
         }
 
         [Input("podAnnotations")]
-        private InputMap<ImmutableDictionary<string, string>>? _podAnnotations;
-        public InputMap<ImmutableDictionary<string, string>> PodAnnotations
+        private InputMap<string>? _podAnnotations;
+        public InputMap<string> PodAnnotations
         {
-            get => _podAnnotations ?? (_podAnnotations = new InputMap<ImmutableDictionary<string, string>>());
+            get => _podAnnotations ?? (_podAnnotations = new InputMap<string>());
             set => _podAnnotations = value;
         }
 
