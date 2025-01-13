@@ -13,10 +13,10 @@ namespace Pulumi.KubernetesIngressNginx.Inputs
     public sealed class ControllerMetricsPrometheusRulesArgs : global::Pulumi.ResourceArgs
     {
         [Input("additionalLabels")]
-        private InputMap<ImmutableDictionary<string, string>>? _additionalLabels;
-        public InputMap<ImmutableDictionary<string, string>> AdditionalLabels
+        private InputMap<string>? _additionalLabels;
+        public InputMap<string> AdditionalLabels
         {
-            get => _additionalLabels ?? (_additionalLabels = new InputMap<ImmutableDictionary<string, string>>());
+            get => _additionalLabels ?? (_additionalLabels = new InputMap<string>());
             set => _additionalLabels = value;
         }
 

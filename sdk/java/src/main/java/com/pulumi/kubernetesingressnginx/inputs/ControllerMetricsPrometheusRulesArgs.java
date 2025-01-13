@@ -19,9 +19,9 @@ public final class ControllerMetricsPrometheusRulesArgs extends com.pulumi.resou
     public static final ControllerMetricsPrometheusRulesArgs Empty = new ControllerMetricsPrometheusRulesArgs();
 
     @Import(name="additionalLabels")
-    private @Nullable Output<Map<String,Map<String,String>>> additionalLabels;
+    private @Nullable Output<Map<String,String>> additionalLabels;
 
-    public Optional<Output<Map<String,Map<String,String>>>> additionalLabels() {
+    public Optional<Output<Map<String,String>>> additionalLabels() {
         return Optional.ofNullable(this.additionalLabels);
     }
 
@@ -73,12 +73,12 @@ public final class ControllerMetricsPrometheusRulesArgs extends com.pulumi.resou
             $ = new ControllerMetricsPrometheusRulesArgs(Objects.requireNonNull(defaults));
         }
 
-        public Builder additionalLabels(@Nullable Output<Map<String,Map<String,String>>> additionalLabels) {
+        public Builder additionalLabels(@Nullable Output<Map<String,String>> additionalLabels) {
             $.additionalLabels = additionalLabels;
             return this;
         }
 
-        public Builder additionalLabels(Map<String,Map<String,String>> additionalLabels) {
+        public Builder additionalLabels(Map<String,String> additionalLabels) {
             return additionalLabels(Output.of(additionalLabels));
         }
 

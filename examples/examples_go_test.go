@@ -24,6 +24,7 @@ func TestGoExamples(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			p := pulumitest.NewPulumiTest(t, test.directoryName,
 				opttest.LocalProviderPath("pulumi-kubernetes-ingress-nginx", filepath.Join(getCwd(t), "..", "bin")),
+				opttest.GoModReplacement("github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk", "..", "sdk"),
 			)
 			if test.additionalConfig != nil {
 				for key, value := range test.additionalConfig {

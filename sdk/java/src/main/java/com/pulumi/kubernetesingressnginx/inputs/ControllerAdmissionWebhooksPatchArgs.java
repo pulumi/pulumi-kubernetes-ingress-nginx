@@ -43,9 +43,9 @@ public final class ControllerAdmissionWebhooksPatchArgs extends com.pulumi.resou
     }
 
     @Import(name="podAnnotations")
-    private @Nullable Output<Map<String,Map<String,String>>> podAnnotations;
+    private @Nullable Output<Map<String,String>> podAnnotations;
 
-    public Optional<Output<Map<String,Map<String,String>>>> podAnnotations() {
+    public Optional<Output<Map<String,String>>> podAnnotations() {
         return Optional.ofNullable(this.podAnnotations);
     }
 
@@ -135,12 +135,12 @@ public final class ControllerAdmissionWebhooksPatchArgs extends com.pulumi.resou
             return nodeSelector(Output.of(nodeSelector));
         }
 
-        public Builder podAnnotations(@Nullable Output<Map<String,Map<String,String>>> podAnnotations) {
+        public Builder podAnnotations(@Nullable Output<Map<String,String>> podAnnotations) {
             $.podAnnotations = podAnnotations;
             return this;
         }
 
-        public Builder podAnnotations(Map<String,Map<String,String>> podAnnotations) {
+        public Builder podAnnotations(Map<String,String> podAnnotations) {
             return podAnnotations(Output.of(podAnnotations));
         }
 

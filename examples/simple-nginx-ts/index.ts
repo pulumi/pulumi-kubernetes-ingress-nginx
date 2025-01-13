@@ -24,6 +24,10 @@ const ctrl = new nginx.IngressController("myctrl", {
             enabled: true,
         },
         service: {
+            annotations: {
+                "pulumi.com/test-annotation1": "test-value1",
+                "pulumi.com/test-annotation2": "test-value2",
+            },
             type: "NodePort",
             externalTrafficPolicy: "Local"
         }

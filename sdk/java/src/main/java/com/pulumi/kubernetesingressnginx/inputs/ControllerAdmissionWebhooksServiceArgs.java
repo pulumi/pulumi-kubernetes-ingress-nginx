@@ -19,9 +19,9 @@ public final class ControllerAdmissionWebhooksServiceArgs extends com.pulumi.res
     public static final ControllerAdmissionWebhooksServiceArgs Empty = new ControllerAdmissionWebhooksServiceArgs();
 
     @Import(name="annotations")
-    private @Nullable Output<Map<String,Map<String,String>>> annotations;
+    private @Nullable Output<Map<String,String>> annotations;
 
-    public Optional<Output<Map<String,Map<String,String>>>> annotations() {
+    public Optional<Output<Map<String,String>>> annotations() {
         return Optional.ofNullable(this.annotations);
     }
 
@@ -97,12 +97,12 @@ public final class ControllerAdmissionWebhooksServiceArgs extends com.pulumi.res
             $ = new ControllerAdmissionWebhooksServiceArgs(Objects.requireNonNull(defaults));
         }
 
-        public Builder annotations(@Nullable Output<Map<String,Map<String,String>>> annotations) {
+        public Builder annotations(@Nullable Output<Map<String,String>> annotations) {
             $.annotations = annotations;
             return this;
         }
 
-        public Builder annotations(Map<String,Map<String,String>> annotations) {
+        public Builder annotations(Map<String,String> annotations) {
             return annotations(Output.of(annotations));
         }
 
