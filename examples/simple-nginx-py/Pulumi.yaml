@@ -1,6 +1,0 @@
-name: simple-nginx-py
-runtime:
-  name: python
-  options:
-    virtualenv: venv
-description: A simple NGINX ingress controller example
