@@ -87,7 +87,7 @@ type Controller struct {
 	// https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
 	Config *map[string]interface{} `pulumi:"config"`
 	// Annotations to be added to the controller config configuration configmap.
-	ConfigAnnotations *map[string]interface{} `pulumi:"configAnnotations"`
+	ConfigAnnotations pulumi.StringMapInput `pulumi:"configAnnotations"`
 	// Will add custom headers before sending traffic to backends according to
 	// https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers.
 	ProxySetHeaders *map[string]interface{} `pulumi:"proxySetHeaders"`
@@ -128,7 +128,7 @@ type Controller struct {
 	// IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
 	IngressClassResource *ControllerIngressClassResource `pulumi:"ingressClassResource"`
 	// labels to add to the pod container metadata.
-	PodLabels *map[string]interface{} `pulumi:"podLabels"`
+	PodLabels pulumi.StringMapInput `pulumi:"podLabels"`
 	// Security Context policies for controller pods.
 	PodSecurityContext *corev1.PodSecurityContext `pulumi:"podSecurityContext" pschema:"ref=/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:PodSecurityContext"`
 	// See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
@@ -157,9 +157,9 @@ type Controller struct {
 	// DaemonSet or Deployment.
 	Kind *string `pulumi:"kind"`
 	// Annotations to be added to the controller Deployment or DaemonSet.
-	Annotations *map[string]string `pulumi:"annotations"`
+	Annotations pulumi.StringMapInput `pulumi:"annotations"`
 	// Labels to be added to the controller Deployment or DaemonSet.
-	Labels *map[string]string `pulumi:"labels"`
+	Labels pulumi.StringMapInput `pulumi:"labels"`
 	// The update strategy to apply to the Deployment or DaemonSet.
 	UpdateStrategy *ControllerUpdateStrategy `pulumi:"updateStrategy"`
 	// minReadySeconds to avoid killing pods before we are ready.
@@ -195,9 +195,9 @@ type Controller struct {
 	// if the ingress nginx controller is running in the hostNetwork: true mode.
 	HealthCheckHost *string `pulumi:"heathCheckHost"`
 	// Annotations to be added to controller pods.
-	PodAnnotations *map[string]string `pulumi:"podAnnotations"`
-	ReplicaCount   *int               `pulumi:"replicaCount"`
-	MinAvailable   *int               `pulumi:"minAvailable"`
+	PodAnnotations pulumi.StringMapInput `pulumi:"podAnnotations"`
+	ReplicaCount   *int                  `pulumi:"replicaCount"`
+	MinAvailable   *int                  `pulumi:"minAvailable"`
 	// Define requests resources to avoid probe issues due to CPU utilization in busy nodes
 	// ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903
 	// Ideally, there should be no limits.
@@ -305,13 +305,13 @@ type ControllerScope struct {
 type ControllerTcp struct {
 	ConfigMapNamespace *string `pulumi:"configMapNamespace"`
 	// Annotations to be added to the tcp config configmap.
-	Annotations *map[string]string `pulumi:"annotations"`
+	Annotations pulumi.StringMapInput `pulumi:"annotations"`
 }
 
 type ControllerUdp struct {
 	ConfigMapNamespace *string `pulumi:"configMapNamespace"`
 	// Annotations to be added to the udp config configmap.
-	Annotations *map[string]string `pulumi:"annotations"`
+	Annotations pulumi.StringMapInput `pulumi:"annotations"`
 }
 
 type ControllerUpdateStrategy struct {
@@ -324,13 +324,13 @@ type ControllerRollingUpdate struct {
 }
 
 type Autoscaling struct {
-	Annotations                        *map[string]string   `pulumi:"annotations"`
-	Enabled                            *bool                `pulumi:"enabled"`
-	MinReplicas                        *int                 `pulumi:"minReplicas"`
-	MaxReplicas                        *int                 `pulumi:"maxReplicas"`
-	TargetCPUUtilizationPercentation   *int                 `pulumi:"targetCPUUtilizationPercentage"`
-	TargetMemoryUtilizationPercentatge *int                 `pulumi:"targetMemoryUtilizationPercentage"`
-	Behavior                           *AutoscalingBehavior `pulumi:"controllerAutoscalingBehavior"`
+	Annotations                        pulumi.StringMapInput `pulumi:"annotations"`
+	Enabled                            *bool                 `pulumi:"enabled"`
+	MinReplicas                        *int                  `pulumi:"minReplicas"`
+	MaxReplicas                        *int                  `pulumi:"maxReplicas"`
+	TargetCPUUtilizationPercentation   *int                  `pulumi:"targetCPUUtilizationPercentage"`
+	TargetMemoryUtilizationPercentatge *int                  `pulumi:"targetMemoryUtilizationPercentage"`
+	Behavior                           *AutoscalingBehavior  `pulumi:"controllerAutoscalingBehavior"`
 }
 
 type AutoscalingBehavior struct {
@@ -386,7 +386,7 @@ type Keda struct {
 
 type KedaScaledObject struct {
 	// Custom annotations for ScaledObject resource.
-	Annotations *map[string]string `pulumi:"annotations"`
+	Annotations pulumi.StringMapInput `pulumi:"annotations"`
 }
 
 type KedaTrigger struct {
@@ -400,10 +400,10 @@ type ControllerCustomTemplate struct {
 }
 
 type ControllerService struct {
-	Enabled     *bool                   `pulumi:"enabled"`
-	Annotations *map[string]interface{} `pulumi:"annotations"`
-	Labels      *map[string]interface{} `pulumi:"labels"`
-	ClusterIP   *string                 `pulumi:"clusterIP"`
+	Enabled     *bool                 `pulumi:"enabled"`
+	Annotations pulumi.StringMapInput `pulumi:"annotations"`
+	Labels      pulumi.StringMapInput `pulumi:"labels"`
+	ClusterIP   *string               `pulumi:"clusterIP"`
 	// List of IP addresses at which the controller services are available
 	// Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
 	ExternalIPs              *[]string             `pulumi:"externalIPs"`
@@ -439,10 +439,10 @@ type ControllerServiceNodePorts struct {
 }
 
 type ControllerServiceInternal struct {
-	Enabled        *bool                   `pulumi:"enabled"`
-	Annotations    *map[string]interface{} `pulumi:"annotations"`
-	Labels         *map[string]interface{} `pulumi:"labels"`
-	LoadBalancerIP *string                 `pulumi:"loadBalancerIPs"`
+	Enabled        *bool                 `pulumi:"enabled"`
+	Annotations    pulumi.StringMapInput `pulumi:"annotations"`
+	Labels         pulumi.StringMapInput `pulumi:"labels"`
+	LoadBalancerIP *string               `pulumi:"loadBalancerIPs"`
 	// Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.
 	LoadBalancerSourceRanges *[]string `pulumi:"loadBalancerSourceRanges"`
 	// Set external traffic policy to: "Local" to preserve source IP on
@@ -453,7 +453,7 @@ type ControllerServiceInternal struct {
 
 type ContollerAdmissionWebhooks struct {
 	Enabled           *bool                   `pulumi:"enabled"`
-	Annotations       *map[string]interface{} `pulumi:"annotations"`
+	Annotations       pulumi.StringMapInput   `pulumi:"annotations"`
 	FailurePolicy     *string                 `pulumi:"failurePolicy"`
 	TimeoutSeconds    *int                    `pulumi:"timeoutSeconds"`
 	Port              *int                    `pulumi:"port"`
@@ -470,13 +470,13 @@ type ContollerAdmissionWebhooks struct {
 }
 
 type ControllerAdmissionWebhooksService struct {
-	Annotations              *map[string]interface{} `pulumi:"annotations"`
-	ClusterIP                *string                 `pulumi:"clusterIP"`
-	ExternalIPs              *[]string               `pulumi:"externalIPs"`
-	LoadBalancerIP           *string                 `pulumi:"loadBalancerIPs"`
-	LoadBalancerSourceRanges *[]string               `pulumi:"loadBalancerSourceRanges"`
-	ServicePort              *int                    `pulumi:"servicePort"`
-	Type                     *string                 `pulumi:"type"`
+	Annotations              pulumi.StringMapInput `pulumi:"annotations"`
+	ClusterIP                *string               `pulumi:"clusterIP"`
+	ExternalIPs              *[]string             `pulumi:"externalIPs"`
+	LoadBalancerIP           *string               `pulumi:"loadBalancerIPs"`
+	LoadBalancerSourceRanges *[]string             `pulumi:"loadBalancerSourceRanges"`
+	ServicePort              *int                  `pulumi:"servicePort"`
+	Type                     *string               `pulumi:"type"`
 }
 
 type ControllerAdmissionWebhooksCreateSecretJob struct {
@@ -491,11 +491,11 @@ type ControllerAdmissionWebhooksPatch struct {
 	Enabled *bool            `pulumi:"enabled"`
 	Image   *ControllerImage `pulumi:"image"`
 	// Provide a priority class name to the webhook patching job.
-	PriorityClassName *string                 `pulumi:"priorityClassName"`
-	PodAnnotations    *map[string]interface{} `pulumi:"podAnnotations"`
-	NodeSelector      *map[string]string      `pulumi:"nodeSelector"`
-	Tolerations       *[]corev1.Toleration    `pulumi:"tolerations" pschema:"ref=/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Toleration"`
-	RunAsUser         *int                    `pulumi:"runAsUser"`
+	PriorityClassName *string               `pulumi:"priorityClassName"`
+	PodAnnotations    pulumi.StringMapInput `pulumi:"podAnnotations"`
+	NodeSelector      *map[string]string    `pulumi:"nodeSelector"`
+	Tolerations       *[]corev1.Toleration  `pulumi:"tolerations" pschema:"ref=/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Toleration"`
+	RunAsUser         *int                  `pulumi:"runAsUser"`
 }
 
 type ControllerMetrics struct {
@@ -508,35 +508,35 @@ type ControllerMetrics struct {
 }
 
 type ControllerMetricsService struct {
-	Annotations              *map[string]string `pulumi:"annotations"`
-	ClusterIP                *string            `pulumi:"clusterIP"`
-	ExternalIPs              *[]string          `pulumi:"externalIPs"`
-	LoadBalancerIP           *string            `pulumi:"loadBalancerIPs"`
-	LoadBalancerSourceRanges *[]string          `pulumi:"loadBalancerSourceRanges"`
-	ServicePort              *int               `pulumi:"servicePort"`
-	Type                     *string            `pulumi:"type"`
-	ExternalTrafficPolicy    *string            `pulumi:"externalTrafficPolicy"`
-	NodePort                 *string            `pulumi:"nodePort"`
+	Annotations              pulumi.StringMapInput `pulumi:"annotations"`
+	ClusterIP                *string               `pulumi:"clusterIP"`
+	ExternalIPs              *[]string             `pulumi:"externalIPs"`
+	LoadBalancerIP           *string               `pulumi:"loadBalancerIPs"`
+	LoadBalancerSourceRanges *[]string             `pulumi:"loadBalancerSourceRanges"`
+	ServicePort              *int                  `pulumi:"servicePort"`
+	Type                     *string               `pulumi:"type"`
+	ExternalTrafficPolicy    *string               `pulumi:"externalTrafficPolicy"`
+	NodePort                 *string               `pulumi:"nodePort"`
 }
 
 type ControllerMetricsServiceMonitor struct {
-	Enabled          *bool                   `pulumi:"enabled"`
-	AdditionalLabels *map[string]interface{} `pulumi:"additionalLabels"`
+	Enabled          *bool                 `pulumi:"enabled"`
+	AdditionalLabels pulumi.StringMapInput `pulumi:"additionalLabels"`
 	// The label to use to retrieve the job name from.
-	JobLabel          *string                 `pulumi:"jobLabel"`
-	Namespace         *string                 `pulumi:"namespace"`
-	NamespaceSelector *map[string]interface{} `pulumi:"namespaceSelector"`
-	ScrapeInterval    *string                 `pulumi:"scrapeInterval"`
-	HonorLabels       *bool                   `pulumi:"honorLabels"`
-	TargetLabels      *[]string               `pulumi:"targetLabels"`
-	MetricRelabelings *[]string               `pulumi:"metricRelabelings"`
+	JobLabel          *string               `pulumi:"jobLabel"`
+	Namespace         *string               `pulumi:"namespace"`
+	NamespaceSelector pulumi.StringMapInput `pulumi:"namespaceSelector"`
+	ScrapeInterval    *string               `pulumi:"scrapeInterval"`
+	HonorLabels       *bool                 `pulumi:"honorLabels"`
+	TargetLabels      *[]string             `pulumi:"targetLabels"`
+	MetricRelabelings *[]string             `pulumi:"metricRelabelings"`
 }
 
 type ControllerMetricsPrometheusRules struct {
-	Enabled          *bool                   `pulumi:"enabled"`
-	AdditionalLabels *map[string]interface{} `pulumi:"additionalLabels"`
-	Namespace        *string                 `pulumi:"namespace"`
-	Rules            *[]interface{}          `pulumi:"rules"`
+	Enabled          *bool                 `pulumi:"enabled"`
+	AdditionalLabels pulumi.StringMapInput `pulumi:"additionalLabels"`
+	Namespace        *string               `pulumi:"namespace"`
+	Rules            *[]interface{}        `pulumi:"rules"`
 }
 
 type ControllerDefaultBackend struct {
@@ -564,12 +564,12 @@ type ControllerDefaultBackend struct {
 	// notes on enabling and using sysctls.
 	PodSecurityContext *corev1.PodSecurityContext `pulumi:"podSecurityContext" pschema:"ref=/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:PodSecurityContext"`
 	// labels to add to the pod container metadata
-	PodLabels *map[string]string `pulumi:"podLabels"`
+	PodLabels pulumi.StringMapInput `pulumi:"podLabels"`
 	// Node labels for default backend pod assignment
 	// Ref: https://kubernetes.io/docs/user-guide/node-selection/.
 	NodeSelector *map[string]string `pulumi:"nodeSelector"`
 	// Annotations to be added to default backend pods.
-	PodAnnotations *map[string]string           `pulumi:"podAnnotations"`
+	PodAnnotations pulumi.StringMapInput        `pulumi:"podAnnotations"`
 	ReplicaCount   *int                         `pulumi:"replicaCount"`
 	MinAvailable   *int                         `pulumi:"minAvailable"`
 	Resources      *corev1.ResourceRequirements `pulumi:"resources" pschema:"ref=/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements"`
@@ -587,8 +587,8 @@ type ControllerDefaultBackend struct {
 }
 
 type ControllerDefaultBackendService struct {
-	Annoations *map[string]string `pulumi:"annotations"`
-	ClusterIP  *string            `pulumi:"clusterIP"`
+	Annoations pulumi.StringMapInput `pulumi:"annotations"`
+	ClusterIP  *string               `pulumi:"clusterIP"`
 	// List of IP addresses at which the default backend service is available.
 	// Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
 	ExternalIPs              *[]string `pulumi:"externalIPs"`
