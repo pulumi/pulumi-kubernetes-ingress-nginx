@@ -40,7 +40,7 @@
                 "imagePullSecrets": {
                     "description": "Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:LocalObjectReference"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:LocalObjectReference"
                     },
                     "type": "array"
                 },
@@ -501,7 +501,7 @@
                     "$ref": "#/types/kubernetes-ingress-nginx:index:ContollerAdmissionWebhooks"
                 },
                 "affinity": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Affinity",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Affinity",
                     "description": "Affinity and anti-affinity Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity."
                 },
                 "allowSnippetAnnotations": {
@@ -577,35 +577,35 @@
                 "extraContainers": {
                     "description": "Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Container"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Container"
                     },
                     "type": "array"
                 },
                 "extraEnvs": {
                     "description": "Additional environment variables to set.",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:EnvVar"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:EnvVar"
                     },
                     "type": "array"
                 },
                 "extraInitContainers": {
                     "description": "Containers, which are run before the app containers are started. - name: init-myservice   image: busybox   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Container"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Container"
                     },
                     "type": "array"
                 },
                 "extraVolumeMounts": {
                     "description": "Additional volumeMounts to the controller main container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:VolumeMount"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:VolumeMount"
                     },
                     "type": "array"
                 },
                 "extraVolumes": {
                     "description": "Additional volumes to the controller pod.  - name: copy-portal-skins    emptyDir: {}",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Volume"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Volume"
                     },
                     "type": "array"
                 },
@@ -652,11 +652,11 @@
                     "type": "string"
                 },
                 "lifecycle": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Lifecycle",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Lifecycle",
                     "description": "Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s."
                 },
                 "livenessProbe": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Probe",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Probe",
                     "description": "Liveness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
                 },
                 "maxmindLicenseKey": {
@@ -692,7 +692,7 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:PodSecurityContext",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:PodSecurityContext",
                     "description": "Security Context policies for controller pods."
                 },
                 "priorityClassName": {
@@ -710,7 +710,7 @@
                     "description": "Allows customization of the source of the IP address or FQDN to report in the ingress status field. By default, it reads the information provided by the service. If disable, the status field reports the IP address of the node or nodes where an ingress controller pod is running."
                 },
                 "readinessProbe": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Probe",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Probe",
                     "description": "Readiness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
                 },
                 "replicaCount": {
@@ -721,7 +721,7 @@
                     "type": "boolean"
                 },
                 "resources": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements",
                     "description": "Define requests resources to avoid probe issues due to CPU utilization in busy nodes ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903 Ideally, there should be no limits. https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/"
                 },
                 "scope": {
@@ -732,7 +732,7 @@
                     "$ref": "#/types/kubernetes-ingress-nginx:index:ControllerService"
                 },
                 "startupProbe": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Probe",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Probe",
                     "description": "Startup probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
                 },
                 "sysctls": {
@@ -743,7 +743,7 @@
                     "type": "object"
                 },
                 "tolerations": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Toleration",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Toleration",
                     "description": "Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/."
                 },
                 "tcp": {
@@ -757,7 +757,7 @@
                 "topologySpreadConstraints": {
                     "description": "Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:TopologySpreadConstraint"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:TopologySpreadConstraint"
                     },
                     "type": "array"
                 },
@@ -778,7 +778,7 @@
         "kubernetes-ingress-nginx:index:ControllerAdmissionWebhooksCreateSecretJob": {
             "properties": {
                 "resources": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
                 }
             },
             "type": "object"
@@ -809,7 +809,7 @@
                 },
                 "tolerations": {
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Toleration"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Toleration"
                     },
                     "type": "array"
                 }
@@ -819,7 +819,7 @@
         "kubernetes-ingress-nginx:index:ControllerAdmissionWebhooksPatchWebhbookJob": {
             "properties": {
                 "resources": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
                 }
             },
             "type": "object"
@@ -870,7 +870,7 @@
         "kubernetes-ingress-nginx:index:ControllerDefaultBackend": {
             "properties": {
                 "affinity": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Affinity"
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Affinity"
                 },
                 "autoscaling": {
                     "$ref": "#/types/kubernetes-ingress-nginx:index:Autoscaling"
@@ -890,21 +890,21 @@
                 },
                 "extraEnvs": {
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:EnvVar"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:EnvVar"
                     },
                     "type": "array"
                 },
                 "extraVolumes": {
                     "description": "Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Volume"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Volume"
                     },
                     "type": "array"
                 },
                 "extraVolumeMounts": {
                     "description": "Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:VolumeMount"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:VolumeMount"
                     },
                     "type": "array"
                 },
@@ -912,7 +912,7 @@
                     "$ref": "#/types/kubernetes-ingress-nginx:index:ControllerImage"
                 },
                 "livenessProbe": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Probe",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Probe",
                     "description": "Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
                 },
                 "minAvailable": {
@@ -937,7 +937,7 @@
                     "type": "object"
                 },
                 "podSecurityContext": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:PodSecurityContext",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:PodSecurityContext",
                     "description": "Security Context policies for controller pods. See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls."
                 },
                 "port": {
@@ -947,14 +947,14 @@
                     "type": "string"
                 },
                 "readinessProbe": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Probe",
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Probe",
                     "description": "Readiness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes."
                 },
                 "replicaCount": {
                     "type": "integer"
                 },
                 "resources": {
-                    "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
+                    "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements"
                 },
                 "service": {
                     "$ref": "#/types/kubernetes-ingress-nginx:index:ControllerDefaultBackendService"
@@ -965,7 +965,7 @@
                 "tolerations": {
                     "description": "Node tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/",
                     "items": {
-                        "$ref": "/kubernetes/v4.19.0/schema.json#/types/kubernetes:core/v1:Toleration"
+                        "$ref": "/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Toleration"
                     },
                     "type": "array"
                 }
@@ -1525,10 +1525,10 @@
             "dependencies": {
                 "com.google.code.findbugs:jsr305": "3.0.2",
                 "com.google.code.gson:gson": "2.8.9",
-                "com.pulumi:pulumi": "0.20.0",
-                "com.pulumi:kubernetes": "4.19.0"
+                "com.pulumi:pulumi": "1.0.0",
+                "com.pulumi:kubernetes": "4.21.0"
             },
-            "gradleNexusPublishPluginVersion": "1.1.0",
+            "gradleNexusPublishPluginVersion": "2.0.0",
             "gradleTest": ""
         },
         "nodejs": {
