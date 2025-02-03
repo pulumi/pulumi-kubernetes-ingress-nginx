@@ -82,13 +82,13 @@ public final class IngressControllerArgs extends com.pulumi.resources.ResourceAr
      * 
      */
     @Import(name="helmOptions")
-    private @Nullable Output<ReleaseArgs> helmOptions;
+    private @Nullable ReleaseArgs helmOptions;
 
     /**
      * @return HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
      * 
      */
-    public Optional<Output<ReleaseArgs>> helmOptions() {
+    public Optional<ReleaseArgs> helmOptions() {
         return Optional.ofNullable(this.helmOptions);
     }
 
@@ -318,19 +318,9 @@ public final class IngressControllerArgs extends com.pulumi.resources.ResourceAr
          * @return builder
          * 
          */
-        public Builder helmOptions(@Nullable Output<ReleaseArgs> helmOptions) {
+        public Builder helmOptions(@Nullable ReleaseArgs helmOptions) {
             $.helmOptions = helmOptions;
             return this;
-        }
-
-        /**
-         * @param helmOptions HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder helmOptions(ReleaseArgs helmOptions) {
-            return helmOptions(Output.of(helmOptions));
         }
 
         /**
