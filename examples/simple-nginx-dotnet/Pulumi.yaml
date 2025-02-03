@@ -1,0 +1,7 @@
+name: simple-nginx-dotnet
+description: A minimal Kubernetes C# Pulumi program
+runtime: dotnet
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: kubernetes-csharp
