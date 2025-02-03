@@ -26,7 +26,7 @@ class IngressControllerArgs:
                  default_backend: Optional[pulumi.Input['ControllerDefaultBackendArgs']] = None,
                  dh_param: Optional[pulumi.Input[str]] = None,
                  fullname_override: Optional[pulumi.Input[str]] = None,
-                 helm_options: Optional[pulumi.Input['ReleaseArgs']] = None,
+                 helm_options: Optional['ReleaseArgs'] = None,
                  image_pull_secrets: Optional[pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.LocalObjectReferenceArgs']]]] = None,
                  name_override: Optional[pulumi.Input[str]] = None,
                  pod_security_policy: Optional[pulumi.Input['ControllerPodSecurityPolicyArgs']] = None,
@@ -40,7 +40,7 @@ class IngressControllerArgs:
         :param pulumi.Input['ControllerDefaultBackendArgs'] default_backend: Default 404 backend.
         :param pulumi.Input[str] dh_param: A base64ed Diffie-Hellman parameter. This can be generated with: openssl dhparam 4096 2> /dev/null | base64 Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.
         :param pulumi.Input[str] fullname_override: Overrides for generated resource names.
-        :param pulumi.Input['ReleaseArgs'] helm_options: HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
+        :param 'ReleaseArgs' helm_options: HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
         :param pulumi.Input[Sequence[pulumi.Input['pulumi_kubernetes.core.v1.LocalObjectReferenceArgs']]] image_pull_secrets: Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.
         :param pulumi.Input[str] name_override: Overrides for generated resource names.
         :param pulumi.Input['ControllerPodSecurityPolicyArgs'] pod_security_policy: If true, create & use Pod Security Policy resources https://kubernetes.io/docs/concepts/policy/pod-security-policy/
@@ -123,14 +123,14 @@ class IngressControllerArgs:
 
     @property
     @pulumi.getter(name="helmOptions")
-    def helm_options(self) -> Optional[pulumi.Input['ReleaseArgs']]:
+    def helm_options(self) -> Optional['ReleaseArgs']:
         """
         HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
         """
         return pulumi.get(self, "helm_options")
 
     @helm_options.setter
-    def helm_options(self, value: Optional[pulumi.Input['ReleaseArgs']]):
+    def helm_options(self, value: Optional['ReleaseArgs']):
         pulumi.set(self, "helm_options", value)
 
     @property
@@ -236,7 +236,7 @@ class IngressController(pulumi.ComponentResource):
                  default_backend: Optional[pulumi.Input[Union['ControllerDefaultBackendArgs', 'ControllerDefaultBackendArgsDict']]] = None,
                  dh_param: Optional[pulumi.Input[str]] = None,
                  fullname_override: Optional[pulumi.Input[str]] = None,
-                 helm_options: Optional[pulumi.Input[Union['ReleaseArgs', 'ReleaseArgsDict']]] = None,
+                 helm_options: Optional[Union['ReleaseArgs', 'ReleaseArgsDict']] = None,
                  image_pull_secrets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['pulumi_kubernetes.core.v1.LocalObjectReferenceArgs']]]]] = None,
                  name_override: Optional[pulumi.Input[str]] = None,
                  pod_security_policy: Optional[pulumi.Input[Union['ControllerPodSecurityPolicyArgs', 'ControllerPodSecurityPolicyArgsDict']]] = None,
@@ -254,7 +254,7 @@ class IngressController(pulumi.ComponentResource):
         :param pulumi.Input[Union['ControllerDefaultBackendArgs', 'ControllerDefaultBackendArgsDict']] default_backend: Default 404 backend.
         :param pulumi.Input[str] dh_param: A base64ed Diffie-Hellman parameter. This can be generated with: openssl dhparam 4096 2> /dev/null | base64 Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.
         :param pulumi.Input[str] fullname_override: Overrides for generated resource names.
-        :param pulumi.Input[Union['ReleaseArgs', 'ReleaseArgsDict']] helm_options: HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
+        :param Union['ReleaseArgs', 'ReleaseArgsDict'] helm_options: HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['pulumi_kubernetes.core.v1.LocalObjectReferenceArgs']]]] image_pull_secrets: Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.
         :param pulumi.Input[str] name_override: Overrides for generated resource names.
         :param pulumi.Input[Union['ControllerPodSecurityPolicyArgs', 'ControllerPodSecurityPolicyArgsDict']] pod_security_policy: If true, create & use Pod Security Policy resources https://kubernetes.io/docs/concepts/policy/pod-security-policy/
@@ -291,7 +291,7 @@ class IngressController(pulumi.ComponentResource):
                  default_backend: Optional[pulumi.Input[Union['ControllerDefaultBackendArgs', 'ControllerDefaultBackendArgsDict']]] = None,
                  dh_param: Optional[pulumi.Input[str]] = None,
                  fullname_override: Optional[pulumi.Input[str]] = None,
-                 helm_options: Optional[pulumi.Input[Union['ReleaseArgs', 'ReleaseArgsDict']]] = None,
+                 helm_options: Optional[Union['ReleaseArgs', 'ReleaseArgsDict']] = None,
                  image_pull_secrets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['pulumi_kubernetes.core.v1.LocalObjectReferenceArgs']]]]] = None,
                  name_override: Optional[pulumi.Input[str]] = None,
                  pod_security_policy: Optional[pulumi.Input[Union['ControllerPodSecurityPolicyArgs', 'ControllerPodSecurityPolicyArgsDict']]] = None,
