@@ -16,6 +16,7 @@ package provider
 
 import (
 	helmbase "github.com/pulumi/pulumi-go-helmbase"
+	king "github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk/go/kubernetes-ingress-nginx"
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/core/v1"
 	helmv3 "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/helm/v3"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -75,14 +76,14 @@ type IngressControllerArgs struct {
 func (args *IngressControllerArgs) R() **helmbase.ReleaseType { return &args.HelmOptions }
 
 type Controller struct {
-	Name  *string          `pulumi:"name"`
-	Image *ControllerImage `pulumi:"image"`
+	Name  *string                      `pulumi:"name"`
+	Image king.ControllerImagePtrInput `pulumi:"image"`
 	// Use an existing PSP instead of creating one.
 	ExistingPsp *string `pulumi:"existingPsp"`
 	// Configures the controller container name.
 	ContainerName *string `pulumi:"containerName"`
 	// Configures the ports the nginx-controller listens on.
-	ContainerPort *ControllerPort `pulumi:"containerPort"`
+	ContainerPort king.ControllerPortPtrInput `pulumi:"containerPort"`
 	// Will add custom configuration options to Nginx
 	// https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
 	Config *map[string]interface{} `pulumi:"config"`
@@ -142,7 +143,7 @@ type Controller struct {
 	// Limit the scope of the controller.
 	Scope *ControllerScope `pulumi:"scope"`
 	// Allows customization of the configmap / nginx-configmap namespace.
-	ConfigMapNamespace *string `pulumi:"configMapNamespace"`
+	ConfigMapNamespace pulumi.StringPtrInput `pulumi:"configMapNamespace"`
 	// Allows customization of the tcp-services-configmap.
 	Tcp *ControllerTcp `pulumi:"tcp"`
 	Udp *ControllerUdp `pulumi:"udp"`
@@ -204,18 +205,18 @@ type Controller struct {
 	// https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/
 	Resources *corev1.ResourceRequirements `pulumi:"resources" pschema:"ref=/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:ResourceRequirements"`
 	// Mutually exclusive with keda autoscaling.
-	Autoscaling *Autoscaling `pulumi:"autoscaling"`
+	Autoscaling king.AutoscalingPtrInput `pulumi:"autoscaling"`
 	// Custom or additional autoscaling metrics
 	// ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
-	AutoscalingTemplate *[]AutoscalingTemplate `pulumi:"autoscalingTemplate"`
+	AutoscalingTemplate *king.AutoscalingTemplateArrayInput `pulumi:"autoscalingTemplate"`
 	// Mutually exclusive with hpa autoscaling.
 	Keds *Keda `pulumi:"keda"`
 	// Enable mimalloc as a drop-in replacement for malloc.
 	// ref: https://github.com/microsoft/mimalloc.
 	EnableMimalloc *bool `pulumi:"enableMimalloc"`
 	// Override NGINX template.
-	CustomTemplate *ControllerCustomTemplate `pulumi:"customTemplate"`
-	Service        *ControllerService        `pulumi:"service"`
+	CustomTemplate king.ControllerCustomTemplatePtrInput `pulumi:"customTemplate"`
+	Service        king.ControllerServicePtrInput        `pulumi:"service"`
 	// Additional containers to be added to the controller pod.
 	// See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
 	ExtraContainers *[]corev1.Container `pulumi:"extraContainers" pschema:"ref=/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Container"`
@@ -231,9 +232,9 @@ type Controller struct {
 	// - name: init-myservice
 	//   image: busybox
 	//   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
-	ExtraInitContainers *[]corev1.Container         `pulumi:"extraInitContainers" pschema:"ref=/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Container"`
-	AdmissionWebhooks   *ContollerAdmissionWebhooks `pulumi:"admissionWebhooks"`
-	Metrics             *ControllerMetrics          `pulumi:"metrics"`
+	ExtraInitContainers *[]corev1.Container                     `pulumi:"extraInitContainers" pschema:"ref=/kubernetes/v4.21.0/schema.json#/types/kubernetes:core/v1:Container"`
+	AdmissionWebhooks   king.ContollerAdmissionWebhooksPtrInput `pulumi:"admissionWebhooks"`
+	Metrics             king.ControllerMetricsPtrInput          `pulumi:"metrics"`
 	// Improve connection draining when ingress controller pod is deleted using a lifecycle hook:
 	// With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds
 	// to 300, allowing the draining of connections up to five minutes.
