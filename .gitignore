@@ -30,3 +30,4 @@ sdk/java/build.gradle
 sdk/python/venv
 sdk/python/pulumi_kubernetes_ingress_nginx.egg-info/
 sdk/python/pulumi_kubernetes_ingress_nginx/__pycache__/
+**/*.sln
