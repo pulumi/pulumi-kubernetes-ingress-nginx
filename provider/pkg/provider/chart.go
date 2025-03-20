@@ -407,7 +407,7 @@ type ControllerService struct {
 	// List of IP addresses at which the controller services are available
 	// Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
 	ExternalIPs              *[]string             `pulumi:"externalIPs"`
-	LoadBalancerIP           pulumi.StringPtrInput `pulumi:"loadBalancerIPs"`
+	LoadBalancerIP           pulumi.StringPtrInput `pulumi:"loadBalancerIP"`
 	LoadBalancerSourceRanges *[]string             `pulumi:"loadBalancerSourceRanges"`
 	EnableHttp               *bool                 `pulumi:"enableHttp"`
 	EnableHttps              *bool                 `pulumi:"enableHttps"`
