@@ -73,7 +73,7 @@ type IngressControllerArgs struct {
 	// Overrides for generated resource names.
 	FullnameOverride pulumi.StringPtrInput
 	// HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
-	HelmOptions ReleasePtrInput
+	HelmOptions *ReleaseArgs
 	// Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.
 	ImagePullSecrets corev1.LocalObjectReferenceArrayInput
 	// Overrides for generated resource names.
