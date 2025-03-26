@@ -74,7 +74,7 @@ namespace Pulumi.KubernetesIngressNginx
         /// HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
         /// </summary>
         [Input("helmOptions")]
-        public Input<Inputs.ReleaseArgs>? HelmOptions { get; set; }
+        public Inputs.ReleaseArgs? HelmOptions { get; set; }
 
         [Input("imagePullSecrets")]
         private InputList<Pulumi.Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs>? _imagePullSecrets;
