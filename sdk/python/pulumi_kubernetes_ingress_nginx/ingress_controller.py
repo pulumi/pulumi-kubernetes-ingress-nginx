@@ -229,6 +229,9 @@ class IngressControllerArgs:
 
 
 class IngressController(pulumi.ComponentResource):
+
+    pulumi_type = "kubernetes-ingress-nginx:index:IngressController"
+
     @overload
     def __init__(__self__,
                  resource_name: str,
