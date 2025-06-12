@@ -9,7 +9,7 @@ require (
 	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.1.3
 	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.23.0
 	github.com/pulumi/pulumi/pkg/v3 v3.175.0
-	github.com/pulumi/pulumi/sdk/v3 v3.175.0
+	github.com/pulumi/pulumi/sdk/v3 v3.176.0
 )
 
 replace github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk => ../sdk
