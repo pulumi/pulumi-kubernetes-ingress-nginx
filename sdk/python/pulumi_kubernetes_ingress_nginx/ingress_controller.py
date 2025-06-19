@@ -228,6 +228,7 @@ class IngressControllerArgs:
         pulumi.set(self, "udp", value)
 
 
+@pulumi.type_token("kubernetes-ingress-nginx:index:IngressController")
 class IngressController(pulumi.ComponentResource):
     @overload
     def __init__(__self__,
