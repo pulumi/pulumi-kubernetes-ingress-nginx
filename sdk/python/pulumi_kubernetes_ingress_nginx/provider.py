@@ -26,6 +26,7 @@ class ProviderArgs:
         pass
 
 
+@pulumi.type_token("pulumi:providers:kubernetes-ingress-nginx")
 class Provider(pulumi.ProviderResource):
     @overload
     def __init__(__self__,
