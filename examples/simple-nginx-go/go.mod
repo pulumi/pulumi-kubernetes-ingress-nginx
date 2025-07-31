@@ -1,13 +1,11 @@
 module github.com/pulumi/pulumi-kubernetes-ingress-nginx/examples/simple-nginx-go
 
-go 1.23.1
-
-toolchain go1.23.4
+go 1.23.11
 
 require (
 	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.1.3
 	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.23.0
-	github.com/pulumi/pulumi/sdk/v3 v3.183.0
+	github.com/pulumi/pulumi/sdk/v3 v3.186.0
 )
 
 require (
