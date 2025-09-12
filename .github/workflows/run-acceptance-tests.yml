@@ -65,7 +65,7 @@ jobs:
         persist-credentials: false
         ref: ${{ env.PR_COMMIT_SHA }}    
     - env:
-        ESC_ACTION_ENVIRONMENT: github-secrets/${{ github.repository_owner }}-${{ github.event.repository.name }}
+        ESC_ACTION_ENVIRONMENT: imports/github-secrets
         ESC_ACTION_OIDC_AUTH: "true"
         ESC_ACTION_OIDC_ORGANIZATION: pulumi
         ESC_ACTION_OIDC_REQUESTED_TOKEN_TYPE: urn:pulumi:token-type:access_token:organization
@@ -243,7 +243,7 @@ jobs:
         persist-credentials: false
         ref: ${{ env.PR_COMMIT_SHA }}    
     - env:
-        ESC_ACTION_ENVIRONMENT: github-secrets/${{ github.repository_owner }}-${{ github.event.repository.name }}
+        ESC_ACTION_ENVIRONMENT: imports/github-secrets
         ESC_ACTION_OIDC_AUTH: "true"
         ESC_ACTION_OIDC_ORGANIZATION: pulumi
         ESC_ACTION_OIDC_REQUESTED_TOKEN_TYPE: urn:pulumi:token-type:access_token:organization
@@ -412,7 +412,7 @@ jobs:
         persist-credentials: false
         ref: ${{ env.PR_COMMIT_SHA }}    
     - env:
-        ESC_ACTION_ENVIRONMENT: github-secrets/${{ github.repository_owner }}-${{ github.event.repository.name }}
+        ESC_ACTION_ENVIRONMENT: imports/github-secrets
         ESC_ACTION_OIDC_AUTH: "true"
         ESC_ACTION_OIDC_ORGANIZATION: pulumi
         ESC_ACTION_OIDC_REQUESTED_TOKEN_TYPE: urn:pulumi:token-type:access_token:organization
@@ -535,7 +535,7 @@ jobs:
         persist-credentials: false
         ref: ${{ env.PR_COMMIT_SHA }}    
     - env:
-        ESC_ACTION_ENVIRONMENT: github-secrets/${{ github.repository_owner }}-${{ github.event.repository.name }}
+        ESC_ACTION_ENVIRONMENT: imports/github-secrets
         ESC_ACTION_OIDC_AUTH: "true"
         ESC_ACTION_OIDC_ORGANIZATION: pulumi
         ESC_ACTION_OIDC_REQUESTED_TOKEN_TYPE: urn:pulumi:token-type:access_token:organization
