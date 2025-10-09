@@ -29,7 +29,7 @@ export class IngressController extends pulumi.ComponentResource {
     /**
      * Detailed information about the status of the underlying Helm deployment.
      */
-    public /*out*/ readonly status!: pulumi.Output<outputs.ReleaseStatus>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.ReleaseStatus>;
 
     /**
      * Create a IngressController resource with the given unique name, arguments, and options.
@@ -42,19 +42,19 @@ export class IngressController extends pulumi.ComponentResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
-            resourceInputs["controller"] = args ? args.controller : undefined;
-            resourceInputs["defaultBackend"] = args ? args.defaultBackend : undefined;
-            resourceInputs["dhParam"] = args ? args.dhParam : undefined;
-            resourceInputs["fullnameOverride"] = args ? args.fullnameOverride : undefined;
-            resourceInputs["helmOptions"] = args ? args.helmOptions : undefined;
-            resourceInputs["imagePullSecrets"] = args ? args.imagePullSecrets : undefined;
-            resourceInputs["nameOverride"] = args ? args.nameOverride : undefined;
-            resourceInputs["podSecurityPolicy"] = args ? args.podSecurityPolicy : undefined;
-            resourceInputs["rbac"] = args ? args.rbac : undefined;
-            resourceInputs["revisionHistoryLimit"] = args ? args.revisionHistoryLimit : undefined;
-            resourceInputs["serviceAccount"] = args ? args.serviceAccount : undefined;
-            resourceInputs["tcp"] = args ? args.tcp : undefined;
-            resourceInputs["udp"] = args ? args.udp : undefined;
+            resourceInputs["controller"] = args?.controller;
+            resourceInputs["defaultBackend"] = args?.defaultBackend;
+            resourceInputs["dhParam"] = args?.dhParam;
+            resourceInputs["fullnameOverride"] = args?.fullnameOverride;
+            resourceInputs["helmOptions"] = args?.helmOptions;
+            resourceInputs["imagePullSecrets"] = args?.imagePullSecrets;
+            resourceInputs["nameOverride"] = args?.nameOverride;
+            resourceInputs["podSecurityPolicy"] = args?.podSecurityPolicy;
+            resourceInputs["rbac"] = args?.rbac;
+            resourceInputs["revisionHistoryLimit"] = args?.revisionHistoryLimit;
+            resourceInputs["serviceAccount"] = args?.serviceAccount;
+            resourceInputs["tcp"] = args?.tcp;
+            resourceInputs["udp"] = args?.udp;
             resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["status"] = undefined /*out*/;
