@@ -7,7 +7,7 @@ toolchain go1.24.10
 require (
 	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.1.3
 	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.24.0
-	github.com/pulumi/pulumi/sdk/v3 v3.205.0
+	github.com/pulumi/pulumi/sdk/v3 v3.207.0
 )
 
 require (
