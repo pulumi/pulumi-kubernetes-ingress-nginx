@@ -9,15 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Stale issue job
     steps:
-    - uses: pulumi/esc-action@9eb774255b1a4afb7855678ae8d4a77359da0d9b
-      name: Fetch secrets from ESC
-      env:
-        ESC_ACTION_ENVIRONMENT: imports/github-secrets
-        ESC_ACTION_EXPORT_ENVIRONMENT_VARIABLES: "false"
-        ESC_ACTION_OIDC_AUTH: "true"
-        ESC_ACTION_OIDC_ORGANIZATION: pulumi
-        ESC_ACTION_OIDC_REQUESTED_TOKEN_TYPE: urn:pulumi:token-type:access_token:organization
-      id: esc-secrets
     - uses: aws-actions/stale-issue-cleanup@5650b49bcd757a078f6ca06c373d7807b773f9bc # v7.1.0
       with:
         issue-types: issues # only look at issues (ignore pull-requests)
