@@ -64,7 +64,16 @@ func TestTsIngressNginxMapProperties(t *testing.T) {
 		t.Logf("Retrieved ConfigMap name: %s", configMapName)
 
 		// Step 3: Get the hsts-max-age value from the dynamically retrieved ConfigMap
-		kubectlCmd := exec.Command("kubectl", "get", "configmap", configMapName, "-n", namespace, "-o", "jsonpath={.data.hsts-max-age}")
+		kubectlCmd := exec.Command(
+			"kubectl",
+			"get",
+			"configmap",
+			configMapName,
+			"-n",
+			namespace,
+			"-o",
+			"jsonpath={.data.hsts-max-age}",
+		)
 		var kubectlOut bytes.Buffer
 		kubectlCmd.Stdout = &kubectlOut
 		kubectlCmd.Stderr = &kubectlOut
