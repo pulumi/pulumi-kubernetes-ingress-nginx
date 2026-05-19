@@ -4,8 +4,8 @@
         "@types/node": "22.13.1"
     },
     "dependencies": {
-        "@pulumi/pulumi": "3.241.0",
-        "@pulumi/kubernetes": "4.31.0",
+        "@pulumi/pulumi": "3.242.0",
+        "@pulumi/kubernetes": "4.31.1",
         "@pulumi/kubernetes-ingress-nginx": "latest"
     }
 }
