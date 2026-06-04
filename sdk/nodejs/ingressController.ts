@@ -29,7 +29,7 @@ export class IngressController extends pulumi.ComponentResource {
     /**
      * Detailed information about the status of the underlying Helm deployment.
      */
-    public /*out*/ readonly status!: pulumi.Output<outputs.ReleaseStatus>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.ReleaseStatus>;
 
     /**
      * Create a IngressController resource with the given unique name, arguments, and options.
@@ -42,19 +42,19 @@ export class IngressController extends pulumi.ComponentResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
-            resourceInputs["controller"] = args ? args.controller : undefined;
-            resourceInputs["defaultBackend"] = args ? args.defaultBackend : undefined;
-            resourceInputs["dhParam"] = args ? args.dhParam : undefined;
-            resourceInputs["fullnameOverride"] = args ? args.fullnameOverride : undefined;
-            resourceInputs["helmOptions"] = args ? args.helmOptions : undefined;
-            resourceInputs["imagePullSecrets"] = args ? args.imagePullSecrets : undefined;
-            resourceInputs["nameOverride"] = args ? args.nameOverride : undefined;
-            resourceInputs["podSecurityPolicy"] = args ? args.podSecurityPolicy : undefined;
-            resourceInputs["rbac"] = args ? args.rbac : undefined;
-            resourceInputs["revisionHistoryLimit"] = args ? args.revisionHistoryLimit : undefined;
-            resourceInputs["serviceAccount"] = args ? args.serviceAccount : undefined;
-            resourceInputs["tcp"] = args ? args.tcp : undefined;
-            resourceInputs["udp"] = args ? args.udp : undefined;
+            resourceInputs["controller"] = args?.controller;
+            resourceInputs["defaultBackend"] = args?.defaultBackend;
+            resourceInputs["dhParam"] = args?.dhParam;
+            resourceInputs["fullnameOverride"] = args?.fullnameOverride;
+            resourceInputs["helmOptions"] = args?.helmOptions;
+            resourceInputs["imagePullSecrets"] = args?.imagePullSecrets;
+            resourceInputs["nameOverride"] = args?.nameOverride;
+            resourceInputs["podSecurityPolicy"] = args?.podSecurityPolicy;
+            resourceInputs["rbac"] = args?.rbac;
+            resourceInputs["revisionHistoryLimit"] = args?.revisionHistoryLimit;
+            resourceInputs["serviceAccount"] = args?.serviceAccount;
+            resourceInputs["tcp"] = args?.tcp;
+            resourceInputs["udp"] = args?.udp;
             resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["status"] = undefined /*out*/;
@@ -68,19 +68,19 @@ export class IngressController extends pulumi.ComponentResource {
  * The set of arguments for constructing a IngressController resource.
  */
 export interface IngressControllerArgs {
-    controller?: pulumi.Input<inputs.ControllerArgs>;
+    controller?: pulumi.Input<inputs.ControllerArgs | undefined>;
     /**
      * Default 404 backend.
      */
-    defaultBackend?: pulumi.Input<inputs.ControllerDefaultBackendArgs>;
+    defaultBackend?: pulumi.Input<inputs.ControllerDefaultBackendArgs | undefined>;
     /**
      * A base64ed Diffie-Hellman parameter. This can be generated with: openssl dhparam 4096 2> /dev/null | base64 Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param.
      */
-    dhParam?: pulumi.Input<string>;
+    dhParam?: pulumi.Input<string | undefined>;
     /**
      * Overrides for generated resource names.
      */
-    fullnameOverride?: pulumi.Input<string>;
+    fullnameOverride?: pulumi.Input<string | undefined>;
     /**
      * HelmOptions is an escape hatch that lets the end user control any aspect of the Helm deployment. This exposes the entirety of the underlying Helm Release component args.
      */
@@ -88,30 +88,30 @@ export interface IngressControllerArgs {
     /**
      * Optional array of imagePullSecrets containing private registry credentials Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/.
      */
-    imagePullSecrets?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.LocalObjectReference>[]>;
+    imagePullSecrets?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.LocalObjectReference>[] | undefined>;
     /**
      * Overrides for generated resource names.
      */
-    nameOverride?: pulumi.Input<string>;
+    nameOverride?: pulumi.Input<string | undefined>;
     /**
      * If true, create & use Pod Security Policy resources https://kubernetes.io/docs/concepts/policy/pod-security-policy/
      */
-    podSecurityPolicy?: pulumi.Input<inputs.ControllerPodSecurityPolicyArgs>;
+    podSecurityPolicy?: pulumi.Input<inputs.ControllerPodSecurityPolicyArgs | undefined>;
     /**
      * Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266
      */
-    rbac?: pulumi.Input<inputs.ControllerRBACArgs>;
+    rbac?: pulumi.Input<inputs.ControllerRBACArgs | undefined>;
     /**
      * Rollback limit.
      */
-    revisionHistoryLimit?: pulumi.Input<number>;
-    serviceAccount?: pulumi.Input<inputs.ControllerServiceAccountArgs>;
+    revisionHistoryLimit?: pulumi.Input<number | undefined>;
+    serviceAccount?: pulumi.Input<inputs.ControllerServiceAccountArgs | undefined>;
     /**
      * TCP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
      */
-    tcp?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    tcp?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
     /**
      * UDP service key:value pairs Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md.
      */
-    udp?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    udp?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
 }
