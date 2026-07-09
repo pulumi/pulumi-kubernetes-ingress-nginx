@@ -8,628 +8,628 @@ import * as outputs from "../types/output";
 import * as pulumiKubernetes from "@pulumi/kubernetes";
 
 export interface AutoscalingArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    controllerAutoscalingBehavior?: pulumi.Input<inputs.AutoscalingBehaviorArgs>;
-    enabled?: pulumi.Input<boolean>;
-    maxReplicas?: pulumi.Input<number>;
-    minReplicas?: pulumi.Input<number>;
-    targetCPUUtilizationPercentage?: pulumi.Input<number>;
-    targetMemoryUtilizationPercentage?: pulumi.Input<number>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    controllerAutoscalingBehavior?: pulumi.Input<inputs.AutoscalingBehaviorArgs | undefined>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    maxReplicas?: pulumi.Input<number | undefined>;
+    minReplicas?: pulumi.Input<number | undefined>;
+    targetCPUUtilizationPercentage?: pulumi.Input<number | undefined>;
+    targetMemoryUtilizationPercentage?: pulumi.Input<number | undefined>;
 }
 
 export interface AutoscalingBehaviorArgs {
-    scaleDown?: pulumi.Input<inputs.AutoscalingBehaviorScalingArgs>;
-    scaleUp?: pulumi.Input<inputs.AutoscalingBehaviorScalingArgs>;
+    scaleDown?: pulumi.Input<inputs.AutoscalingBehaviorScalingArgs | undefined>;
+    scaleUp?: pulumi.Input<inputs.AutoscalingBehaviorScalingArgs | undefined>;
 }
 
 export interface AutoscalingBehaviorScalingArgs {
-    policies?: pulumi.Input<pulumi.Input<inputs.AutoscalingBehaviorScalingPolicyArgs>[]>;
-    stabilizationWindowSeconds?: pulumi.Input<number>;
+    policies?: pulumi.Input<pulumi.Input<inputs.AutoscalingBehaviorScalingPolicyArgs>[] | undefined>;
+    stabilizationWindowSeconds?: pulumi.Input<number | undefined>;
 }
 
 export interface AutoscalingBehaviorScalingPolicyArgs {
-    periodSeconds?: pulumi.Input<number>;
-    type?: pulumi.Input<string>;
-    value?: pulumi.Input<number>;
+    periodSeconds?: pulumi.Input<number | undefined>;
+    type?: pulumi.Input<string | undefined>;
+    value?: pulumi.Input<number | undefined>;
 }
 
 export interface AutoscalingTemplateArgs {
-    pods?: pulumi.Input<inputs.AutoscalingTemplatePodsArgs>;
-    type?: pulumi.Input<string>;
+    pods?: pulumi.Input<inputs.AutoscalingTemplatePodsArgs | undefined>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 export interface AutoscalingTemplatePodsArgs {
-    metric?: pulumi.Input<inputs.AutoscalingTemplatePodsMetricArgs>;
-    target?: pulumi.Input<inputs.AutoscalingTemplatePodsTargetArgs>;
+    metric?: pulumi.Input<inputs.AutoscalingTemplatePodsMetricArgs | undefined>;
+    target?: pulumi.Input<inputs.AutoscalingTemplatePodsTargetArgs | undefined>;
 }
 
 export interface AutoscalingTemplatePodsMetricArgs {
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 export interface AutoscalingTemplatePodsTargetArgs {
-    averageValue?: pulumi.Input<string>;
-    type?: pulumi.Input<string>;
+    averageValue?: pulumi.Input<string | undefined>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 export interface ContollerAdmissionWebhooksArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    certificate?: pulumi.Input<string>;
-    createSecretJob?: pulumi.Input<inputs.ControllerAdmissionWebhooksCreateSecretJobArgs>;
-    enabled?: pulumi.Input<boolean>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    certificate?: pulumi.Input<string | undefined>;
+    createSecretJob?: pulumi.Input<inputs.ControllerAdmissionWebhooksCreateSecretJobArgs | undefined>;
+    enabled?: pulumi.Input<boolean | undefined>;
     /**
      * Use an existing PSP instead of creating one.
      */
-    existingPsp?: pulumi.Input<string>;
-    failurePolicy?: pulumi.Input<string>;
-    key?: pulumi.Input<string>;
-    namespaceSelector?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    objectSelector?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    patch?: pulumi.Input<inputs.ControllerAdmissionWebhooksPatchArgs>;
-    patchWebhookJob?: pulumi.Input<inputs.ControllerAdmissionWebhooksPatchWebhbookJobArgs>;
-    port?: pulumi.Input<number>;
-    service?: pulumi.Input<inputs.ControllerAdmissionWebhooksServiceArgs>;
-    timeoutSeconds?: pulumi.Input<number>;
+    existingPsp?: pulumi.Input<string | undefined>;
+    failurePolicy?: pulumi.Input<string | undefined>;
+    key?: pulumi.Input<string | undefined>;
+    namespaceSelector?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
+    objectSelector?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
+    patch?: pulumi.Input<inputs.ControllerAdmissionWebhooksPatchArgs | undefined>;
+    patchWebhookJob?: pulumi.Input<inputs.ControllerAdmissionWebhooksPatchWebhbookJobArgs | undefined>;
+    port?: pulumi.Input<number | undefined>;
+    service?: pulumi.Input<inputs.ControllerAdmissionWebhooksServiceArgs | undefined>;
+    timeoutSeconds?: pulumi.Input<number | undefined>;
 }
 
 export interface ControllerArgs {
     /**
      * Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers.
      */
-    addHeaders?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    admissionWebhooks?: pulumi.Input<inputs.ContollerAdmissionWebhooksArgs>;
+    addHeaders?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
+    admissionWebhooks?: pulumi.Input<inputs.ContollerAdmissionWebhooksArgs | undefined>;
     /**
      * Affinity and anti-affinity Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity.
      */
-    affinity?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Affinity>;
+    affinity?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Affinity | undefined>;
     /**
      * This configuration defines if Ingress Controller should allow users to set their own *-snippet annotations, otherwise this is forbidden / dropped when users add those annotations. Global snippets in ConfigMap are still respected.
      */
-    allowSnippetAnnotations?: pulumi.Input<boolean>;
+    allowSnippetAnnotations?: pulumi.Input<boolean | undefined>;
     /**
      * Annotations to be added to the controller Deployment or DaemonSet.
      */
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Mutually exclusive with keda autoscaling.
      */
-    autoscaling?: pulumi.Input<inputs.AutoscalingArgs>;
+    autoscaling?: pulumi.Input<inputs.AutoscalingArgs | undefined>;
     /**
      * Custom or additional autoscaling metrics ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
      */
-    autoscalingTemplate?: pulumi.Input<pulumi.Input<inputs.AutoscalingTemplateArgs>[]>;
+    autoscalingTemplate?: pulumi.Input<pulumi.Input<inputs.AutoscalingTemplateArgs>[] | undefined>;
     /**
      * Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/.
      */
-    config?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    config?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Annotations to be added to the controller config configuration configmap.
      */
-    configAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    configAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Allows customization of the configmap / nginx-configmap namespace.
      */
-    configMapNamespace?: pulumi.Input<string>;
+    configMapNamespace?: pulumi.Input<string | undefined>;
     /**
      * Configures the controller container name.
      */
-    containerName?: pulumi.Input<string>;
+    containerName?: pulumi.Input<string | undefined>;
     /**
      * Configures the ports the nginx-controller listens on.
      */
-    containerPort?: pulumi.Input<inputs.ControllerPortArgs>;
+    containerPort?: pulumi.Input<inputs.ControllerPortArgs | undefined>;
     /**
      * Override NGINX template.
      */
-    customTemplate?: pulumi.Input<inputs.ControllerCustomTemplateArgs>;
+    customTemplate?: pulumi.Input<inputs.ControllerCustomTemplateArgs | undefined>;
     /**
      * Optionally customize the pod dnsConfig.
      */
-    dnsConfig?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    dnsConfig?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
      */
-    dnsPolicy?: pulumi.Input<string>;
+    dnsPolicy?: pulumi.Input<string | undefined>;
     /**
      * Election ID to use for status update.
      */
-    electionID?: pulumi.Input<string>;
+    electionID?: pulumi.Input<string | undefined>;
     /**
      * Enable mimalloc as a drop-in replacement for malloc. ref: https://github.com/microsoft/mimalloc.
      */
-    enableMimalloc?: pulumi.Input<boolean>;
+    enableMimalloc?: pulumi.Input<boolean | undefined>;
     /**
      * Use an existing PSP instead of creating one.
      */
-    existingPsp?: pulumi.Input<string>;
+    existingPsp?: pulumi.Input<string | undefined>;
     /**
      * Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use `default-ssl-certificate: "<namespace>/<secret_name>"`.
      */
-    extraArgs?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    extraArgs?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
      */
-    extraContainers?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Container>[]>;
+    extraContainers?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Container>[] | undefined>;
     /**
      * Additional environment variables to set.
      */
-    extraEnvs?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.EnvVar>[]>;
+    extraEnvs?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.EnvVar>[] | undefined>;
     /**
      * Containers, which are run before the app containers are started. - name: init-myservice   image: busybox   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
      */
-    extraInitContainers?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Container>[]>;
+    extraInitContainers?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Container>[] | undefined>;
     /**
      * Additional volumeMounts to the controller main container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
      */
-    extraVolumeMounts?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeMount>[]>;
+    extraVolumeMounts?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeMount>[] | undefined>;
     /**
      * Additional volumes to the controller pod.  - name: copy-portal-skins    emptyDir: {}
      */
-    extraVolumes?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Volume>[]>;
+    extraVolumes?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Volume>[] | undefined>;
     /**
      * Path of the health check endpoint. All requests received on the port defined by the healthz-port parameter are forwarded internally to this path.
      */
-    healthCheckPath?: pulumi.Input<string>;
+    healthCheckPath?: pulumi.Input<string | undefined>;
     /**
      * Address to bind the health check endpoint. It is better to set this option to the internal node address if the ingress nginx controller is running in the hostNetwork: true mode.
      */
-    heathCheckHost?: pulumi.Input<string>;
+    heathCheckHost?: pulumi.Input<string | undefined>;
     /**
      * Required for use with CNI based kubernetes installations (such as ones set up by kubeadm), since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920 is merged.
      */
-    hostNetwork?: pulumi.Input<boolean>;
+    hostNetwork?: pulumi.Input<boolean | undefined>;
     /**
      * Use host ports 80 and 443. Disabled by default.
      */
-    hostPort?: pulumi.Input<inputs.ControllerHostPortArgs>;
+    hostPort?: pulumi.Input<inputs.ControllerHostPortArgs | undefined>;
     /**
      * Optionally customize the pod hostname.
      */
-    hostname?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    image?: pulumi.Input<inputs.ControllerImageArgs>;
+    hostname?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
+    image?: pulumi.Input<inputs.ControllerImageArgs | undefined>;
     /**
      * Process IngressClass per name (additionally as per spec.controller).
      */
-    ingressClassByName?: pulumi.Input<boolean>;
+    ingressClassByName?: pulumi.Input<boolean | undefined>;
     /**
      * This section refers to the creation of the IngressClass resource. IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
      */
-    ingressClassResource?: pulumi.Input<inputs.ControllerIngressClassResourceArgs>;
+    ingressClassResource?: pulumi.Input<inputs.ControllerIngressClassResourceArgs | undefined>;
     /**
      * Mutually exclusive with hpa autoscaling.
      */
-    keda?: pulumi.Input<inputs.KedaArgs>;
+    keda?: pulumi.Input<inputs.KedaArgs | undefined>;
     /**
      * DaemonSet or Deployment.
      */
-    kind?: pulumi.Input<string>;
+    kind?: pulumi.Input<string | undefined>;
     /**
      * Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s.
      */
-    lifecycle?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Lifecycle>;
+    lifecycle?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Lifecycle | undefined>;
     /**
      * Liveness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    livenessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
+    livenessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe | undefined>;
     /**
      * Maxmind license key to download GeoLite2 Databases https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases.
      */
-    maxmindLicenseKey?: pulumi.Input<string>;
-    metrics?: pulumi.Input<inputs.ControllerMetricsArgs>;
-    minAvailable?: pulumi.Input<number>;
+    maxmindLicenseKey?: pulumi.Input<string | undefined>;
+    metrics?: pulumi.Input<inputs.ControllerMetricsArgs | undefined>;
+    minAvailable?: pulumi.Input<number | undefined>;
     /**
      * minReadySeconds to avoid killing pods before we are ready.
      */
-    minReadySeconds?: pulumi.Input<number>;
-    name?: pulumi.Input<string>;
+    minReadySeconds?: pulumi.Input<number | undefined>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Node labels for controller pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.
      */
-    nodeSelector?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    nodeSelector?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Annotations to be added to controller pods.
      */
-    podAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    podAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * labels to add to the pod container metadata.
      */
-    podLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    podLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Security Context policies for controller pods.
      */
-    podSecurityContext?: pulumi.Input<pulumiKubernetes.types.input.core.v1.PodSecurityContext>;
-    priorityClassName?: pulumi.Input<string>;
+    podSecurityContext?: pulumi.Input<pulumiKubernetes.types.input.core.v1.PodSecurityContext | undefined>;
+    priorityClassName?: pulumi.Input<string | undefined>;
     /**
      * Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers.
      */
-    proxySetHeaders?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    proxySetHeaders?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
     /**
      * Allows customization of the source of the IP address or FQDN to report in the ingress status field. By default, it reads the information provided by the service. If disable, the status field reports the IP address of the node or nodes where an ingress controller pod is running.
      */
-    publishService?: pulumi.Input<inputs.ControllerPublishServiceArgs>;
+    publishService?: pulumi.Input<inputs.ControllerPublishServiceArgs | undefined>;
     /**
      * Readiness probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    readinessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
-    replicaCount?: pulumi.Input<number>;
+    readinessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe | undefined>;
+    replicaCount?: pulumi.Input<number | undefined>;
     /**
      * Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply.
      */
-    reportNodeInternalIp?: pulumi.Input<boolean>;
+    reportNodeInternalIp?: pulumi.Input<boolean | undefined>;
     /**
      * Define requests resources to avoid probe issues due to CPU utilization in busy nodes ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903 Ideally, there should be no limits. https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/
      */
-    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements>;
+    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements | undefined>;
     /**
      * Limit the scope of the controller.
      */
-    scope?: pulumi.Input<inputs.ControllerScopeArgs>;
-    service?: pulumi.Input<inputs.ControllerServiceArgs>;
+    scope?: pulumi.Input<inputs.ControllerScopeArgs | undefined>;
+    service?: pulumi.Input<inputs.ControllerServiceArgs | undefined>;
     /**
      * Startup probe values Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    startupProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
+    startupProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe | undefined>;
     /**
      * See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.
      */
-    sysctls?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    sysctls?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
     /**
      * Allows customization of the tcp-services-configmap.
      */
-    tcp?: pulumi.Input<inputs.ControllerTcpArgs>;
+    tcp?: pulumi.Input<inputs.ControllerTcpArgs | undefined>;
     /**
      * How long to wait for the drain of connections.
      */
-    terminateGracePeriodSeconds?: pulumi.Input<number>;
+    terminateGracePeriodSeconds?: pulumi.Input<number | undefined>;
     /**
      * Node tolerations for server scheduling to nodes with taints Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/.
      */
-    tolerations?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Toleration>;
+    tolerations?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Toleration | undefined>;
     /**
      * Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/.
      */
-    topologySpreadConstraints?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.TopologySpreadConstraint>[]>;
-    udp?: pulumi.Input<inputs.ControllerUdpArgs>;
+    topologySpreadConstraints?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.TopologySpreadConstraint>[] | undefined>;
+    udp?: pulumi.Input<inputs.ControllerUdpArgs | undefined>;
     /**
      * The update strategy to apply to the Deployment or DaemonSet.
      */
-    updateStrategy?: pulumi.Input<inputs.ControllerUpdateStrategyArgs>;
+    updateStrategy?: pulumi.Input<inputs.ControllerUpdateStrategyArgs | undefined>;
     /**
      * Process Ingress objects without ingressClass annotation/ingressClassName field. Overrides value for --watch-ingress-without-class flag of the controller binary. Defaults to false.
      */
-    watchIngressWithoutClass?: pulumi.Input<boolean>;
+    watchIngressWithoutClass?: pulumi.Input<boolean | undefined>;
 }
 
 export interface ControllerAdmissionWebhooksCreateSecretJobArgs {
-    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements>;
+    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements | undefined>;
 }
 
 export interface ControllerAdmissionWebhooksPatchArgs {
-    enabled?: pulumi.Input<boolean>;
-    image?: pulumi.Input<inputs.ControllerImageArgs>;
-    nodeSelector?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    podAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    image?: pulumi.Input<inputs.ControllerImageArgs | undefined>;
+    nodeSelector?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    podAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Provide a priority class name to the webhook patching job.
      */
-    priorityClassName?: pulumi.Input<string>;
-    runAsUser?: pulumi.Input<number>;
-    tolerations?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Toleration>[]>;
+    priorityClassName?: pulumi.Input<string | undefined>;
+    runAsUser?: pulumi.Input<number | undefined>;
+    tolerations?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Toleration>[] | undefined>;
 }
 
 export interface ControllerAdmissionWebhooksPatchWebhbookJobArgs {
-    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements>;
+    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements | undefined>;
 }
 
 export interface ControllerAdmissionWebhooksServiceArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    clusterIP?: pulumi.Input<string>;
-    externalIPs?: pulumi.Input<pulumi.Input<string>[]>;
-    loadBalancerIPs?: pulumi.Input<string>;
-    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
-    servicePort?: pulumi.Input<number>;
-    type?: pulumi.Input<string>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    clusterIP?: pulumi.Input<string | undefined>;
+    externalIPs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    loadBalancerIPs?: pulumi.Input<string | undefined>;
+    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    servicePort?: pulumi.Input<number | undefined>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerCustomTemplateArgs {
-    configMapKey?: pulumi.Input<string>;
-    configMapName?: pulumi.Input<string>;
+    configMapKey?: pulumi.Input<string | undefined>;
+    configMapName?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerDefaultBackendArgs {
-    affinity?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Affinity>;
-    autoscaling?: pulumi.Input<inputs.AutoscalingArgs>;
-    enabled?: pulumi.Input<boolean>;
+    affinity?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Affinity | undefined>;
+    autoscaling?: pulumi.Input<inputs.AutoscalingArgs | undefined>;
+    enabled?: pulumi.Input<boolean | undefined>;
     /**
      * Use an existing PSP instead of creating one.
      */
-    existingPsp?: pulumi.Input<string>;
-    extraArgs?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    extraEnvs?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.EnvVar>[]>;
+    existingPsp?: pulumi.Input<string | undefined>;
+    extraArgs?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
+    extraEnvs?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.EnvVar>[] | undefined>;
     /**
      * Additional volumeMounts to the default backend container.  - name: copy-portal-skins    mountPath: /var/lib/lemonldap-ng/portal/skins
      */
-    extraVolumeMounts?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeMount>[]>;
+    extraVolumeMounts?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.VolumeMount>[] | undefined>;
     /**
      * Additional volumes to the default backend pod.  - name: copy-portal-skins    emptyDir: {}
      */
-    extraVolumes?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Volume>[]>;
-    image?: pulumi.Input<inputs.ControllerImageArgs>;
+    extraVolumes?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Volume>[] | undefined>;
+    image?: pulumi.Input<inputs.ControllerImageArgs | undefined>;
     /**
      * Liveness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    livenessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
-    minAvailable?: pulumi.Input<number>;
-    name?: pulumi.Input<string>;
+    livenessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe | undefined>;
+    minAvailable?: pulumi.Input<number | undefined>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Node labels for default backend pod assignment Ref: https://kubernetes.io/docs/user-guide/node-selection/.
      */
-    nodeSelector?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    nodeSelector?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Annotations to be added to default backend pods.
      */
-    podAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    podAnnotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * labels to add to the pod container metadata
      */
-    podLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    podLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Security Context policies for controller pods. See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls.
      */
-    podSecurityContext?: pulumi.Input<pulumiKubernetes.types.input.core.v1.PodSecurityContext>;
-    port?: pulumi.Input<number>;
-    priorityClassName?: pulumi.Input<string>;
+    podSecurityContext?: pulumi.Input<pulumiKubernetes.types.input.core.v1.PodSecurityContext | undefined>;
+    port?: pulumi.Input<number | undefined>;
+    priorityClassName?: pulumi.Input<string | undefined>;
     /**
      * Readiness probe values for default backend. Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes.
      */
-    readinessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe>;
-    replicaCount?: pulumi.Input<number>;
-    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements>;
-    service?: pulumi.Input<inputs.ControllerDefaultBackendServiceArgs>;
-    serviceAccount?: pulumi.Input<inputs.ControllerServiceAccountArgs>;
+    readinessProbe?: pulumi.Input<pulumiKubernetes.types.input.core.v1.Probe | undefined>;
+    replicaCount?: pulumi.Input<number | undefined>;
+    resources?: pulumi.Input<pulumiKubernetes.types.input.core.v1.ResourceRequirements | undefined>;
+    service?: pulumi.Input<inputs.ControllerDefaultBackendServiceArgs | undefined>;
+    serviceAccount?: pulumi.Input<inputs.ControllerServiceAccountArgs | undefined>;
     /**
      * Node tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
      */
-    tolerations?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Toleration>[]>;
+    tolerations?: pulumi.Input<pulumi.Input<pulumiKubernetes.types.input.core.v1.Toleration>[] | undefined>;
 }
 
 export interface ControllerDefaultBackendServiceArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    clusterIP?: pulumi.Input<string>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    clusterIP?: pulumi.Input<string | undefined>;
     /**
      * List of IP addresses at which the default backend service is available. Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
      */
-    externalIPs?: pulumi.Input<pulumi.Input<string>[]>;
-    loadBalancerIP?: pulumi.Input<string>;
-    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
-    servicePort?: pulumi.Input<number>;
-    type?: pulumi.Input<string>;
+    externalIPs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    loadBalancerIP?: pulumi.Input<string | undefined>;
+    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    servicePort?: pulumi.Input<number | undefined>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerHostPortArgs {
-    enabled?: pulumi.Input<boolean>;
-    ports?: pulumi.Input<inputs.ControllerHostPortPortsArgs>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    ports?: pulumi.Input<inputs.ControllerHostPortPortsArgs | undefined>;
 }
 
 export interface ControllerHostPortPortsArgs {
-    http?: pulumi.Input<number>;
-    https?: pulumi.Input<number>;
+    http?: pulumi.Input<number | undefined>;
+    https?: pulumi.Input<number | undefined>;
 }
 
 export interface ControllerImageArgs {
-    allowPrivilegeEscalation?: pulumi.Input<boolean>;
-    digest?: pulumi.Input<string>;
-    image?: pulumi.Input<string>;
-    pullPolicy?: pulumi.Input<string>;
-    readOnlyRootFilesystem?: pulumi.Input<boolean>;
-    registry?: pulumi.Input<string>;
+    allowPrivilegeEscalation?: pulumi.Input<boolean | undefined>;
+    digest?: pulumi.Input<string | undefined>;
+    image?: pulumi.Input<string | undefined>;
+    pullPolicy?: pulumi.Input<string | undefined>;
+    readOnlyRootFilesystem?: pulumi.Input<boolean | undefined>;
+    registry?: pulumi.Input<string | undefined>;
     /**
      * for backwards compatibility consider setting the full image url via the repository value below use *either* current default registry/image or repository format or installing will fail.
      */
-    repository?: pulumi.Input<string>;
-    runAsNonRoot?: pulumi.Input<boolean>;
-    runAsUser?: pulumi.Input<string>;
-    tag?: pulumi.Input<string>;
+    repository?: pulumi.Input<string | undefined>;
+    runAsNonRoot?: pulumi.Input<boolean | undefined>;
+    runAsUser?: pulumi.Input<string | undefined>;
+    tag?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerIngressClassResourceArgs {
-    controllerValue?: pulumi.Input<string>;
-    default?: pulumi.Input<boolean>;
-    enabled?: pulumi.Input<boolean>;
-    name?: pulumi.Input<string>;
+    controllerValue?: pulumi.Input<string | undefined>;
+    default?: pulumi.Input<boolean | undefined>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Parameters is a link to a custom resource containing additional configuration for the controller. This is optional if the controller does not require extra parameters.
      */
-    parameters?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    parameters?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
 }
 
 export interface ControllerMetricsArgs {
-    enabled?: pulumi.Input<boolean>;
+    enabled?: pulumi.Input<boolean | undefined>;
     /**
      * if this port is changed, change healthz-port: in extraArgs: accordingly.
      */
-    port?: pulumi.Input<number>;
-    prometheusRule?: pulumi.Input<inputs.ControllerMetricsPrometheusRulesArgs>;
-    service?: pulumi.Input<inputs.ControllerMetricsServiceArgs>;
-    serviceMonitor?: pulumi.Input<inputs.ControllerMetricsServiceMonitorArgs>;
+    port?: pulumi.Input<number | undefined>;
+    prometheusRule?: pulumi.Input<inputs.ControllerMetricsPrometheusRulesArgs | undefined>;
+    service?: pulumi.Input<inputs.ControllerMetricsServiceArgs | undefined>;
+    serviceMonitor?: pulumi.Input<inputs.ControllerMetricsServiceMonitorArgs | undefined>;
 }
 
 export interface ControllerMetricsPrometheusRulesArgs {
-    additionalLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    enabled?: pulumi.Input<boolean>;
-    namespace?: pulumi.Input<string>;
-    rules?: pulumi.Input<pulumi.Input<{[key: string]: pulumi.Input<string>}>[]>;
+    additionalLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    namespace?: pulumi.Input<string | undefined>;
+    rules?: pulumi.Input<pulumi.Input<{[key: string]: pulumi.Input<string>}>[] | undefined>;
 }
 
 export interface ControllerMetricsServiceArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    clusterIP?: pulumi.Input<string>;
-    externalIPs?: pulumi.Input<pulumi.Input<string>[]>;
-    externalTrafficPolicy?: pulumi.Input<string>;
-    loadBalancerIPs?: pulumi.Input<string>;
-    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
-    nodePort?: pulumi.Input<string>;
-    servicePort?: pulumi.Input<number>;
-    type?: pulumi.Input<string>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    clusterIP?: pulumi.Input<string | undefined>;
+    externalIPs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    externalTrafficPolicy?: pulumi.Input<string | undefined>;
+    loadBalancerIPs?: pulumi.Input<string | undefined>;
+    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    nodePort?: pulumi.Input<string | undefined>;
+    servicePort?: pulumi.Input<number | undefined>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerMetricsServiceMonitorArgs {
-    additionalLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    enabled?: pulumi.Input<boolean>;
-    honorLabels?: pulumi.Input<boolean>;
+    additionalLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    honorLabels?: pulumi.Input<boolean | undefined>;
     /**
      * The label to use to retrieve the job name from.
      */
-    jobLabel?: pulumi.Input<string>;
-    metricRelabelings?: pulumi.Input<pulumi.Input<string>[]>;
-    namespace?: pulumi.Input<string>;
-    namespaceSelector?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    scrapeInterval?: pulumi.Input<string>;
-    targetLabels?: pulumi.Input<pulumi.Input<string>[]>;
+    jobLabel?: pulumi.Input<string | undefined>;
+    metricRelabelings?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    namespace?: pulumi.Input<string | undefined>;
+    namespaceSelector?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
+    scrapeInterval?: pulumi.Input<string | undefined>;
+    targetLabels?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 export interface ControllerPodSecurityPolicyArgs {
-    enabled?: pulumi.Input<boolean>;
+    enabled?: pulumi.Input<boolean | undefined>;
 }
 
 export interface ControllerPortArgs {
-    http?: pulumi.Input<number>;
-    https?: pulumi.Input<number>;
+    http?: pulumi.Input<number | undefined>;
+    https?: pulumi.Input<number | undefined>;
 }
 
 export interface ControllerPublishServiceArgs {
-    enabled?: pulumi.Input<boolean>;
+    enabled?: pulumi.Input<boolean | undefined>;
     /**
      * Allows overriding of the publish service to bind to. Must be <namespace>/<service_name>.
      */
-    pathOverride?: pulumi.Input<string>;
+    pathOverride?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerRBACArgs {
-    create?: pulumi.Input<boolean>;
-    scope?: pulumi.Input<boolean>;
+    create?: pulumi.Input<boolean | undefined>;
+    scope?: pulumi.Input<boolean | undefined>;
 }
 
 export interface ControllerRollingUpdateArgs {
-    maxUnavailable?: pulumi.Input<number>;
+    maxUnavailable?: pulumi.Input<number | undefined>;
 }
 
 export interface ControllerScopeArgs {
-    enabled?: pulumi.Input<boolean>;
-    namespace?: pulumi.Input<string>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    namespace?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerServiceArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    clusterIP?: pulumi.Input<string>;
-    enableHttp?: pulumi.Input<boolean>;
-    enableHttps?: pulumi.Input<boolean>;
-    enabled?: pulumi.Input<boolean>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    clusterIP?: pulumi.Input<string | undefined>;
+    enableHttp?: pulumi.Input<boolean | undefined>;
+    enableHttps?: pulumi.Input<boolean | undefined>;
+    enabled?: pulumi.Input<boolean | undefined>;
     /**
      * List of IP addresses at which the controller services are available Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
      */
-    externalIPs?: pulumi.Input<pulumi.Input<string>[]>;
+    externalIPs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Set external traffic policy to: "Local" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
      */
-    externalTrafficPolicy?: pulumi.Input<string>;
+    externalTrafficPolicy?: pulumi.Input<string | undefined>;
     /**
      * specifies the health check node port (numeric port number) for the service. If healthCheckNodePort isn’t specified, the service controller allocates a port from your cluster’s NodePort range. Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
      */
-    healthCheckNodePort?: pulumi.Input<number>;
+    healthCheckNodePort?: pulumi.Input<number | undefined>;
     /**
      * Enables an additional internal load balancer (besides the external one). Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
      */
-    internal?: pulumi.Input<inputs.ControllerServiceInternalArgs>;
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    loadBalancerIP?: pulumi.Input<string>;
-    loadBalancerIPs?: pulumi.Input<string>;
-    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
-    nodePorts?: pulumi.Input<inputs.ControllerServiceNodePortsArgs>;
-    ports?: pulumi.Input<inputs.ControllerPortArgs>;
+    internal?: pulumi.Input<inputs.ControllerServiceInternalArgs | undefined>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    loadBalancerIP?: pulumi.Input<string | undefined>;
+    loadBalancerIPs?: pulumi.Input<string | undefined>;
+    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    nodePorts?: pulumi.Input<inputs.ControllerServiceNodePortsArgs | undefined>;
+    ports?: pulumi.Input<inputs.ControllerPortArgs | undefined>;
     /**
      * Must be either "None" or "ClientIP" if set. Kubernetes will default to "None". Ref: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
      */
-    sessionAffinity?: pulumi.Input<string>;
-    targetPorts?: pulumi.Input<inputs.ControllerPortArgs>;
-    type?: pulumi.Input<string>;
+    sessionAffinity?: pulumi.Input<string | undefined>;
+    targetPorts?: pulumi.Input<inputs.ControllerPortArgs | undefined>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerServiceAccountArgs {
-    automountServiceAccountToken?: pulumi.Input<boolean>;
-    create?: pulumi.Input<boolean>;
-    name?: pulumi.Input<string>;
+    automountServiceAccountToken?: pulumi.Input<boolean | undefined>;
+    create?: pulumi.Input<boolean | undefined>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerServiceInternalArgs {
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    enabled?: pulumi.Input<boolean>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    enabled?: pulumi.Input<boolean | undefined>;
     /**
      * Set external traffic policy to: "Local" to preserve source IP on providers supporting it. Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
      */
-    externalTrafficPolicy?: pulumi.Input<string>;
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    loadBalancerIPs?: pulumi.Input<string>;
+    externalTrafficPolicy?: pulumi.Input<string | undefined>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    loadBalancerIPs?: pulumi.Input<string | undefined>;
     /**
      * Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.
      */
-    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
+    loadBalancerSourceRanges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 export interface ControllerServiceNodePortsArgs {
-    http?: pulumi.Input<string>;
-    https?: pulumi.Input<string>;
-    tcp?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    udp?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
+    http?: pulumi.Input<string | undefined>;
+    https?: pulumi.Input<string | undefined>;
+    tcp?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
+    udp?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
 }
 
 export interface ControllerTcpArgs {
     /**
      * Annotations to be added to the tcp config configmap.
      */
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    configMapNamespace?: pulumi.Input<string>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    configMapNamespace?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerUdpArgs {
     /**
      * Annotations to be added to the udp config configmap.
      */
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    configMapNamespace?: pulumi.Input<string>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    configMapNamespace?: pulumi.Input<string | undefined>;
 }
 
 export interface ControllerUpdateStrategyArgs {
-    rollingUpdate?: pulumi.Input<inputs.ControllerRollingUpdateArgs>;
-    type?: pulumi.Input<string>;
+    rollingUpdate?: pulumi.Input<inputs.ControllerRollingUpdateArgs | undefined>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 export interface KedaArgs {
     /**
      * apiVersion changes with keda 1.x vs 2.x: 2.x = keda.sh/v1alpha1, 1.x = keda.k8s.io/v1alpha1.
      */
-    apiVersion?: pulumi.Input<string>;
-    behavior?: pulumi.Input<inputs.AutoscalingBehaviorArgs>;
-    cooldownPeriod?: pulumi.Input<number>;
-    enabled?: pulumi.Input<boolean>;
-    maxReplicas?: pulumi.Input<number>;
-    minReplicas?: pulumi.Input<number>;
-    pollingInterval?: pulumi.Input<number>;
-    restoreToOriginalReplicaCount?: pulumi.Input<boolean>;
-    scaledObject?: pulumi.Input<inputs.KedaScaledObjectArgs>;
-    triggers?: pulumi.Input<pulumi.Input<inputs.KedaTriggerArgs>[]>;
+    apiVersion?: pulumi.Input<string | undefined>;
+    behavior?: pulumi.Input<inputs.AutoscalingBehaviorArgs | undefined>;
+    cooldownPeriod?: pulumi.Input<number | undefined>;
+    enabled?: pulumi.Input<boolean | undefined>;
+    maxReplicas?: pulumi.Input<number | undefined>;
+    minReplicas?: pulumi.Input<number | undefined>;
+    pollingInterval?: pulumi.Input<number | undefined>;
+    restoreToOriginalReplicaCount?: pulumi.Input<boolean | undefined>;
+    scaledObject?: pulumi.Input<inputs.KedaScaledObjectArgs | undefined>;
+    triggers?: pulumi.Input<pulumi.Input<inputs.KedaTriggerArgs>[] | undefined>;
 }
 
 export interface KedaScaledObjectArgs {
     /**
      * Custom annotations for ScaledObject resource.
      */
-    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    annotations?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 export interface KedaTriggerArgs {
-    metadata?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>}>;
-    type?: pulumi.Input<string>;
+    metadata?: pulumi.Input<{[key: string]: pulumi.Input<{[key: string]: pulumi.Input<string>}>} | undefined>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -641,135 +641,135 @@ export interface ReleaseArgs {
     /**
      * If set, installation process purges chart on fail. `skipAwait` will be disabled automatically if atomic is used.
      */
-    atomic?: pulumi.Input<boolean>;
+    atomic?: pulumi.Input<boolean | undefined>;
     /**
      * Chart name to be installed. A path may be used.
      */
-    chart?: pulumi.Input<string>;
+    chart?: pulumi.Input<string | undefined>;
     /**
      * Allow deletion of new resources created in this upgrade when upgrade fails.
      */
-    cleanupOnFail?: pulumi.Input<boolean>;
+    cleanupOnFail?: pulumi.Input<boolean | undefined>;
     /**
      * Create the namespace if it does not exist.
      */
-    createNamespace?: pulumi.Input<boolean>;
+    createNamespace?: pulumi.Input<boolean | undefined>;
     /**
      * Run helm dependency update before installing the chart.
      */
-    dependencyUpdate?: pulumi.Input<boolean>;
+    dependencyUpdate?: pulumi.Input<boolean | undefined>;
     /**
      * Add a custom description
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Use chart development versions, too. Equivalent to version '>0.0.0-0'. If `version` is set, this is ignored.
      */
-    devel?: pulumi.Input<boolean>;
+    devel?: pulumi.Input<boolean | undefined>;
     /**
      * Prevent CRD hooks from, running, but run other hooks.  See helm install --no-crd-hook
      */
-    disableCRDHooks?: pulumi.Input<boolean>;
+    disableCRDHooks?: pulumi.Input<boolean | undefined>;
     /**
      * If set, the installation process will not validate rendered templates against the Kubernetes OpenAPI Schema
      */
-    disableOpenapiValidation?: pulumi.Input<boolean>;
+    disableOpenapiValidation?: pulumi.Input<boolean | undefined>;
     /**
      * Prevent hooks from running.
      */
-    disableWebhooks?: pulumi.Input<boolean>;
+    disableWebhooks?: pulumi.Input<boolean | undefined>;
     /**
      * Force resource update through delete/recreate if needed.
      */
-    forceUpdate?: pulumi.Input<boolean>;
+    forceUpdate?: pulumi.Input<boolean | undefined>;
     /**
      * Location of public keys used for verification. Used only if `verify` is true
      */
-    keyring?: pulumi.Input<string>;
+    keyring?: pulumi.Input<string | undefined>;
     /**
      * Run helm lint when planning.
      */
-    lint?: pulumi.Input<boolean>;
+    lint?: pulumi.Input<boolean | undefined>;
     /**
      * The rendered manifests as JSON. Not yet supported.
      */
-    manifest?: pulumi.Input<{[key: string]: any}>;
+    manifest?: pulumi.Input<{[key: string]: any} | undefined>;
     /**
      * Limit the maximum number of revisions saved per release. Use 0 for no limit.
      */
-    maxHistory?: pulumi.Input<number>;
+    maxHistory?: pulumi.Input<number | undefined>;
     /**
      * Release name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Namespace to install the release into.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Postrender command to run.
      */
-    postrender?: pulumi.Input<string>;
+    postrender?: pulumi.Input<string | undefined>;
     /**
      * Perform pods restart during upgrade/rollback.
      */
-    recreatePods?: pulumi.Input<boolean>;
+    recreatePods?: pulumi.Input<boolean | undefined>;
     /**
      * If set, render subchart notes along with the parent.
      */
-    renderSubchartNotes?: pulumi.Input<boolean>;
+    renderSubchartNotes?: pulumi.Input<boolean | undefined>;
     /**
      * Re-use the given name, even if that name is already used. This is unsafe in production
      */
-    replace?: pulumi.Input<boolean>;
+    replace?: pulumi.Input<boolean | undefined>;
     /**
      * Specification defining the Helm chart repository to use.
      */
-    repositoryOpts?: pulumi.Input<inputs.RepositoryOptsArgs>;
+    repositoryOpts?: pulumi.Input<inputs.RepositoryOptsArgs | undefined>;
     /**
      * When upgrading, reset the values to the ones built into the chart.
      */
-    resetValues?: pulumi.Input<boolean>;
+    resetValues?: pulumi.Input<boolean | undefined>;
     /**
      * Names of resources created by the release grouped by "kind/version".
      */
-    resourceNames?: pulumi.Input<{[key: string]: pulumi.Input<pulumi.Input<string>[]>}>;
+    resourceNames?: pulumi.Input<{[key: string]: pulumi.Input<pulumi.Input<string>[]>} | undefined>;
     /**
      * When upgrading, reuse the last release's values and merge in any overrides. If 'resetValues' is specified, this is ignored
      */
-    reuseValues?: pulumi.Input<boolean>;
+    reuseValues?: pulumi.Input<boolean | undefined>;
     /**
      * By default, the provider waits until all resources are in a ready state before marking the release as successful. Setting this to true will skip such await logic.
      */
-    skipAwait?: pulumi.Input<boolean>;
+    skipAwait?: pulumi.Input<boolean | undefined>;
     /**
      * If set, no CRDs will be installed. By default, CRDs are installed if not already present.
      */
-    skipCrds?: pulumi.Input<boolean>;
+    skipCrds?: pulumi.Input<boolean | undefined>;
     /**
      * Time in seconds to wait for any individual kubernetes operation.
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * List of assets (raw yaml files). Content is read and merged with values. Not yet supported.
      */
-    valueYamlFiles?: pulumi.Input<pulumi.Input<pulumi.asset.Asset | pulumi.asset.Archive>[]>;
+    valueYamlFiles?: pulumi.Input<pulumi.Input<pulumi.asset.Asset | pulumi.asset.Archive>[] | undefined>;
     /**
      * Custom values set for the release.
      */
-    values?: pulumi.Input<{[key: string]: any}>;
+    values?: pulumi.Input<{[key: string]: any} | undefined>;
     /**
      * Verify the package before installing it.
      */
-    verify?: pulumi.Input<boolean>;
+    verify?: pulumi.Input<boolean | undefined>;
     /**
      * Specify the exact chart version to install. If this is not specified, the latest version is installed.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
     /**
      * Will wait until all Jobs have been completed before marking the release as successful. This is ignored if `skipAwait` is enabled.
      */
-    waitForJobs?: pulumi.Input<boolean>;
+    waitForJobs?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -779,25 +779,25 @@ export interface RepositoryOptsArgs {
     /**
      * The Repository's CA File
      */
-    caFile?: pulumi.Input<string>;
+    caFile?: pulumi.Input<string | undefined>;
     /**
      * The repository's cert file
      */
-    certFile?: pulumi.Input<string>;
+    certFile?: pulumi.Input<string | undefined>;
     /**
      * The repository's cert key file
      */
-    keyFile?: pulumi.Input<string>;
+    keyFile?: pulumi.Input<string | undefined>;
     /**
      * Password for HTTP basic authentication
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Repository where to locate the requested chart. If is a URL the chart is installed without installing the repository.
      */
-    repo?: pulumi.Input<string>;
+    repo?: pulumi.Input<string | undefined>;
     /**
      * Username for HTTP basic authentication
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }
