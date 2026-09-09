@@ -5,7 +5,7 @@ go 1.25.11
 require (
 	github.com/pulumi/pulumi-go-helmbase v0.2.0
 	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.1.3
-	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.34.0
+	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.34.1
 	github.com/pulumi/pulumi/sdk/v3 v3.259.0
 )
 
