@@ -1,6 +1,6 @@
 module github.com/pulumi/pulumi-kubernetes-ingress-nginx/provider
 
-go 1.25.11
+go 1.26.0
 
 require (
 	github.com/pulumi/pulumi-go-helmbase v0.2.0
@@ -106,7 +106,7 @@ require (
 	go.opentelemetry.io/proto/otlp v1.11.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/crypto v0.55.0 // indirect
+	golang.org/x/crypto v0.56.0 // indirect
 	golang.org/x/mod v0.40.0 // indirect
 	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/sync v0.22.0 // indirect
