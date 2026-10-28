@@ -3,8 +3,8 @@ module github.com/pulumi/pulumi-kubernetes-ingress-nginx/examples/simple-nginx-g
 go 1.26.10
 
 require (
-	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.1.3
-	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.34.0
+	github.com/pulumi/pulumi-kubernetes-ingress-nginx/sdk v0.2.0
+	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.34.2
 	github.com/pulumi/pulumi/sdk/v3 v3.259.0
 )
 
