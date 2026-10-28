@@ -1,3 +1,0 @@
-name: simple-nginx-ts
-runtime: nodejs
-description: A simple NGINX ingress controller example
