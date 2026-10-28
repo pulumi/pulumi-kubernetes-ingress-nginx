@@ -1,6 +1,6 @@
 module github.com/pulumi/pulumi-kubernetes-ingress-nginx/provider
 
-go 1.25.11
+go 1.26.10
 
 require (
 	github.com/pulumi/pulumi-go-helmbase v0.2.0
