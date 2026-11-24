@@ -5,7 +5,7 @@
     },
     "dependencies": {
         "@pulumi/pulumi": "3.277.0",
-        "@pulumi/kubernetes": "4.34.3",
+        "@pulumi/kubernetes": "4.35.0",
         "@pulumi/kubernetes-ingress-nginx": "latest"
     }
 }
